@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE tsung SYSTEM "/usr/share/tsung/tsung-1.0.dtd" [
+ <!ENTITY session-efetuar-compra SYSTEM "/home/vagrant/.tsung/tsung_recorder20130223-2223.xml">
+]>
+<tsung loglevel="warning" version="1.0" dumptraffic="false">
+
+  <clients>
+    <client host="localhost" cpu="2"/>
+  </clients>
+  
+  <servers>
+    <server host="server" port="3000" type="tcp"/>
+  </servers>
+
+  <load>
+    <arrivalphase phase="1" duration="10" unit="minute">
+      <users arrivalrate="25" unit="second"/>
+    </arrivalphase>
+
+    <arrivalphase phase="2" duration="10" unit="minute">
+      <users arrivalrate="50" unit="second"/>
+    </arrivalphase>
+
+  </load>
+  <sessions>
+    &session-efetuar-compra;
+  </sessions>
+</tsung>

@@ -1,0 +1,63 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant::Config.run do |config|
+  
+
+# Database server
+# sudo apt-get update
+# sudo apt-get -y upgrade
+# sudo apt-get install -y postgresql
+  config.vm.define :db do |db_config|
+
+    db_config.vm.box = "precise64-ruby"
+
+    db_config.vm.network :hostonly, "192.168.10.20"
+
+  end
+
+
+# Application server, where Spree will run
+# apt-get -y install python-software-properties
+# sudo add-apt-repository ppa:nginx/stable
+# sudo apt-get update
+# sudo apt-get -y upgrade
+# sudo apt-get install -y nginx nodejs imagemagick libxslt-dev libxml2-dev libpq-dev
+# sudo service nginx start
+# sudo gem install rails spree --no-ri --no-rdoc
+  config.vm.define :server do |server_config|
+
+    server_config.vm.box = "precise64-ruby"
+
+    server_config.vm.network :hostonly, "192.168.10.100"
+
+  end
+
+
+# Tsung client machine
+# sudo apt-get update
+# sudo apt-get -y upgrade
+# sudo apt-get install -y erlang gnuplot git libtemplate-perl
+# git clone git://git.process-one.net/tsung/mainline.git
+# mv mainline tsung-1.5.0a
+# cd tsung-1.5.0a/
+# ./configure
+# make
+# sudo make install
+# echo "192.168.10.100 server" | sudo tee -a /etc/hosts
+# echo "192.168.10.20 db" | sudo tee -a /etc/hosts
+# echo "192.168.10.30 client" | sudo tee -a /etc/hosts
+# ssh-keygen -t rsa -N ""
+# cat .ssh/id_rsa.pub | ssh server 'cat >> .ssh/authorized_keys'
+# cat .ssh/id_rsa.pub | ssh db 'cat >> .ssh/authorized_keys'
+
+  config.vm.define :client do |client_config|
+
+    client_config.vm.box = "ubuntu1210-64min"
+
+    client_config.vm.network :hostonly, "192.168.10.30"
+
+  end
+
+
+end
