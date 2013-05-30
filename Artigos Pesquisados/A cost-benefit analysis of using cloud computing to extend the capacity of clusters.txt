@@ -1,0 +1,10 @@
+@article{de2010cost,
+  title={A cost-benefit analysis of using cloud computing to extend the capacity of clusters},
+  author={de Assun{\c{c}}{\~a}o, Marcos Dias and di Costanzo, Alexandre and Buyya, Rajkumar},
+  journal={Cluster Computing},
+  volume={13},
+  number={3},
+  pages={335--347},
+  year={2010},
+  publisher={Springer}
+}

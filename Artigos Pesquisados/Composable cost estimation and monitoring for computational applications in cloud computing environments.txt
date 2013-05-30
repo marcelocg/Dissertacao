@@ -1,0 +1,10 @@
+@article{truong2010composable,
+  title={Composable cost estimation and monitoring for computational applications in cloud computing environments},
+  author={Truong, Hong-Linh and Dustdar, Schahram},
+  journal={Procedia Computer Science},
+  volume={1},
+  number={1},
+  pages={2175--2184},
+  year={2010},
+  publisher={Elsevier}
+}

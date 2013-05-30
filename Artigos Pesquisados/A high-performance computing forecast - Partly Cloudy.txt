@@ -1,0 +1,10 @@
+@article{sterling2009high,
+  title={A high-performance computing forecast: Partly cloudy},
+  author={Sterling, Thomas and Stark, Dylan},
+  journal={Computing in Science \& Engineering},
+  volume={11},
+  number={4},
+  pages={42--49},
+  year={2009},
+  publisher={IEEE}
+}

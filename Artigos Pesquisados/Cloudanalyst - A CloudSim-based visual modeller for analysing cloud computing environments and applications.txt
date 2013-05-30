@@ -1,0 +1,8 @@
+@inproceedings{wickremasinghe2010cloudanalyst,
+  title={Cloudanalyst: A cloudsim-based visual modeller for analysing cloud computing environments and applications},
+  author={Wickremasinghe, Bhathiya and Calheiros, Rodrigo N and Buyya, Rajkumar},
+  booktitle={Advanced Information Networking and Applications (AINA), 2010 24th IEEE International Conference on},
+  pages={446--452},
+  year={2010},
+  organization={IEEE}
+}

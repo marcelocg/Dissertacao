@@ -1,0 +1,10 @@
+@article{beloglazov2012energy,
+  title={Energy-aware resource allocation heuristics for efficient management of data centers for cloud computing},
+  author={Beloglazov, Anton and Abawajy, Jemal and Buyya, Rajkumar},
+  journal={Future Generation Computer Systems},
+  volume={28},
+  number={5},
+  pages={755--768},
+  year={2012},
+  publisher={Elsevier}
+}

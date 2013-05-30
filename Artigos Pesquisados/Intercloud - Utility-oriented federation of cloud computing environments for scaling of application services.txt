@@ -1,0 +1,8 @@
+@incollection{buyya2010intercloud,
+  title={Intercloud: Utility-oriented federation of cloud computing environments for scaling of application services},
+  author={Buyya, Rajkumar and Ranjan, Rajiv and Calheiros, Rodrigo N},
+  booktitle={Algorithms and architectures for parallel processing},
+  pages={13--31},
+  year={2010},
+  publisher={Springer}
+}

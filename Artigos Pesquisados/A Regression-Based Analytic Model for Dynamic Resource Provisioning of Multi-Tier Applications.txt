@@ -1,0 +1,8 @@
+@inproceedings{zhang2007regression,
+  title={A regression-based analytic model for dynamic resource provisioning of multi-tier applications},
+  author={Zhang, Qi and Cherkasova, Ludmila and Smirni, Evgenia},
+  booktitle={Autonomic Computing, 2007. ICAC'07. Fourth International Conference on},
+  pages={27--27},
+  year={2007},
+  organization={IEEE}
+}

@@ -1,0 +1,10 @@
+@article{iosup2011performance,
+  title={Performance analysis of cloud computing services for many-tasks scientific computing},
+  author={Iosup, Alexandru and Ostermann, Simon and Yigitbasi, M Nezih and Prodan, Radu and Fahringer, Thomas and Epema, Dick HJ},
+  journal={Parallel and Distributed Systems, IEEE Transactions on},
+  volume={22},
+  number={6},
+  pages={931--945},
+  year={2011},
+  publisher={IEEE}
+}

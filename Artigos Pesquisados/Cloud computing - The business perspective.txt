@@ -1,0 +1,8 @@
+@article{marston2011cloud,
+  title={Cloud computing—The business perspective?},
+  author={Marston, Sean and Li, Zhi and Bandyopadhyay, Subhajyoti and Zhang, Juheng and Ghalsasi, Anand},
+  journal={Decision Support Systems},
+  volume={51},
+  pages={176--189},
+  year={2011}
+}
