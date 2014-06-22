@@ -1,0 +1,6 @@
+@inproceedings{moura2013automated,
+  title={Automated Scalability Testing of Software as a Service},
+  author={Moura, Paulo and Kon, Fabio and others},
+  booktitle={AST-8th International Workshop on Automation of Software Test},
+  year={2013}
+}

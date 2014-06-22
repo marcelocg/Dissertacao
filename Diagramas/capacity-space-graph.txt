@@ -1,0 +1,109 @@
+digraph g{
+  // rankdir=LR;
+  node [shape=plaintext];
+  edge [color=black;fontsize=12];
+  "($0.113)" -> "($0.150)" [label=" x1.33",arrowhead=none]
+  "($0.150)" -> "($0.225)" [label=" x1.50",arrowhead=none]
+  "($0.225)" -> "($0.300)" [label=" x1.33",arrowhead=none]
+  "($0.300)" -> "($0.338)" [label=" x1.13",arrowhead=none]
+  "($0.338)" -> "($0.450)" [label=" x1.33",arrowhead=none]
+  "($0.450)" -> "($0.600)" [label=" x1.33",arrowhead=none]
+  "($0.600)" -> "($0.675)" [label=" x1.13",arrowhead=none]
+  "($0.675)" -> "($0.900)" [label=" x1.33",arrowhead=none]
+  "($0.900)" -> "($1.200)" [label=" x1.33",arrowhead=none]
+  "($1.200)" -> "($1.350)" [label=" x1.13",arrowhead=none]
+  "($1.350)" -> "($1.800)" [label=" x1.33",arrowhead=none]
+  "($1.800)" -> "($2.400)" [label=" x1.33",arrowhead=none]
+ 
+   // cost
+  node [shape=box, fillcolor="burlywood", style="filled,rounded"];
+  edge [style=solid,color=black,fontsize=8];
+  
+  "m3.m(1)" -> "c3.l(1)" //[label="x1.33"]
+  
+  "c3.l(1)" -> "m3.l(1)"  //[label="x1.50"]
+
+  "c3.l(1)" -> "m3.m(2)" //[label="x1.50"]
+
+  "m3.l(1)" -> "c3.xl(1)" //[label="x1.33"]
+
+  "m3.l(1)" -> "c3.l(2)" //[label="x1.33"]
+
+  "m3.m(2)" -> "c3.xl(1)" //[label="x1.33"]
+
+  "m3.m(2)" -> "c3.l(2)" //[label="x1.33"]
+
+  "c3.xl(1)" -> "m3.m(3)" //[label="x1.13"]
+
+  "c3.l(2)" -> "m3.m(3)" //[label="x1.13"]
+  
+  "m3.m(3)" -> "m3.xl(1)" //[label="x1.33"]
+
+  "m3.m(3)" -> "m3.l(2)" //[label="x1.33"]
+
+  "m3.m(3)" -> "c3.l(3)" //[label="x1.33"]
+
+  "m3.m(3)" -> "m3.m(4)" //[label="x1.33"]
+
+  "m3.xl(1)" -> "c3.2xl(1)" //[label="x1.33"]
+
+  "m3.xl(1)" -> "c3.xl(2)" //[label="x1.33"]
+
+  "m3.xl(1)" -> "c3.l(4)" //[label="x1.33"]
+
+  "m3.l(2)" -> "c3.2xl(1)" //[label="x1.33"]
+
+  "m3.l(2)" -> "c3.xl(2)" //[label="x1.33"]
+
+  "m3.l(2)" -> "c3.l(4)" //[label="x1.33"]
+
+  "c3.l(3)" -> "c3.2xl(1)" //[label="x1.33"]
+
+  "c3.l(3)" -> "c3.xl(2)" //[label="x1.33"]
+
+  "c3.l(3)" -> "c3.l(4)" //[label="x1.33"]
+
+  "m3.m(4)" -> "c3.2xl(1)" //[label="x1.33"]
+
+  "m3.m(4)" -> "c3.xl(2)" //[label="x1.33"]
+
+  "m3.m(4)" -> "c3.l(4)" //[label="x1.33"]
+
+  "c3.2xl(1)" -> "m3.l(3)" //[label="x1.13"]
+ 
+  "c3.xl(2)" -> "m3.l(3)" //[label="x1.13"]
+
+  "c3.l(4)" -> "m3.l(3)" //[label="x1.13"]
+
+  "m3.l(3)" -> "m3.xl(2)" //[label="x1.33"]
+
+  "m3.l(3)" -> "c3.xl(3)" //[label="x1.33"]
+
+  "m3.l(3)" -> "m3.l(4)" //[label="x1.33"] 
+
+  "m3.xl(2)" -> "c3.2xl(2)" //[label="x1.33"]
+
+  "m3.xl(2)" -> "c3.xl(4)" //[label="x1.33"]
+
+  "c3.xl(3)" -> "c3.2xl(2)" //[label="x1.33"]
+
+  "c3.xl(3)" -> "c3.xl(4)" //[label="x1.33"]
+
+  "m3.l(4)" -> "c3.2xl(2)" //[label="x1.33"]
+
+  "m3.l(4)" -> "c3.xl(4)" //[label="x1.33"]
+
+  "c3.2xl(2)" -> "m3.xl(3)" //[label="x1.13"]
+
+  "c3.xl(4)" -> "m3.xl(3)" //[label="x1.13"]
+
+  "m3.xl(3)" -> "c3.2xl(3)" //[label="x1.33"]
+
+  "m3.xl(3)" -> "m3.xl(4)" //[label="x1.33"]
+
+  "c3.2xl(3)" -> "c3.2xl(4)" //[label="x1.33"]
+
+  "m3.xl(4)" -> "c3.2xl(4)" //[label="x1.33"]
+
+
+}

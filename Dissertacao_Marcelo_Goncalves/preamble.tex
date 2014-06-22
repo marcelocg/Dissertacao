@@ -1,0 +1,100 @@
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+\preambulo{Dissertação apresentada ao Programa de Pós-Graduação em Informática
+Aplicada (PPGIA) da Universidade de Fortaleza como parte dos requisitos
+necessários para a obtenção do grau de Mestre em Informática Aplicada.}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+      %pagebackref=true,
+    pdftitle={\@title}, 
+    pdfauthor={\@author},
+      pdfsubject={\imprimirpreambulo},
+      pdfcreator={LaTeX with abnTeX2},
+    pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+    %colorlinks=false,          % false: boxed links; true: colored links
+      linkcolor=blue,           % color of internal links
+      %citecolor=blue,           % color of links to bibliography
+      filecolor=magenta,          % color of file links
+    urlcolor=blue,
+    bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+%Altera a capa
+% Impressão da Capa
+\renewcommand{\imprimircapa}{%
+\begin{capa}%
+\center
+
+% Logomarca da Universidade
+\includegraphics[scale=2]{./img/logo.png}\\
+\textbf{FUNDAÇÃO EDSON QUEIROZ}\\
+\textbf{UNIVERSIDADE DE FORTALEZA -- UNIFOR}
+
+\vfill
+\ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo
+\vfill
+
+\ABNTEXchapterfont\large\imprimirautor
+\vspace*{1cm}
+\vfill\vfill\vfill
+\large\imprimirlocal
+
+\large\imprimirdata
+
+\vspace*{1cm}
+\end{capa}
+}
+% ---
+% Altera a folha de rosto
+\renewcommand{\folhaderostocontent}{
+  \begin{center}
+
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+    \vspace*{\fill}\vspace*{\fill}
+    \begin{center}
+      \ABNTEXchapterfont\bfseries\Large\imprimirtitulo
+    \end{center}
+    \vspace*{\fill}
+
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+      \SingleSpacing
+      \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+
+    {\large\imprimirorientadorRotulo~\imprimirorientador\par}
+    {\large\imprimircoorientadorRotulo~\imprimircoorientador}%
+    \vspace*{\fill}
+
+    {\imprimirinstituicao\vspace*{\fill}}
+
+    {\large\imprimirlocal}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+
+  \end{center}
+}

@@ -1,0 +1,333 @@
+\chapter[Formalização do Problema]{Formalização do Problema}
+% ----------------------------------------------------------
+A fim de que uma análise criteriosa possa ser feita, apresentamos a seguir um 
+conjunto de definições e terminologias que possam basear o entendimento da 
+construção do trabalho e também da avaliação dos resultados e de sua eficiência 
+e eficácia. Os conceitos aqui explicitados são tomados de forma a permitir um 
+estudo agnóstico quanto a aplicações, plataformas e provedores utilizados 
+durante a execução das ferramentas desenvolvidas neste trabalho.
+
+Apresentamos também um formalismo que visa à generalização da metodologia 
+utilizada neste trabalho e a permitir a melhor descrição do raciocínio lógico 
+envolvido no desenvolvimento das heurísticas criadas.
+
+\section{Definições e Terminologias}
+Apresentamos a seguir as definições que permeiam o conhecimento necessário para 
+a análise dos problemas estudados e soluções propostas. Mostramos também as 
+terminologias ou nomenclaturas que criamos para designar esses conceitos a fim 
+de facilitar a comunicação e o entendimento por parte do leitor.
+
+\subsection{Aplicação sob Teste}
+A Aplicação sob Teste é um sistema computacional, possivelmente implementado em 
+arquitetura multicamadas, para o qual se deseja observar o comportamento em um 
+ambiente de computação em nuvem e ao estão ligadas uma ou mais Métricas de 
+Desempenho.
+
+\subsection{Métrica de Desempenho}
+Uma característica ou comportamento mensurável de forma automatizada e 
+comparável a um Valor de Referência capaz de indicar o grau de sucesso de uma 
+execução da Aplicação. Ex. tempo de resposta, quadros por segundo, etc. Métricas 
+podem ser minimizáveis ou maximizáveis, a depender do objetivo da métrica quanto 
+ao resultado desejado. Por exemplo, “tempo de resposta” é uma métrica 
+minimizável, uma vez que geralmente se deseja que uma Aplicação responda a uma 
+requisição com o menor tempo de resposta possível nos resultados. Contrariamente, 
+uma métrica “quadros renderizados por segundo”, no domínio da computação gráfica, 
+é uma métrica maximizável, pois quanto mais quadros são renderizados por unidade 
+de tempo, maior a qualidade percebida pelo usuário.
+
+\subsection{Valor de Referência}
+Um valor predefinido como minimamente aceitável como resultado apresentado por 
+uma Métrica após uma Execução da Aplicação sob Teste. Este valor, também 
+referenciado neste trabalho como SLA (Service Level Agreement), serve como base 
+de comparação para que as Heurísticas desenvolvidas e apresentadas saibam se a 
+Aplicação é capaz de ser executada sobre um determinado arranjo de máquinas 
+virtuais e sob uma determinada Carga de Trabalho a ela imposta.
+
+\subsection{Provedor}
+Consideramos neste trabalho a figura do provedor como representando uma empresa 
+que fornece infraestrutura computacional como serviço cobrado financeiramente 
+por fração de tempo de utilização. Alguns provedores fornecem conjuntamente a 
+modalidade de plataforma como serviço. Nós, porém, não estamos considerando essa 
+modalidade neste trabalho, interessando-nos apenas os serviços de infraestrutura, 
+notadamente a disponibilização de máquinas virtuais.
+
+\subsection{Tipos de Máquinas Virtuais}
+Provedores costumam classificar as máquinas virtuais fornecidas conforme suas 
+características, de modo a manter uma linha de produtos discreta e finita. 
+Normalmente essa classificação se dá em termos de quantidade de memória RAM, 
+quantidade de espaço em disco e capacidade computacional, neste caso, quer seja 
+em termos relativos a um valor padrão tomado como base, quer seja em termos 
+absolutos, como número de CPUs virtuais.
+
+\subsection{Categorias de Máquinas Virtuais}
+Tipos de Máquinas Virtuais podem ser agrupados em Categorias, conforme suas 
+características físicas, plataforma e/ou arquitetura de hardware e a natureza do 
+uso a que se destinam. Dentro de uma mesma Categoria, os Tipos de Máquinas 
+Virtuais variam apenas na quantidade de cada um dos recursos especificados para 
+a Categoria e no preço cobrado pelo uso das máquinas virtuais.
+
+Como exemplo, podemos citar uma Categoria de máquinas destinadas a armazenamento 
+de arquivos, onde as máquinas devem privilegiar o espaço de armazenamento em 
+massa. Dentro dessa categoria, a principal diferença entre os Tipos de Máquinas 
+Virtuais se dá em função da quantidade de espaço em disco disponibilizado, 
+enquanto características como memória RAM e CPU teriam pequenas variações. 
+Outras Categorias podem enfatizar o consumo de banda de rede ou processamento 
+paralelo de alto desempenho.
+
+\subsection{Configurações}
+Chamamos de Configuração um conjunto de máquinas virtuais pertencentes ao mesmo 
+Tipo de Máquinas Virtuais (e, portanto, de uma mesma Categoria) e que será 
+aplicado a uma camada arquitetural da aplicação sob estudo (apresentação, 
+negócio, persistência, etc.). Uma Configuração representa o estado de uma 
+determinada camada da aplicação quanto à sua escalabilidade, vertical ou horizontal.
+
+Por exemplo, poderíamos avaliar o comportamento de uma Aplicação sob Teste 
+implantada com sua camada de aplicação em arquitetura de cluster, composta por 
+duas, três ou quatro instâncias em paralelo, caracterizando a variação dessa 
+camada em diferentes níveis de escalabilidade horizontal. Para esse teste, 
+teríamos então três Configurações diferentes, a primeira com duas instâncias, a 
+segunda com três e a terceira com quatro instâncias de máquinas do mesmo Tipo de 
+Máquina Virtual.
+
+As heurísticas desenvolvidas e apresentadas por este trabalho comparam 
+implantações de diferentes Configurações em uma determinada camada da Aplicação 
+sob Teste estudada. Isso permite que sejam feitas avaliações como a viabilidade 
+financeira da escalabilidade vertical face ao desempenho possivelmente obtido 
+com a escalabilidade horizontal.
+
+\subsection{Espaço de Implantação}
+Chamamos de Espaço de Implantação o conjunto limitado de Configurações tomadas 
+para execução da Aplicação sob Teste em uma sessão de avaliação.
+ 
+Idealmente, uma Aplicação deveria ser testada sob todos os Tipos de Máquinas 
+Virtuais fornecidos pelo Provedor (cobrindo todo o espaço de escalabilidade 
+vertical) com o maior número possível de combinações de quantidade de instâncias 
+(cobrindo o espaço de escalabilidade horizontal). Porém, se muitos Tipos de 
+Máquinas Virtuais forem necessários e se o intervalo de número de instâncias 
+solicitado for muito grande, o tempo de duração da sessão e o custo da muitas 
+execuções podem se tornar proibitivos.
+
+Assim, o processo de especificação de um Espaço de Implantação consiste em 
+selecionar uma lista de Tipos de Máquinas Virtuais entre os oferecidos pelo 
+Provedor e designar o melhor valor para o número máximo de instâncias que serão 
+usadas na criação das Configurações. Isso faz com que ambos os espaços de 
+escalabilidade vertical e horizontal sejam limitados, de forma a controlar 
+melhor os custos e permitir que sejam executados testes mais objetivos e de 
+acordo com a meta de Carga de Trabalho a ser atendida pela Aplicação.
+
+\subsection{Carga de Trabalho}
+A Carga de Trabalho, ou Workload, representa o tamanho da demanda que será 
+imposta à Aplicação sob Teste em uma execução. A unidade de medida da Carga é 
+dependente do domínio da Aplicação,  mas, para efeito deste trabalho, é 
+irrelevante, uma vez que a responsabilidade pela execução dos testes e, por 
+conseguinte, pela geração da carga, é delegada a um módulo à parte dentro 
+sistema de avaliação.
+
+\subsection{Execução}
+Damos o nome de Execução ao evento de utilização de uma Configuração para 
+executar a Aplicação sob Teste submetida a uma determinada Carga de Trabalho. 
+Dessa forma, a avaliação dos Resultados de uma Execução nos dará uma ideia de 
+como a Aplicação responderá às requisições de certo número de usuários (workload) 
+após ser implantada num ambiente de nuvem com certo grau de escalabilidade 
+horizontal (número de máquinas virtuais usadas).
+
+\section{Formalismos}
+Dada uma Aplicação sob Teste A, precisamos identificar, dentre um conjunto de 
+cenários de implantação e execução da aplicação em ambiente de nuvem 
+computacional sob a modalidade de infraestrutura como serviço, sob quais desses 
+cenários a aplicação é executada com sucesso e, dentre esses cenários, quais os 
+de menor custo.
+
+De modo a facilitar uma descrição formal do raciocínio lógico empregado na
+solução proposta, mostramos a seguir a notação que representa os conceitos 
+descritos na seção anterior. Ao final, será apresentada uma descrição formal
+do modelo vislumbrado como solução para o problema apresentado.
+
+\subsection{Métricas de Desempenho}
+Seja $M(A)$ um conjunto de Métricas de Desempenho de interesse da Aplicação sob 
+Teste $A$. Seja $|M(A)|$ a quantidade de Métricas de Desempenho $\in M(A)$ avaliadas 
+para a Aplicação sob Teste $A$.
+
+$M(A) = \{m_1, m_2, \dotsc, m_{|P|}\}\; | \; m_n \in M, 1 \leq n \leq |M| \iff m_n $ 
+é uma Métrica de Desempenho a ser avaliada para a Aplicação sob Teste $A$.
+
+\subsection{Provedor}
+Seja $P$ um conjunto de Provedores. Seja $|P|$ a quantidade de Provedores 
+pertencentes a $P$.
+
+$P = \{p_1, p_2, \dotsc, p_{|P|}\}\; | \; p_n \in P, 1 \leq n \leq |P| \iff p_n $ 
+é um Provedor de infraestrutura como serviço.
+
+\subsection{Tipos de Máquinas Virtuais}
+Seja $T(P)$ um conjunto de Tipos de Máquinas Virtuais fornecidos pelo provedor $P$.
+
+Seja $|T(P)|$ a quantidade de Tipos de Máquinas Virtuais pertencentes a $T(P)$.
+
+$T(P) = \{t_1, t_2, \dotsc, t_{|T(P)|}\}\; | \; t_n \in T(P), 1 \leq n \leq |T(P)|
+ \iff t_n $ é um Tipo de Máquina Virtual fornecido pelo provedor P.
+
+Definimos $i(t)$ como uma instância de Máquina Virtual do Tipo $t \in T(P)$. 
+
+Definimos $t(i)$ como o Tipo de Máquina Virtual $t \in T(P)$ usado para criar a 
+instância $i$.
+
+Definimos \$$(t)$ como o valor de custo unitário por hora de utilização de uma 
+instância do Tipo $t$.
+
+Definimos $cpu(t)$ como o tamanho da capacidade computacional do Tipo $t$.
+
+Definimos $mem(t)$ como o tamanho da capacidade de memória do Tipo $t$.
+
+Dados dois Tipos de Máquinas Virtuais $t_1$ e $t_2$:
+
+$t_1 = t_2 \iff cpu(t_1) = cpu(t_2) \land mem(t_1) = mem(t_2)$.
+
+$t_1 < t_2 \iff cpu(t_1) < cpu(t_2) \land mem(t_1) < mem(t_2)$.
+
+$t_1 > t_2 \iff cpu(t_1) > cpu(t_2) \land mem(t_1) > mem(t_2)$.  
+  
+\subsection{Categorias de Máquinas Virtuais}
+Seja $Cat(P)$ um conjunto de Categorias de Máquinas Virtuais fornecidas pelo 
+provedor $P$.
+
+$Cat(P) = \{cat_1, cat_2, \dotsc, cat_{|Cat(P)|}\}\; | \; cat_n \in Cat(P), 
+1 \leq n \leq |Cat(P)| \iff cat_n $ é uma Categoria de Máquina Virtual fornecida 
+pelo provedor P.
+
+$cat_n = \{T(P)_1, T(P)_2, \dotsc\, T(P)_{|cat_n|}\}\; | \; T(P)_m \subset T(P), 
+1 \leq m \leq |cat_n| \iff T(P)_m $ é um grupo de Tipos de Máquina Virtual
+fornecidos pelo provedor P.
+
+Definimos $cat(t_n) \in Cat(P)$ como a Categoria atribuída ao Tipo $t_n \in T(P)$ 
+pelo Provedor $P$.
+
+\subsection{Configurações}
+Seja $c$ um grupo com um certo número de Máquinas Virtuais $i(t)$.
+
+Dizemos que $c$ é uma Configuração se $\forall \; i(t) \in c, t$ é constante.
+
+Definimos $t(c)$ como o Tipo de Máquina Virtual usado para criar as instâncias 
+que compõem $c$. Portanto, temos que $t(c) = t(i), \forall \; i(t) \in c$. 
+
+Definimos $\#(c)$ como o tamanho da Configuração $c$, ou seja, a quantidade de 
+instâncias $i(t)$ usadas para formar $c$.
+
+Definimos \$$(c)$ como o custo total da configuração, dado por \$$(t) \times \#(c)$.
+
+O conjunto $C(P)$ é o conjunto de todas as Configurações $c$ possíveis de serem 
+formadas a partir dos Tipos $t \in T(P)$ e com um número arbitrário de instâncias 
+$i(t)$.
+
+Dadas duas Configurações $c_1$ e $c_2$:
+
+$c_1 = c_2 \iff t(c_1) = t(c_2) \land \#(c_1) = \#(c_2)$.
+
+$ c_1 > c_2 \iff \left\{
+  \begin{array}{l l}
+    t(c_1) = t(c_2) \land \#(c_1) > \#(c_2)\\
+    ou\\
+    t(c_1) > t(c_2) \land \#(c_1) = \#(c_2)
+  \end{array} \right.$
+  
+$ c_1 < c_2 \iff \left\{
+  \begin{array}{l l}
+    t(c_1) = t(c_2) \land \#(c_1) < \#(c_2)\\
+    ou\\
+    t(c_1) < t(c_2) \land \#(c_1) = \#(c_2)
+  \end{array} \right.$
+
+\subsection{Espaço de Implantação}
+Seja um conjunto de Tipos de Máquinas Virtuais $T(DS_x^y) \subset T(P)$.
+
+Seja um conjunto de Configurações $C_x^y$ tal que:
+ 
+$\forall \; t \in T(DS_x^y), \; \forall \; i \; | \; x \leq i \leq y, \; \exists \; c \in C_x^y \; | \; t(c) = t \; \land \; \#(c) = i$.
+ 
+O Espaço de Implantação $DS_x^y(P)$ é um grafo cujo conjunto de vértices é dado 
+por $C_x^y$ e cujas arestas são dadas pelas seguintes operações:
+
+\begin{enumerate}
+  \item Ordenar $C_x^y$ pelo atributo $preço$ de cada elemento do conjunto (\$$(c)$).
+  \item $preço_{\to} = \forall\; c_1, c_2 \in C_x^y,\; c_1 \to c_2 \iff \$(c_1) < \$(c_2) \land \nexists\; c_3\;|\; \$(c_1) < \$(c_3) < \$(c_2)$
+  \item Ordenar $C_x^y$ pelo atributo $CPU$ de cada elemento do conjunto ($cpu(c)$).
+  \item $cpu_{\to} = \forall\; c_1, c_2 \in C_x^y,\; c_1 \to c_2 \iff cpu(c_1) < cpu(c_2) \land \nexists\; c_3\;|\; cpu(c_1) < cpu(c_3) < cpu(c_2)$
+  \item Ordenar $C_x^y$ pelo atributo $Memória$ de cada elemento do conjunto ($mem(c)$).
+  \item $mem_{\to} = \forall\; c_1, c_2 \in C_x^y,\; c_1 \to c_2 \iff mem(c_1) < mem(c_2) \land \nexists\; c_3\;|\; mem(c_1) < mem(c_3) < mem(c_2)$
+\end{enumerate}
+
+\subsection{Cargas de Trabalho}
+Seja $W$ um conjunto finito de valores que representam Cargas de Trabalho. Seja 
+$|W|$ a quantidade de Cargas de Trabalho pertencentes a $W$.
+
+$W = \{w_1, w_2, \dotsc, w_{|W|}\}\; | \; w_n \in W, 1 \leq n \leq |W| \iff w_n $ 
+é um valor válido como carga a ser submetida dentro do domínio de conhecimento 
+da Aplicação sob Teste.
+
+\subsection{Resultados}
+Um Resultado $r$ é uma quádrupla no formato $\{m, v, cpu, mem\}$ onde:
+
+$m \in M(A)$ é a Métrica de Desempenho medida no Resultado;
+
+$v$ é o valor medido para a Métrica;
+
+$cpu$ é o percentual de CPU utilizada para a obtenção de $v$; e
+
+$mem$ é o percentual de memória RAM utilizada para a obtenção de $v$.
+
+\subsection{Execuções}
+Seja $E(A)$ um conjunto de Execuções da Aplicação sob Teste $A$. Seja $|E|$ a 
+quantidade de Execuções pertencentes a $E(A)$.
+
+$E(A) = \{e_1, e_2, \dotsc, e_{|E|}\}\; | \; e_n \in E(A), 1 \leq n \leq |E(A)| \iff e_n $ 
+é uma tripla no formato $\{c, w, r\}\; |\; c \in DS_x^y(P), w \in W$ e onde $r$ é 
+o Resultado obtido a partir da Execução da Aplicação na configuração $c$, 
+submetida à Carga de Trabalho $w$.
+
+\subsection{Avaliação da Execução}
+Seja $\alpha$ um valor de referência definido como parâmetro de sucesso para uma 
+Métrica de Desempenho quando da Execução de um teste da Aplicação.
+
+Seja $e \in E(A)$ uma Execução da Aplicação $A$
+
+Seja $r \in e$ o Resultado da Execução $e$
+
+Seja $m \in r$ a Métrica de Desempenho avaliada no Resultado $r$
+
+Seja $v \in r$ o valor medido para a Métrica $m$ no Resultado $r$
+
+Seja $atende(r, \alpha)$ uma função tal que:
+
+$m\; é\; minimizável \iff atende(r,\alpha) = \left\{
+  \begin{array}{l l}
+    \{1, \delta\}, v \leq \alpha\\
+    \{0, \delta\}, v > \alpha
+  \end{array} \right.$
+
+$m\; é\; maximizável \iff atende(r,\alpha) = \left\{
+  \begin{array}{l l}
+    \{0, \delta\}, v < \alpha\\
+    \{1, \delta\}, v \geq \alpha
+  \end{array} \right.$
+
+Em ambos os casos, $\delta$ representa a distância entre o valor de Resultado 
+obtido para a Métrica $m$ na Execução $e$ (ou seja, o valor $e[r[v]]$) e o Valor
+de Referência ou SLA $\alpha$. 
+
+A representação dessa distância é dada por $\delta = \{grau\; de\; desvio,
+\; direção\; do\; desvio\}$, onde o $grau\;de\;desvio$ indica se esse desvio é 
+$alto$, $médio$ ou $baixo$, e a $direção\;do\;desvio$ indica se o resultado 
+obtido está $abaixo$ ou $acima$ do SLA.  
+
+Os limites de comparação do Resultado com o SLA para a classificação do grau de 
+desvio são parâmetros e podem ser modificados conforme a tolerância da Aplicação
+a flutuações de desempenho do ambiente de nuvem. Os valores desses parâmetros 
+são dados em termos percentuais.
+
+As informações trazidas por $\delta$ podem influenciar o modo como as Heurísticas
+de Avaliação de Capacidade caminham sobre o Espaço de Implantação na busca pelas 
+melhores Configurações. Seu uso, porém, é opcional e fica a critério da própria 
+Heurística.
+
+Apresentamos a seguir uma especificação de funcionamento das Heurísticas, 
+detalhando seu papel dentro deste trabalho, insumos de entrada e as operações
+que devem fornecer como interface para sua manipulação e controle.

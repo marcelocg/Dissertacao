@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Tue Jun 10 00:09:13 GMT-03:00 2014
+markTmpDer=true
+builderNum=2
+outputDir=
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=dissertacao.tex
+outputFile=Dissertacao Marcelo Goncalves.pdf
+langSpell=pt
+markDer=true
+srcDir=

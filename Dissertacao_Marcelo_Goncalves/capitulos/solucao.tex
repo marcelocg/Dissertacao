@@ -1,0 +1,27 @@
+\chapter[Esquema de Solução]{Esquema de Solução}
+% ----------------------------------------------------------
+
+***** DESCONSIDERAR POR ENQUANTO *****
+
+O objetivo deste trabalho é estudar heurísticas de preenchimento da matriz P 
+descrita no capítulo anterior sem necessariamente ter que executar de fato todos
+os testes necessários. Esse preenchimento deverá ser feito, assim, por meio de 
+um motor de predições que executará uma ou mais estratégias para preencher a 
+matriz P com resultados calculados a partir dos dados de entrada.
+
+Consideraremos como dados de entrada os resultados de uma ou mais execuções 
+reais para um ou mais cenários de teste. A precisão dos resultados obtidos pelo 
+motor de predição vai depender da qualidade da estratégia escolhida e da 
+quantidade de dados de entrada. Quanto mais diversificadas quanto aos cenários a
+que forem aplicadas e quanto maior o número de execuções reais usadas para 
+alimentar inicialmente o motor de predições, mais preciso tenderá a ser o 
+resultado da predição, porém mais caro se tornará o processo, uma vez que os 
+testes executados no ambiente de nuvem incorrem em custo financeiro.
+
+Apresentaremos um motor capaz de executar heurísticas de predição e um arcabouço
+de implementação dessas heurísticas, de forma que nova inteligência de predição 
+possa ser agregada ao trabalho futuramente. Apresentaremos também, como forma de
+validar a proposta do arcabouço e do motor de execuções, duas heurísticas para 
+geração da matriz P preenchida e sugestão da configuração de menor custo para 
+executar a aplicação alvo em ambiente de nuvem de infraestrutura.
+

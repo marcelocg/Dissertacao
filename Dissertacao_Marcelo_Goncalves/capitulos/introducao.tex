@@ -1,0 +1,91 @@
+\chapter[Introdução]{Introdução}
+% ----------------------------------------------------------
+O processo de decisão pela migração de aplicações para o ambiente de nuvens computacionais 
+envolve uma série de análises que buscam, entre outras coisas, identificar que vantagens a 
+mudança trará de fato. Ao comparar os serviços de provedores de computação em nuvem com a 
+administração de um centro de dados próprio, a melhoria dos indicadores de desempenho e de 
+custo, como redução de tempo de resposta, redução/otimização de custo de operação e melhores 
+ferramentas com mais facilidades de gerenciamento, está entre os principais benefícios buscados 
+a partir da adoção do ambiente de infraestrutura como serviço (IaaS – Infrastructure as a Service)
+\cite{li2011cloudprophet, rodero2010infrastructure}.
+
+Em geral, provedores de IaaS cobram um valor em função do tempo de ocupação de uma máquina 
+virtual, normalmente medido em horas, e esse valor unitário varia conforme o tamanho da máquina 
+virtual (capacidade de processamento, memória e espaço de armazenamento). Dessa forma, a apuração 
+do custo de operação da aplicação em um determinado período de tempo leva em conta a quantidade 
+de máquinas virtuais utilizadas bem como seu perfil, ou seja, o tamanho e quantidade de recursos 
+usados em cada uma.
+ 
+Para prever o custo de operação de uma aplicação na nuvem, é preciso estimar ou medir como a 
+aplicação responderá à demanda submetida em termos de indicadores de desempenho. A aplicação deve 
+manter ou superar na nuvem o nível de desempenho apresentado quando executada em centro de dados 
+próprio e com indicadores de custo menores, a fim de que se justifique o investimento feito na 
+migração de ambiente. Para se chegar a essa conclusão, faz-se necessário conhecer o comportamento 
+da aplicação na nova implantação para que se identifiquem quais perfis de máquinas virtuais 
+oferecidos pelo provedor são capazes de executar a aplicação com níveis satisfatórios de desempenho. 
+Somem-se a isso as variações da demanda exercida sobre a aplicação e as diversas possibilidades de 
+variação de arquitetura de implantação por meio de procedimentos de escalabilidade.
+ 
+Ao se tomarem procedimentos de escalabilidade vertical (variando-se a quantidade de recursos de 
+cada máquina) e/ou de escalabilidade horizontal (variando-se a quantidade de máquinas em uma ou 
+mais camadas, como dados, apresentação e negócio) chega-se a níveis de desempenho e de custo muito 
+diversos. A variação da demanda exige que a aplicação também varie em tamanho da implantação, 
+vertical ou horizontalmente, conforme a carga aplicada. Quanto mais acentuadas e mais frequentes 
+as variações na demanda, mais variações de custo e desempenho serão observadas.
+
+Assim, o custo apresenta-se entre os mais difíceis de prever, uma vez que depende necessariamente 
+do tamanho da demanda exercida sobre a aplicação além do desempenho oferecido e preços cobrados 
+pelo provedor de nuvem de infraestrutura contratado \cite{cunha2012ambiente}. Estrategicamente, 
+torna-se interessante identificar, entre as possíveis composições de máquinas virtuais ofertadas 
+em um ou vários provedores, quais são as configurações de menor custo capazes de executar a 
+aplicação mantendo-se os níveis satisfatórios para os indicadores de desempenho.
+
+Para saber se uma determinada configuração de recursos do provedor é capaz de atender a uma 
+demanda específica, é preciso antes enumerar os indicadores de desempenho que mais interessam 
+à aplicação e a partir daí estabelecer os valores aceitáveis para esses indicadores. Uma vez 
+estabelecidos os valores aceitáveis, pode-se implantar a aplicação sob essa configuração de 
+recursos e então aplicar diferentes níveis de carga de trabalho sobre a aplicação. Ao comparar 
+a resposta da aplicação com os valores dados como aceitáveis para os indicadores, é possível 
+determinar se aquela configuração de recursos escolhida é capaz de executar a aplicação a 
+contento e ainda calcular o custo mensal dessa implantação.
+
+Porém, partindo-se do pressuposto de que o desempenho da aplicação foi satisfatório, o que se 
+tem até agora é o custo de uma única configuração capaz de executar a aplicação estudada sob 
+um único nível de carga de trabalho. Mas cargas de trabalho costumam variar em função do tempo 
+em implantações reais, fazendo-se necessário, portanto, que esse efeito seja contemplado nos 
+testes por meio da medição do desempenho da aplicação submetida a diferentes níveis de carga 
+de trabalho.
+
+Analogamente, as diversas configurações de máquinas e recursos, ainda que no mesmo provedor, 
+podem responder de maneira muito diferente sob o mesmo nível de carga de trabalho a depender 
+do momento em que sejam ativados \cite{cunha2011investigating, iosup2011performance, 
+jayasinghe2011variations}. Independente do motivo que leve a esse comportamento de certa 
+forma imprevisível, é preciso levar em conta nos ensaios de avaliação de desempenho essa 
+variabilidade e isso pode ser alcançado através da repetição dos cenários de teste em horários 
+e dias diferentes.
+
+Um grande problema começa a se desenhar ao seguir essa abordagem: a fase de ensaios pode atingir 
+patamares elevados de custo, a depender das necessidades de variação da demanda, da arquitetura 
+de implantação e das configurações utilizadas em cada arquitetura implantada 
+\cite{silva2013cloudbench}. Ainda que certos provedores IaaS ofereçam descontos ou pacotes de 
+horas grátis para novos clientes, em geral esses incentivos são suficientes para custear apenas 
+um mês de utilização de uma única máquina virtual muito pequena, provavelmente incapaz suportar 
+a carga de uma aplicação real em produção. Assim, executar uma aplicação real, tipicamente 
+implantada em arquitetura de várias camadas, em máquinas virtuais de tamanho considerável e por 
+longos períodos de tempo apenas para estudar o seu comportamento, pode se traduzir em um custo 
+alto que inviabilize o próprio projeto de migração dessa aplicação para a nuvem. Para evitar 
+que sejam feitos testes com todas as combinações de provedores, configurações, horários, cargas 
+de trabalho e métricas avaliadas, é possível lançar mão de técnicas de predição.
+
+Através da predição, é possível estimar com razoável aproximação o desempenho que a aplicação 
+apresentará ao ser executada em vários perfis de configuração diferentes, permitindo a 
+determinação de qual configuração de menor custo capaz de executar a aplicação e sem a 
+necessidade da realização completa dos testes. Como consequência, o custo dessa fase de 
+ensaios pode ser reduzido sensivelmente.
+
+Este trabalho propõe heurísticas de predição de custo mínimo para execução de aplicações 
+em ambientes de nuvem de infraestrutura, bem como um arcabouço de programação que apoia a 
+implementação dessas heurísticas. Além disso, o trabalho estuda os resultados apresentados 
+pela aplicação das heurísticas propostas quanto ao custo total de execução da fase de ensaios 
+para escolha da melhor configuração capaz de executar uma aplicação e quanto à acuidade dos 
+resultados da predição em si.

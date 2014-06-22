@@ -1,0 +1,8 @@
+@inproceedings{hill2010early,
+  title={Early observations on the performance of Windows Azure},
+  author={Hill, Zach and Li, Jie and Mao, Ming and Ruiz-Alvarez, Arkaitz and Humphrey, Marty},
+  booktitle={Proceedings of the 19th ACM International Symposium on High Performance Distributed Computing},
+  pages={367--376},
+  year={2010},
+  organization={ACM}
+}

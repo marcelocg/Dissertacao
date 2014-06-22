@@ -1,0 +1,42 @@
+digraph g{
+  // rankdir=LR;
+  node [shape=box, fillcolor="burlywood", style="filled,rounded"];
+   
+  // cost (elastic)
+
+  subgraph cluster0 {
+    "m3.m(1)"   
+  }
+
+  subgraph cluster1 {
+     "c3.l(1)"
+  }
+
+  subgraph cluster2 {
+    "m3.l(1)" 
+  }
+  
+  subgraph cluster3 {
+    "c3.xl(1)"
+  }
+  
+  subgraph cluster4 {
+    "m3.xl(1)"
+  }
+  
+  subgraph cluster5 {
+    "c3.2xl(1)"
+  }  
+
+  "m3.m(1)" -> "c3.l(1)" 
+
+  "c3.l(1)" -> "m3.l(1)" 
+
+  "m3.l(1)" -> "c3.xl(1)"
+
+  "c3.xl(1)" -> "m3.xl(1)"
+
+  "m3.xl(1)" -> "c3.2xl(1)"
+  
+
+}

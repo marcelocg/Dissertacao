@@ -1,0 +1,23 @@
+***************************************
+*** ###easy### TPC-C Load Generator ***
+***************************************
+option h with value '192.241.149.101'
+option d with value 'tpcc'
+option u with value 'root'
+option p with value 'password'
+option w with value '50'
+option c with value '500'
+option r with value '1200'
+option l with value '7200'
+<Parameters>
+     [server]: 192.241.149.101
+     [port]: 3306
+     [DBname]: tpcc
+       [user]: root
+       [pass]: password
+  [warehouse]: 50
+ [connection]: 500
+     [rampup]: 1200 (sec.)
+    [measure]: 7200 (sec.)
+
+RAMP-UP TIME.(1200 sec.)

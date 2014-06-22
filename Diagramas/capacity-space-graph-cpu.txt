@@ -1,0 +1,93 @@
+digraph g{
+  // rankdir=LR;
+  node [shape=plaintext];
+  edge [color=black;fontsize=10];
+  "(3.0)" -> "(6.0)" [label=" x2.00",arrowhead=none]
+  "(6.0)" -> "(6.5)" [label=" x1.08",arrowhead=none]
+  "(6.5)" -> "(7.0)" [label=" x1.08",arrowhead=none]
+  "(7.0)" -> "(9.0)" [label=" x1.29",arrowhead=none]
+  "(9.0)" -> "(12.0)" [label=" x1.33",arrowhead=none]
+  "(12.0)" -> "(13.0)" [label=" x1.08",arrowhead=none]
+  "(13.0)" -> "(14.0)" [label=" x1.08",arrowhead=none]
+  "(14.0)" -> "(19.5)" [label=" x1.39",arrowhead=none]
+  "(19.5)" -> "(21.0)" [label=" x1.08",arrowhead=none]
+  "(21.0)" -> "(26.0)" [label=" x1.24",arrowhead=none]
+  "(26.0)" -> "(28.0)" [label=" x1.08",arrowhead=none]
+  "(28.0)" -> "(39.0)" [label=" x1.39",arrowhead=none]
+  "(39.0)" -> "(42.0)" [label=" x1.08",arrowhead=none]
+  "(42.0)" -> "(52.0)" [label=" x1.24",arrowhead=none]
+  "(52.0)" -> "(56.0)" [label=" x1.08",arrowhead=none]
+  "(56.0)" -> "(84.0)" [label=" x1.50",arrowhead=none]
+  "(84.0)" -> "(112.0)" [label=" x1.33",arrowhead=none]
+ 
+   // cpu
+  node [shape=box, fillcolor="burlywood", style="filled,rounded"];
+  edge [style=solid,color=black,fontsize=8];
+  
+  "m3.m(1)" -> "m3.m(2)" 
+    
+  "m3.m(2)" -> "m3.l(1)"  
+
+  "m3.l(1)" -> "c3.l(1)" 
+
+  "c3.l(1)" -> "m3.m(3)" 
+
+  "m3.m(3)" -> "m3.m(4)" 
+
+  "m3.m(4)" -> "m3.l(2)" 
+
+  "m3.m(4)" -> "m3.xl(1)" 
+
+  "m3.l(2)" -> "c3.l(2)" 
+
+  "m3.l(2)" -> "c3.xl(1)" 
+  
+  "m3.xl(1)" -> "c3.l(2)" 
+
+  "m3.xl(1)" -> "c3.xl(1)" 
+
+  "c3.l(2)" -> "m3.l(3)" 
+
+  "c3.xl(1)" -> "m3.l(3)"
+
+  "m3.l(3)" -> "c3.l(3)" 
+  
+  "c3.l(3)" -> "m3.l(4)" 
+
+  "c3.l(3)" -> "m3.xl(2)" 
+
+  "m3.l(4)" -> "c3.l(4)"
+  
+  "m3.l(4)" -> "c3.xl(2)"
+  
+  "m3.l(4)" -> "c3.2xl(1)"
+  
+  "m3.xl(2)" -> "c3.l(4)"
+  
+  "m3.xl(2)" -> "c3.xl(2)"
+  
+  "m3.xl(2)" -> "c3.2xl(1)"
+  
+  "c3.l(4)" -> "m3.xl(3)"
+  
+  "c3.xl(2)" -> "m3.xl(3)"
+  
+  "c3.2xl(1)" -> "m3.xl(3)"
+  
+  "m3.xl(3)" -> "c3.xl(3)" 
+
+  "c3.xl(3)" -> "m3.xl(4)" 
+
+  "m3.xl(4)" -> "c3.xl(4)"
+
+  "m3.xl(4)" -> "c3.2xl(2)" 
+
+  "c3.xl(4)" -> "c3.2xl(3)" 
+
+  "c3.2xl(2)" -> "c3.2xl(3)"
+
+  "c3.2xl(3)" -> "c3.2xl(4)" 
+
+ 
+
+}

@@ -1,0 +1,8 @@
+@inproceedings{jayasinghe2012expertus,
+  title={Expertus: A generator approach to automate performance testing in IaaS clouds},
+  author={Jayasinghe, Deepal and Swint, Galen and Malkowski, Simon and Li, Jack and Wang, Qingyang and Park, Junhee and Pu, Calton},
+  booktitle={Cloud Computing (CLOUD), 2012 IEEE 5th International Conference on},
+  pages={115--122},
+  year={2012},
+  organization={IEEE}
+}

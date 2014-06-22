@@ -1,0 +1,6 @@
+@article{chen2010towards,
+  title={Towards understanding cloud performance tradeoffs using statistical workload analysis and replay},
+  author={Chen, Yanpei and Ganapathi, Archana Sulochana and Griffith, Rean and Katz, Randy H},
+  journal={University of California at Berkeley, Technical Report No. UCB/EECS-2010-81},
+  year={2010}
+}
