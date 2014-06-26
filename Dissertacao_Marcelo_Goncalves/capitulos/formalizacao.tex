@@ -20,7 +20,7 @@ de facilitar a comunicação e o entendimento por parte do leitor.
 \subsection{Aplicação sob Teste}
 A Aplicação sob Teste é um sistema computacional, possivelmente implementado em 
 arquitetura multicamadas, para o qual se deseja observar o comportamento em um 
-ambiente de computação em nuvem e ao estão ligadas uma ou mais Métricas de 
+ambiente de computação em nuvem e ao qual estão ligadas uma ou mais Métricas de 
 Desempenho.
 
 \subsection{Métrica de Desempenho}
@@ -35,7 +35,7 @@ uma métrica “quadros renderizados por segundo”, no domínio da computação
 é uma métrica maximizável, pois quanto mais quadros são renderizados por unidade 
 de tempo, maior a qualidade percebida pelo usuário.
 
-\subsection{Valor de Referência}
+\subsection{Valor de Referência ou SLA}
 Um valor predefinido como minimamente aceitável como resultado apresentado por 
 uma Métrica após uma Execução da Aplicação sob Teste. Este valor, também 
 referenciado neste trabalho como SLA (Service Level Agreement), serve como base 
@@ -118,10 +118,13 @@ acordo com a meta de Carga de Trabalho a ser atendida pela Aplicação.
 \subsection{Carga de Trabalho}
 A Carga de Trabalho, ou Workload, representa o tamanho da demanda que será 
 imposta à Aplicação sob Teste em uma execução. A unidade de medida da Carga é 
-dependente do domínio da Aplicação,  mas, para efeito deste trabalho, é 
-irrelevante, uma vez que a responsabilidade pela execução dos testes e, por 
-conseguinte, pela geração da carga, é delegada a um módulo à parte dentro 
-sistema de avaliação.
+dependente do domínio da Aplicação, como a duração do vídeo em uma aplicação
+de transcodificação de arquivos multimídia ou o tamanho do arquivos de entrada
+para uma aplicação de compactação de arquivos. Entretanto, para efeito deste 
+trabalho, essa unidade de medida da Carga é irrelevante, uma vez que a 
+responsabilidade pela execução dos testes e, por conseguinte, pela geração da 
+carga, é delegada a um módulo à parte dentro do sistema de avaliação, como um
+software de \emph{benchmarking}.
 
 \subsection{Execução}
 Damos o nome de Execução ao evento de utilização de uma Configuração para 
@@ -129,7 +132,15 @@ executar a Aplicação sob Teste submetida a uma determinada Carga de Trabalho.
 Dessa forma, a avaliação dos Resultados de uma Execução nos dará uma ideia de 
 como a Aplicação responderá às requisições de certo número de usuários (workload) 
 após ser implantada num ambiente de nuvem com certo grau de escalabilidade 
-horizontal (número de máquinas virtuais usadas).
+horizontal (número de máquinas virtuais usadas). 
+
+Tomemos como exemplo uma aplicação web muito comum, um blog. São requisições 
+comuns a um blog o acesso à página principal, uma consulta às postagens de uma
+categoria e o acesso a uma determinada postagem. Agora suponhamos uma Configuração
+composta de três instâncias de máquinas virtuais do Provedor Rackspace, do Tipo 
+"Performance 1", executando uma instalação do blog Wordpress, muito usado hoje em 
+dia. Uma Execução dessa aplicação seria a imposição da Carga de Trabalho correspondente
+a um conjunto de requisições disparadas por 100 usuários simultâneos sobre essa Configuração. 
 
 \section{Formalismos}
 Dada uma Aplicação sob Teste A, precisamos identificar, dentre um conjunto de 
@@ -184,8 +195,12 @@ $t_1 = t_2 \iff cpu(t_1) = cpu(t_2) \land mem(t_1) = mem(t_2)$.
 
 $t_1 < t_2 \iff cpu(t_1) < cpu(t_2) \land mem(t_1) < mem(t_2)$.
 
-$t_1 > t_2 \iff cpu(t_1) > cpu(t_2) \land mem(t_1) > mem(t_2)$.  
-  
+$t_1 > t_2 \iff cpu(t_1) > cpu(t_2) \land mem(t_1) > mem(t_2)$.
+
+$cpu(t_1) < cpu(t_2) \land mem(t_1) > mem(t_2) \iff$ relação indeterminada entre t_1 e t_2.
+
+$cpu(t_1) > cpu(t_2) \land mem(t_1) < mem(t_2) \iff$ relação indeterminada entre t_1 e t_2.
+
 \subsection{Categorias de Máquinas Virtuais}
 Seja $Cat(P)$ um conjunto de Categorias de Máquinas Virtuais fornecidas pelo 
 provedor $P$.
