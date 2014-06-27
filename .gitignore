@@ -17,7 +17,6 @@ local.properties
 .loadpath
 
 # TeXlipse specific
-*.pdf
 *.synctex.gz
 
 # External tool builders
