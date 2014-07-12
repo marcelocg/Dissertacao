@@ -18,6 +18,7 @@ local.properties
 
 # TeXlipse specific
 *.synctex.gz
+*.aux
 
 # External tool builders
 .externalToolBuilders/
