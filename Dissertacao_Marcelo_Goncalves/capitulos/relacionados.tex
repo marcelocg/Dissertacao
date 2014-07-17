@@ -9,21 +9,90 @@ nossas contribuições diferenciais.
 \section{CloudBench}
 \cite{silva2013cloudbench} descrevem o CloudBench como um arcabouço para 
 automação dos testes e avaliação do desempenho de ambientes de nuvem computacional 
-sob o modelo IaaS. Através da abstração de experimentos, aplicações e máquinas 
-virtuais, CloudBench a execução dos testes e a coleta de dados relativos
-às métricas de desempenho observadas. CloudBench prevê métricas que dizem respeito
-não só à aplicação, mas também ao provedor, como latência de provisionamento. 
+sob o modelo IaaS. CloudBench prevê métricas que dizem respeito não só à aplicação,
+mas também ao provedor, como latência de provisionamento, bem como a execução dos 
+testes e a coleta de dados relativos às métricas de desempenho observadas, através 
+da abstração de experimentos, aplicações e máquinas virtuais.   
 
 As abstrações criadas pelo CloudBench permitem que um experimento seja 
-especificado através de uma lista de diretivas. Essas diretivas descrevem os itens
-que compõem o experimento, definindo objetos como a aplicação e asinstâncias de 
+especificado através de uma lista de diretivas que descrevem os itens
+que compõem o experimento, definindo objetos como a aplicação e as instâncias de 
 máquinas virtuais utilizadas.
 
-******* CloudBench executa apenas benchmarks! 
-(página 3 = The applications used in the experiments are predefined
-benchmarks that fall into one of the categories
-previously discussed, making CloudBench a metabenchmark
-(or benchmark harness).)
+CloudBench faz a implantação automática da aplicação a ser executada para
+efeito de testes, desde a criação da máquina virtual no ambiente até a coleta dos
+dados de desempenho e desligamento das máquinas, com suporte a diversos provedores.
+
+Essas características fazem do CloudBench uma ferramenta muito poderosa para a
+automação de testes e coleta de dados para análise das execuções. Suas ferramentas
+de monitoramento fornecem informações com grandes níveis de detalhamento a respeito
+de cada componente implantado e usado nos testes, proporcionando excelente embasamento
+para a tomada de decisão.
+
+Entretanto, embora o CloudBench tenha um escopo de solução muito mais amplo, 
+voltado para a avaliação de desempenho tanto da aplicação do cliente como do 
+provisionamento de máquinas pelo provedor, seu alvo no momento da execução de 
+testes está restrito a benchmarks pré-definidos, não permitindo a execução de 
+uma aplicação real no ambiente testado.
+
+Neste sentido, o arcabouço que propomos com este trabalho se diferencia pelo fato
+de ser agnóstico em relação à aplicação que deverá ser testada, assim como quanto 
+às métricas que a ela concernem, conferindo ao usuário da solução a oportunidade 
+de avaliar o comportamento da aplicação de seu interesse implantada no ambiente
+pretendido e sob a perspectiva que lhe for mais conveniente, inclusive em termos
+de arquitetura de implantação. 
+
+\section{CloudProphet}
+Em \cite{li2011cloudprophet} os autores apresentam o CloudProphet, um sistema de
+predição de desempenho de aplicações em ambiente de nuvem computacional baseado 
+na metodologia de ``rastrear e reproduzir'' (\textit{trace and replay}).
+
+O CloudProphet não testa a aplicação do cliente de fato no ambiente de nuvem. De
+modo contrário, ele injeta na implantação original da aplicação um módulo que 
+registra um rastreamento detalhado dos eventos de utilização de recursos de CPU,
+armazenamento e rede em cada componente da aplicação durante um período de 
+execução habitual em seu ambiente de produção.
+
+Em um passo seguinte, outro módulo faz uma extração das relações de dependência 
+entre os eventos coletados, ordenando as transações executadas nos diversos 
+componentes.
+
+O terceiro passo é a reprodução dos eventos coletados durante a fase de 
+rastreamento. Essa reprodução consiste fazer com que o ambiente de nuvem 
+computacional que se deseja avaliar execute as transações representadas nos dados
+do rastreamento a partir de requisições que partem de clientes simulados.
+   
+O objetivo do CloudBench, segundo os autores é eliminar o custo e o trabalho 
+envolvidos na migração da aplicação real para a nuvem para a execução de testes 
+antes que seja de fato tomada a decisão em favor dessa migração.
+
+Os autores argumentam que a simples implantação da aplicação no ambiente de um
+serviço de nuvem computacional já incorre em custos, que podem ser altos a 
+depender do tamanho ou da arquitetura da aplicação. Além disso, a tarefa de
+migração pode ser bastante trabalhosa conforme o número e a diversidade dos 
+componentes da aplicação, que podem acarretar dificuldades de configuração e
+compatibilidade no novo ambiente.
 
 
-\cite{li2011cloudprophet}
+
+
+
+\section{Outros Trabalhos e Considerações}
+
+******
+
+\textbf{Caracteristicas gerais do Cloud Capacitor}
+
+Foco em minimização dos custos de execução dos testes
+
+Proposta de análise do impacto da escalabilidade horizontal e/ou vertical nos 
+resultados dos testes
+
+Julgamento de qual tipo de máquina apresenta melhor custo x desempenho para cada
+faixa de workload
+
+Flexibilidade de implementação da lógica de avaliação através do arcabouço de
+heurísticas
+
+******
+
