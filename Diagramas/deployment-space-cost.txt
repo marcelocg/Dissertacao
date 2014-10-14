@@ -1,0 +1,127 @@
+digraph g{
+  // rankdir=LR;
+  node [shape=box, fillcolor="lightblue", style="filled,rounded"];
+
+  "root" [shape=circle, fillcolor="pink", style="filled,rounded"];
+  
+  "root" -> "m3.m(1)"
+  
+  "m3.m(1)" -> "c3.l(1)" //[label="x1.33"]
+  
+  "c3.l(1)" -> "m3.l(1)"  //[label="x1.50"]
+
+  "c3.l(1)" -> "m3.m(2)" //[label="x1.50"]
+
+  "m3.l(1)" -> "c3.xl(1)" //[label="x1.33"]
+
+  "m3.l(1)" -> "c3.l(2)" //[label="x1.33"]
+
+  "m3.m(2)" -> "c3.xl(1)" //[label="x1.33"]
+
+  "m3.m(2)" -> "c3.l(2)" //[label="x1.33"]
+
+  "c3.xl(1)" -> "m3.m(3)" //[label="x1.13"]
+
+  "c3.l(2)" -> "m3.m(3)" //[label="x1.13"]
+  
+  "m3.m(3)" -> "m3.xl(1)" //[label="x1.33"]
+
+  "m3.m(3)" -> "m3.l(2)" //[label="x1.33"]
+
+  "m3.m(3)" -> "c3.l(3)" //[label="x1.33"]
+
+  "m3.m(3)" -> "m3.m(4)" //[label="x1.33"]
+
+  "m3.xl(1)" -> "c3.2xl(1)" //[label="x1.33"]
+
+  "m3.xl(1)" -> "c3.xl(2)" //[label="x1.33"]
+
+  "m3.xl(1)" -> "c3.l(4)" //[label="x1.33"]
+
+  "m3.l(2)" -> "c3.2xl(1)" //[label="x1.33"]
+
+  "m3.l(2)" -> "c3.xl(2)" //[label="x1.33"]
+
+  "m3.l(2)" -> "c3.l(4)" //[label="x1.33"]
+
+  "c3.l(3)" -> "c3.2xl(1)" //[label="x1.33"]
+
+  "c3.l(3)" -> "c3.xl(2)" //[label="x1.33"]
+
+  "c3.l(3)" -> "c3.l(4)" //[label="x1.33"]
+
+  "m3.m(4)" -> "c3.2xl(1)" //[label="x1.33"]
+
+  "m3.m(4)" -> "c3.xl(2)" //[label="x1.33"]
+
+  "m3.m(4)" -> "c3.l(4)" //[label="x1.33"]
+
+  "c3.2xl(1)" -> "m3.l(3)" //[label="x1.13"]
+ 
+  "c3.xl(2)" -> "m3.l(3)" //[label="x1.13"]
+
+  "c3.l(4)" -> "m3.l(3)" //[label="x1.13"]
+
+  "m3.l(3)" -> "m3.xl(2)" //[label="x1.33"]
+
+  "m3.l(3)" -> "c3.xl(3)" //[label="x1.33"]
+
+  "m3.l(3)" -> "m3.l(4)" //[label="x1.33"] 
+
+  "m3.xl(2)" -> "c3.2xl(2)" //[label="x1.33"]
+
+  "m3.xl(2)" -> "c3.xl(4)" //[label="x1.33"]
+
+  "c3.xl(3)" -> "c3.2xl(2)" //[label="x1.33"]
+
+  "c3.xl(3)" -> "c3.xl(4)" //[label="x1.33"]
+
+  "m3.l(4)" -> "c3.2xl(2)" //[label="x1.33"]
+
+  "m3.l(4)" -> "c3.xl(4)" //[label="x1.33"]
+
+  "c3.2xl(2)" -> "m3.xl(3)" //[label="x1.13"]
+
+  "c3.xl(4)" -> "m3.xl(3)" //[label="x1.13"]
+
+  "m3.xl(3)" -> "c3.2xl(3)" //[label="x1.33"]
+
+  "m3.xl(3)" -> "m3.xl(4)" //[label="x1.33"]
+
+  "c3.2xl(3)" -> "c3.2xl(4)" //[label="x1.33"]
+
+  "m3.xl(4)" -> "c3.2xl(4)" //[label="x1.33"]
+
+  // equivalence edges
+  
+  edge [dir=both, constraint=false, arrowsize=0.7]
+  
+  "m3.l(1)" -> "m3.m(2)"
+
+  
+  "c3.xl(1)" -> "c3.l(2)"
+  
+  
+  "m3.xl(1)" -> "m3.l(2)"
+  
+  "c3.l(3)" -> "m3.m(4)"
+  
+  "m3.xl(1)" -> "m3.m(4)"
+  
+  
+  "c3.xl(2)" -> "c3.l(4)"
+
+  "c3.2xl(1)" -> "c3.xl(2)"
+  
+  
+  "m3.xl(2)" -> "c3.xl(3)"
+
+  "c3.xl(3)" -> "m3.l(4)"
+  
+
+  "c3.2xl(2)" -> "c3.xl(4)"
+  
+  
+  "c3.2xl(3)" -> "m3.xl(4)"
+
+}
