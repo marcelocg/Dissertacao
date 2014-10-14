@@ -6,7 +6,53 @@ computação em nuvem. Fazemos então uma análise de seus objetivos e resultado
 alcançados, bem como traçamos as semelhanças com este trabalho, avaliando quais são
 nossas contribuições diferenciais.
 
-\section{CloudBench}
+\section{cloud comparison services}
+\subsection{Cloud Harmony}
+O projeto {\em CloudHarmony}, cujo
+objetivo é ``tornar-se a principal fonte independente, imparcial e útil de
+métricas de desempenho de provedores de nuvem''~\cite{cloudharmony}, agrega
+dados de testes de desempenho realizados desde 2009 em mais de 60 provedores de
+nuvem. Além do histórico das avaliações, o {\em CloudHarmony} disponibiliza uma ferramenta para executar novas avaliações de desempenho a qualquer momento, denominada
+\textit{Cloud Speed Test},\footnote{\url{http://cloudharmony.com/speedtest}}, a qual permite realizar quatro tipos de teste:
+
+\begin{description}
+  \item[\em Download a few large files] --- objetiva determinar o melhor provedor
+  para descarregar arquivos grandes, sendo útil para aplicações como {\em video
+  streaming};
+  \item[\em Download many small files] --- objetiva determinar o melhor provedor
+  para descarregar arquivos pequenos, podendo ser útil para hospedar uma página
+  web, por exemplo;
+  \item[\em Upload] --- útil para avaliar serviços que serão utilizados para
+  envio de arquivos;
+  \item[\em Test network latency] --- a latência afeta o tempo de resposta da
+  aplicação e geralmente está relacionada com a região de onde o teste está
+  partindo.
+\end{description}
+
+Os resultados disponibilizados pelo {\em CloudHarmony} têm como pontos fortes a
+grande quantidade de dados de testes de desempenho disponíveis, além da possibilidade do cliente da
+nuvem poder executar novos testes a qualquer tempo. Por outro lado, os testes estão limitados àqueles implementados pela ferramenta de teste, não podendo ser facilmente modificados para contemplar novas métricas ou cenários de avaliação.
+
+\subsection{Cloud Ops}
+Este trabalho apresenta os resultados da medição do desempenho e da disponibilidade
+dos serviços oferecidos por nove provedores de nuvem~\cite{cloudops}.  A coleta dos resultados foi realizada por um cliente {\em Javascript} que era executado ao final do carregamento de uma página web, aproveitando o tempo ocioso em que o usuário da página estava lendo o seu conteúdo. Esse {\em script} recebia uma
+lista de provedores de nuvem e de, forma randômica, escolhia o provedor que seria
+avaliado. Para cada provedor, eram enviados dois tipos de requisição: uma com 50
+{\em bytes} e outra com 100 {\em Kbytes}. A requisição de menor tamanho era
+enviada duas vezes, com cada envio passando um parâmetro diferente, cujo conteúdo era definido randomicamente, de modo a evitar a utilização de {\em caches}. Essas requisições
+eram respondidas por uma aplicação hospedada em cada um dos provedores avaliados, permitindo a coleta de quatro métricas pelo {\em script} cliente: disponibilidade (o serviço está no ar), {\em HTTP Connect
+Time} (tempo necessário para estabelecer a conexão), {\em HTTP Response Time} (tempo
+necessário para receber a resposta da requisição) e {\em Throughput} (taxa de
+transferência da requisição).
+
+Esse trabalho tem o mérito de conseguir mapear o desempenho de vários provedores de nuvem sob o ponto de
+vista de usuários espalhados por todo o mundo. Através dele, é possível escolher o melhor provedor para hospedar uma determinada aplicação, em termos das quatro métricas coletadas na época da realização dos experimentos, com base apenas na localização física dos clientes. Por outro, o trabalho não disponibiliza publicamente nenhum {\em benchmark} ou ferramenta de apoio, de modo que não é possível replicar os testes realizados em outros cenários ou com outros provedores. 
+
+\section{trial-and-test tools}
+\subsection{Expertus}
+Um outro trabalho recente foi descrito em~\cite{jayasinghe2012}, onde os autores propõem um ambiente para execução automática de testes de desempenho em nuvens IaaS.  Nesse ambiente, chamado Expertus, os usuários implementam testes de desempenho através da geração e customização de \textit{scripts} Shell a partir de {\em templates} especificados na forma de documentos XML~\cite{jayasinghe2012}. 
+
+\subsection{CloudBench}
 \cite{silva2013cloudbench} descrevem o CloudBench como um arcabouço para 
 automação dos testes e avaliação do desempenho de ambientes de nuvem computacional 
 sob o modelo IaaS. CloudBench prevê métricas que dizem respeito não só à aplicação,
@@ -42,7 +88,15 @@ de avaliar o comportamento da aplicação de seu interesse implantada no ambient
 pretendido e sob a perspectiva que lhe for mais conveniente, inclusive em termos
 de arquitetura de implantação. 
 
-\section{CloudProphet}
+\subsection{Cloud Crawler}
+Este trabalho apresenta um ambiente programável para apoiar os usuários de nuvens IaaS na realização de testes automáticos de desempenho de aplicações na nuvem. As principais contribuições do ambiente são: a linguagem declarativa {\em Crawl}, com a qual os usuários podem especificar, através de uma notação simples e de alto nível de abstração, uma grande variedade de cenários de avaliação de desempenho de uma aplicação na nuvem; e o motor de execução {\em Crawler}, que automaticamente executa e coleta os resultados dos cenários descritos em {\em Crawl} em um ou mais provedores. Essas duas ferramentas são denominadas conjuntamente de {\em Cloud Crawler}~\cite{cunhacloud}.
+
+Para iniciar os testes de desempenho de uma aplicação através do ambiente {\em Cloud Crawler}, os componentes dessa aplicação precisam ser declarados em um \textit{script} da linguagem {\em Crawl}. Compõem esse \textit{script Crawl}, por exemplo, o provedor de nuvem, os tipos de máquinas virtuais e as máquinas virtuais que serão utilizadas nas avaliações, além disso, métricas de desempenho e a demanda imposta à aplicação também irão compor o cenário de avaliação que é declarado no \textit{script Crawl}. Finalizada essa etapa de declaração, o usuário do ambiente irá submeter o \textit{script crawl} para o motor de execução {\em Crawler}. Esse motor irá iniciar todas as máquinas virtuais, caso seja necessário, irá proceder com a modificação do tipo de máquina virtual, de acordo com o que estiver declarado. Após a inicialização de cada máquina virtual, o motor pode executar alguma configuração nessa máquina, por exemplo, a configuração do endereço ip de um banco de dados, ou a configuração do total de memória utilizado por uma máquina virtual java. Todas as configurações necessárias para a aplicação executar na nuvem devem estar declaradas no {\em script Crawl} que foi submetido para o motor. Quando a última máquina virtual é configurada, o motor {\em Crawler} executa um por um os cenários de avaliação, com suas respectivas demandas, e ao mesmo tempo coleta as métricas de desempenho especificadas. As métricas de desempenho podem ser tanto métricas de sistema, como percentual de CPU utilizado e de memória RAM, quanto métricas de aplicação, como o tempo de resposta de uma aplicação WEB.
+
+A fase de mapeamento dos componentes da aplicação é realizada apenas uma vez, enquanto que a submissão para o motor de execução pode ser repetida ao critério do usuário. Ambientes como o {\em Cloud Crawler} permitem que os seus usuários testem suas aplicaçãoes em difirentes cenário de implantação e possibilitam que o mesmo entenda o comportamento da sua aplicação à medida em que ela é submetida a diferentes demandas e implantada em diferentes configurações, porém, a qualidade da avaliação de desempenho dependerá da qualidade dos cenários de testes que os usuários declararem, uma vez que o ambiente não decide qual será a nova configuração testada. O ambiente apenas segue aquilo que foi declarado pelo usuário.   
+
+\section{prediction tools}
+\subsection{CloudProphet}
 Em \cite{li2011cloudprophet} os autores apresentam o CloudProphet, um sistema de
 predição de desempenho de aplicações em ambiente de nuvem computacional baseado 
 na metodologia de ``rastrear e reproduzir'' (\textit{trace and replay}).
@@ -74,6 +128,40 @@ componentes da aplicação, que podem acarretar dificuldades de configuração e
 compatibilidade no novo ambiente.
 
 
+\subsection{CloudCmp}
+\citeonline{li2011} apresentam uma ferramenta para apoiar a avaliação e a comparação do
+desempenho e do custo dos recursos e serviços de diversos provedores de nuvem
+pública, de modo a auxiliar o cliente da nuvem a escolher o provedor mais adequado para a sua
+aplicação. Essa ferramenta, denominada {\em CloudCmp}, analisa
+os serviços de elasticidade, persistência de dados e rede oferecidos pelos provedores
+de interesse, com base em resultados previamente coletados a partir da execução de diversos
+{\em benchmarks}: uma versão modificada do {\em SPECjvm2008}~\cite{SPECjvm2008}
+para avaliar a característica de elasticidade do provedor; um cliente Java para avaliar os serviços de
+armazenamento e persistência de dados; e as ferramentas {\em iperf}\footnote{http://iperf.sourceforge.net. }
+e {\em ping} para avaliar os serviços de rede. Após a fase inicial da coleta dos dados, a ferramenta pode ser utilizada para gerar gráficos que auxiliem o
+cliente da nuvem a comparar o desempenho dos recursos de cada um
+dos provedores nos quais as avaliações foram realizadas, que assim poderá escolher o provedor e os recursos mais apropriados para as necessidades e demandas específicas de suas aplicações. 
+
+%Os gráficos gerados nos
+%experimentos apresentados neste trabalho foram comparados com os gerados após o
+%estudo do comportamento de três aplicações simples implantadas na nuvem. Essas
+%comparações mostraram que as previsões do CloudCmp refletiram o comportamento
+%das aplicações testadas.
+
+Segundo \citeonline{li2011}, até a época do trabalho não houve
+nenhum provedor de nuvem que se destacasse com relação aos demais. Outra constatação foi de que os resultados
+obtidos a partir da execução dos {\em benchmarks} em cada provedor apenas refletiam o momento em que foram coletados, uma vez que a estrutura utilizada pelos provedores para hospedar seus serviços sofre frequentes modificações e a demanda por seus recursos computacionais é bastante variável.
+
+Como essa solução compara serviços e recursos da nuvem através da análise de dados
+previamente coletados a partir da execução de diferentes {\em benchmarks}, a
+escolha dos provedores e recursos mais apropriados para uma determinada aplicação só será eficaz se a aplicação utilizar os recursos da nuvem de forma semelhante à dos {\em benchmarks} avaliados. Além disso, a
+ferramenta não oferece suporte à execução de novos cenários de avaliação na nuvem, estando limitada àqueles previamente definidos para os respectivos {\em bechmarks}.
+
+\subsection{CloudAdvisor}
+\cite{jung2013cloudadvisor}
+
+\subsection{CDOSim}
+\cite{fittkau2012cdosim}
 
 
 
