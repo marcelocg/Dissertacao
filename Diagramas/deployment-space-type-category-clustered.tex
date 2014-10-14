@@ -1,0 +1,118 @@
+digraph g{
+  // rankdir=LR;
+  node [shape=box, fillcolor="lightblue", style="filled,rounded"];
+
+  "root" [shape=circle, fillcolor="pink", style="filled,rounded"];
+  
+  "root" -> "m3.m(1)"
+  "root" -> "c3.l(1)"
+  
+   
+  // category-type
+  
+  subgraph cluster10{
+
+  subgraph cluster11 {
+    "m3.m(1)" -> "m3.m(2)"
+
+    "m3.m(2)" -> "m3.m(3)"
+
+    "m3.m(3)" -> "m3.m(4)"
+  }
+
+  
+  subgraph cluster12 {
+    "m3.l(1)" -> "m3.l(2)"
+
+    "m3.l(2)" -> "m3.l(3)"
+
+    "m3.l(3)" -> "m3.l(4)"
+  } 
+  
+  subgraph cluster13 {
+    "m3.xl(1)" -> "m3.xl(2)"
+
+    "m3.xl(2)" -> "m3.xl(3)"
+
+    "m3.xl(3)" -> "m3.xl(4)"
+  }
+  
+ subgraph cluster14 {
+    "m3.2xl(1)" -> "m3.2xl(2)"
+
+    "m3.2xl(2)" -> "m3.2xl(3)"
+
+    "m3.2xl(3)" -> "m3.2xl(4)"
+  }
+
+  "m3.m(1)" -> "m3.l(1)" 
+  
+  "m3.m(2)" -> "m3.l(2)"
+  
+  "m3.m(3)" -> "m3.l(3)"
+  
+  "m3.m(4)" -> "m3.l(4)"   
+
+  "m3.l(1)" -> "m3.xl(1)" 
+  
+  "m3.l(2)" -> "m3.xl(2)"
+  
+  "m3.l(3)" -> "m3.xl(3)"
+  
+  "m3.l(4)" -> "m3.xl(4)"  
+
+  "m3.xl(1)" -> "m3.2xl(1)" 
+  
+  "m3.xl(2)" -> "m3.2xl(2)"
+  
+  "m3.xl(3)" -> "m3.2xl(3)"
+  
+  "m3.xl(4)" -> "m3.2xl(4)"
+}
+   //
+subgraph cluster20{ 
+
+subgraph cluster21 {
+     "c3.l(1)" -> "c3.l(2)"
+
+    "c3.l(2)" -> "c3.l(3)"
+
+    "c3.l(3)" -> "c3.l(4)"
+  }
+
+subgraph cluster22 {
+    "c3.xl(1)" -> "c3.xl(2)"
+
+    "c3.xl(2)" -> "c3.xl(3)"
+
+    "c3.xl(3)" -> "c3.xl(4)"
+
+  }
+
+subgraph cluster23 {
+    "c3.2xl(1)" -> "c3.2xl(2)"
+
+    "c3.2xl(2)" -> "c3.2xl(3)"
+
+    "c3.2xl(3)" -> "c3.2xl(4)"
+  }  
+
+  
+  "c3.l(1)" -> "c3.xl(1)"
+   
+  "c3.l(2)" -> "c3.xl(2)"
+  
+  "c3.l(3)" -> "c3.xl(3)"
+  
+  "c3.l(4)" -> "c3.xl(4)" 
+  
+  "c3.xl(1)" -> "c3.2xl(1)" 
+  
+  "c3.xl(2)" -> "c3.2xl(2)"
+  
+  "c3.xl(3)" -> "c3.2xl(3)"
+  
+  "c3.xl(4)" -> "c3.2xl(4)"
+}
+
+}
