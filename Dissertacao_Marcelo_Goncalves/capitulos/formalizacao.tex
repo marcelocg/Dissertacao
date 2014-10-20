@@ -76,18 +76,28 @@ paralelo de alto desempenho.
 
 \subsection{Configurações}
 Chamamos de Configuração um conjunto de máquinas virtuais pertencentes ao mesmo 
-Tipo de Máquinas Virtuais (e, portanto, de uma mesma Categoria) e que será 
-aplicado a uma camada arquitetural da aplicação sob estudo (apresentação, 
-negócio, persistência, etc.). Uma Configuração representa o estado de uma 
-determinada camada da aplicação quanto à sua escalabilidade, vertical ou horizontal.
+Tipo de Máquinas Virtuais e, portanto, de uma mesma Categoria. Configurações são
+usadas para implantar uma camada arquitetural da Aplicação sob Teste (apresentação, 
+negócio, persistência, etc.) e representam o estado de uma determinada camada da 
+aplicação quanto à sua escalabilidade, vertical ou horizontal.
 
-Por exemplo, poderíamos avaliar o comportamento de uma Aplicação sob Teste 
-implantada com sua camada de aplicação em arquitetura de cluster, composta por 
-duas, três ou quatro instâncias em paralelo, caracterizando a variação dessa 
-camada em diferentes níveis de escalabilidade horizontal. Para esse teste, 
-teríamos então três Configurações diferentes, a primeira com duas instâncias, a 
-segunda com três e a terceira com quatro instâncias de máquinas do mesmo Tipo de 
-Máquina Virtual.
+Por exemplo, suponhamos avaliação do comportamento de uma Aplicação cuja camada de
+negócios está implantada em arquitetura de cluster de servidores de aplicação. 
+Variando a quantidade de máquinas que compõem esse cluster, obtemos diferentes níveis
+de escalabilidade horizontal para os quais podemos avaliar o desempenho da Aplicação.
+Agora, suponhamos que podemos usar uma, duas, três ou quatro máquinas em paralelo como
+componentes do cluster da camada de negócios da Aplicação sob Teste. Assim, teríamos
+então quatro Configurações diferentes, a primeira com uma instância na camada de negócio,
+a segunda Configuração com duas instâncias, a terceira com três e a quarta com quatro 
+instâncias de máquinas do mesmo Tipo de Máquina Virtual. A Aplicação sob Teste seria 
+executada quatro vezes, cada uma das quais utilizando uma dessas Configurações. Os 
+resultados dessas Execuções refletem o efeito da escalabilidade horizontal no desempenho
+geral da Aplicação.
+
+Analogamente, poderiam ser usadas Configurações criadas a partir de Tipos de Máquinas
+Virtuais diferentes, umas mais potentes que as outras. A comparação dos resultados obtidos
+nesse cenário nos dão insumos para avaliar o efeito da escalabilidade vertical sobre o
+desempenho da Aplicação.
 
 As heurísticas desenvolvidas e apresentadas por este trabalho comparam 
 implantações de diferentes Configurações em uma determinada camada da Aplicação 
