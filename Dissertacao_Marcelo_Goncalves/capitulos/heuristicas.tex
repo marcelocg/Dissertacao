@@ -1,12 +1,31 @@
-\chapter[Heurísticas de Avaliação]{Heurísticas de Avaliação de Capacidade}
+\chapter[Avaliação de Capacidade]{Avaliação de Capacidade}
 % ----------------------------------------------------------
 Dadas as definições e formalizações propostas no anteriormente, faz-se necessária
 a especificação de uma lógica de manipulação das entidades e operações descritas.
 
-Passamos agora a descrever uma proposta de construção de estratégias de avaliação
-dos Resultados de Execuções a fim de buscar as Configurações de menor preço capazes
-de executar uma determinada Carga de Trabalho. A essas estratégias demos o nome 
-de Heurísticas de Avaliação. 
+Passamos agora a descrever uma proposta de processo de de avaliação de capacidade
+a fim de buscar as Configurações de menor preço capazes de executar uma determinada 
+Carga de Trabalho. Esse processo foi implementado como parte de um sistema 
+computacional ao qual demos o nome de \textit{Cloud Capacitor}.  
+
+Cloud Capacitor é um arcabouço para implementação de sistemas de avaliação de 
+capacidade em ambientes de nuvem de infraestrutura como serviço. Ele permite que 
+sejam implementadas lógicas customizadas de avaliação do desempenho resultante
+da execução da Aplicação sob Teste. Essas lógicas são então reconhecidas pelo Cloud 
+Capacitor como Estratégias de Avaliação.
+
+As Estratégias devem implementar um conjunto de operações pré-definidas no processo 
+que as torna capazes de se comunicar com o processo de avaliação de capacidade. Tais 
+operações dão suporte ao processo nos momentos em que devem ser analisados os dados
+dos resultados das execuções da Aplicação. Diferentes estratégias podem tomar 
+decisões diferentes a partir dos mesmos dados de resultado.
+
+\begin{figure}[htb]
+  \caption{\label{fig_arq_alto_nivel}Arquitetura de alto nível do Cloud Capacitor}
+  \begin{center}
+    \includegraphics[scale=0.5]{img/arquiteturaAltoNivel}
+  \end{center}
+\end{figure}
 
 As Heurísticas de Avaliação de Capacidade, conforme propostas neste trabalho, 
 são implementações de estratégias que buscam encontrar, a partir do Resultado 
