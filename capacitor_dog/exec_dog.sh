@@ -14,7 +14,7 @@ declare -a cfg_app=("optimistic" "conservative" "pessimistic" "random")
 declare -a slas=(10000 20000 30000 40000 50000 60000 70000 80000 90000 100000)
 workload='workloadlist[]=100&workloadlist[]=200&workloadlist[]=300&workloadlist[]=400&workloadlist[]=500&workloadlist[]=600&workloadlist[]=700&workloadlist[]=800&workloadlist[]=900&workloadlist[]=1000'
 now=$(date +%s)
-header="sla,OO,OC,OP,OR,CO,CC,CP,CR,PO,PC,PP,PC,RO,RC,RP,RR"
+header="sla,OO,OC,OP,OR,CO,CC,CP,CR,PO,PC,PP,PR,RO,RC,RP,RR"
 
 for graph_mode in "${graph[@]}"
 do
