@@ -41,8 +41,10 @@ Para que a Aplicação seja executada, é preciso que o processo conheça quais 
 as Configurações disponibilizadas no Provedor de nuvem para esse fim. Para isso,
 o processo deve ser alimentado com uma lista de Tipos de Máquinas Virtuais que
 serão utilizadas na execução da Aplicação, bem como a quantidade máxima de 
-instâncias usadas para compor cada Configuração. A partir desses dados o processo
-passa a conhecer o Espaço de Implantação disponível para os testes de desempenho.
+instâncias usadas para compor cada Configuração. Através desses dados o processo
+passa a conhecer então o Espaço de Implantação disponível para os testes de 
+desempenho, composto por uma lista de Configurações geradas a partir da lista de
+ Tipos de Máquinas Virtuais disponíveis e do número máximo de instâncias.
 
   
 As Estratégias devem implementar um conjunto de operações pré-definidas no processo 
