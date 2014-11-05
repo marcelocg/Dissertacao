@@ -59,10 +59,12 @@ cost$heuristic <- factor(cost$heuristic, order=TRUE)
 
 graph_base <- capacity
 
+pdf("RR-capacitor.pdf", width = 9.5, height = 6)
+
 ggplot(graph_base, aes(x = num)) +  
   geom_line(aes(group=sla, colour=sla, y = exec), linetype="solid", size=1) +
   theme_bw(base_size = 12, base_family = "") +
-  scale_x_continuous("Repetitions") + 
+  scale_x_continuous("Iterations") + 
   scale_y_continuous("Executions") + 
   theme(
     title    = element_text(face="bold", size = 14),
@@ -73,32 +75,236 @@ ggplot(graph_base, aes(x = num)) +
 ggplot(graph_base, aes(x = num)) +  
   geom_line(aes(group=sla, colour=sla, y = cost), linetype="solid", size=1) +
   theme_bw(base_size = 12, base_family = "") +
-  scale_x_continuous("Repetitions") + 
+  scale_x_continuous("Iterations") + 
   scale_y_continuous("U$/Hour") + 
   theme(
     title    = element_text(face="bold", size = 14),
     axis.title  = element_text(face="bold", size = 12)
   )+ ggtitle("Capacity Graph - RR")
+
+
+graph_base <- subset(graph_base, num <= 250)
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = exec), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("Executions") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Graph - RR")
+
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = cost), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("U$/Hour") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Graph - RR")
+
+
+graph_base <- subset(graph_base, num <= 150)
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = exec), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("Executions") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Graph - RR")
+
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = cost), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("U$/Hour") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Graph - RR")
+
+graph_base <- subset(graph_base, num <= 100)
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = exec), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("Executions") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Graph - RR")
+
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = cost), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("U$/Hour") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Graph - RR")
+
+graph_base <- subset(graph_base, num <= 50)
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = exec), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("Executions") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Graph - RR")
+
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = cost), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("U$/Hour") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Graph - RR")
+
 
 graph_base <- cost
 
 ggplot(graph_base, aes(x = num)) +  
   geom_line(aes(group=sla, colour=sla, y = exec), linetype="solid", size=1) +
   theme_bw(base_size = 12, base_family = "") +
-  scale_x_continuous("Repetitions") + 
+  scale_x_continuous("Iterations") + 
   scale_y_continuous("Executions") + 
   theme(
     title    = element_text(face="bold", size = 14),
     axis.title  = element_text(face="bold", size = 12)
-  )+ ggtitle("Cost Graph - RR")
+  )+ ggtitle("Capacity Cost - RR")
 
 
 ggplot(graph_base, aes(x = num)) +  
   geom_line(aes(group=sla, colour=sla, y = cost), linetype="solid", size=1) +
   theme_bw(base_size = 12, base_family = "") +
-  scale_x_continuous("Repetitions") + 
+  scale_x_continuous("Iterations") + 
   scale_y_continuous("U$/Hour") + 
   theme(
     title    = element_text(face="bold", size = 14),
     axis.title  = element_text(face="bold", size = 12)
-  )+ ggtitle("Cost Graph - RR")
+  )+ ggtitle("Capacity Cost - RR")
+
+
+graph_base <- subset(graph_base, num <= 250)
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = exec), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("Executions") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Cost - RR")
+
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = cost), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("U$/Hour") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Cost - RR")
+
+
+graph_base <- subset(graph_base, num <= 150)
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = exec), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("Executions") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Cost - RR")
+
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = cost), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("U$/Hour") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Cost - RR")
+
+graph_base <- subset(graph_base, num <= 100)
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = exec), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("Executions") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Cost - RR")
+
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = cost), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("U$/Hour") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Cost - RR")
+
+graph_base <- subset(graph_base, num <= 50)
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = exec), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("Executions") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Cost - RR")
+
+
+ggplot(graph_base, aes(x = num)) +  
+  geom_line(aes(group=sla, colour=sla, y = cost), linetype="solid", size=1) +
+  theme_bw(base_size = 12, base_family = "") +
+  scale_x_continuous("Iterations") + 
+  scale_y_continuous("U$/Hour") + 
+  theme(
+    title    = element_text(face="bold", size = 14),
+    axis.title  = element_text(face="bold", size = 12)
+  )+ ggtitle("Capacity Cost - RR")
+
+dev.off()
+
+
+capacity = read.csv("1414458286-capacity.csv", header = TRUE, stringsAsFactors = FALSE)
+cost = read.csv("1414458286-cost.csv", header = TRUE, stringsAsFactors = FALSE)
+
+capacity <- subset(capacity, num == 50 | num == 10 | num == 100)
+capacity$heuristic <- mapply(function(x,y){paste(x,y,sep="")}, capacity$heuristic, capacity$num)
+
+cost  <- subset(cost, num == 50 | num == 10 | num == 100)
+cost$heuristic <- mapply(function(x,y){paste(x,y,sep="")}, cost$heuristic, cost$num)
+
+write.table(data.frame(capacity$heuristic, capacity$sla, capacity$exec, capacity$cost), "capacity.csv", sep=",")
+write.table(data.frame(cost$heuristic, cost$sla, cost$exec, cost$cost), "cost.csv", sep=",")
