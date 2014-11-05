@@ -9,9 +9,16 @@ Carga de Trabalho. Esse processo foi implementado como parte de um sistema
 computacional ao qual demos o nome de \emph{Cloud Capacitor} e que descreveremos 
 no capítulo seguinte.  
 
+\begin{figure}[htb]
+  \caption{\label{fig_processo_alto_nivel}Visão geral do Processo de Avaliação de Capacidade}
+  \begin{center}
+    \includegraphics[scale=0.5]{img/processoAltoNivel}
+  \end{center}
+\end{figure}
+
 O processo prevê um conjunto de dados de entrada, ao menos uma execução da 
 Aplicação sob Teste no ambiente de nuvem de infraestrutura almejado para 
-hospedá-la, e, por fim, a análise do desempenho obtido pela Aplicação a partir 
+hospedá-la e a análise do desempenho obtido pela Aplicação a partir 
 de suas execuções. Com base nos dados de desempenho, o processo passa por diversos
 pontos de decisão que podem levar a novas execuções da Aplicação em diferentes 
 cenários. Ao final do processo, é fornecida como saída uma lista de Configurações, 
@@ -57,13 +64,6 @@ para fins de orquestração do teste de desempenho, e também funções para as 
 é desejado um certo grau de flexibilidade a fim de tornar o processo mais adaptável,
 como a escolha das Cargas de Trabalho e Configurações que serão usadas na execução
 da Aplicação.
-
-\begin{figure}[htb]
-  \caption{\label{fig_processo_alto_nivel}Visão geral do Processo de Avaliação de Capacidade}
-  \begin{center}
-    \includegraphics[scale=0.5]{img/processoAltoNivel}
-  \end{center}
-\end{figure}
 
 Toda a rotina de execução da Aplicação, desde sua implantação, passando pela 
 criação e configuração das máquinas virtuais no ambiente do Provedor de nuvem, 
