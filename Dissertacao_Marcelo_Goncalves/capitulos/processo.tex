@@ -84,6 +84,13 @@ como resposta os dados de desempenho esperados pelo processo. O componente Execu
 concreta está fora do escopo deste trabalho, cujo foco não está na automação de
 execução de testes de qualquer natureza.
 
+\begin{figure}[hbt]
+  \caption{\label{fig_processo_aval_capacidade}Diagrama de Funcionamento do Processo de Avaliação de Capacidade}
+  \begin{center}
+    \includegraphics[scale=0.45]{img/diagrama-avaliacao-capacidade-v14}
+  \end{center}
+\end{figure}
+
 Analogamente, as operações de seleção das Configuração sobre as quais a Aplicação
 sob Teste será executada, bem como a seleção das Cargas de Trabalho a que ela 
 será submetida durante sua execução, são delegadas a um componente que chamamos de
@@ -107,13 +114,6 @@ aplicações em ambientes de nuvem de infraestrutura. A inteligência das Estrat
 propostas, ou seja, sua capacidade de escolher corretamente as Configurações e 
 Cargas de Trabalho, é determinante para o sucesso do processo e da técnica de 
 inferência. 
-
-\begin{figure}[hbt]
-  \caption{\label{fig_processo_aval_capacidade}Diagrama de Funcionamento do Processo de Avaliação de Capacidade}
-  \begin{center}
-    \includegraphics[scale=0.4]{img/diagrama-avaliacao-capacidade-v14}
-  \end{center}
-\end{figure}
 
 Para efeito de entendimento do funcionamento geral do processo de avaliação de 
 capacidade ora proposto, podemos abstrair temporariamente o comportamento da 
@@ -242,5 +242,29 @@ Caso não seja encontrada uma Carga e nem um Nível de Capacidade, o Processo de
 Avaliação está terminado e é fornecida, para cada Carga de Trabalho, uma lista 
 de Configurações, em ordem crescente de preço, capazes de executar a Aplicação 
 sob Teste.  
- 
+
+\section{Resumo}
+Apresentamos neste capítulo uma proposta de processo de avaliação de capacidade
+cuja ideia chave é a inferência de capacidade de um recurso a partir dos dados 
+reais de desempenho obtidos por um outro recurso semelhante, mas de capacidade
+presumidamente menor ou maior.
+
+Essa proposta de processo se apoia na hipótese de que é possível estabelecer uma
+relação de capacidade entre os recursos disponibilizados por um provedor de nuvem
+de infraestrutura. Com base nessa hipótese, criamos uma sequência de passos que
+visam a identificar quais recursos são capazes de executar uma determinada 
+aplicação sob determinados volumes de carga de trabalho com o menor número
+possível de execuções reais da aplicação. Como resultado, o processo busca
+a redução de custo e tempo normalmente envolvidos na atividade de avaliação de
+capacidade dos recursos disponíveis na nuvem.
+
+No Capítulo 5 a seguir apresentaremos uma visão mais concreta, com a descrição do 
+arcabouço de software desenvolvido neste trabalho como implementação de referência
+para o processo proposto. Apresentaremos também uma aplicação
+web desenvolvida utilizando o arcabouço com o intuito de atestar a efetividade do processo de avaliação 
+de capacidade baseado em inferência de desempenho. Essa aplicação foi usada para
+demonstração da criação de algumas Estratégias criadas e para a execução dos 
+testes de eficácia e efetividade das técnicas propostas, bem como das próprias
+Estratégias, e cujos resultados apresentaremos no Capítulo 6 mais adiante.
+   
 % ----------------------------------------------------------
