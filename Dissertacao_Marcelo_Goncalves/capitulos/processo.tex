@@ -22,41 +22,41 @@ hospedá-la e a análise do desempenho obtido pela Aplicação a partir
 de suas execuções. Com base nos dados de desempenho, o processo passa por diversos
 pontos de decisão que podem levar a novas execuções da Aplicação em diferentes 
 cenários. Ao final do processo, é fornecida como saída uma lista de Configurações, 
-ordenadas por preço, capazes de executar a Aplicação sob Cargas de Trabalho específicas.
+ordenadas por preço, capazes de executar a Aplicação sob cada uma das Cargas de 
+Trabalho fornecidas como parte dos dados de entrada.
 
 Este capítulo estuda em detalhes todas as fases do processo 
-proposto, explicando quais são os dados de entrada necessários, os componentes do 
-processo e as operações pelas quais são responsáveis e quais as decisões pelas quais
-o processo tem que passar até determinar quais são as Configurações de menor custo
-capazes de executar a Aplicação.
+proposto, explicando quais são os dados de entrada necessários, as operações 
+executadas pelo processo e quais as decisões pelas quais o processo tem que 
+passar até determinar quais são as Configurações de menor custo capazes de 
+executar a Aplicação.
 
 \section{Dados de Entrada}
 
 O principal parâmetro esperado pelo processo de avaliação de capacidade é o Valor
 de Referência de Desempenho, ao qual também nos referimos como SLA 
-(\emph{Service Level Agreement}). Esse valor será usadp para determinar 
+(\emph{Service Level Agreement}). Esse valor será usado para determinar 
 se a Aplicação atingiu os requisitos mínimos de desempenho exigidos, conforme
 veremos na descrição do funcionamento do processo, mais adiante.
 
 Além do SLA, o processo precisa também conhecer quais são as Cargas de Trabalho
-que deverão ser submetidas à Aplicação sob Teste durante seu funcionamento. Porém,
-nem todas as Cargas de Trabalho serão submetidas de fato. Isso vai depender do 
-conjunto de decisões tomadas pelo processo com base na comparação do desempenho 
-da Aplicação com o SLA. Ainda assim, graças à sua característica de inferência de
-desempenho, o processo mostra resultados para todas as Cargas de Trabalhado 
-informadas como parâmetro de entrada.
+para as quais o desempenho da Aplicação sob Teste deverá ser avaliado. Porém,
+nem todas as Cargas de Trabalho serão impostas de fato à Aplicação. Isso vai 
+depender do conjunto de decisões tomadas pelo processo com base na comparação do 
+resultado obtido pela Aplicação com o SLA. Ainda assim, graças à sua característica 
+de inferência de desempenho, o processo mostra resultados para todas as Cargas de 
+Trabalhado informadas como parâmetro de entrada.
 
-Para que a Aplicação seja executada, é preciso que o processo conheça quais são
-as Configurações disponibilizadas no Provedor de nuvem para esse fim. Para isso,
-o processo deve ser alimentado com uma lista de Tipos de Máquinas Virtuais que
-serão utilizadas na execução da Aplicação, bem como a quantidade máxima de 
+Para que o desempenho da Aplicação seja avaliado, é preciso que o processo conheça 
+quais são as Configurações disponibilizadas no Provedor de nuvem para esse fim. 
+Para isso, o processo deve ser alimentado com uma lista de Tipos de Máquinas Virtuais 
+que serão utilizadas na execução da Aplicação, bem como a quantidade máxima de 
 instâncias usadas para compor cada Configuração. Através desses dados o processo
 passa a conhecer então o Espaço de Implantação disponível para os testes de 
 desempenho, composto por uma lista de Configurações geradas a partir da lista de
 Tipos de Máquinas Virtuais disponíveis e do número máximo de instâncias.
 
-\section{Funcionamento do Processo}
-
+\section{Componentes}
 O processo de avaliação de capacidade proposto é um processo extensível, ao qual
 devem ser ligados componentes para os quais são delegadas funções de cunho mais
 específico, como a comunicação com o Provedor de nuvem e a Aplicação sob Teste
@@ -65,6 +65,7 @@ para fins de orquestração do teste de desempenho, e também funções para as 
 como a escolha das Cargas de Trabalho e Configurações que serão usadas na execução
 da Aplicação.
 
+\subsection{Executor}
 Todas as atividades ligadas à rotina de execução da Aplicação, desde sua implantação,
 passando pela criação e configuração das máquinas virtuais no ambiente do Provedor 
 de nuvem, bem como pelo controle de inicialização e finalização dessas instâncias, 
@@ -82,67 +83,152 @@ e com a Aplicação sob Teste e, assim, ser capaz de ordenar a sua execução e 
 como resposta os dados de desempenho esperados pelo processo. O componente Executor
 é um dos pontos de extensibilidade oferecidos pelo processo e sua implementação
 concreta está fora do escopo deste trabalho, cujo foco não está na automação de
-execução de testes de qualquer natureza.
+execução de testes de qualquer natureza, mas na análise dos dados resultantes dessa 
+execução.
+
+\subsection{Estratégias e Heurísticas}
+\label{sec:heuristicas}
+De modo análogo à abordagem adotada em relação às atividade de execução dos testes, 
+as operações de seleção da Configuração sobre as quais a Aplicação
+sob Teste será executada, bem como a seleção das Cargas de Trabalho a que ela 
+será submetida durante sua execução, não são executadas diretamente pelo processo.
+Nesse caso, são delegadas a um componente que chamamos de Estratégia de Avaliação ou, 
+simplesmente, Estratégia. Seu objetivo é permitir a aplicação de diferentes métodos 
+para a escolha da melhor Configuração e/ou Carga de Trabalho mais adequada aos 
+objetivos da avaliação de capacidade em curso e também ao perfil da Aplicação.
+
+Como veremos na seção~\ref{sec:funcionamento_processo}, em diversas oportunidades
+durante a execução do processo se faz necessária a seleção de uma Configuração de
+maior ou menor capacidade. Do mesmo modo, em certos momentos o processo precisa
+que uma Carga de Trabalho menor ou maior seja selecionada. A partir dessas escolhas
+o processo é capaz de navegar no Espaço de Implantação submetendo a Aplicação sob
+Teste a diferentes cenários de Cargas de Trabalho em diversas condições de capacidade
+computacional.
+
+Um problema relacionado à execução de testes de desempenho em ambientes de nuvem
+é que o próprio teste implica num custo financeiro que pode ser bastante elevado
+caso o Espaço de Implantação definido seja muito extenso. O mesmo se dá com 
+relação à lista de Cargas de Trabalho. A fim de minimizar esse problema, propomos 
+neste trabalho a técnica de inferência de desempenho, que explicamos mais detidamente 
+na seção~\ref{subsec:processo_niveis_capacidade}, e através da qual seremos capazes
+de eliminar grande parte das execuções reais da Aplicação durante os testes, 
+reduzindo assim o custo total da avaliação. 
+
+Porém, outro problema enfrentado na busca pela melhor Configuração capaz de executar 
+uma Aplicação está justamente no momento de selecionar, dentre um conjunto de 
+Configurações possíveis, qual a mais promissora a ser usada para uma execução real, 
+dado que não é conhecido previamente o potencial computacional dessas Configurações.
+
+A fim de solucionar esse problema, introduzimos neste trabalho o conceito das 
+Heurísticas de Seleção, que são abordagens a serem observadas no momento em que
+a Estratégia de Avaliação deve escolher a próxima Configuração ou a próxima Carga 
+de Trabalho. 
+
+Propomos, assim, um conjunto de 3 abordagens aplicáveis ao Espaço de Implantação,
+ou seja, à escolha da próxima Configuração a ser testada, e outras 3 abordagens
+aplicáveis à lista de Cargas de Trabalho. A combinação dessas abordagens dá origem
+a 9 Heurísticas de Seleção, a saber:
+
+\begin{description}
+  \item[OO - Otimista/Otimista] \hfill \\ Visa Configurações menores e Cargas de Trabalho maiores
+  \item[OC - Otimista/Conservadora] \hfill \\ Visa Configurações menores e Cargas de Trabalho intermediárias
+  \item[OP - Otimista/Pessimista] \hfill \\ Visa Configurações e Cargas de Trabalho menores
+  \item[CO - Conservadora/Otimista] \hfill \\ Visa Configurações intermediárias e Cargas de Trabalho maiores
+  \item[CC - Conservadora/Conservadora] \hfill \\ Visa Configurações e Cargas de Trabalho intermediárias
+  \item[CP - Conservadora/Pessimista] \hfill \\ Visa Configurações intermediárias e Cargas de Trabalho menores
+  \item[PO - Pessimista/Otimista] \hfill \\ Visa Configurações e Cargas de Trabalho maiores
+  \item[PC - Pessimista/Conservadora] \hfill \\ Visa Configurações maiores e Cargas de Trabalho intermediárias
+  \item[PP - Pessimista/Pessimista] \hfill \\ Visa Configurações maiores e Cargas de Trabalho menores
+\end{description}
+
+Para um melhor entendimento de como as Heurísticas influenciam a navegação do 
+processo entre as Configurações que compõem o Espaço de Implantação a ser explorado
+e também entre as Cargas de Trabalho a serem impostas sobre a Aplicação, convém
+observar a figura~\ref{fig:heuristicas}.
 
 \begin{figure}[hbt]
-  \caption{\label{fig_processo_aval_capacidade}Diagrama de Funcionamento do Processo de Avaliação de Capacidade}
+  \caption{\label{fig:heuristicas}Diagrama de Funcionamento das Heurísticas de Seleção}
+  \begin{center}
+    \includegraphics[scale=1]{img/heuristics}
+  \end{center}
+\end{figure}
+
+A imagem ilustra dois conjuntos dispostos em forma de matriz, um conjunto 
+na vertical, formando as linhas, composto de $n$ Configurações $C_1 \ldots C_{n/2} 
+\ldots C_n$ e um conjunto composto de $m$ Cargas de Trabalho $W_1 \ldots W_{m/2} 
+\ldots W_m$, formando as colunas. As células dessa matriz mostram as Heurísticas
+que selecionariam o par formado pela Configuração e pela Carga de Trabalho referentes
+à linha e coluna da célula. Nessa representação das Heurísticas, a primeira letra
+refere-se à abordagem usada para a escolha da Configuração e a segunda letra refere-se 
+à abordagem usada na escolha da Carga de Trabalho.
+ 
+Podemos ver, então, que as Heurísticas com abordagem Otimista escolherão Configurações 
+mais próximas a $C_1$ e Cargas de Trabalho mais próximas a $W_m$. Por serem otimistas, essas 
+abordagens consideram que máquinas menores são capazes de executar sob cargas 
+mais severas.
+
+Ainda com base na mesma imagem, vemos que as abordagens conservadoras se concentram
+nas células intermediárias, conforme a descrição das Heurísticas. A Heurística
+OC, otimista para Configurações e conservadora para Cargas, se concentra na 
+primeira linha, ou seja, mais próxima de $C_1$, e nas colunas do centro, mais
+próximas de $W_{n/2}$. Observação similar se faz para a Heurística PO, pessimista 
+para Configurações e otimista para Cargas, concentrando-se nas últimas linhas e 
+últimas colunas, ou seja, Configurações e Cargas maiores.
+
+Voltando a tratar das Estratégias de Avaliação, estas serão responsáveis por efetuar
+a escolha de Configurações e Cargas de Trabalho implementando a lógica prevista pelas
+Heurísticas. Enquanto as Heurísticas são lógicas que indicam as proximidades onde 
+deve ser feita a escolha de Configurações e Cargas, a Estratégia implementa de fato
+um algoritmo que reflita o comportamento esperado pela ideia da Heurística.
+ 
+A aplicação das Heurísticas de Seleção, através da implementação de Estratégias 
+de Avaliação, está intrinsecamente ligada aos objetivos deste trabalho de estudar 
+os efeitos da inferência de desempenho na eficiência do processo de avaliação de 
+capacidade para aplicações em ambientes de nuvem de infraestrutura. A inteligência 
+das Heurísticas propostas, ou seja, sua capacidade de escolher corretamente as 
+Configurações e Cargas de Trabalho, é determinante para o sucesso do processo e 
+da técnica de inferência. A eficácia e efetividade da aplicação das heurísticas
+é analisada no capítulo~\ref{chap:resultados}. 
+
+\section{Funcionamento do Processo}
+\label{sec:funcionamento_processo}
+Para efeito de entendimento do funcionamento geral do processo de avaliação de 
+capacidade ora proposto, podemos abstrair temporariamente o comportamento das 
+Heurísticas. Esta é, aliás, outra vantagem da abordagem adotada de 
+delegação de funções específicas a componentes: além da flexibilidade e 
+adaptabilidade, a abstração dessas operações torna mais fáceis o entendimento, 
+a descrição e a implementação concreta do processo.   
+
+\begin{figure}[hbt]
+  \caption{\label{fig:fig_processo_aval_capacidade}Diagrama de Funcionamento do Processo de Avaliação de Capacidade}
   \begin{center}
     \includegraphics[scale=0.45]{img/diagrama-avaliacao-capacidade-v14}
   \end{center}
 \end{figure}
 
-Analogamente, as operações de seleção das Configuração sobre as quais a Aplicação
-sob Teste será executada, bem como a seleção das Cargas de Trabalho a que ela 
-será submetida durante sua execução, são delegadas a um componente que chamamos de
-Estratégia de Avaliação ou, simplesmente, Estratégia. Seu objetivo é permitir a
-aplicação de diferentes métodos para a escolha da melhor Configuração e/ou Carga 
-de Trabalho mais adequada aos objetivos da avaliação de capacidade em curso e 
-também ao perfil da Aplicação.
-
-Dessa forma, o processo permite que a mesma Aplicação seja facilmente avaliada 
-por meio de diferentes abordagens e sem modificação da lógica geral original de 
-avaliação. Para exemplificar, uma Estratégia pode selecionar Configurações 
-maiores ou menores priorizando a escalabilidade vertical em detrimento da mudança
-do número de instâncias que compõem a Configuração anterior. Outra Estratégia 
-poderia agir priorizando a escolha de máquinas mais robustas ou cargas de trabalho
-maiores quando o SLA informado fosse mais folgado.
-
-De modo contrário em relação ao Executor, a definição de Estratégias de Avaliação
-está intrinsecamente ligada aos objetivos deste trabalho de estudar os efeitos da
-inferência de desempenho na eficiência do processo de avaliação de capacidade para
-aplicações em ambientes de nuvem de infraestrutura. A inteligência das Estratégias
-propostas, ou seja, sua capacidade de escolher corretamente as Configurações e 
-Cargas de Trabalho, é determinante para o sucesso do processo e da técnica de 
-inferência. 
-
-Para efeito de entendimento do funcionamento geral do processo de avaliação de 
-capacidade ora proposto, podemos abstrair temporariamente o comportamento da 
-Estratégia de Avaliação, o qual voltaremos a analisar um pouco mais adiante. 
-Esta é, aliás, outra vantagem da abordagem adotada de delegação de funções 
-específicas a componentes: além da flexibilidade e adaptabilidade, a abstração 
-dessas operações torna mais fáceis o entendimento, a descrição e a implementação 
-concreta do processo.   
-
-Na Figura~\ref{fig_processo_aval_capacidade}, os blocos em vermelho representam
+Na Figura~\ref{fig:fig_processo_aval_capacidade}, os blocos em vermelho representam
 as operações que o processo espera que sejam executadas por uma Estratégia de 
-Avaliação. Os outros blocos referem-se a ações comuns do próprio processo, 
-executadas de maneira idêntica independentemente de qual seja a Aplicação sob Teste
-ou de qual seja a Estratégia de Avaliação usada. A delegação de funções para o 
-componente Executor não está destacada no diagrama e se dá no passo 
-``\emph{Execute \& Monitor}'', situado aproximadamente no centro da figura.
+Avaliação que implemente as Heurísticas propostas na seção anterior. Os outros 
+blocos referem-se a ações comuns do próprio processo, executadas de maneira 
+idêntica independentemente de qual seja a Aplicação sob Teste ou de qual seja a 
+Estratégia de Avaliação usada. A delegação de funções para o componente Executor 
+não está destacada no diagrama e se dá no passo ``\emph{Execute \& Monitor}'', 
+situado aproximadamente no centro da figura.
 
 \subsection{Operações iniciais}
+\label{subsec:processo_operacoes_iniciais}
 Uma vez tendo recebido os dados de entrada, o processo tem seu início com as 
 primeiras invocações da Estratégia utilizada na avaliação. É o momento de escolher
 por onde começar a execução dos testes.
 
 A primeira atividade delegada pelo processo à Estratégia é a escolha da Categoria 
-inicial. Conforme as definições apresentadas no Capítulo 3, os Tipos de Máquinas
-Virtuais oferecidos pelo Provedor são normalmente agrupadas por Categorias, que
-reunem máquinas de propósito e atributos semelhantes. Assim, o Espaço de Implantação
-sobre o qual a avaliação de capacidade se dará está dividido em Categorias. O número 
-de Categorias envolvidas na avaliação depende do conjunto de máquinas virtuais
-selecionados pelo usuário e passados como parte dos dados de entrada do processo.
+inicial. Conforme as definições apresentadas no Capítulo~\ref{chap:formalizacao}, 
+os Tipos de Máquinas Virtuais oferecidos pelo Provedor são normalmente agrupadas 
+por Categorias, que reunem máquinas de propósito e atributos semelhantes. Assim, 
+o Espaço de Implantação sobre o qual a avaliação de capacidade se dará está 
+dividido em Categorias. O número de Categorias envolvidas na avaliação depende do 
+conjunto de máquinas virtuais selecionados pelo usuário e passados como parte dos 
+dados de entrada do processo.
 
 Assim, como primeiro passo no processo de avaliação, e Estratégia seleciona, 
 segundo sua própria lógica, dependente de implementação, qual a primeira
@@ -155,6 +241,7 @@ o volume de trabalho inicial a partir da lista de Cargas fornecida nos dados de
 entrada.
 
 \subsubsection{Níveis de Capacidade}
+\label{subsec:processo_niveis_capacidade}
 Dando continuidade à sequência de operações iniciais dentro do Processo de Avaliação 
 de Capacidade, a Estratégia deve selecionar um Nível de Capacidade inicial. 
 
@@ -188,13 +275,13 @@ menor para a maior. A ausência de seta entre duas Configurações implica a
 impossibilidade de se afirmar uma relação de capacidade entre elas. 
 
 Assim, observando o Espaço de Implantação organizado por Categorias e classificado
-hierarquicamente, a Estratégia deve selecionar, com base em sua própria lógica, um
-Nível de Capacidade inicial. As Configurações que fazem parte do Nível inicial 
-escolhido são disponibilizadas para que a Avaliação proceda com a execução dos 
-testes da Aplicação.
+hierarquicamente, a Estratégia deve selecionar, com base em uma das Heurísticas 
+propostas na seção~\ref{sec:heuristicas}, um Nível de Capacidade inicial. As 
+Configurações que fazem parte do Nível inicial escolhido são disponibilizadas 
+para que a Avaliação proceda com a execução dos testes da Aplicação.
 
 \subsubsection{Ciclo de Execução de Testes}
-Após a escolha da Carga de Trabalho inicial e do primeiro Níveç de Capacidade a
+Após a escolha da Carga de Trabalho inicial e do primeiro Nível de Capacidade a
 ser avaliado, o processo entra em um laço. 
 
 De maneira geral, toma-se uma Configuração a partir do Nível de Capacidade atual, 
