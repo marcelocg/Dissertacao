@@ -202,11 +202,11 @@ a descrição e a implementação concreta do processo.
 \begin{figure}[hbt]
   \caption{\label{fig:fig_processo_aval_capacidade}Diagrama de Funcionamento do Processo de Avaliação de Capacidade}
   \begin{center}
-    \includegraphics[scale=0.45]{img/diagrama-avaliacao-capacidade-v14}
+    \includegraphics[scale=0.45]{img/capacity-planning-diagram-v13-mono}
   \end{center}
 \end{figure}
 
-Na Figura~\ref{fig:fig_processo_aval_capacidade}, os blocos em vermelho representam
+Na Figura~\ref{fig:fig_processo_aval_capacidade}, os blocos em destaque representam
 as operações que o processo espera que sejam executadas por uma Estratégia de 
 Avaliação que implemente as Heurísticas propostas na seção anterior. Os outros 
 blocos referem-se a ações comuns do próprio processo, executadas de maneira 
@@ -217,33 +217,38 @@ situado aproximadamente no centro da figura.
 
 \subsection{Operações iniciais}
 \label{subsec:processo_operacoes_iniciais}
-Uma vez tendo recebido os dados de entrada, o processo tem seu início com as 
-primeiras invocações da Estratégia utilizada na avaliação. É o momento de escolher
-por onde começar a execução dos testes.
+Uma vez tendo recebido os dados de entrada, o Processo tem seu início com o momento 
+de escolher por onde começar a execução dos testes.
 
-A primeira atividade delegada pelo processo à Estratégia é a escolha da Categoria 
+A primeira atividade desempenhada pelo Processo é a escolha da Categoria 
 inicial. Conforme as definições apresentadas no Capítulo~\ref{chap:formalizacao}, 
-os Tipos de Máquinas Virtuais oferecidos pelo Provedor são normalmente agrupadas 
-por Categorias, que reunem máquinas de propósito e atributos semelhantes. Assim, 
-o Espaço de Implantação sobre o qual a avaliação de capacidade se dará está 
+os Tipos de Máquinas Virtuais oferecidos pelo Provedor são normalmente agrupados 
+por Categorias, que reunem máquinas de propósito e atributos semelhantes. Dessa
+forma, o Espaço de Implantação sobre o qual a avaliação de capacidade se dará está 
 dividido em Categorias. O número de Categorias envolvidas na avaliação depende do 
-conjunto de máquinas virtuais selecionados pelo usuário e passados como parte dos 
-dados de entrada do processo.
+conjunto de Tipos de Máquinas Virtuais selecionados pelo usuário e passados como
+parte dos dados de entrada do Processo.
 
-Assim, como primeiro passo no processo de avaliação, e Estratégia seleciona, 
-segundo sua própria lógica, dependente de implementação, qual a primeira
-Categoria de máquinas a ser explorada.
+Então, como passo inicial, o Processo de Avaliação seleciona a primeira
+Categoria de máquinas a ser explorada. O processo não especifica a ordem ou método 
+dessa escolha, pois essa ordem não é importante uma vez que todas as Categorias 
+presentes no Espaço de Implantação serão avaliadas. Conforme veremos no 
+capítulo~\ref{chap:implementacao}, a implementação de referência do Processo 
+desenvolvida neste trabalho escolhe a primeira Categoria em ordem alfabética pelo
+nome. Outras implementações do processo podem optar por outro método de escolha. 
 
 Depois de escolhida a Categoria inicial, a Estratégia é solicitada a escolher 
 qual a primeira Carga de Trabalho a ser imposta sobre a Aplicação sob Teste. Essa 
-escolha também é feita conforme a lógica própria da Estratégia e deve selecionar
-o volume de trabalho inicial a partir da lista de Cargas fornecida nos dados de 
-entrada.
+escolha deve seguir a orientação dada pela lógica da Heurística selecionada para 
+a avaliação, cuja implementação está a cargo da Estratégia. Assim, será escolhido
+um volume de carga maior se a Heurística for Otimista ou um volume menor se a
+Heurística para Cargas de Trabalho for Pessimista.
 
 \subsubsection{Níveis de Capacidade}
 \label{subsec:processo_niveis_capacidade}
 Dando continuidade à sequência de operações iniciais dentro do Processo de Avaliação 
-de Capacidade, a Estratégia deve selecionar um Nível de Capacidade inicial. 
+de Capacidade, o próximo passo prevê que a Estratégia de Avaliação deve selecionar 
+um Nível de Capacidade inicial. 
 
 Níveis de Capacidade são um conceito criado para ajudar a estabelecer uma hierarquia 
 sobre as relações de capacidade de processamento entre as diversas Configurações. 
@@ -260,19 +265,20 @@ Categoria de Máquinas Virtuais.
 Para cada Categoria, o Nível "um" de Capacidade é composto apenas pela Configuração 
 de menor preço dentro da Categoria. Um novo nível é criado com todas as Configurações 
 para as quais é verdadeira a relação "maior que", conforme a definição descrita 
-no Seção 3.2.5. Esse então passa a ser o Nível "dois" e a lógica se repete daí em diante, 
-tomando-se, para cada Configuração desse nível, as imediatamente maiores, 
-formando um novo Nível. O procedimento continua até que todas as Configurações 
-estejam devidamente classificadas em Níveis de Capacidade.
+no seção~\ref{sec:formalizacao_configuracoes}. Esse, então, passa a ser o Nível 
+"dois" e a lógica se repete daí em diante, tomando-se, para cada Configuração 
+desse nível, as imediatamente maiores, formando um novo Nível. O procedimento 
+continua até que todas as Configurações estejam devidamente classificadas em 
+Níveis de Capacidade.
 
-A Figura~\ref{fig_niveis_capacidade} mostra um pequeno exemplo, onde 6 Configurações
-pertencentes a duas Categorias distintas foram classificadas em dois Níveis de 
+A Figura~\ref{fig_niveis_capacidade} mostra um pequeno exemplo, onde 6 Configurações,
+pertencentes a duas Categorias distintas, foram classificadas em dois Níveis de 
 Capacidade dentro de cada Categoria. Os retângulos representam as Configurações, 
-com o nome do Tipo de Máquina Virtual utilizado e o número entre parênteses 
-representa a quantidade de instâncias que compõem a Configuração. As setas que 
-ligam as Configurações indicam a relação de capacidade entre elas apontando da 
-menor para a maior. A ausência de seta entre duas Configurações implica a 
-impossibilidade de se afirmar uma relação de capacidade entre elas. 
+com o texto indicando o nome do Tipo de Máquina Virtual utilizado e o número entre 
+parênteses representando a quantidade de instâncias que compõem a Configuração. 
+As setas que ligam as Configurações indicam a existência da relação de capacidade 
+entre elas apontando da menor para a maior. A ausência de seta entre duas Configurações 
+implica a impossibilidade de se afirmar uma relação de capacidade entre elas. 
 
 Assim, observando o Espaço de Implantação organizado por Categorias e classificado
 hierarquicamente, a Estratégia deve selecionar, com base em uma das Heurísticas 
@@ -280,44 +286,132 @@ propostas na seção~\ref{sec:heuristicas}, um Nível de Capacidade inicial. As
 Configurações que fazem parte do Nível inicial escolhido são disponibilizadas 
 para que a Avaliação proceda com a execução dos testes da Aplicação.
 
-\subsubsection{Ciclo de Execução de Testes}
+\subsection{Execução do Teste de Desempenho}
 Após a escolha da Carga de Trabalho inicial e do primeiro Nível de Capacidade a
-ser avaliado, o processo entra em um laço. 
+ser avaliado, uma Configuração deve ser tomada a partir do Nível de Capacidade 
+atual. Essa seleção não segue nenhuma regra específica, uma vez que todas as 
+Configurações do Nível de Capacidade devem ser avaliados, ainda que por meio da técnica de 
+Inferência de Desempenho, vista adiante.
+ 
+Executa-se, então, a Aplicação sob Teste, impondo-se a ela a Carga de Trabalho 
+selecionada, e analisa-se o Resultado (ver seção~\ref{subsec:formalizacao_resultados}) 
+dessa execução. Nesse ponto o Processo se bifurca, atingindo seu primeiro ponto 
+de decisão.
 
-De maneira geral, toma-se uma Configuração a partir do Nível de Capacidade atual, 
-executa-se a Aplicação sob Teste impondo-se a ela a Carga de Trabalho selecionada 
-e analisa-se o resultado dessa execução. O processo então se bifurca no primeiro
-ponto de decisão, comparando o valor obtido pela Aplicação para a Métrica de 
-Desempenho com o SLA definido nos dados de entrada.
+Esse é o momento em que a técnica de Inferência, conforme propomos neste trabalho,
+será aplicada. A análise do Resultado obtido, mais especificamente do valor atribuído
+à Métrica de Desempenho avaliada, comparado ao parâmetro do Valor de Referência, 
+ou SLA, define se a Aplicação é ou não capaz de atender à demanda imposta pela
+Carga de Trabalho. Vejamos a seguir uma explanação mais detalhada a respeito das
+inferências que sucedem essa análise.  
+
+\subsubsection{Inferência de Desempenho}
+O processo de Inferência de Desempenho acontece logo após a análise comparativa
+do Resultado, conseguinte a uma execução real da Aplicação sob Teste em uma 
+Configuração, que foi tomada a partir de um Nível de Capacidade previamente 
+selecionado. Durante essa execução, foi imposta sobre a Aplicação uma Carga de 
+Trabalho, também previamente selecionada.
+
+Observando o diagrama da Figura~\ref{fig:fig_processo_aval_capacidade}, podemos 
+ver, bem ao centro, o ponto de decisão que define o sucesso ou o fracasso da 
+Aplicação em atingir o SLA exigido. 
 
 Se o desempenho da Aplicação satisfaz o SLA proposto, o Processo considera que a
-Configuração é capaz de executar sob a Carga de Trabalho imposta e sob todas as
-Cargas de Trabalho menores. Além disso, o Processo infere que todas as 
-Configurações maiores que a atual, da mesma maneira, podem executar
-a Aplicação sob a Carga de Trabalho atual e também sob as Cargas menores. 
+Configuração é capaz de executar sob a Carga de Trabalho imposta e diz que a 
+Configuração atual (sobre a qual a Aplicação acabou de ser executada) deve ser
+assinalada como uma Configuração Candidata.
 
-Caso o desempenho da Aplicação não satisfaça o SLA, o Processo considera que a 
-Configuração não é capaz de executar sob a Carga de Trabalho atual e nem sob as
-Cargas maiores. O Processo infere então que as Configurações menores igualmente
-não serão capazes de executar sob a Carga atual e tampouco sob as de maior volume.
+Neste ponto, a técnica de Inferência de Desempenho é aplicada e, como vemos
+no texto do diagrama do Processo, todas as Configurações maiores que a atual também
+são assinaladas como Candidatas. Ora, se identificamos que uma certa Configuração
+consegue executar a Aplicação sob uma certa Carga de Trabalho, é intuitivo o 
+pensamento de que qualquer Configuração que possua maior poder computacional 
+também seja capaz de executar a mesma Aplicação sob a mesma Carga de Trabalho.
 
-O Processo atinge então mais um ponto de decisão. Se existirem Configurações
-pertencentes ao atual Nível de Capacidade cujas execuções ainda não tenham sido 
-avaliadas para a Carga de Trabalho selecionada, o Processo volta ao passo de 
-seleção de uma Configuração a partir do Nível de Capacidade e uma nova execução
-é solicitada ao componente Executor.
+Assim, usando a representação do Espaço de Implantação conforme descrito na
+Seção~\ref{subsec:processo_niveis_capacidade}, o Processo assinala como candidatas
+todas as Configurações para as quais, direta ou indiretamente, a Configuração 
+atual aponte uma seta, ou seja, todas as Configurações ``maiores que'' a Configuração
+atual, no sentido da definição apresentada na seção~\ref{sec:formalizacao_configuracoes}.
+
+Mas a técnica de Inferência ainda vai mais longe. Sabendo que as Configurações
+que acabaram de ser assinaladas como Candidatas são capazes de executar a Aplicação
+sob a Carga de Trabalho atual, também é intuitivo concluir que Cargas de Trabalho 
+menores, ou mais brandas, serão naturalmente atendidas.
+
+Então, prosseguindo com a aplicação da Inferência de Desempenho, o Processo marca
+a Configuração atual e todas as maiores que ela como Candidatas não só para a 
+Carga de Trabalho atual, mas também para todas as Cargas inferiores à atual.
+
+\begin{figure}[hbt]
+  \caption{\label{fig:fig_processo_inferencia}Inferência de Desempenho: Marcação de Configurações Candidatas e Rejeitadas}
+  \begin{center}
+    \includegraphics[scale=1.00]{img/inference}
+  \end{center}
+\end{figure}
+
+De volta ao ponto de decisão da análise do Resultado em relação ao SLA, caso o 
+desempenho da Aplicação não satisfaça o SLA, o Processo considera que a 
+Configuração não é capaz de executar sob a Carga de Trabalho atual. Assim, essa
+Configuração é marcada como Rejeitada para tal Carga.
+
+De forma coerente, a lógica de Inferência de Desempenho entende que, se dada 
+Configuração não consegue executar uma Aplicação a contento sob uma certa Carga,
+intuitivamente, as Configurações menores tampouco conseguirão. Assim, o processo
+indica a marcação de todas as Configurações ``menores que'' a atual como 
+Rejeitadas para a Carga de Trabalho atual. 
+
+Ainda seguindo a Inferência de Desempenho, quando uma Configuração não consegue
+atender a demanda de uma Carga de Trabalho, presume-se que também não consiga
+atender a demandas maiores, ou mais severas. O Processo de Avaliação manda, então,
+que a Configuração atual e todas as Configurações menores sejam também marcadas
+como Rejeitadas para todas as Cargas de Trabalho maiores que a Carga atual. 
+
+O efeito da aplicação da técnica de Inferência de Desempenho pode ser melhor
+visualizado através da Figura~\ref{fig:fig_processo_inferencia}. A figura mostra 
+duas situações: a da esquerda para o caso em que o SLA é satisfeito e a da direita 
+caso o SLA não seja satisfeito. Em ambos os casos vemos uma célula central realçada, 
+indicando que a Aplicação sob Teste foi executada na Configuração $C_3$ sob a 
+Carga de Trabalho $W_3$. As células marcadas com $\sqrt{}$ mostram as Configurações
+marcadas como Candidatas para as Cargas de Trabalho correspondentes. As células
+marcadas com $\times{}$ representam as Configurações assinaladas como Rejeitadas.
+
+Essa representação serve para demonstrar a contribuição da aplicação da técnica 
+de Inferência na aplicação de testes de desempenho . Nesse exemplo, foram 
+explorados 9 cenários diferentes, dados pelas combinações de Configurações e 
+Cargas de Trabalho, mas apenas 1 execução real foi conduzida. Isso significa não
+só que o tempo total gasto na Avaliação de Capacidade é reduzido, mas também o
+custo financeiro envolvido nessa atividade. 
+
+Mais adiante neste capítulo, expandiremos essa representação para mostrar a ação
+da Inferência de Desempenho após várias iterações do laço compreendido pelo 
+Processo de Avaliação. Por hora, continuemos com a descrição dos passos seguintes.
+
+\subsection{Seleção dos Próximos Cenários}
+Passada a fase de Inferência de Desempenho, o processo segue seu caminho, tomando
+as decisões que levarão à seleção dos cenários seguintes a serem avaliados quanto
+à sua capacidade.
+
+O ponto de decisão que sucede a marcação das Configurações Candidatas ou Rejeitadas
+checa se existem Configurações pertencentes ao atual Nível de Capacidade cujas 
+execuções ainda não tenham sido avaliadas para a Carga de Trabalho atual. Se 
+existirem, o Processo volta ao passo de seleção de uma Configuração a partir do 
+Nível de Capacidade e uma nova execução é solicitada ao componente Executor.
 
 Se não existirem Configurações inexploradas para a Carga de Trabalho atual no
 Nível de Capacidade corrente, o Processo buscará por um Nível de Capacidade que 
 ainda não tenha sido completamente explorado. Se a Aplicação satisfez o SLA na 
 execução anterior, a Estratégia deverá selecionar um Nível de Capacidade menor. 
-Se o SLA não tiver sido atingido, a Estratégia tentará selecionar um  Níveç de 
+Se o SLA não tiver sido atingido, a Estratégia tentará selecionar um  Nível de 
 Capacidade maior. Depois de selecionado o próximo Nível de Capacidade, o laço do
 Processo retorna ao ponto de seleção da próxima Configuração e outra execução 
 acontece.
    
 Novo ponto de decisão surge quando a Estratégia não encontra um Nível de 
-Capacidade a ser explorado. Nessa situação, a Estratégia deve buscar uma Carga 
+Capacidade a ser explorado. Nessa situação, o Processo  
+
+
+a Estratégia deve buscar uma Carga 
 de Trabalho que não tenha sido avaliada. Se a execução anterior atingiu o SLA,
 uma Carga de Trabalho maior será buscada. Caso contrário, a Estratégia tentará
 uma Carga menor que a atualmente selecionada. Porém, se a Estratégia não conseguir 
@@ -325,10 +419,11 @@ fornecer uma Carga de Trabalho segundo essas restrições, o processo tentará a
 escolha de uma Carga inexplorada qualquer, bem como um Nível de Capacidade que 
 disponha de pelo menos uma Configuração inexplorada, mesmo que de outra Categoria.    
 
-Caso não seja encontrada uma Carga e nem um Nível de Capacidade, o Processo de 
+\subsection{Finalização da Avaliação}
+Caso não seja encontrada nem uma Carga e nem um Nível de Capacidade, o Processo de 
 Avaliação está terminado e é fornecida, para cada Carga de Trabalho, uma lista 
 de Configurações, em ordem crescente de preço, capazes de executar a Aplicação 
-sob Teste.  
+sob Teste.
 
 \section{Resumo}
 Apresentamos neste capítulo uma proposta de processo de avaliação de capacidade
