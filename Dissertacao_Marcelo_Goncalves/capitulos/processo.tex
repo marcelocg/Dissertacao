@@ -408,22 +408,34 @@ Processo retorna ao ponto de seleção da próxima Configuração e outra execu�
 acontece.
    
 Novo ponto de decisão surge quando a Estratégia não encontra um Nível de 
-Capacidade a ser explorado. Nessa situação, o Processo  
+Capacidade a ser explorado. Nessa situação, o Processo procura uma outra
+Categoria dentro do Espaço de Implantação que ainda possua pelo menos uma
+Configuração ainda não explorada para a Carga de Trabalho atual. Se houver,
+o Processo retorna ao passo de seleção de um Nível de Capacidade dentro da
+Categoria selecionada e nova execução será realizada.
 
-
-a Estratégia deve buscar uma Carga 
+Caso não haja uma outra Categoria com Configurações não avaliadas, atingimos
+então um outro ponto de decisão, onde a Estratégia deve buscar uma Carga 
 de Trabalho que não tenha sido avaliada. Se a execução anterior atingiu o SLA,
 uma Carga de Trabalho maior será buscada. Caso contrário, a Estratégia tentará
-uma Carga menor que a atualmente selecionada. Porém, se a Estratégia não conseguir 
-fornecer uma Carga de Trabalho segundo essas restrições, o processo tentará a 
-escolha de uma Carga inexplorada qualquer, bem como um Nível de Capacidade que 
-disponha de pelo menos uma Configuração inexplorada, mesmo que de outra Categoria.    
+uma Carga menor que a atualmente selecionada. Se a Estratégia obtiver sucesso
+nessa escolha, o Processo dispara uma nova execução da Aplicação com a Configuração
+corrente e sob a Carga de Trabalho que acabou de ser selecionada.
+
+Porém, se a Estratégia não conseguir fornecer uma Carga de Trabalho segundo as 
+restrições do Processo segundo a comparação do Resultado com o SLA, o Processo 
+voltará ao passo inicial de seleção de Carga de Trabalho, que não tem qualquer 
+restrição quanto a essa seleção. Tentará assim a escolha de uma Carga inexplorada
+qualquer. Caso não seja encontrada nenhuma Carga de Trabalho inexplorada, significa
+que não há mais nada a ser testado e o Processo é encerrado.
 
 \subsection{Finalização da Avaliação}
-Caso não seja encontrada nem uma Carga e nem um Nível de Capacidade, o Processo de 
-Avaliação está terminado e é fornecida, para cada Carga de Trabalho, uma lista 
-de Configurações, em ordem crescente de preço, capazes de executar a Aplicação 
-sob Teste.
+Não tendo mais Configurações a serem testadas sob nenhuma Carga de Trabalho, o 
+Processo é dado por concluído e sua finalização se dá pela apresentação de uma
+lista que contém, para cada Carga de Trabalho, as Configurações capazes de executar
+a Aplicação sob Teste, em ordem crescente de preço.
+
+
 
 \section{Resumo}
 Apresentamos neste capítulo uma proposta de processo de avaliação de capacidade
