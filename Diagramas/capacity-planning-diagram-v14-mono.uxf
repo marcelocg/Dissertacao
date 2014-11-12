@@ -16,7 +16,7 @@
     <type>com.umlet.element.custom.State</type>
     <coordinates>
       <x>460</x>
-      <y>350</y>
+      <y>250</y>
       <w>140</w>
       <h>80</h>
     </coordinates>
@@ -40,13 +40,13 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
       <x>460</x>
-      <y>450</y>
+      <y>350</y>
       <w>140</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>Execute
 selected config
-under selected
+under selected 
 workload level
 bg=light_gray</panel_attributes>
     <additional_attributes/>
@@ -55,7 +55,7 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>500</x>
-      <y>400</y>
+      <y>300</y>
       <w>50</w>
       <h>70</h>
     </coordinates>
@@ -66,19 +66,18 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
       <x>510</x>
-      <y>580</y>
+      <y>480</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>
-</panel_attributes>
+    <panel_attributes/>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>500</x>
-      <y>500</y>
+      <y>400</y>
       <w>50</w>
       <h>100</h>
     </coordinates>
@@ -89,14 +88,14 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
       <x>290</x>
-      <y>550</y>
+      <y>450</y>
       <w>180</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>Mark selected &amp; higher
 capacity configs as 
 candidate for selected &amp;
-lower workload levels
+lower workloads
 bg=light_gray</panel_attributes>
     <additional_attributes/>
   </element>
@@ -104,7 +103,7 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>440</x>
-      <y>550</y>
+      <y>450</y>
       <w>90</w>
       <h>70</h>
     </coordinates>
@@ -117,7 +116,7 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
       <x>370</x>
-      <y>770</y>
+      <y>670</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -128,7 +127,7 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>350</x>
-      <y>700</y>
+      <y>600</y>
       <w>76</w>
       <h>90</h>
     </coordinates>
@@ -141,7 +140,7 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>350</x>
-      <y>780</y>
+      <y>680</y>
       <w>76</w>
       <h>100</h>
     </coordinates>
@@ -154,7 +153,7 @@ bg=light_gray</panel_attributes>
     <id>Text</id>
     <coordinates>
       <x>500</x>
-      <y>620</y>
+      <y>520</y>
       <w>80</w>
       <h>30</h>
     </coordinates>
@@ -166,7 +165,7 @@ elementstyle=wordwrap</panel_attributes>
     <id>Text</id>
     <coordinates>
       <x>410</x>
-      <y>760</y>
+      <y>660</y>
       <w>110</w>
       <h>60</h>
     </coordinates>
@@ -179,7 +178,7 @@ halign=center</panel_attributes>
     <id>Text</id>
     <coordinates>
       <x>410</x>
-      <y>940</y>
+      <y>750</y>
       <w>120</w>
       <h>70</h>
     </coordinates>
@@ -191,8 +190,8 @@ halign=center</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>370</x>
-      <y>860</y>
+      <x>520</x>
+      <y>940</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -203,20 +202,20 @@ halign=center</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>360</x>
-      <y>960</y>
+      <y>770</y>
       <w>200</w>
-      <h>120</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=  N
 </panel_attributes>
-    <additional_attributes>180;100;180;70;30;70;30;30</additional_attributes>
+    <additional_attributes>180;90;180;70;30;70;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
       <x>470</x>
-      <y>1130</y>
+      <y>1020</y>
       <w>140</w>
       <h>90</h>
     </coordinates>
@@ -231,7 +230,7 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>300</x>
-      <y>760</y>
+      <y>660</y>
       <w>90</w>
       <h>50</h>
     </coordinates>
@@ -244,7 +243,7 @@ m2= Y
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>140</x>
-      <y>350</y>
+      <y>250</y>
       <w>340</w>
       <h>460</h>
     </coordinates>
@@ -255,18 +254,18 @@ m2= Y
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>510</x>
-      <y>1190</y>
+      <y>1080</y>
       <w>50</w>
-      <h>70</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;50;30;30</additional_attributes>
+    <additional_attributes>30;60;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.FinalState</type>
     <coordinates>
       <x>530</x>
-      <y>1240</y>
+      <y>1140</y>
       <w>20</w>
       <h>20</h>
     </coordinates>
@@ -277,7 +276,7 @@ m2= Y
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>520</x>
-      <y>550</y>
+      <y>450</y>
       <w>100</w>
       <h>70</h>
     </coordinates>
@@ -291,7 +290,7 @@ N
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
       <x>660</x>
-      <y>770</y>
+      <y>670</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -302,7 +301,7 @@ N
     <id>Text</id>
     <coordinates>
       <x>540</x>
-      <y>760</y>
+      <y>660</y>
       <w>120</w>
       <h>60</h>
     </coordinates>
@@ -315,7 +314,7 @@ halign=center</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>670</x>
-      <y>760</y>
+      <y>660</y>
       <w>90</w>
       <h>50</h>
     </coordinates>
@@ -325,21 +324,10 @@ m2=Y
     <additional_attributes>70;30;30;30</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.custom.Decision</type>
-    <coordinates>
-      <x>660</x>
-      <y>860</y>
-      <w>40</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Text</id>
     <coordinates>
       <x>540</x>
-      <y>940</y>
+      <y>750</y>
       <w>120</w>
       <h>60</h>
     </coordinates>
@@ -352,7 +340,7 @@ halign=center</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>570</x>
-      <y>350</y>
+      <y>250</y>
       <w>350</w>
       <h>460</h>
     </coordinates>
@@ -363,14 +351,14 @@ halign=center</panel_attributes>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
       <x>600</x>
-      <y>550</y>
+      <y>450</y>
       <w>180</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>Mark selected &amp; lower
 capacity configs as 
 explored for selected &amp;
-higher workload levels
+higher workloads
 bg=light_gray</panel_attributes>
     <additional_attributes/>
   </element>
@@ -378,7 +366,7 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>640</x>
-      <y>700</y>
+      <y>600</y>
       <w>76</w>
       <h>90</h>
     </coordinates>
@@ -390,7 +378,7 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>630</x>
-      <y>780</y>
+      <y>680</y>
       <w>84</w>
       <h>100</h>
     </coordinates>
@@ -403,7 +391,7 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>510</x>
-      <y>960</y>
+      <y>770</y>
       <w>190</w>
       <h>90</h>
     </coordinates>
@@ -415,7 +403,7 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
       <x>370</x>
-      <y>950</y>
+      <y>760</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -426,7 +414,7 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
       <x>660</x>
-      <y>950</y>
+      <y>760</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -437,7 +425,7 @@ bg=light_gray</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>300</x>
-      <y>940</y>
+      <y>750</y>
       <w>90</w>
       <h>50</h>
     </coordinates>
@@ -449,34 +437,21 @@ m2=Y
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>350</x>
-      <y>870</y>
+      <x>500</x>
+      <y>950</y>
       <w>76</w>
-      <h>100</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
   N
 </panel_attributes>
-    <additional_attributes>40;80;40;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>630</x>
-      <y>870</y>
-      <w>84</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-  N  
-</panel_attributes>
-    <additional_attributes>50;80;50;30</additional_attributes>
+    <additional_attributes>40;70;40;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>670</x>
-      <y>940</y>
+      <y>750</y>
       <w>90</w>
       <h>50</h>
     </coordinates>
@@ -488,22 +463,9 @@ m2=Y
   <element>
     <id>Text</id>
     <coordinates>
-      <x>410</x>
-      <y>860</y>
+      <x>560</x>
+      <y>940</y>
       <w>110</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>Unexplored categories?
-elementstyle=wordwrap
-halign=center</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Text</id>
-    <coordinates>
-      <x>550</x>
-      <y>860</y>
-      <w>120</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>Unexplored categories?
@@ -515,43 +477,30 @@ halign=center</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>120</x>
-      <y>160</y>
-      <w>360</w>
-      <h>740</h>
+      <y>60</y>
+      <w>420</w>
+      <h>920</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=Y</panel_attributes>
-    <additional_attributes>340;30;30;30;30;720;250;720</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>570</x>
-      <y>160</y>
-      <w>370</w>
-      <h>740</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-m2=Y</panel_attributes>
-    <additional_attributes>30;30;350;30;350;720;130;720</additional_attributes>
+    <additional_attributes>340;30;30;30;30;900;400;900</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
       <x>660</x>
-      <y>690</y>
+      <y>590</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>
-</panel_attributes>
+    <panel_attributes/>
     <additional_attributes/>
   </element>
   <element>
     <id>Text</id>
     <coordinates>
       <x>540</x>
-      <y>680</y>
+      <y>580</y>
       <w>120</w>
       <h>60</h>
     </coordinates>
@@ -564,7 +513,7 @@ halign=center</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>570</x>
-      <y>370</y>
+      <y>270</y>
       <w>250</w>
       <h>360</h>
     </coordinates>
@@ -577,7 +526,7 @@ m2=Y
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>650</x>
-      <y>610</y>
+      <y>510</y>
       <w>50</w>
       <h>100</h>
     </coordinates>
@@ -588,34 +537,36 @@ m2=Y
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>160</x>
-      <y>460</y>
+      <y>360</y>
       <w>320</w>
-      <h>530</h>
+      <h>440</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>300;30;30;30;30;510;50;510</additional_attributes>
+    <additional_attributes>300;30;30;30;30;420;50;420</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>570</x>
-      <y>460</y>
+      <y>360</y>
       <w>330</w>
-      <h>530</h>
+      <h>440</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;310;30;310;510;290;510</additional_attributes>
+    <additional_attributes>30;30;310;30;310;420;290;420</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>500</x>
-      <y>300</y>
-      <w>50</w>
-      <h>70</h>
+      <x>460</x>
+      <y>50</y>
+      <w>140</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;50;30;30</additional_attributes>
+    <panel_attributes>Select initial 
+category
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -629,22 +580,32 @@ m2=Y
     <additional_attributes>30;50;30;30</additional_attributes>
   </element>
   <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>500</x>
+      <y>100</y>
+      <w>50</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;50;30;30</additional_attributes>
+  </element>
+  <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
       <x>370</x>
-      <y>690</y>
+      <y>590</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>
-</panel_attributes>
+    <panel_attributes/>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>360</x>
-      <y>610</y>
+      <y>510</y>
       <w>50</w>
       <h>100</h>
     </coordinates>
@@ -655,7 +616,7 @@ m2=Y
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>240</x>
-      <y>370</y>
+      <y>270</y>
       <w>240</w>
       <h>360</h>
     </coordinates>
@@ -668,7 +629,7 @@ m2=Y
     <id>Text</id>
     <coordinates>
       <x>410</x>
-      <y>680</y>
+      <y>580</y>
       <w>120</w>
       <h>60</h>
     </coordinates>
@@ -681,7 +642,7 @@ halign=center</panel_attributes>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
       <x>520</x>
-      <y>1060</y>
+      <y>860</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -692,11 +653,11 @@ halign=center</panel_attributes>
     <id>Text</id>
     <coordinates>
       <x>410</x>
-      <y>1050</y>
+      <y>860</y>
       <w>120</w>
-      <h>70</h>
+      <h>50</h>
     </coordinates>
-    <panel_attributes>Unexplored workload levels?
+    <panel_attributes>Unexplored workloads?
 elementstyle=wordwrap
 halign=center</panel_attributes>
     <additional_attributes/>
@@ -705,37 +666,38 @@ halign=center</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>490</x>
-      <y>1070</y>
+      <y>870</y>
       <w>84</w>
-      <h>80</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
   N  
 </panel_attributes>
-    <additional_attributes>50;60;50;30</additional_attributes>
+    <additional_attributes>50;70;50;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>530</x>
-      <y>60</y>
-      <w>430</w>
-      <h>1040</h>
+      <y>160</y>
+      <w>410</w>
+      <h>740</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=Y</panel_attributes>
-    <additional_attributes>70;30;410;30;410;1020;30;1020</additional_attributes>
+    <additional_attributes>70;30;390;30;390;720;30;720</additional_attributes>
   </element>
   <element>
     <type>CustomElementImpl</type>
     <coordinates>
       <x>460</x>
-      <y>50</y>
+      <y>150</y>
       <w>141</w>
       <h>81</h>
     </coordinates>
     <panel_attributes>Select initial 
-workload level
+workload &amp; 
+capacity levels
 bg=gray
 </panel_attributes>
     <additional_attributes/>
@@ -752,53 +714,8 @@ for(String textline : textlines) {
   <element>
     <type>CustomElementImpl</type>
     <coordinates>
-      <x>460</x>
-      <y>250</y>
-      <w>141</w>
-      <h>81</h>
-    </coordinates>
-    <panel_attributes>Select initial 
-capacity level
-from category
-bg=gray</panel_attributes>
-    <additional_attributes/>
-    <custom_code>int y=(height)/2-textHeight()*textlines.size()*3/5;
-
-drawRectangleRound(0,0,width,height,20,20);
-drawRectangleRound(7,7,width-14,height-14,20,20);
-
-for(String textline : textlines) {
-	y += textHeight();
-	printCenter(textline,y);
-}</custom_code>
-  </element>
-  <element>
-    <type>CustomElementImpl</type>
-    <coordinates>
       <x>210</x>
-      <y>750</y>
-      <w>121</w>
-      <h>71</h>
-    </coordinates>
-    <panel_attributes>Select lower
-capacity level
-bg=gray</panel_attributes>
-    <additional_attributes/>
-    <custom_code>int y=(height)/2-textHeight()*textlines.size()*3/5;
-
-drawRectangleRound(0,0,width,height,20,20);
-drawRectangleRound(7,7,width-14,height-14,20,20);
-
-for(String textline : textlines) {
-	y += textHeight();
-	printCenter(textline,y);
-}</custom_code>
-  </element>
-  <element>
-    <type>CustomElementImpl</type>
-    <coordinates>
-      <x>210</x>
-      <y>930</y>
+      <y>740</y>
       <w>121</w>
       <h>71</h>
     </coordinates>
@@ -819,8 +736,30 @@ for(String textline : textlines) {
   <element>
     <type>CustomElementImpl</type>
     <coordinates>
+      <x>210</x>
+      <y>650</y>
+      <w>121</w>
+      <h>71</h>
+    </coordinates>
+    <panel_attributes>Select lower
+capacity level
+bg=gray</panel_attributes>
+    <additional_attributes/>
+    <custom_code>int y=(height)/2-textHeight()*textlines.size()*3/5;
+
+drawRectangleRound(0,0,width,height,20,20);
+drawRectangleRound(7,7,width-14,height-14,20,20);
+
+for(String textline : textlines) {
+	y += textHeight();
+	printCenter(textline,y);
+}</custom_code>
+  </element>
+  <element>
+    <type>CustomElementImpl</type>
+    <coordinates>
       <x>740</x>
-      <y>750</y>
+      <y>650</y>
       <w>121</w>
       <h>71</h>
     </coordinates>
@@ -842,7 +781,7 @@ for(String textline : textlines) {
     <type>CustomElementImpl</type>
     <coordinates>
       <x>740</x>
-      <y>930</y>
+      <y>740</y>
       <w>121</w>
       <h>71</h>
     </coordinates>
@@ -859,28 +798,5 @@ for(String textline : textlines) {
 	y += textHeight();
 	printCenter(textline,y);
 }</custom_code>
-  </element>
-  <element>
-    <type>com.umlet.element.custom.State</type>
-    <coordinates>
-      <x>460</x>
-      <y>150</y>
-      <w>140</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>Select category
-bg=light_gray</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>500</x>
-      <y>100</y>
-      <w>50</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;50;30;30</additional_attributes>
   </element>
 </diagram>
