@@ -431,9 +431,29 @@ que não há mais nada a ser testado e o Processo é encerrado.
 
 \subsection{Finalização da Avaliação}
 Não tendo mais Configurações a serem testadas sob nenhuma Carga de Trabalho, o 
-Processo é dado por concluído e sua finalização se dá pela apresentação de uma
+Processo é dado por concluído e sua finalização se efetiva pela apresentação de uma
 lista que contém, para cada Carga de Trabalho, as Configurações capazes de executar
 a Aplicação sob Teste, em ordem crescente de preço.
+
+Por "capazes de executar", entenda-se como as Configurações para as quais o valor
+obtido para a Métrica de Desempenho durante a execução da Aplicação sob determinada
+Carga de Trabalho é menor ou igual ao valor definido para o SLA ou Valor de Referência
+como um dos dados de entrada no início do Processo de Avaliação de Capacidade.
+
+Embora essa seja a resposta final do processo, a contribuição real deste trabalho está
+na maneira como chegamos a essa resposta, com redução de custo e tempo, e na precisão 
+da resposta, ou seja, o nível de acerto atingido pelo Processo ao apontar as Configurações
+Candidatas e Rejeitadas. Demonstraremos dados reais que comprovam a eficácia do 
+Processo e da técnica de Inferência de Desempenho propostos no capítulo~\ref{chap:resultados},
+que trata dos experimentos realizados e analisa criticamente os resultados obtidos.
+
+Para que se possa entender melhor o que significa essa contribuição, explicamos a seguir
+como o Processo constrói a resposta final, demonstrando o rastreamento dos vários momentos
+em que a técnica de Inferência de Desempenho é empregada e evidenciando a influência que
+a utilização de diferentes Heurísticas exerce sobre a eficiência do Processo.
+
+
+
 
 
 
