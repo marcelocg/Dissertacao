@@ -1,14 +1,21 @@
 \chapter[Cloud Capacitor]{Cloud Capacitor}
 \label{chap:capacitor}
 % ----------------------------------------------------------
-A partir da especificação do processo de avaliação de capacidade descrita no
-capítulo anterior, bem como dos componentes de suporte a esse processo, apresentamos
-a sua implementação na forma de um sistema computacional que demonstra seu funcionamento,
-eficácia e eficiência.
+A fim de confirmar as hipóteses de eficácia e eficiência do emprego do Processo
+de Avaliação de Capacidade descrito no capítulo anterior, bem como da técnica de
+Inferência de Desempenho e das Heurísticas de Seleção que dão suporte a esse Processo, 
+criamos uma implementação concreta de sua especificação na forma de uma biblioteca
+extensível e de um sistema computacional que demonstra seu funcionamento fazendo
+a avaliação de uma aplicação real em um provedor de nuvem de infraestrutura.
 
-Cloud Capacitor é um arcabouço para criação de sistemas de avaliação de 
-capacidade em ambientes de nuvem de infraestrutura como serviço. Ele permite que 
-sejam implementadas lógicas customizadas de avaliação do desempenho resultante
+Cloud Capacitor é uma biblioteca para criação de sistemas de avaliação de 
+capacidade em ambientes de nuvem de infraestrutura como serviço. Implementa as
+atividades descritas na especificação do Processo de Avaliação de Capacidade do 
+Capítulo~\ref{chap:processo}, permitindo que sejam customizadas as atividades
+definidas pelo Processo como pontos de extensão, como as Estratégias de Avaliação
+e o disparo e controle da execução da Aplicação sob Teste.
+
+implementadas lógicas customizadas de avaliação do desempenho resultante
 da execução da Aplicação sob Teste. Essas lógicas são então reconhecidas pelo Cloud 
 Capacitor como Estratégias de Avaliação.
 
