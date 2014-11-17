@@ -41,10 +41,58 @@ Para concluir a apresentação do CloudCapacitor, será mostrada a saída de dad
 fornecida pela biblioteca com as Configurações capazes de executar a
 Aplicação sob Teste em cada uma das Cargas de Trabalho respeitando o SLA definido.
 
+\subsection{Classes e Responsabilidades}
+\label{subsec:classes}
+CloudCapacitor é formado por um conjunto de classes que, juntas representam os
+componentes envolvidos na avaliação de capacidade de aplicações em ambientes de
+nuvem, de acordo com os conceitos e o Processo definidos anteriormente, nos
+Capítulos~\ref{chap:formalizacao} e~\ref{chap:processo}. A Figura~\ref{fig:classes}
+mostra as principais classes cujas responsabilidades e cooperação levam ao 
+resultado final de uma Avaliação. 
+
+Ao utilizar a biblioteca CloudCapacitor na construção de um software para avaliação
+de capacidade, o desenvolvedor tem à sua disposição uma classe principal, chamada
+\emph{Cacitor}. Essa classe fornece o fluxo principal do Processo de Avaliação, com todos
+os seus pontos de decisão e de extensão.
+
+\begin{figure}[htb]
+  \caption{\label{fig:classes}Principais classes que compõem o CloudCapacitor e suas relações}
+  \begin{center}
+    \includegraphics[scale=0.75]{img/CapacitorClasses}
+  \end{center}
+\end{figure}
+
+Entre os pontos de extensão, destacamos o uso da classe \emph{Strategy}. Como 
+vemos na Figura~\ref{fig:classes}, essa classe é fornecida pela biblioteca e a
+notação de linhas pontilhadas denota a sua possibilidade de especialização, onde,
+sobrescrevendo alguns de seus métodos, é possível criar Estratégias com comportamento
+diversificado.
+
+A classe \emph{DefaultExecutor} é o outro ponto de extensão oferecido pela biblioteca.
+Porém, neste caso, o desenvolvedor deve mandatoriamente implementar uma subclasse
+que forneça a lógica necessária ao controle da execução do teste de desempenho.
+Na figura, a classe a ser implementada pelo desenvolvedor é representada com o 
+nome de \emph{RealExecutor}.
+
+Para que a Avaliação de Capacidade possa ser efetuada, a classe \emph{Capacitor}
+deve conhecer o resultado de cada execução da Aplicação sob Teste, de modo que
+possa tomar as decisões corretas na indicação das Configurações Candidatas e
+Rejeitadas. Esses resultados são encapsulados na classe \emph{Result}, cujos 
+objetos são fornecidos pela subclasse responsável pela execução dos testes de 
+desempenho.
+
+E, finalmente, durante a execução da Avaliação de Capacidade, a classe \emph{Capacitor} 
+precisa ter conhecimento do Espaço de Implantação disponibilizado. Essa é a 
+responsabilidade da classe \emph{DeploymentSpace}, que implementa uma estrutura 
+de dados em memória para representar os diversos Níveis de Capacidade formados 
+entre as Configurações. A construção dessa estrutura é responsabilidade da classe 
+\emph{DeploymentSpaceBuilder}, que contém os algoritmos necessários à preparação 
+do grafo usado para navegação pelos Níveis de Capacidade. 
+
 ***RASCUNHO***
 CloudCapacitor
-  Diagrama de Classes (UML) / Arquitetura de Componentes
-  Enumeração das classes e suas responsabilidades
+OK  Diagrama de Classes (UML) / Arquitetura de Componentes
+OK  Enumeração das classes e suas responsabilidades
   Fluxo de utilização da biblioteca (caixa preta, interface com o Capacitor)
   Especificação e Carregamento do Deployment Space
   Executor - Implementação
@@ -59,12 +107,7 @@ Capacitor Web
 Resumo e transicao para o proximo capitulo
 ***RASCUNHO***
 
-\subsection{Classes e Responsabilidades}
-\label{subsec:classes}
-Ao utilizar a biblioteca CloudCapacitor na construção de um software para avaliação
-de capacidade, o desenvolvedor tem à sua disposição uma classe principal, chamada
-Cacitor. Essa classe fornece o fluxo principal do Processo de Avaliação, com todos
-os seus pontos de decisão e de extensão.
+
 
 PorémAo instanciar um objeto da classe Capacitor, o desenvolvedor deve atribuir  
 Por padrão, o CloudCapacitor oferece uma Estratégia de Avaliação que implementa 
@@ -72,12 +115,6 @@ uma lógica simples para as Heurísticas de Seleção de Configurações definid
 capítulo anterior. Essa lógica pode ser facilmente sobrescrita conforme a necessidade
 do usuário ou o perfil da Aplicação sob Teste.
 
-\begin{figure}[htb]
-  \caption{\label{fig_arq_alto_nivel}Arquitetura de alto nível do Cloud Capacitor}
-  \begin{center}
-    \includegraphics[scale=0.5]{img/arquiteturaAltoNivel}
-  \end{center}
-\end{figure}
 
 ****RASCUNHO
 \subsection{Heuristicas}
