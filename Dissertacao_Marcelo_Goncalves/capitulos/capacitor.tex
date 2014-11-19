@@ -89,11 +89,163 @@ entre as Configurações. A construção dessa estrutura é responsabilidade da 
 \emph{DeploymentSpaceBuilder}, que contém os algoritmos necessários à preparação 
 do grafo usado para navegação pelos Níveis de Capacidade. 
 
+\subsection{Fluxo de Utilização da Biblioteca}
+\label{subsec:fluxo}
+CloudCapacitor foi criada para ser uma ferramenta de auxílio na construção de 
+aplicações destinadas à condução de testes para avaliação de capacidade,
+visando basicamente a reusabilidade e a simplicidade na composição dessas 
+aplicações.
+
+Embora tenha sido desenvolvida objetivando sua utilização na construção de 
+aplicações web baseadas no framework Ruby on Rails, CloudCapacitor pode facilmente
+ser usada em todo tipo de aplicação escrita em Ruby, desde scripts puros até
+aplicações baseadas em outros frameworks.
+
+Em suma, o fluxo de utilização da biblioteca é bastante simples e pode ser 
+descrito por:
+
+\begin{enumerate}
+  \item Configurar parâmetros de criação do Espaço de Implantação 
+  \item Identificar Tipos de Máquinas Virtuais para o Espaço de Implantação
+  \item Instanciar um objeto \emph{Capacitor}
+  \item Atribuir ao \emph{Capacitor} um objeto \emph{DefaultExecutor}
+  \item Atribuir ao \emph{Capacitor} um objeto \emph{Strategy}
+  \item Executar o método \emph{run\_for} do \emph{Capacitor}
+\end{enumerate}
+
+Antes que a aplicação que está sendo desenvolvida possa de fato dar início ao uso 
+da biblioteca, é preciso que o desenvolvedor a configure previamente. 
+
+O primeiro passo é configurar os limites de tamanho do Espaço de Implantação e 
+isso deve ser feito através de um arquivo em formato YAML~\cite{yml}. A localização 
+e o nome do arquivo de parâmetros para a criação do Espaço de Implantação dependem 
+de como a aplicação está sendo implementada: se for uma aplicação Ruby on Rails, 
+deverá haver um arquivo chamado \emph{capacitor.yml} na pasta \emph{config}, que 
+fica dentro da pasta raiz da aplicação; caso contrário, deverá haver um arquivo 
+chamado \emph{capacitor\_settings.yml} já na pasta raiz da aplicação ou na mesma 
+pasta em que está o script que invoca a biblioteca. 
+
+A Figura~\ref{fig:settings} mostra um exemplo de conteúdo do arquivo que configura
+os limites do Espaço de Implantação. São apenas dois parâmetros:
+
+\begin{description}
+  \item[max\_price] \hfill \\ O custo máximo que uma Configuração pode atingir
+  \item[max\_num\_instances] \hfill \\ Número máximo de instâncias usadas em uma Configuração 
+\end{description}
+
+\begin{figure}[h]
+  \caption{\label{fig:settings}Parâmetros de Configuração para o CloudCapacitor}
+ \begin{lstlisting}[linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
+deployment_space:
+  #The maximum price for a whole Configuration.
+  #This refers to the individual VM_Type price multiplied 
+  #by the number of instances that make up the Configuration
+  max_price: 7.0
+
+  #The maximum number of instances in a Configuration. 
+  #This is for horizontal scaling.
+  max_num_instances: 4
+  \end{lstlisting}
+\end{figure}
+
+No exemplo acima, serão criadas Configurações com 1, 2, 3 e 4 instâncias para cada
+Tipo de Máquina Virtual especificada, desde que o custo total da Configuração não
+ultrapasse o valor de 7,00 unidades monetárias.
+
+O próximo passo na utilização do CloudCapacitor é especificar quais serão os Tipos
+de Máquinas Virtuais utilizados na geração do Espaço de Implantação. Essa 
+especificação é feita em outro arquivo em formato YAML, discriminando as 
+características de CPU, Memória e custo de cada Tipo de Máquina para que o
+CloudCapacitor possa gerar os Níveis de Capacidade usados para inferência de
+desempenho. O caminho onde esse arquivo deve ser entrado precisa ser passado 
+como parâmetro na inicialização do objeto Capacitor. Caso não seja informado, o 
+CloudCapacitor procurará um arquivo pelo nome \emph{deployment\_space.yml}, na
+pasta \emph{config}, se for uma aplicação Ruby on Rails, ou na pasta raiz do
+script ou outro tipo de aplicação.
+ 
+\begin{figure}[h]
+  \caption{\label{fig:depspace}Especificação de Tipos de Máquinas para o Espaço de Implantação}
+ \begin{lstlisting}[linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
+---
+- !ruby/object:CloudCapacitor::VMType
+  name: m2.xlarge
+  cpu: 6.5
+  mem: 17.1
+  price: 0.41
+- !ruby/object:CloudCapacitor::VMType
+  name: c1.xlarge
+  cpu: 20
+  mem: 7.0
+  price: 0.58
+- !ruby/object:CloudCapacitor::VMType
+  name: m1.xlarge
+  cpu: 8
+  mem: 15.0
+  price: 0.48
+- !ruby/object:CloudCapacitor::VMType
+  name: m2.4xlarge
+  cpu: 26
+  mem: 68.4
+  price: 1.64
+  \end{lstlisting}
+\end{figure}
+
+A Figura~\ref{fig:depspace} mostra a especificação de um conjunto de Tipos de
+Máquinas Virtuais oferecidos pelo serviço EC2 do Provedor Amazon Web 
+Services~\cite{ec2}. São disponibilizadas para o CloudCapacitor máquinas 
+\emph{m2.xlarge}, \emph{c1.xlarge}, \emph{m1.xlarge} e \emph{m2.4xlarge} e, para
+cada uma, podemos ver as características de CPU, memória RAM e preço, conforme
+informados pelo Provedor. Esses são os dados que serão usados na criação do Espaço
+de Implantação, atendendo às restrições de tamanho e custo impostas no passo 
+anterior, de forma que os testes sejam executados conforme o proposto
+no Processo de Avaliação de Capacidade.
+
+Feitas as configurações necessárias, o desenvolvedor pode, assim, criar um objeto 
+a partir da classe \emph{Capacitor} e, então atribuir a ele um objeto instanciado
+a partir de uma subclasse de \emph{DefaultExecutor}, subclasse esta de sua própria
+implementação e que forneça os meios necessários para administração da execução
+dos testes de desempenho da Aplicação sob Teste.
+
+\begin{figure}[h]
+  \caption{\label{fig:mincode}Código Ruby para execução do CloudCapacitor}
+ \begin{lstlisting}[language=Ruby,linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
+    capacitor = Capacitor.new
+    capacitor.executor = Executors::DummyExecutor.new
+    capacitor.strategy = Strategies::Strategy.new
+
+    capacitor.strategy.approach workload: :optimistic,
+                                config:   :conservative
+
+    candidates = capacitor.run_for [100,200,300,400,500]
+    
+    total_cost = capacitor.run_cost
+    total_executions = capacitor.executions  
+ \end{lstlisting}
+\end{figure}
+
+Observamos na Figura~\ref{fig:mincode} os passos de instanciação do Capacitor,
+na linha 1. Nalinha seguinte, um objeto da classe \emph{DummyExecutor}, apenas 
+didática, já é atribuído ao \emph{Capacitor}.
+
+A partir da linha 3, começamos a ver os passos seguintes da utilização do 
+CloudCapacitor, com a definição de uma Estratégia de Avaliação, configurada
+com uma Heurística de Seleção do tipo OC (v. Seção~\ref{sec:heuristicas}).
+A execução da Avaliação de Capacidade acontece de fato na chamada que ocorre
+na linha 8, onde são passados valores que representam uma lista de grandezas de
+Cargas de Trabalho que serão impostas à Aplicação sob Teste rodando sobre as
+Configurações geradas a partir do Espaço de Implantação.
+
+Ao final da Avaliação, o Capacitor retorna a lista de Configurações Candidatas
+para cada valor de Carga de Trabalho passado como parâmetro. Adicionalmente, o
+desenvolvedor tem à sua disposição alguns dados a respeito da própria Avaliação,
+como o número total de execuções da Aplicação sob Teste no ambiente de nuvem e o  
+custo total acarretado por essas execuções. 
+ 
 ***RASCUNHO***
 CloudCapacitor
 OK  Diagrama de Classes (UML) / Arquitetura de Componentes
 OK  Enumeração das classes e suas responsabilidades
-  Fluxo de utilização da biblioteca (caixa preta, interface com o Capacitor)
+OK  Fluxo de utilização da biblioteca (caixa preta, interface com o Capacitor)
   Especificação e Carregamento do Deployment Space
   Executor - Implementação
   Estratégia - Descrição da interface
