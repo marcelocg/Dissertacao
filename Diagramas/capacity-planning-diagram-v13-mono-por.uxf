@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="13.0">
+<diagram program="umlet" version="12.2">
   <zoom_level>10</zoom_level>
   <element>
     <type>com.umlet.element.custom.InitialState</type>
@@ -110,7 +110,7 @@ bg=light_gray</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
- Y
+ S
 </panel_attributes>
     <additional_attributes>30;50;70;50</additional_attributes>
   </element>
@@ -130,7 +130,7 @@ bg=light_gray</panel_attributes>
     <coordinates>
       <x>350</x>
       <y>700</y>
-      <w>68</w>
+      <w>76</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
@@ -143,7 +143,7 @@ bg=light_gray</panel_attributes>
     <coordinates>
       <x>350</x>
       <y>780</y>
-      <w>68</w>
+      <w>76</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
@@ -156,22 +156,24 @@ bg=light_gray</panel_attributes>
     <coordinates>
       <x>500</x>
       <y>620</y>
-      <w>80</w>
-      <h>30</h>
+      <w>70</w>
+      <h>40</h>
     </coordinates>
-    <panel_attributes>Met SLA?
-elementstyle=wordwrap</panel_attributes>
+    <panel_attributes>Satisfaz
+SLA?
+elementstyle=wordwrap
+halign=center</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Text</id>
     <coordinates>
       <x>410</x>
-      <y>760</y>
+      <y>750</y>
       <w>110</w>
-      <h>60</h>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>Unexplored lower capacity levels?
+    <panel_attributes>Níveis mais baixos de capacidade por explorar?
 elementstyle=wordwrap
 halign=center</panel_attributes>
     <additional_attributes/>
@@ -184,7 +186,8 @@ halign=center</panel_attributes>
       <w>120</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>Unexplored higher workload levels?
+    <panel_attributes>Níveis mais altos de carga
+por explorar?
 elementstyle=wordwrap
 halign=center</panel_attributes>
     <additional_attributes/>
@@ -221,10 +224,11 @@ m2=  N
       <w>140</w>
       <h>90</h>
     </coordinates>
-    <panel_attributes>Output candidate
-configs for each
-workload level
-(ordered by price)
+    <panel_attributes>Listar configs
+candidatas para
+cada nível de
+carga (ordenadas
+por preço)
 bg=light_gray</panel_attributes>
     <additional_attributes/>
   </element>
@@ -237,7 +241,7 @@ bg=light_gray</panel_attributes>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2= Y
+m2= S
 </panel_attributes>
     <additional_attributes>30;30;70;30</additional_attributes>
   </element>
@@ -250,7 +254,7 @@ m2= Y
       <h>460</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>320;30;30;30;30;440;70;440</additional_attributes>
+    <additional_attributes>320;30;30;30;30;440;60;440</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -303,11 +307,12 @@ N
     <id>Text</id>
     <coordinates>
       <x>540</x>
-      <y>760</y>
+      <y>750</y>
       <w>120</w>
-      <h>60</h>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>Unexplored higher capacity levels?
+    <panel_attributes>Níveis mais altos de capacidade
+por explorar?
 elementstyle=wordwrap
 halign=center</panel_attributes>
     <additional_attributes/>
@@ -321,7 +326,7 @@ halign=center</panel_attributes>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2=Y
+m2=S
 </panel_attributes>
     <additional_attributes>70;30;30;30</additional_attributes>
   </element>
@@ -344,7 +349,8 @@ m2=Y
       <w>120</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>Unexplored lower workload levels?
+    <panel_attributes>Níveis mais baixos de carga
+por explorar?
 elementstyle=wordwrap
 halign=center</panel_attributes>
     <additional_attributes/>
@@ -358,7 +364,7 @@ halign=center</panel_attributes>
       <h>460</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;330;30;330;440;290;440</additional_attributes>
+    <additional_attributes>30;30;330;30;330;440;300;440</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.State</type>
@@ -381,7 +387,7 @@ bg=light_gray</panel_attributes>
     <coordinates>
       <x>640</x>
       <y>700</y>
-      <w>68</w>
+      <w>76</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
@@ -391,15 +397,15 @@ bg=light_gray</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>640</x>
+      <x>630</x>
       <y>780</y>
-      <w>68</w>
+      <w>84</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
   N  
 </panel_attributes>
-    <additional_attributes>40;80;40;30</additional_attributes>
+    <additional_attributes>50;80;50;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -444,7 +450,7 @@ bg=light_gray</panel_attributes>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2=Y
+m2=S
 </panel_attributes>
     <additional_attributes>30;30;70;30</additional_attributes>
   </element>
@@ -453,7 +459,7 @@ m2=Y
     <coordinates>
       <x>350</x>
       <y>870</y>
-      <w>68</w>
+      <w>76</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
@@ -464,15 +470,15 @@ m2=Y
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>640</x>
+      <x>630</x>
       <y>870</y>
-      <w>68</w>
+      <w>84</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
   N  
 </panel_attributes>
-    <additional_attributes>40;80;40;30</additional_attributes>
+    <additional_attributes>50;80;50;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -483,7 +489,7 @@ m2=Y
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2=Y
+m2=S
 </panel_attributes>
     <additional_attributes>70;30;30;30</additional_attributes>
   </element>
@@ -495,7 +501,7 @@ m2=Y
       <w>110</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>Unexplored categories?
+    <panel_attributes>Categories por explorar?
 elementstyle=wordwrap
 halign=center</panel_attributes>
     <additional_attributes/>
@@ -508,7 +514,7 @@ halign=center</panel_attributes>
       <w>120</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>Unexplored categories?
+    <panel_attributes>Categories por explorar?
 elementstyle=wordwrap
 halign=center</panel_attributes>
     <additional_attributes/>
@@ -522,7 +528,7 @@ halign=center</panel_attributes>
       <h>740</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2=Y</panel_attributes>
+m2=S</panel_attributes>
     <additional_attributes>340;30;30;30;30;720;250;720</additional_attributes>
   </element>
   <element>
@@ -534,7 +540,7 @@ m2=Y</panel_attributes>
       <h>740</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2=Y</panel_attributes>
+m2=S</panel_attributes>
     <additional_attributes>30;30;350;30;350;720;130;720</additional_attributes>
   </element>
   <element>
@@ -553,12 +559,12 @@ m2=Y</panel_attributes>
     <id>Text</id>
     <coordinates>
       <x>540</x>
-      <y>680</y>
+      <y>670</y>
       <w>120</w>
-      <h>60</h>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>Unexplored capacity level configs?
-elementstyle=wordwrap
+    <panel_attributes>Categorias por explorar no
+atual nível de capacidade?
 halign=center</panel_attributes>
     <additional_attributes/>
   </element>
@@ -571,7 +577,7 @@ halign=center</panel_attributes>
       <h>360</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2=Y
+m2=S
 </panel_attributes>
     <additional_attributes>30;30;230;30;230;340;130;340</additional_attributes>
   </element>
@@ -595,7 +601,7 @@ m2=Y
       <h>530</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>300;30;30;30;30;510;50;510</additional_attributes>
+    <additional_attributes>300;30;30;30;30;510;40;510</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -606,7 +612,7 @@ m2=Y
       <h>530</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;310;30;310;510;290;510</additional_attributes>
+    <additional_attributes>30;30;310;30;310;510;300;510</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -662,7 +668,7 @@ m2=Y
       <h>360</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2=Y
+m2=S
 </panel_attributes>
     <additional_attributes>220;30;30;30;30;340;130;340</additional_attributes>
   </element>
@@ -670,11 +676,12 @@ m2=Y
     <id>Text</id>
     <coordinates>
       <x>410</x>
-      <y>680</y>
+      <y>670</y>
       <w>120</w>
-      <h>60</h>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>Unexplored capacity level configs?
+    <panel_attributes>Categorias por explorar no
+atual nível de capacidade?
 elementstyle=wordwrap
 halign=center</panel_attributes>
     <additional_attributes/>
@@ -693,12 +700,12 @@ halign=center</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>410</x>
-      <y>1050</y>
+      <x>400</x>
+      <y>1060</y>
       <w>120</w>
-      <h>70</h>
+      <h>50</h>
     </coordinates>
-    <panel_attributes>Unexplored workload levels?
+    <panel_attributes>Níveis de carga por explorar?
 elementstyle=wordwrap
 halign=center</panel_attributes>
     <additional_attributes/>
@@ -706,15 +713,15 @@ halign=center</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>500</x>
+      <x>490</x>
       <y>1070</y>
-      <w>68</w>
+      <w>84</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
   N  
 </panel_attributes>
-    <additional_attributes>40;60;40;30</additional_attributes>
+    <additional_attributes>50;60;50;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -725,7 +732,7 @@ halign=center</panel_attributes>
       <h>1040</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2=Y</panel_attributes>
+m2=S</panel_attributes>
     <additional_attributes>70;30;410;30;410;1020;30;1020</additional_attributes>
   </element>
   <element>
@@ -777,13 +784,14 @@ for(String textline : textlines) {
   <element>
     <type>CustomElementImpl</type>
     <coordinates>
-      <x>210</x>
+      <x>200</x>
       <y>750</y>
-      <w>121</w>
+      <w>131</w>
       <h>71</h>
     </coordinates>
-    <panel_attributes>Select lower
-capacity level
+    <panel_attributes>Selecionar
+nível mais baixo
+de capacidade
 bg=gray</panel_attributes>
     <additional_attributes/>
     <custom_code>int y=(height)/2-textHeight()*textlines.size()*3/5;
@@ -799,13 +807,14 @@ for(String textline : textlines) {
   <element>
     <type>CustomElementImpl</type>
     <coordinates>
-      <x>210</x>
+      <x>200</x>
       <y>930</y>
-      <w>121</w>
+      <w>131</w>
       <h>71</h>
     </coordinates>
-    <panel_attributes>Select higher
-workload level
+    <panel_attributes>Selecionar
+nível mais alto 
+de carga
 bg=gray</panel_attributes>
     <additional_attributes/>
     <custom_code>int y=(height)/2-textHeight()*textlines.size()*3/5;
@@ -823,11 +832,12 @@ for(String textline : textlines) {
     <coordinates>
       <x>740</x>
       <y>750</y>
-      <w>121</w>
+      <w>131</w>
       <h>71</h>
     </coordinates>
-    <panel_attributes>Select higher
-capacity level
+    <panel_attributes>Selecionar
+nível mais alto 
+de capacidade
 bg=gray</panel_attributes>
     <additional_attributes/>
     <custom_code>int y=(height)/2-textHeight()*textlines.size()*3/5;
@@ -845,11 +855,12 @@ for(String textline : textlines) {
     <coordinates>
       <x>740</x>
       <y>930</y>
-      <w>121</w>
+      <w>131</w>
       <h>71</h>
     </coordinates>
-    <panel_attributes>Select lower
-workload level
+    <panel_attributes>Selecionar
+nível mais baixo
+de carga
 bg=gray</panel_attributes>
     <additional_attributes/>
     <custom_code>int y=(height)/2-textHeight()*textlines.size()*3/5;
