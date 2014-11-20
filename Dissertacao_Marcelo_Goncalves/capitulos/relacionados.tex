@@ -139,7 +139,11 @@ compatibilidade no novo ambiente.
 
 \section{Trial-And-Test Tools}
 \subsection{Expertus}
-Um outro trabalho recente foi descrito em~\cite{jayasinghe2012}, onde os autores propõem um ambiente para execução automática de testes de desempenho em nuvens IaaS.  Nesse ambiente, chamado Expertus, os usuários implementam testes de desempenho através da geração e customização de \textit{scripts} Shell a partir de {\em templates} especificados na forma de documentos XML~\cite{jayasinghe2012}. 
+Devido à complexidade e às implicações da escolha da configuração para a implantação de uma aplicação na nuvem, em~\cite{jayasinghe2012} os autores apresentam o \textit{Expertus}, que é descrito como ``um framework flexível de geração de código para automatizar testes de performance de aplicações distribuídas em nuvem de infraestrutura''. Essa geração automática de código é realizada a partir de {\em templates} especificados na forma de documentos XML~\cite{jayasinghe2012}. Os templates utilizados nas avaliações de desempenho devem ser escritos pelo usuário e servem de entrada para o ambiente, que realiza diversas transformações nessa entrada até a forma de \textit{shell scripts}. Esses \textit{scripts}, por fim, possuem os comandos para a configuração da avaliação de desempenho na aplicação alvo.
+
+Como demonstração da usabilidade da ferramenta, os autores apresentaram em~\cite{jayasinghe2012} resultados de experimentos realizados com duas aplicações alvo. Cada uma das aplicações foi avaliada com duas opções de sistemas de gerenciamento de bancos de dados, o que demonstrou também como diferentes opções de configuração poderiam ser utilizadas nas aplicações. Além da demonstração da usabilidade, os autores realizaram experimentos para evidenciar a magniture e tipos de \textit{scripts} que podem ser gerados pela ferramenta. Como exemplo da magnitute, para a realização de experimentos com 48 nós, o total de linhas de scripts geradas pelo \textit{Expertus} girou em torno de 15 mil. Por fim, os autores demonstraram o que chamaram de ``riqueza da ferramenta'', que foi comprovada através da execução de experimentos em 5 nuvens (por exemplo, Amazon EC2 e Open Cirrus~\cite{avetisyan2010open}).
+
+Dessa forma, pode-se concluir que a ferramenta apresentada minimiza a ocorrência de falhas humanas na avaliação de desempenho de uma aplicação implantada em diversos nós. Além disso, os mesmo experimentos podem ser repetidos em diferentes provedores de nuvem pública. De modo que mais cenários de implantação podem ser considerados para a escolha do mais adequado para a aplicação.
 
 \subsection{CloudBench}
 \cite{silva2013cloudbench} descrevem o CloudBench como um arcabouço para 
@@ -170,12 +174,12 @@ provisionamento de máquinas pelo provedor, seu alvo no momento da execução de
 testes está restrito a benchmarks pré-definidos, não permitindo a execução de 
 uma aplicação real no ambiente testado.
 
-Neste sentido, o arcabouço que propomos com este trabalho se diferencia pelo fato
-de ser agnóstico em relação à aplicação que deverá ser testada, assim como quanto 
-às métricas que a ela concernem, conferindo ao usuário da solução a oportunidade 
-de avaliar o comportamento da aplicação de seu interesse implantada no ambiente
-pretendido e sob a perspectiva que lhe for mais conveniente, inclusive em termos
-de arquitetura de implantação. 
+%Neste sentido, o arcabouço que propomos com este trabalho se diferencia pelo fato
+%de ser agnóstico em relação à aplicação que deverá ser testada, assim como quanto 
+%às métricas que a ela concernem, conferindo ao usuário da solução a oportunidade 
+%de avaliar o comportamento da aplicação de seu interesse implantada no ambiente
+%pretendido e sob a perspectiva que lhe for mais conveniente, inclusive em termos
+%de arquitetura de implantação. 
 
 \subsection{Cloud Crawler}
 Este trabalho apresenta um ambiente programável para apoiar os usuários de nuvens IaaS na realização de testes automáticos de desempenho de aplicações na nuvem. As principais contribuições do ambiente são: a linguagem declarativa {\em Crawl}, com a qual os usuários podem especificar, através de uma notação simples e de alto nível de abstração, uma grande variedade de cenários de avaliação de desempenho de uma aplicação na nuvem; e o motor de execução {\em Crawler}, que automaticamente executa e coleta os resultados dos cenários descritos em {\em Crawl} em um ou mais provedores. Essas duas ferramentas são denominadas conjuntamente de {\em Cloud Crawler}~\cite{cunhacloud}.
@@ -184,10 +188,12 @@ Para iniciar os testes de desempenho de uma aplicação através do ambiente {\e
 
 A fase de mapeamento dos componentes da aplicação é realizada apenas uma vez, enquanto que a submissão para o motor de execução pode ser repetida ao critério do usuário. Ambientes como o {\em Cloud Crawler} permitem que os seus usuários testem suas aplicaçãoes em difirentes cenário de implantação e possibilitam que o mesmo entenda o comportamento da sua aplicação à medida em que ela é submetida a diferentes demandas e implantada em diferentes configurações, porém, a qualidade da avaliação de desempenho dependerá da qualidade dos cenários de testes que os usuários declararem, uma vez que o ambiente não decide qual será a nova configuração testada. O ambiente apenas segue aquilo que foi declarado pelo usuário.
 
-\subsection{Cloud WorkBench}   
-Em~\cite{scheuner2014cloud}
+\subsection{Cloud WorkBench}
+Uma vez que a escolha da infraestrutura computacional ótima para hospedar uma determinada aplicação na nuvem se trata de uma tarefa que ``exige a avaliação de custos e performances de diferentes combinações de configurações''~\cite{scheuner2014cloud}. Onde os autores propõem uma arquitetura e uma implementação concreta dessa arquitetura para automatizar a realização de avaliações em serviços da nuvem. O {\em Cloud WorkBench}, nome dado à solução apresentada neste trabalho, adota noções de Infraestrutura como Código, do inglês {\em Infrastructure-as-Code} (IaC)~\cite{huttermann2012devops}, para a realização dessas avalições. Dessa forma, as ações necessárias para o provisionamento dos recursos utilizados pela aplicação encontram-se todas codificadas.
 
+Para ilustrar o uso do \textit{Cloud WorkBench}, foi realizado um pequeno experimento para avaliar a velocidade de escrita sequencial em disco de recursos da nuvem. Nesse experimento, foram utilizados três perfis de recursos computacionais da Amazon EC2 na região Irlanda (\textit{eu-west-1}), em servidores utilizando o sistema operacional Ubuntu 14.04. Para cada perfil de recurso, foram realizadas entre 8 e 12 execuções do benchmark FIO\footnote{http://git.kernel.org/cgit/linux/kernel/git/axboe/fio.git} 2.1.10. Conforme descrito em~\cite{scheuner2014cloud}, o experimento evidenciou que há diferenças na performance dos perfis de recursos utilizados. Esse diferença poderia se refletir na performance de uma aplicação que fizesse muita escrita em disco.
 
+Após a análise dos resultados, os autores concluem que o \textit{Cloud WorkBench} suporta a realização de experimentos em nuvens de infraestrutura, e que toda a complexidade da configuração do ambiente pode ficar codificada. O que diminui a ocorrência de erros decorrentes de eventuais intervenções manuais.
 
 \section{Outros Trabalhos e Considerações}
 
