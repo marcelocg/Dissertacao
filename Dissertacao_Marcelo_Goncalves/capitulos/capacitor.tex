@@ -1,4 +1,4 @@
-\chapter{Cloud Capacitor}
+\chapter{Implementação do Processo}
 \label{chap:capacitor}
 % ----------------------------------------------------------
 A fim de confirmar as hipóteses de eficácia e eficiência do emprego do Processo
@@ -172,21 +172,25 @@ script ou outro tipo de aplicação.
   cpu: 6.5
   mem: 17.1
   price: 0.41
+  category: m2
 - !ruby/object:CloudCapacitor::VMType
   name: c1.xlarge
   cpu: 20
   mem: 7.0
   price: 0.58
+  category: c1
 - !ruby/object:CloudCapacitor::VMType
   name: m1.xlarge
   cpu: 8
   mem: 15.0
   price: 0.48
+  category: m1
 - !ruby/object:CloudCapacitor::VMType
   name: m2.4xlarge
   cpu: 26
   mem: 68.4
   price: 1.64
+  category: m2
   \end{lstlisting}
 \end{figure}
 
@@ -224,8 +228,8 @@ dos testes de desempenho da Aplicação sob Teste.
 \end{figure}
 
 Observamos na Figura~\ref{fig:mincode} os passos de instanciação do Capacitor,
-na linha 1. Nalinha seguinte, um objeto da classe \emph{DummyExecutor}, apenas 
-didática, já é atribuído ao \emph{Capacitor}.
+na linha 1. Na linha seguinte, um objeto da classe \emph{DummyExecutor}, que é
+apenas didática, já é atribuído ao \emph{Capacitor}.
 
 A partir da linha 3, começamos a ver os passos seguintes da utilização do 
 CloudCapacitor, com a definição de uma Estratégia de Avaliação, configurada
@@ -240,13 +244,143 @@ para cada valor de Carga de Trabalho passado como parâmetro. Adicionalmente, o
 desenvolvedor tem à sua disposição alguns dados a respeito da própria Avaliação,
 como o número total de execuções da Aplicação sob Teste no ambiente de nuvem e o  
 custo total acarretado por essas execuções. 
+
+Agora que já temos uma visão geral dos componente e da utilização do CloudCapacitor,
+passemos a uma descrição um pouco mais detalhada do que acontece durante a atividade
+de Avaliação de Capacidade.
+
+\subsection{Funcionamento Interno}
+\label{subsec:capacitor_funcionamento}
+Uma vez demonstrado o modelo de utilização da biblioteca e explicadas as relações
+entre as diversas classes que a compõem, podemos detalhar alguns aspectos da
+implementação que ajudarão a esclarecer melhor como todas essas partes agem em
+conjunto para executar, da forma como proposto no Capítulo~\ref{chap:processo},
+o Processo de Avaliação de Capacidade.
+
+Nesta seção mostraremos inicialmente as linhas gerais da implementação da classe 
+responsável pelo controle da execução dos testes de desempenho. Mostraremos em 
+seguida como a biblioteca representa o Espaço de Implantação de forma que os 
+Níveis de Capacidade sejam usados para navegar entre Configurações e como a 
+Inferência de Desempenho atua sobre esses dados. Explicamos ainda como pode ser 
+feita a customização de uma Estratégia de Avaliação a fim de alterar o 
+comportamento de uma Heurística. Será também apresentado um exemplo de saída do 
+resultado apresentado pela classe Capacitor ao final da execução de uma Avaliação.
+
+\subsubsection{Controle da Execução}
+\label{subsubsec:funcionamento_executor}
+O controle da execução da Aplicação sob Teste no ambiente de nuvem é feito por 
+meio de um objeto instanciado de uma classe que deve ser criada pelo
+desenvolvedor que está utilizando o CloudCapacitor na implementação de sua 
+ferramenta de Avaliação de Capacidade.
+
+Para que tudo funcione a contento, a classe criada deve ser extendida a partir
+da classe \emph{DefaultExecutor} fornecida pelo CloudCapacitor. A única 
+exigência feita para essa subclasse é que ela implemente um método:
+
+\begin{itemize}
+  \item Com a assinatura \emph{run(configuration, workload)}; e
+  \item Que retorne um objeto da classe \emph{Result}
+\end{itemize}
+
+Ou seja, a classe criada pelo desenvolvedor deve pelo menos apresentar um método
+\emph{run} que receba como parâmetros uma Configuração e um valor para a Carga 
+de Trabalho que será imposta sobre a Aplicação. O retorno desse método deve ser
+um objeto da classe \emph{Result}, que deve ser inicializado com apenas 3 atributos:
+
+\begin{description}
+  \item[\emph{value}] \hfill \\
+    O valor obtido pela Aplicação para a Métrica de Desempenho estudada
+  \item[\emph{cpu}] \hfill \\
+    O percentual de CPU consumido pela Aplicação durante o teste
+  \item[\emph{mem}] \hfill \\
+    O percentual de Memória RAM utilizada pela Aplicação durante o teste
+\end{description}
+
+Essas informações devem ser obtidas pelo desenvolvedor através de chamadas a
+uma ferramenta de execução de testes, como \cite{cunha2012ambiente}, 
+\cite{jayasinghe2012} ou \cite{silva2013cloudbench}. A implementação dessa 
+comunicação com a ferramenta de automação de testes escolhida é efetuada está 
+fora do escopo deste trabalho e deve ficar a cargo do desenvolvedor prover o 
+código que controle a execução dos testes e obtenha os valores de desempenho
+e consumo de CPU e memória.
+
+O método \emph{run}, implementado na subclasse criada a partir de 
+\emph{DefaultExecutor}, é chamado pelo objeto \emph{Capacitor} nos momentos em
+que novas execuções são necessárias, conforme descrito na 
+Seção~\ref{subsec:processo_execucao}. O objeto \emph{Result} retornado é usado
+na comparação com o SLA especificado pelo usuário do sistema como Valor de
+Referência para indicar se a Aplicação atendeu ou não ao requisito de desempenho.
+
+De posse dessa resposta, o \emph{Capacitor} tem condições de prosseguir no seu
+processamento, marcando as Configurações como Candidatas ou Rejeitadas e 
+escolhendo as próximas Configurações a serem executadas. Essas ações se baseiam
+no caminhamento sobre o Espaço de Implantação, cuja implementação passamos a
+descrever a seguir.
+
+\subsubsection{Espaço de Implantação}
+\label{subsubsec:funcionamento_depspace}
+O uso do CloudCapacitor começa com as configurações de como a 
+biblioteca vai montar o Espaço de Implantação, apontando-se quais as restrições 
+e quais os Tipos de Máquinas disponíveis para realização dos testes.
+
+No momento em que o desenvolvedor instancia um objeto da classe \emph{Capacitor},
+uma das primeiras tarefas da biblioteca é exatamente proceder à montagem de uma
+estrutura que represente o Espaço de Implantação de forma que as Heurísticas
+possam navegar entre as Configurações e que a rotina que implementa o Processo de
+Avaliação possa identificar, por meio da técnica de Inferência de Desempenho, 
+quais são as Configurações Candidatas e Rejeitadas. 
+
+\begin{figure}[htb]
+  \caption{\label{fig:depspace_real}Representação interna de um Espaço de Implantação no CloudCapacitor}
+  \begin{center}
+    \includegraphics[scale=0.35]{img/exemplo_grafo_espaco_implantacao}
+  \end{center}
+\end{figure}
+
+Como podemos ver na Figura~\ref{fig:depspace_real}, o Espaço de Implantação é 
+representado internamente por um grafo bi-direcionado onde os nós são as 
+Configurações. Arestas existem entre nós onde sejam verdadeiras as relações 
+``maior que'' e ``menor que'', conforme as definições da 
+Seção~\ref{sec:formalizacao_configuracoes}. O grafo precisa ser bi-direcionado 
+para permitir que a navegação a partir de uma determinada Configuração seja feita 
+tanto para as Configurações ``maiores'' quanto para as ``menores''.
+
+CloudCapacitor separa o Espaço de Implantação em subgrafos, agrupando as
+Configurações por Categoria de Máquinas Virtuais. Cada subgrafo é destinado às
+Configurações cujo Tipo de Máquina pertença a uma determinada Categoria. O primeiro
+nó, observado no topo do grafo, é o nó raiz e serve apenas para estabelecer a 
+separação e permitir o trânsito entre as Categorias.
+
+As classes \emph{DeploymentSpace} e \emph{DeploymentSpaceBuilder} implementam
+a geração do Espaço de Implantação com base na relação de capacidade ou na relação
+de preço entre as Configurações. O desenvolvedor pode optar pelo grafo por capacidade ou por preço no momento da
+instanciação do objeto \emph{Capacitor}. Embora esse não seja o foco desta 
+pesquisa, isso foi feito para que pudesse ser estudada a influência da formação 
+do Espaço de Implantação na precisão e eficiência de custo das Heurísticas de 
+Seleção. Discutiremos a respeito desses resultados no Capítulo~\ref{chap:resultados} 
+adiante.
+
+O Espaço de Implantação é a estrutura que dá suporte à navegação das Estratégias
+sobre os diversos Níveis de Capacidade no momento em que devem ser escolhidas
+as próximas Configurações a serem testadas. Suporta também a técnica de Inferência 
+de Desempenho na identificação das relações de tamanho e/ou preço entre as 
+Configurações nos pontos onde o Processo marca as Candidatas ou Rejeitadas, 
+mostrando-se como um ponto chave para o sucesso do Processo de Avaliação.
+
+Descreveremos a seguir a implementação e o funcionamento das Estratégias de 
+Avaliação e como o desenvolvedor pode criar sua própria Estratégia que melhor
+supra suas necessidades de seleção de Configurações. 
+
+\subsubsection{Estratégias de Avaliação}
+\label{subsubsec:funcionamento_estrategias}
+
  
 ***RASCUNHO***
 CloudCapacitor
 OK  Diagrama de Classes (UML) / Arquitetura de Componentes
 OK  Enumeração das classes e suas responsabilidades
 OK  Fluxo de utilização da biblioteca (caixa preta, interface com o Capacitor)
-  Especificação e Carregamento do Deployment Space
+OK  Especificação e Carregamento do Deployment Space
   Executor - Implementação
   Estratégia - Descrição da interface
   Estratégia - Como sobrescrever (Gof Strategy Pattern)
