@@ -507,6 +507,11 @@ que faz uso do CloudCapacitor e que foi usado neste trabalho para realizar os
 experimentos e analisar os seus resultados.
 
 \section{Capacitor Web}
+A fim de validar a implementação concreta do Processo através da biblioteca
+CloudCapacitor, foi construída uma aplicação web que faz uso das funcionalidades
+oferecidas para a realização de testes de Avaliação de Capacidade em ambientes
+de nuvem. A aplicação recebeu o nome de Capacitor Web e foi utilizada também
+para a execução dos experimentos que fazem parte deste trabalho.
 
 \begin{figure}[htb]
   \caption{\label{fig:capacitor_web_front}Página inicial do Capacitor Web}
@@ -514,6 +519,25 @@ experimentos e analisar os seus resultados.
     \includegraphics[scale=0.5]{img/CapacitorWeb_Frontpage}
   \end{center}
 \end{figure}
+
+A Figura~\ref{fig:capacitor_web_front} mostra a tela inicial do sistema, onde
+o usuário tem a oportunidade de parametrizar a execução da Avaliação. O primeiro
+campo permite a especificação do SLA que deve ser respeitado pela Aplicação para
+que uma execução seja considerada bem sucedida. Em seguida apresenta-se o campo
+para seleção da representação do Espaço de Implantação, com opções de representação
+por capacidade ou por preço.
+
+Mais ao centro da tela está uma lista de valores para que o usuário selecione quais 
+serão repassados ao CloudCapacitor como a lista de Cargas de Trabalho a serem impostas
+sobre a Aplicação sob Teste. O usuário pode selecionar valores em qualquer ordem e mesmo
+não adjacentes na lista.
+
+Os últimos dois campos apresentam as opções de abordagens a serem usadas na seleção de
+Cargas de Trabalho e Níveis de Capacidade. A combinação dessas duas abordagens forma a
+Heurística de Seleção que a Estratégia de Avaliação usará nos momentos apropriados. As 
+opções aqui são ``\emph{Optimistic}'', ``\emph{Conservative}'' e ``\emph{Pessimistic}''
+para ambos os campos. Depois de selecionados os parâmetros, o usuário ordena a execução 
+ao pressionar o botão presente na parte inferior da tela.
 
 \begin{figure}[htb]
   \caption{\label{fig:capacitor_web_results}Página de Resultados do Capacitor Web}
