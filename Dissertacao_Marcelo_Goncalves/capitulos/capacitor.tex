@@ -338,12 +338,9 @@ quais são as Configurações Candidatas e Rejeitadas.
 \end{figure}
 
 Como é possível ver na Figura~\ref{fig:depspace_real}, o Espaço de Implantação é 
-representado internamente por um grafo bi-direcionado onde os nós são as 
-Configurações. Arestas existem entre nós onde sejam verdadeiras as relações 
-``maior que'' e ``menor que'', conforme as definições da 
-Seção~\ref{sec:formalizacao_configuracoes}. O grafo precisa ser bi-direcionado 
-para permitir que a navegação a partir de uma determinada Configuração seja feita 
-tanto para as Configurações ``maiores'' quanto para as ``menores''.
+representado internamente por um grafo direcionado onde arestas ligam duas 
+Configurações para identificar as relações imediatas ``maior que'' e ``menor que'', 
+conforme as definições da Seção~\ref{sec:formalizacao_configuracoes}. 
 
 CloudCapacitor separa o Espaço de Implantação em subgrafos, agrupando as
 Configurações por Categoria de Máquinas Virtuais. Cada subgrafo é destinado às
@@ -367,7 +364,7 @@ de Desempenho na identificação das relações de tamanho e/ou preço entre as
 Configurações nos pontos onde o Processo marca as Candidatas ou Rejeitadas, 
 mostrando-se como um ponto chave para o sucesso do Processo de Avaliação.
 
-Apróxima seção descreve a implementação e o funcionamento das Estratégias de 
+A próxima seção descreve a implementação e o funcionamento das Estratégias de 
 Avaliação e como o desenvolvedor pode criar sua própria Estratégia que melhor
 supra suas necessidades de seleção de Configurações. 
 
@@ -378,10 +375,11 @@ Seleção de Configurações nos momentos em que o Processo precisa navegar
 pelo Espaço de Implantação. Assim, a cada momento em que um novo Nível 
 de Capacidade deve ser escolhido, segundo o fluxo de ações previsto no 
 Processo de Avaliação proposto, a Estratégia é invocada e age conforme 
-a implementação da Heurística selecionada para a Avaliação.
+a implementação da Heurística selecionada para a Avaliação 
+(v. Seção~\ref{subsec:selecao_cenarios}).
 
 CloudCapacitor fornece uma classe chamada \emph{Strategy} como uma implementação
-padrão para as 9 Heurísticas descritas no Capítulo~\ref{chap:processo}. A
+padrão para as 9 Heurísticas descritas no Capítulo~\ref{chap:processo}. As
 Figuras~\ref{fig:strategy_workload_code}~e~\ref{fig:strategy_capacity_code}
 mostram o código fonte dos métodos de seleção de Carga de Trabalho e Nível
 de Capacidade, respectivamente.
@@ -420,23 +418,63 @@ de Capacidade, respectivamente.
   \end{lstlisting}
 \end{figure}
 
-Porém,
-é possível substituir essa classe por uma mais adequada aos objetivos do
-usuário.
+Ambas as implementações são bastante simples. Para a seleção da Carga de Trabalho,
+o método recebe como parâmetro a lista ordenada de Cargas informada à classe 
+\emph{Capacitor}, como mostrado na linha 8 da Figura~\ref{fig:mincode}. O método 
+então considera a abordagem especificada para a seleção de Cargas de Trabalho 
+(Otimista, Conservadora ou Pessimista). Se a abordagem especificada é a Pessimista, 
+o método retorna a primeira Carga da lista, que é a menor. Se a abordagem for a
+Otimista, retorna a última Carga, que é a maior. Caso a abordagem seja a Conservadora,
+será retornada uma Carga do meio da lista.
 
-A interface da classe \emph{Capacitor} permite que 
+A implementação da seleção do próximo Nível de Capacidade é bem similar. O método
+recebe uma lista de Níveis de Capacidade onde cada item é uma lista das Configurações
+que pertencem ao Nível. O método então analisa a abordagem especificada para a
+seleção de Configurações e, se a abordagem for a Pessimista, retorna a lista de 
+Configurações do maior e último Nível de Capacidade. Se a abordagem for a Otimista, 
+retorna as Configurações do primeiro Nivel, ou seja, o menor deles. Caso a abordagem
+seja Conservadora, as Configurações retornadas serão as que compõem o Nível de 
+Capacidade do meio da lista de Níveis.    
 
-Figura~\ref{fig:mincode}
+A combinação das abordagens de seleção para Cargas de Trabalho e Níveis de 
+Capacidade nos métodos descritos corresponde às 9 Heurísticas apresentadas na
+Seção~\ref{sec:heuristicas}. Os experimentos realizados neste trabalho e 
+apresentados no Capítulo~\ref{chap:resultados} foram todos executados com a 
+implementação mostrada acima que, como será analisado, demonstra grande eficiência
+na predição de desempenho para a Aplicação sob Teste avaliada.
+ 
+Porém, caso se faça necessário atender especificidades da Aplicação sob Teste, 
+é possível substituir essa implementação padrão trazida pela classe \emph{Strategy} 
+por uma mais adequada aos objetivos do usuário. O relacionamento entre a classe 
+\emph{Capacitor} e a Estratégia de Avaliação se dá conforme o Padrão de Projeto 
+(\emph{Design Pattern}) \emph{Strategy} \cite{gamma}, o que justifica a escolha 
+do nome da classe e do conceito criado para a implementação das Heurísticas.
 
+Assim, para que uma nova lógica de seleção de Cargas de Trabalho seja fornecida
+ao CloudCapacitor, basta que o desenvolvedor implemente uma nova classe que extenda
+\emph{Strategy} e sobrescreva o método \emph{select\_workload}. Analogamente,
+para uma nova lógica de seleção de Níveis de Capacidade, a nova classe deve 
+sobrescrever o método \emph{take\_a\_capacity\_level\_from}.
+
+Essa flexibilidade oferecida pelo CloudCapacitor permite que seu uso seja 
+customizado para uma ampla gama de Aplicações. Aliada essa característica à 
+implementação de uma subclasse de \emph{DefaultExecutor}, customizando assim o 
+controle da execução da Aplicação, CloudCapacitor se torna adaptável também ao
+ambiente alvo dos testes, permitindo testes dos mais diversos.
+
+Dando continuidade à descrição da implementação concreta do Processo de Avaliação,
+a seção seguinte apresenta o retorno dos resultados obtidos pelo CloudCapacitor
+após a execução da Avaliação.
+    
 ***RASCUNHO***
 CloudCapacitor
 OK  Diagrama de Classes (UML) / Arquitetura de Componentes
 OK  Enumeração das classes e suas responsabilidades
 OK  Fluxo de utilização da biblioteca (caixa preta, interface com o Capacitor)
+OK  Executor - Implementação
 OK  Especificação e Carregamento do Deployment Space
-  Executor - Implementação
-  Estratégia - Descrição da interface
-  Estratégia - Como sobrescrever (Gof Strategy Pattern)
+OK  Estratégia - Descrição da interface
+OK  Estratégia - Como sobrescrever (Gof Strategy Pattern)
   Apresentação do resultado da avaliacao
 Capacitor Web
   Apresentação da interface de entrada
@@ -446,28 +484,5 @@ Capacitor Web
 Resumo e transicao para o proximo capitulo
 ***RASCUNHO***
 
-
-
-PorémAo instanciar um objeto da classe Capacitor, o desenvolvedor deve atribuir  
-Por padrão, o CloudCapacitor oferece uma Estratégia de Avaliação que implementa 
-uma lógica simples para as Heurísticas de Seleção de Configurações definidas no
-capítulo anterior. Essa lógica pode ser facilmente sobrescrita conforme a necessidade
-do usuário ou o perfil da Aplicação sob Teste.
-
-
-****RASCUNHO
-\subsection{Heuristicas}
-Para que uma Heurística de Avaliação de Capacidade seja compatível no âmbito deste trabalho, 
-deve apresentar um conjunto mínimo de operações esperadas para que a lógica da
-avaliação se complete e o resultado final obtido possa ser considerado válido e
-comparável com os resultados obtidos por outras Heurísticas.
-
-Além disso, as operações constituem a interface pela qual o controlador das 
-sessões de avaliação pode configurar as Heurísticas e informar-lhe os dados 
-necessários ao controle da sua execução.
- 
-Apresentamos esse conjunto mínimo de operações nas subseções a seguir, que 
-representam o arcabouço necessário para a construção de uma Heurística de 
-Avaliação de Capacidade.
  
 % ----------------------------------------------------------
