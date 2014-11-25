@@ -546,25 +546,67 @@ ao pressionar o botão presente na parte inferior da tela.
   \end{center}
 \end{figure}
 
+Uma vez concluída a execução da Avaliação, o sistema apresenta ao usuário a tela
+cuja imagem está na Figura~\ref{fig:capacitor_web_results}. Essa tela se divide
+em duas grandes áreas, uma superior, fixa, e uma inferior, que, por sua vez, 
+se subdivide em três partes, separadas conforme as abas que dividem a parte 
+superior da inferior.
+
+A parte superior mostra os dados passados como parâmetros pelo usuário na tela
+inicial, para facilitar a análise dos resultados e sua comparação futura. Assim,
+são exibidos o valor do SLA, as abordagens para Cargas de Trabalho e Níveis de 
+Capacidade, formando a Heurística de Seleção utilizada, e o atributo usado para
+geração do grafo que representa o Espaço de Implantação, isto é, capacidade ou
+preço. Abaixo, são exibidos o número de execuções reais realizadas no ambiente
+de nuvem alvo da Avaliação e o custo total por hora dessas execuções, com base
+no preço definido pelo Provedir para as Configurações efetivamente utilizadas no 
+teste. 
+ 
+As abas da parte inferior ativam a visualização das informações complementares 
+resultantes da execução. A primeira, com título ``Results'', exibe a saída 
+retornada pela chamada ao método \emph{run\_for} da classe \emph{Capacitor} da 
+biblioteca, conforme descrito na seção anterior. Essa saída é formada por um 
+conjunto de valores de Cargas de Trabalho e, abaixo de cada um, uma lista com os 
+nomes das Configurações consideradas como Candidatas para executar com sucesso a 
+Aplicação sob aquela Carga.  
+
 \begin{figure}[htb]
-  \caption{\label{fig:capacitor_web_results}Rastro de Execução do Capacitor Web}
+  \caption{\label{fig:capacitor_web_trace}Rastro de Execução do Capacitor Web}
   \begin{center}
     \includegraphics[scale=0.45]{img/CapacitorWeb_ExecutionTrace}
   \end{center}
 \end{figure}
 
+A segunda aba da parte inferior da tela de resultados apresenta o título 
+``Exec Trace'' e ativa a exibição dos dados de rastreamento da execução. Essa
+visualização permite que o usuário analise a sequência de execuções reais da 
+Aplicação sob Teste, apontando em que momento cada Carga de Trabalho foi aplicada
+e qual Configuração foi usada para aferir o desempenho da Aplicação. A 
+Figura~\ref{fig:capacitor_web_trace} mostra uma imagem dessa tela.
+
+Os dados são exibidos em uma tabela cujas linhas apresentam a sequencia das 
+execuções, identificadas pelo número presente na primeira coluna. Cada coluna da
+tabela representa uma Carga de Trabalho e as células, que são a intercessão entre
+uma sequencia de execução e uma Carga, trazem um texto com o nome da Configuração 
+utilizada naquela execução daquela Carga de Trabalho. As células que aparecem na 
+cor esverdeada indicam as execuções onde o SLA foi satisfeito. De modo contrário, 
+as células na cor avermelhada indicam as execuções onde a Aplicação não conseguiu 
+desempenho suficiente para satisfazer o SLA.
+ 
 \begin{figure}[htb]
-  \caption{\label{fig:capacitor_web_results}Rastro Completo da Execução do Capacitor Web}
+  \caption{\label{fig:capacitor_web_fulltrace}Rastro Completo da Execução do Capacitor Web}
   \begin{center}
     \includegraphics[scale=0.5]{img/CapacitorWeb_FullTrace}
   \end{center}
 \end{figure}
 
+Por fim, a terceira aba, com o título ``Full Trace'', traz uma tela também com
+uma tabela, esta com as colunas representando as 
 ***RASCUNHO***
 Capacitor Web
-  Apresentação da interface de entrada
-  Resultados
-  Trace
+OK  Apresentação da interface de entrada
+OK  Resultados
+OK  Trace
   Full Trace
 Resumo e transicao para o proximo capitulo
 ***RASCUNHO***
