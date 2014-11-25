@@ -465,17 +465,57 @@ ambiente alvo dos testes, permitindo testes dos mais diversos.
 Dando continuidade à descrição da implementação concreta do Processo de Avaliação,
 a seção seguinte apresenta o retorno dos resultados obtidos pelo CloudCapacitor
 após a execução da Avaliação.
-    
+
+\subsubsection{Resultado da Avaliação}
+\label{subsubsec:funcionamento_resultado}
+Durante toda a execução da Avaliação, CloudCapacitor segue colecionando as
+Configurações marcadas como Candidatas, segundo a técnica de Inferência de 
+Desempenho, para cada uma das Cargas de Trabalho especificadas como parâmetro de 
+entrada.
+
+\begin{figure}[h]
+  \caption{\label{fig:resultado}Representação exemplo do retorno do resultado da execução do CloudCapacitor}
+ \begin{lstlisting}[linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
+- 100
+    m3.large
+    c3.xlarge
+    m3.2xlarge
+- 200
+    c3.xlarge
+    m3.2xlarge
+- 300
+    c3.xlarge
+    m3.2xlarge
+- 400
+    m3.2xlarge
+  \end{lstlisting}
+\end{figure}
+
+Ao final da execução, CloudCapacitor dispõe de uma lista de Cargas de Trabalho 
+associadas cada qual a uma lista de Configurações Candidatas. Essa estrutura de
+lista de listas é devolvida como retorno do método \emph{run\_for} da classe 
+\emph{Capacitor} e uma representação conceitual de exemplo pode ser vista na 
+Figura~\ref{fig:resultado}. 
+
+Esses dados podem então ser usados como base para escolha, por parte do usuário,
+da Configuração mais barata que atende às diversas demandas esperadas para a 
+sua aplicação implantada na nuvem.
+
+Conclui-se assim a apresentação da implementação da biblioteca CloudCapacitor. A
+seção a seguir mostra a implementação de um sistema de avaliação de capacidade 
+que faz uso do CloudCapacitor e que foi usado neste trabalho para realizar os
+experimentos e analisar os seus resultados.
+
 ***RASCUNHO***
-CloudCapacitor
-OK  Diagrama de Classes (UML) / Arquitetura de Componentes
-OK  Enumeração das classes e suas responsabilidades
-OK  Fluxo de utilização da biblioteca (caixa preta, interface com o Capacitor)
-OK  Executor - Implementação
-OK  Especificação e Carregamento do Deployment Space
-OK  Estratégia - Descrição da interface
-OK  Estratégia - Como sobrescrever (Gof Strategy Pattern)
-  Apresentação do resultado da avaliacao
+OK CloudCapacitor
+OK   Diagrama de Classes (UML) / Arquitetura de Componentes
+OK   Enumeração das classes e suas responsabilidades
+OK   Fluxo de utilização da biblioteca (caixa preta, interface com o Capacitor)
+OK   Executor - Implementação
+OK   Especificação e Carregamento do Deployment Space
+OK   Estratégia - Descrição da interface
+OK   Estratégia - Como sobrescrever (Gof Strategy Pattern)
+OK   Apresentação do resultado da avaliacao
 Capacitor Web
   Apresentação da interface de entrada
   Resultados
