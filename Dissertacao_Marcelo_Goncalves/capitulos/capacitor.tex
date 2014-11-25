@@ -466,15 +466,8 @@ Dando continuidade à descrição da implementação concreta do Processo de Ava
 a seção seguinte apresenta o retorno dos resultados obtidos pelo CloudCapacitor
 após a execução da Avaliação.
 
-\subsubsection{Resultado da Avaliação}
-\label{subsubsec:funcionamento_resultado}
-Durante toda a execução da Avaliação, CloudCapacitor segue colecionando as
-Configurações marcadas como Candidatas, segundo a técnica de Inferência de 
-Desempenho, para cada uma das Cargas de Trabalho especificadas como parâmetro de 
-entrada.
-
 \begin{figure}[h]
-  \caption{\label{fig:resultado}Representação exemplo do retorno do resultado da execução do CloudCapacitor}
+  \caption{\label{fig:resultado}Representação do retorno do resultado da execução do CloudCapacitor}
  \begin{lstlisting}[linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
 - 100
     m3.large
@@ -491,6 +484,13 @@ entrada.
   \end{lstlisting}
 \end{figure}
 
+\subsubsection{Resultado da Avaliação}
+\label{subsubsec:funcionamento_resultado}
+Durante toda a execução da Avaliação, CloudCapacitor segue colecionando as
+Configurações marcadas como Candidatas, segundo a técnica de Inferência de 
+Desempenho, para cada uma das Cargas de Trabalho especificadas como parâmetro de 
+entrada.
+
 Ao final da execução, CloudCapacitor dispõe de uma lista de Cargas de Trabalho 
 associadas cada qual a uma lista de Configurações Candidatas. Essa estrutura de
 lista de listas é devolvida como retorno do método \emph{run\_for} da classe 
@@ -506,16 +506,37 @@ seção a seguir mostra a implementação de um sistema de avaliação de capaci
 que faz uso do CloudCapacitor e que foi usado neste trabalho para realizar os
 experimentos e analisar os seus resultados.
 
+\section{Capacitor Web}
+
+\begin{figure}[htb]
+  \caption{\label{fig:capacitor_web_front}Página inicial do Capacitor Web}
+  \begin{center}
+    \includegraphics[scale=0.5]{img/CapacitorWeb_Frontpage}
+  \end{center}
+\end{figure}
+
+\begin{figure}[htb]
+  \caption{\label{fig:capacitor_web_results}Página de Resultados do Capacitor Web}
+  \begin{center}
+    \includegraphics[scale=0.5]{img/CapacitorWeb_Results}
+  \end{center}
+\end{figure}
+
+\begin{figure}[htb]
+  \caption{\label{fig:capacitor_web_results}Rastro de Execução do Capacitor Web}
+  \begin{center}
+    \includegraphics[scale=0.45]{img/CapacitorWeb_ExecutionTrace}
+  \end{center}
+\end{figure}
+
+\begin{figure}[htb]
+  \caption{\label{fig:capacitor_web_results}Rastro Completo da Execução do Capacitor Web}
+  \begin{center}
+    \includegraphics[scale=0.5]{img/CapacitorWeb_FullTrace}
+  \end{center}
+\end{figure}
+
 ***RASCUNHO***
-OK CloudCapacitor
-OK   Diagrama de Classes (UML) / Arquitetura de Componentes
-OK   Enumeração das classes e suas responsabilidades
-OK   Fluxo de utilização da biblioteca (caixa preta, interface com o Capacitor)
-OK   Executor - Implementação
-OK   Especificação e Carregamento do Deployment Space
-OK   Estratégia - Descrição da interface
-OK   Estratégia - Como sobrescrever (Gof Strategy Pattern)
-OK   Apresentação do resultado da avaliacao
 Capacitor Web
   Apresentação da interface de entrada
   Resultados
