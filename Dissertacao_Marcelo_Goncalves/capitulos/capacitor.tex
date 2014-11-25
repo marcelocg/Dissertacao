@@ -4,16 +4,16 @@
 A fim de confirmar as hipóteses de eficácia e eficiência do emprego do Processo
 de Avaliação de Capacidade descrito no capítulo anterior, bem como da técnica de
 Inferência de Desempenho e das Heurísticas de Seleção que dão suporte a esse Processo, 
-criamos uma implementação concreta de sua especificação na forma de uma biblioteca
+foi criada uma implementação concreta de sua especificação na forma de uma biblioteca
 extensível e de um sistema computacional que demonstra seu funcionamento fazendo
 a avaliação de uma aplicação real em um provedor de nuvem de infraestrutura.
 
-Demos o nome de CloudCapacitor à biblioteca, implementada como uma \emph{gem} da
-linguagem Ruby~\cite{ruby}. Desenvolvemos o sistema computacional Capacitor Web 
+Foi dado o nome de CloudCapacitor à biblioteca, implementada como uma \emph{gem} da
+linguagem Ruby~\cite{ruby} e desenvolvido o sistema computacional Capacitor Web 
 para ser uma interface visual para a utilização do CloudCapacitor, usando 
 o \emph{framework} Ruby on Rails~\cite{rails}.  
 
-Descrevemos a seguir os detalhes da implementação de cada um e como ambos se
+A seguir são descritos os detalhes da implementação de cada um e como ambos se
 relacionam para oferecer ao usuário a experiência da avaliação de capacidade
 de baixo custo e alta precisão prevista pelo Processo proposto, com uma interface
 amigável e de fácil utilização.
@@ -26,13 +26,13 @@ Capítulo~\ref{chap:processo}, permitindo que sejam customizadas as atividades
 definidas pelo Processo como pontos de extensão, como as Estratégias de Avaliação
 e o disparo e controle da execução da Aplicação sob Teste.
 
-Vamos iniciar a apresentação do CloudCapacitor pelas classes que compõem a biblioteca
-e suas responsabilidades. Em seguida, veremos como CloudCapacitor auxilia 
+A apresentação do CloudCapacitor inicia-se pelas classes que compõem a biblioteca
+e suas responsabilidades. Em seguida, será mostrado como CloudCapacitor auxilia 
 desenvolvedores de software na criação de sistemas de avaliação de capacidade,
 mostrando o fluxo de utilização da biblioteca através de sua interface de programação.
-Depois, falaremos sobre alguns detalhes de implementação da biblioteca, como 
+Depois, serão explicados alguns detalhes de implementação da biblioteca, como 
 a solução para representação do Espaço de Implantação e seu papel na execução do
-Processo de Avaliação de Capacidade. Por fim, apresentaremos os pontos de extensão
+Processo de Avaliação de Capacidade. Por fim, serão apresentados os pontos de extensão
 da biblioteca, notadamente como implementar um Executor, a classe responsável pelo
 controle de execução da Aplicação sob Teste, e como sobrescrever a Estratégia de
 Avaliação fornecida pela biblioteca a fim de alterar seu comportamento padrão.
@@ -62,8 +62,8 @@ os seus pontos de decisão e de extensão.
   \end{center}
 \end{figure}
 
-Entre os pontos de extensão, destacamos o uso da classe \emph{Strategy}. Como 
-vemos na Figura~\ref{fig:classes}, essa classe é fornecida pela biblioteca e a
+Entre os pontos de extensão, destaca-se o uso da classe \emph{Strategy}. Como 
+pode ser visto na Figura~\ref{fig:classes}, essa classe é fornecida pela biblioteca e a
 notação de linhas pontilhadas denota a sua possibilidade de especialização, onde,
 sobrescrevendo alguns de seus métodos, é possível criar Estratégias com comportamento
 diversificado.
@@ -198,7 +198,7 @@ A Figura~\ref{fig:depspace} mostra a especificação de um conjunto de Tipos de
 Máquinas Virtuais oferecidos pelo serviço EC2 do Provedor Amazon Web 
 Services~\cite{ec2}. São disponibilizadas para o CloudCapacitor máquinas 
 \emph{m2.xlarge}, \emph{c1.xlarge}, \emph{m1.xlarge} e \emph{m2.4xlarge} e, para
-cada uma, podemos ver as características de CPU, memória RAM e preço, conforme
+cada uma, podem ser vistas as características de CPU, memória RAM e preço, conforme
 informados pelo Provedor. Esses são os dados que serão usados na criação do Espaço
 de Implantação, atendendo às restrições de tamanho e custo impostas no passo 
 anterior, de forma que os testes sejam executados conforme o proposto
@@ -227,11 +227,11 @@ dos testes de desempenho da Aplicação sob Teste.
  \end{lstlisting}
 \end{figure}
 
-Observamos na Figura~\ref{fig:mincode} os passos de instanciação do Capacitor,
-na linha 1. Na linha seguinte, um objeto da classe \emph{DummyExecutor}, que é
-apenas didática, já é atribuído ao \emph{Capacitor}.
+Na Figura~\ref{fig:mincode} vê-se a instanciação do Capacitor, na linha 1. Na 
+linha seguinte, um objeto da classe \emph{DummyExecutor}, que é apenas didática, 
+é atribuído ao \emph{Capacitor}.
 
-A partir da linha 3, começamos a ver os passos seguintes da utilização do 
+A partir da linha 3, vêem-se os passos seguintes da utilização do 
 CloudCapacitor, com a definição de uma Estratégia de Avaliação, configurada
 com uma Heurística de Seleção do tipo OC (v. Seção~\ref{sec:heuristicas}).
 A execução da Avaliação de Capacidade acontece de fato na chamada que ocorre
@@ -245,26 +245,26 @@ desenvolvedor tem à sua disposição alguns dados a respeito da própria Avalia
 como o número total de execuções da Aplicação sob Teste no ambiente de nuvem e o  
 custo total acarretado por essas execuções. 
 
-Agora que já temos uma visão geral dos componente e da utilização do CloudCapacitor,
-passemos a uma descrição um pouco mais detalhada do que acontece durante a atividade
+Agora, já com uma visão geral dos componente e da utilização do CloudCapacitor,
+segue-se uma descrição um pouco mais detalhada do que acontece durante a atividade
 de Avaliação de Capacidade.
 
 \subsection{Funcionamento Interno}
 \label{subsec:capacitor_funcionamento}
 Uma vez demonstrado o modelo de utilização da biblioteca e explicadas as relações
-entre as diversas classes que a compõem, podemos detalhar alguns aspectos da
+entre as diversas classes que a compõem, é possível detalhar alguns aspectos da
 implementação que ajudarão a esclarecer melhor como todas essas partes agem em
 conjunto para executar, da forma como proposto no Capítulo~\ref{chap:processo},
 o Processo de Avaliação de Capacidade.
 
-Nesta seção mostraremos inicialmente as linhas gerais da implementação da classe 
-responsável pelo controle da execução dos testes de desempenho. Mostraremos em 
+Nesta seção são mostradas inicialmente as linhas gerais da implementação da classe 
+responsável pelo controle da execução dos testes de desempenho. Mostra-se em 
 seguida como a biblioteca representa o Espaço de Implantação de forma que os 
 Níveis de Capacidade sejam usados para navegar entre Configurações e como a 
-Inferência de Desempenho atua sobre esses dados. Explicamos ainda como pode ser 
+Inferência de Desempenho atua sobre esses dados. Explica-se ainda como pode ser 
 feita a customização de uma Estratégia de Avaliação a fim de alterar o 
 comportamento de uma Heurística. Será também apresentado um exemplo de saída do 
-resultado apresentado pela classe Capacitor ao final da execução de uma Avaliação.
+resultado retornado pela classe Capacitor ao final da execução de uma Avaliação.
 
 \subsubsection{Controle da Execução}
 \label{subsubsec:funcionamento_executor}
@@ -314,8 +314,8 @@ Referência para indicar se a Aplicação atendeu ou não ao requisito de desemp
 De posse dessa resposta, o \emph{Capacitor} tem condições de prosseguir no seu
 processamento, marcando as Configurações como Candidatas ou Rejeitadas e 
 escolhendo as próximas Configurações a serem executadas. Essas ações se baseiam
-no caminhamento sobre o Espaço de Implantação, cuja implementação passamos a
-descrever a seguir.
+no caminhamento sobre o Espaço de Implantação, cuja implementação está descrita
+a seguir.
 
 \subsubsection{Espaço de Implantação}
 \label{subsubsec:funcionamento_depspace}
@@ -357,7 +357,7 @@ de preço entre as Configurações. O desenvolvedor pode optar pelo grafo por ca
 instanciação do objeto \emph{Capacitor}. Embora esse não seja o foco desta 
 pesquisa, isso foi feito para que pudesse ser estudada a influência da formação 
 do Espaço de Implantação na precisão e eficiência de custo das Heurísticas de 
-Seleção. Discutiremos a respeito desses resultados no Capítulo~\ref{chap:resultados} 
+Seleção. Esses resultados serão discutidos no Capítulo~\ref{chap:resultados} 
 adiante.
 
 O Espaço de Implantação é a estrutura que dá suporte à navegação das Estratégias
@@ -367,7 +367,7 @@ de Desempenho na identificação das relações de tamanho e/ou preço entre as
 Configurações nos pontos onde o Processo marca as Candidatas ou Rejeitadas, 
 mostrando-se como um ponto chave para o sucesso do Processo de Avaliação.
 
-Descreveremos a seguir a implementação e o funcionamento das Estratégias de 
+Apróxima seção descreve a implementação e o funcionamento das Estratégias de 
 Avaliação e como o desenvolvedor pode criar sua própria Estratégia que melhor
 supra suas necessidades de seleção de Configurações. 
 
