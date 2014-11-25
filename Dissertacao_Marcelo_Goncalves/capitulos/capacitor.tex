@@ -337,7 +337,7 @@ quais são as Configurações Candidatas e Rejeitadas.
   \end{center}
 \end{figure}
 
-Como podemos ver na Figura~\ref{fig:depspace_real}, o Espaço de Implantação é 
+Como é possível ver na Figura~\ref{fig:depspace_real}, o Espaço de Implantação é 
 representado internamente por um grafo bi-direcionado onde os nós são as 
 Configurações. Arestas existem entre nós onde sejam verdadeiras as relações 
 ``maior que'' e ``menor que'', conforme as definições da 
@@ -373,8 +373,61 @@ supra suas necessidades de seleção de Configurações.
 
 \subsubsection{Estratégias de Avaliação}
 \label{subsubsec:funcionamento_estrategias}
+A Estratégia de Avaliação é responsável por aplicar uma Heurística de 
+Seleção de Configurações nos momentos em que o Processo precisa navegar
+pelo Espaço de Implantação. Assim, a cada momento em que um novo Nível 
+de Capacidade deve ser escolhido, segundo o fluxo de ações previsto no 
+Processo de Avaliação proposto, a Estratégia é invocada e age conforme 
+a implementação da Heurística selecionada para a Avaliação.
 
- 
+CloudCapacitor fornece uma classe chamada \emph{Strategy} como uma implementação
+padrão para as 9 Heurísticas descritas no Capítulo~\ref{chap:processo}. A
+Figuras~\ref{fig:strategy_workload_code}~e~\ref{fig:strategy_capacity_code}
+mostram o código fonte dos métodos de seleção de Carga de Trabalho e Nível
+de Capacidade, respectivamente.
+
+\begin{figure}[h]
+  \caption{\label{fig:strategy_workload_code}Seleção de Carga de Trabalho na classe \emph{Strategy}}
+  \begin{lstlisting}[language=Ruby,linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
+  def select_workload( workload_list )
+    case @wkl_approach
+      when :pessimistic
+        workload_list.first
+      when :optimistic
+        workload_list.last
+      when :conservative
+        workload_list[ workload_list.size / 2 ]
+    end
+  end
+  \end{lstlisting}
+\end{figure}
+
+\begin{figure}[h]
+  \caption{\label{fig:strategy_capacity_code}Seleção de Nível de Capacidade na classe \emph{Strategy}}
+  \begin{lstlisting}[language=Ruby,linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
+  def take_a_capacity_level_from( unexplored_levels )
+    levels = unexplored_levels.keys
+    return [] if levels.empty?
+    case @cfg_approach
+      when :pessimistic
+        unexplored_levels.assoc( levels[-1] )
+      when :optimistic
+        unexplored_levels.assoc( levels[0] )
+      when :conservative
+        unexplored_levels.assoc( levels[levels.size / 2] )
+    end
+  end
+  \end{lstlisting}
+\end{figure}
+
+Porém,
+é possível substituir essa classe por uma mais adequada aos objetivos do
+usuário.
+
+A interface da classe \emph{Capacitor} permite que 
+
+Figura~\ref{fig:mincode}
+
 ***RASCUNHO***
 CloudCapacitor
 OK  Diagrama de Classes (UML) / Arquitetura de Componentes
