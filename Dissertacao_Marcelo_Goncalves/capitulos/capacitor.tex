@@ -624,23 +624,42 @@ Rejeitada para a Carga de Trabalho em questão.
 
 Quando são feitas essas predições de desempenho, em que o sucesso ou fracasso
 da Configuração em satisfazer o SLA é inferido com base no desempenho de outra
-Configuração, há a possibilidade de que a predição não seja feita corretamente.
+Configuração, há a possibilidade de que a predição não tenha sido feita corretamente.
 Quando essa situação acontece, o sistema faz uma marcação na célula com um pequeno
 círculo vermelho com um $\times$ branco inscrito. A imagem da 
 Figura~\ref{fig:capacitor_web_fulltrace} mostra essa marcação de erro de predição
 na coluna referente à Carga de Trabalho de valor 1000 e linhas referentes às
 Configurações ``3\_c3\_large'' e ``2\_c3\_xlarge'', onde a predição afirma erroneamente
 que o SLA não seria satisfeito, e ``4\_c3\_xlarge'', onde a predição errou ao inferir 
-que a Configuração conseguiria satisfazer o SLA. 
- 
-***RASCUNHO***
-Capacitor Web
-OK  Apresentação da interface de entrada
-OK  Resultados
-OK  Trace
-  Full Trace
-Resumo e transicao para o proximo capitulo
-***RASCUNHO***
+que a Configuração conseguiria satisfazer o SLA. A explicação de como o Capacitor Web 
+é capaz de saber se uma predição está correta ou não é dada no Capítulo~\ref{chap:resultados},
+que detalha os experimentos realizados.
 
+O rastreamento completo apresentado nessa tela permite a visualização da eficiência atingida
+pela aplicação da Heurística nos testes de desempenho. Quanto maior a quantidade
+de células pintadas em cor clara (quer sejam verdes ou vermelhas), maior o número
+de predições, o que significa menor custo e menor tempo gasto na Avaliação. Do mesmo 
+modo, quanto menor a presença dos círculos vermelhos indicadores de erro de predição,
+maior a precisão alcançada pela técnica de Inferência de Desempenho ao prever quais
+Configurações são capazes de atender cada Carga de Trabalho.
+
+\section{Resumo}
+Este capítulo apresentou a implementação concreta do Processo de Avaliação proposto no
+Capítulo~\ref{chap:processo} sob a forma de uma biblioteca a ser usada na criação de sistemas
+mais completos destinados à avaliação de desempenho e capacidade de nuvens de infraestrutura.mais
+Foram explicados os detalhes de programação necessários ao entendimento de como os conceitos vistos
+foram concretizados em software, ao tempo em que foram descritos os passos envolvidos na 
+customização das tarefas mais específicas ou que conferem flexibilidade ao Processo.
+
+Foi mostrado ainda o sistema web criado para validação da implementação da biblioteca e para 
+apoiar a execução dos experimentos realizados neste trabalho, com a descrição de sua interface de
+entrada de dados e apresentação de resultados.
+
+O Capítulo~\ref{chap:resultados} a seguir explica em detalhes os experimentos 
+realizados, detalhando a metodologia utilizada, a Aplicação sob Teste escolhida, como
+foi implantada e como foram realizadas as execuções para coleta de dados de desempenho. 
+Além disso, serão analisados os resultados obtidos pela aplicação das 9 Heurísticas, 
+comprovando e quantificando a eficiência do Processo de Avaliação de Capacidade proposto
+e sua técnica de Inferência de Desempenho.
  
 % ----------------------------------------------------------
