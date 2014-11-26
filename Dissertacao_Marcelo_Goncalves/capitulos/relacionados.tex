@@ -7,35 +7,49 @@ computação em nuvem. Esses trabalhos estão agrupados de acordo com a abordage
 Para apoiar a análise crítica de cada trabalho e suas abordagens, definimos um conjunto de critérios a partir dos quais poderemos tanto descrever, quanto comparar as soluções existentes de apoio a avaliação de desempenho do ponto de vista do usuário. Seguem os critérios:
 
 \begin{enumerate}
-  \item Completude da solução
+  \item \textbf{Completude da solução}
   \begin{enumerate}
-    \item Definição da aplicação --- flexibilidade da solução para
+    \item \textbf{Definição da aplicação} --- flexibilidade da solução para
     definir a aplicação a ser avaliada;
-    \item Definição da demanda --- flexibilidade da solução para
+    \item \textbf{Definição da demanda} --- flexibilidade da solução para
     definir os níveis de carga de trabalho sobre os quais a aplicação será
     submetida;
-	\item Definição dos recursos da nuvem --- flexibilidade da solução para
-	definir as configurações de recursos do provedor sobre as quais a aplicação
+	\item \textbf{Definição dos recursos da nuvem} --- flexibilidade da solução
+	para definir as configurações de recursos do provedor sobre as quais a aplicação
 	será executada;
-	\item Definição do acordo de nível de serviço (SLA) --- flexibilidade da
-	solução para definir o SLA desejado.
+	\item \textbf{Definição do acordo de nível de serviço (SLA)} --- flexibilidade
+	da solução para definir o SLA desejado.
   \end{enumerate}
-  \item Efetividade da solução  
+  \item \textbf{Efetividade da solução}  
   \begin{enumerate}
-    \item Eficiência --- tempo e custo necessários para a solução resolver o
-    problema;
-    \item Acurácia --- confiabilidade das respostas oferecidas pela solução;
-	\item Complexidade --- grau de complexidade/esforço exigido do usuário da
-	solução.
+    \item \textbf{Eficiência} --- tempo e custo necessários para a solução
+    resolver o problema;
+    \item \textbf{Acurácia} --- confiabilidade das respostas oferecidas pela
+    solução;
+	\item \textbf{Complexidade} --- grau de complexidade/esforço exigido do usuário
+	da solução.
   \end{enumerate}
 \end{enumerate}
 
 Cada abordagem será apresentada em uma subseção, bem como os diversos trabalhos da área que serão resumidos separadamente. Ao final da subseção, será apresentada uma análise crítica que será baseada nos critérios descritos acima.
 
 \section{Ferramentas com Abordagem Preditiva}
-As ferramentas que serão apresentadas nesta seção têm em comum o fato de indicarem a configuração de implantação na nuvem sem executarem avaliações de desempenho na aplicação que se deseja implantar na nuvem. Dessa forma, elas prevêem a configuração de implantação da nuvem, por isso estão sendo chamadas de abordagens preditivas. Muitas das soluções de abordagem preditiva realizam as suas predições após a caracterização da performance dos recurso da nuvem, o que é realizado através da execução de \textit{benchmarks}. No entanto, esta não é a única for de avaliação, pois há uma solução que coleta como a aplicação alvo faz uso dos recursos computacionais em um ambiente controlado e então repete essa utilização em uma nuvem candidata.
+As ferramentas que serão apresentadas nesta seção têm em comum o fato de
+indicarem a configuração de implantação na nuvem sem executarem avaliações de
+desempenho diretamente na aplicação que será migrada para a nuvem. Dessa forma,
+elas prevêem a configuração de implantação da nuvem, por isso estão sendo chamadas de
+abordagens preditivas. Muitas das soluções de abordagem preditiva realizam as
+suas predições após a caracterização da performance dos recurso da nuvem, o que
+é realizado através da execução de \textit{benchmarks}. No entanto, esta não é a
+única forma de avaliação, pois o \textit{CloudProphet}, apresentado
+em~\cite{li2011cloudprophet}, coleta como a aplicação alvo faz uso dos recursos
+computacionais em um ambiente controlado e então repete essa utilização em uma
+nuvem candidata.
 
-A seguir, apresentaremos cinco trabalhos que se destacam na avaliação de desempenho de aplicações na nuvem usando a abordagem preditiva, são eles:~\cite{cloudharmony},~\cite{malkowski2010cloudxplor},~\cite{li2011},~\cite{jung2013cloudadvisor} e~\cite{li2011cloudprophet}.
+A seguir, apresentaremos seis trabalhos que se destacam na avaliação de
+desempenho de aplicações na nuvem usando uma abordagem preditiva, são
+eles:~\cite{cloudharmony},~\cite{malkowski2010cloudxplor},~\cite{li2011},~\cite{jung2013cloudadvisor},~\cite{fittkau2012cdosim}
+e~\cite{li2011cloudprophet}.
 
 \subsection{Cloud Harmony}
 O projeto {\em CloudHarmony}, cujo
@@ -43,7 +57,7 @@ objetivo é ``tornar-se a principal fonte independente, imparcial e útil de
 métricas de desempenho de provedores de nuvem''~\cite{cloudharmony}, agrega
 dados de testes de desempenho realizados desde 2009 em mais de 60 provedores de
 nuvem. Além do histórico das avaliações, o {\em CloudHarmony} disponibiliza uma ferramenta para executar novas avaliações de desempenho a qualquer momento, denominada
-\textit{Cloud Speed Test}\footnote{\url{http://cloudharmony.com/speedtest}}, a qual permite realizar quatro tipos de teste:
+\textit{Cloud Speed Test},\footnote{\url{http://cloudharmony.com/speedtest}}, a qual permite realizar quatro tipos de teste:
 
 \begin{description}
   \item[\em Download a few large files] --- objetiva determinar o melhor provedor
@@ -84,21 +98,21 @@ das informações necessárias para a execução da sua análise. Após a análi
 parâmetros como carga de trabalho e configuração dos componentes da aplicação.
 
 
-A ferramenta proposta no trabalho faz uso de dados previamente coletados
-e só então realiza a análise do desempenho de aplicações na nuvem
-em diversos recursos. Por isso deixa a cargo do cliente da nuvem todas as
-atividades para a avaliação de desempenho, pois depende dos dados empíricos que
-são coletados após a avaliação. O CloudXplor é capaz de plotar um gráfico com o
-comportamento da aplicação à medida em que é exposta a variação na demanda, do
-custo e do valor, mas só o faz por que o cliente da nuvem executou cada uma das
-avaliações manualmente. Da mesma forma a variação na demanda vai depender do
-conjunto de avaliações executadas pelo cliente da nuvem, a ferramenta apenas
-plota gráficos do que foi executado pelo cliente. Com relação a definição de
-cenários de avaliação e a definição de parâmetros de desempenho, a ferramenta
-não dá nenhum suporte, uma vez que os cenários dependem das avaliações
-realizadas e que os módulos de análise de custo, valor, tempo de resposta e {\em
-throughput} possuem uma lista dos parâmetros de desempenho possíveis de
-avaliação.
+%A ferramenta proposta no trabalho faz uso de dados previamente coletados
+%e só então realiza a análise do desempenho de aplicações na nuvem
+%em diversos recursos. Por isso deixa a cargo do cliente da nuvem todas as
+%atividades para a avaliação de desempenho, pois depende dos dados empíricos que
+%são coletados após a avaliação. O CloudXplor é capaz de plotar um gráfico com o
+%comportamento da aplicação à medida em que é exposta a variação na demanda, do
+%custo e do valor, mas só o faz por que o cliente da nuvem executou cada uma das
+%avaliações manualmente. Da mesma forma a variação na demanda vai depender do
+%conjunto de avaliações executadas pelo cliente da nuvem, a ferramenta apenas
+%plota gráficos do que foi executado pelo cliente. Com relação a definição de
+%cenários de avaliação e a definição de parâmetros de desempenho, a ferramenta
+%não dá nenhum suporte, uma vez que os cenários dependem das avaliações
+%realizadas e que os módulos de análise de custo, valor, tempo de resposta e
+% {\em throughput} possuem uma lista dos parâmetros de desempenho possíveis de
+%avaliação.
 
 
 \subsection{CloudCmp}
@@ -125,10 +139,10 @@ Segundo \citeonline{li2011}, até a época do trabalho não houve
 nenhum provedor de nuvem que se destacasse com relação aos demais. Outra constatação foi de que os resultados
 obtidos a partir da execução dos {\em benchmarks} em cada provedor apenas refletiam o momento em que foram coletados, uma vez que a estrutura utilizada pelos provedores para hospedar seus serviços sofre frequentes modificações e a demanda por seus recursos computacionais é bastante variável.
 
-Como essa solução compara serviços e recursos da nuvem através da análise de dados
-previamente coletados a partir da execução de diferentes {\em benchmarks}, a
-escolha dos provedores e recursos mais apropriados para uma determinada aplicação só será eficaz se a aplicação utilizar os recursos da nuvem de forma semelhante à dos {\em benchmarks} avaliados. Além disso, a
-ferramenta não oferece suporte à execução de novos cenários de avaliação na nuvem, estando limitada àqueles previamente definidos para os respectivos {\em bechmarks}.
+%Como essa solução compara serviços e recursos da nuvem através da análise de
+% dados previamente coletados a partir da execução de diferentes {\em benchmarks}, a
+%escolha dos provedores e recursos mais apropriados para uma determinada
+% aplicação só será eficaz se a aplicação utilizar os recursos da nuvem de forma semelhante à dos {\em benchmarks} avaliados. Além disso, a ferramenta não oferece suporte à execução de novos cenários de avaliação na nuvem, estando limitada àqueles previamente definidos para os respectivos {\em bechmarks}.
 
 \subsection{CloudAdvisor}
 O trabalho apresentado em~\cite{jung2013cloudadvisor} ``introduz uma nova plataforma de recomendação de nuvem, chamada {\em CloudAdvisor}''. Essa plataforma destina-se a auxiliar o seu usuário na tarefa de capturar as implicações monetárias e financeiras das configurções de implantação das suas aplicações. Para recomendar a configuração, a platforma recebe como entrada parâmetros de configuração de alto nível como, orçamento, expectativa de performance e economia de energia, os quais estão limitados a uma escala discreta que vai de 0 até 10, onde 0 significa baixa influência e 10 significa alta influência. Uma vez informados os parâmetros de configuração, o {\em CloudAdvisor} irá caracterizar a performance da aplicação alvo em termos de uso dos recursos computacionais e em seguida executará o {\em benchmark} {\em CloudMeter},~\cite{jung2013cloudadvisor}, nas nuvens candidatas, a fim de caracterizar a performance dos recursos dessas nuvens.
@@ -138,42 +152,13 @@ Para ilustrar o uso do {\em CloudAdvisor}, os autores implantaram a solução em
 Os autores concluem que o usuário da solução pode explorar diversas opções de configuração da sua aplicação na nuvem utilizando uma interface amigável e sem a necessidade de informar detalhes específicos de configuração. Além disso, mostraram que é possível utilizar uma técnica de caracterização de performance, para uma dada carga, baseada na execução de {\em benchmarks} em nuvens candidatas.
 
 \subsection{CDOSim}
-Uma solução para o desafio da escolha da configuração de implantação de uma aplicação 
-na nuvem foi apresentada em~\cite{fittkau2012cdosim} com o nome de \textit{CDOSim}. 
-Essa ferramenta auxilia o usuário no processo de escolha do que os autores chamaram 
-de opção de implantação na nuvem, do inglês \textit{Cloud Deployment Option} (CDO). 
-Uma vez que a análise manual das ``potenciais CDOs é intratável, custosa e consome 
-tempo, devido à heterogeneidade dos ambientes de nuvem'',~\cite{fittkau2012cdosim}, 
-para a escolha das CDOs são realizadas simulações que se baseiam no custo e nas 
-propriedades de performance de cada CDO. O custo é informado pelo provedor de 
-nuvem. Já a caracterização da performance é realizada através da execução de um 
-\textit{benchmark} para medir a quantidade de 
-\textit{mega integer plus instructions per second} (MIPIPS)~\cite{fittkau2012cdosim}. 
-O código desse \textit{benchmark} deve ser gerado para cada linguagem de programação 
-utilizada pela aplicação alvo. Esta, por sua vez, deve passar por um processo de 
-engenharia reversa para modelos KDM, que é descrito em~\cite{perez2011knowledge}, 
-para que o simulator consiga escolher a opção de configuração mais adequada.
+Uma solução para o desafio da escolha da configuração de implantação de uma aplicação na nuvem foi apresentada em~\cite{fittkau2012cdosim} com o nome de \textit{CDOSim}. Essa ferramenta auxilia o usuário no processo de escolha do que os autores chamaram de opção de implantação na nuvem, do inglês \textit{Cloud Deployment Option} (CDO). Uma vez que a análise manual das ``potenciais CDOs é intratável, custosa e consome tempo, devido à heterogeneidade dos ambientes de nuvem'',~\cite{fittkau2012cdosim}. Para a escolha das CDOs, são realizadas simulações que se baseiam no custo e nas propriedades de performance de cada CDO. O custo é informado pelo provedor de nuvem, já a caracterização da performance é realizada através da execução de um \textit{benchmark} para medir a quantidade de \textit{mega integer plus instructions per second} (MIPIPS)~\cite{fittkau2012cdosim}, o código desse \textit{benchmark} deve ser gerado para cada linguagem de programação utilizada pela aplicação alvo. Esta, por sua vez, deve passar por um processo de engenharia reversa para modelos KDM, que é descrito em~\cite{perez2011knowledge}, para que o simulator consiga escolher a opção de configuração mais adequada.
 
-Para validar o \textit{benchmark} MIPIPS, os resultados da simulação em comparação 
-com dados reais e a predição da performance de um provedor de nuvem com base nos 
-dados de outro provedor de nuvem, os autores conduziram uma série de experimentos 
-em dois ambientes de nuvem, uma pública (a Amazon EC2) e outra privada. Na nuvem 
-pública, foi evidenciado que os valores de MIPIPS dependem da região onde o 
-\textit{benchmark} foi realizado e da carga sobre a máquina física que hospeda a 
-máquina virtual. Já na comparação dos resultados da simulação com os dados reais, 
-os autores mostraram que a taxa de error da utilização de CPU simulada com a 
-utilização de CPU medida chegou a 30,86~\%. Contudo, a taxa de erro médio 
-global foi inferior a 22,75~\%, abaixo do limiar estabelecido pelos autores, 
-que era de 30~\%. Já a predição da performance de uma instância da Amazon EC2 a 
-partir da performance de uma instância da nuvem privada gerou 15,76~\% como taxa 
-de erro global.
+Para validar o \textit{benchmark} MIPIPS, os resultados da simulação em comparação com dados reais e a predição da performance de um provedor de nuvem com base nos dados de outro provedor de nuvem, os autores conduziram uma série de experimentos em dois ambientes de nuvem, uma pública a Amazon EC2 e outra privada. Na nuvem pública foi evidenciado que os valores de MIPIPS dependem da região onde o \textit{benchmark} foi realizado e da carga sobre a máquina física que hospeda a máquina virtual. Já na comparação dos resultados da simulação com os dados reais, os autores mostraram que a taxa de error da utilização de CPU simulada com a utilização de CPU medida chegou a 30,86~\%, contudo, como a taxa de erro médio global foi abaixo de 22,75~\%, abaixo do limiar estabelecido pelos autores que era de 30~\%. Já a predição da performance de uma instância da Amazon EC2 a partir da performance de uma instância da nuvem privada gerou 15,76~\% como taxa de erro global.
 
-Finalmente, os autores concluem que a simulação pode auxiliar no processo de 
-escolha da opção de implantação com maior performance e menor custo e que os 
-resultados da simulação são razoavelmente próximos dos experimentos realizados 
-dos valores reais.
+Finalmente, os autores concluem que a simulação pode auxiliar no processo de escolha da opção de implantação com maior performance e menor custo e que os resultados da simulação são razoavelmente próximos dos experimentos realizados dos valores reais.
 
-\subsection{CloudProphet}
+\subsection{CloudProphet}\label{subsec:CloudProphet}
 Em \cite{li2011cloudprophet} os autores apresentam o \textit{CloudProphet}, um sistema de
 predição de desempenho de aplicações em ambiente de nuvem computacional baseado 
 na metodologia de ``rastrear e reproduzir'' (\textit{trace and replay}).
@@ -255,29 +240,41 @@ Uma vez que a escolha da infraestrutura computacional ótima para hospedar uma d
 
 Para ilustrar o uso do \textit{Cloud WorkBench}, foi realizado um pequeno experimento para avaliar a velocidade de escrita sequencial em disco de recursos da nuvem. Nesse experimento, foram utilizados três perfis de recursos computacionais da Amazon EC2 na região Irlanda (\textit{eu-west-1}), em servidores utilizando o sistema operacional Ubuntu 14.04. Para cada perfil de recurso, foram realizadas entre 8 e 12 execuções do benchmark FIO\footnote{http://git.kernel.org/cgit/linux/kernel/git/axboe/fio.git} 2.1.10. Conforme descrito em~\cite{scheuner2014cloud}, o experimento evidenciou que há diferenças na performance dos perfis de recursos utilizados. Esse diferença poderia se refletir na performance de uma aplicação que fizesse muita escrita em disco.
 
-Após a análise dos resultados, os autores concluem que o \textit{Cloud WorkBench} 
-suporta a realização de experimentos em nuvens de infraestrutura, e que toda a 
-complexidade da configuração do ambiente pode ficar codificada, o que diminui a 
-ocorrência de erros decorrentes de eventuais intervenções manuais.
+Após a análise dos resultados, os autores concluem que o \textit{Cloud WorkBench} suporta a realização de experimentos em nuvens de infraestrutura, e que toda a complexidade da configuração do ambiente pode ficar codificada. O que diminui a ocorrência de erros decorrentes de eventuais intervenções manuais.
 
 \section{Análise Crítica}
 
 \subsection{Abordagem Preditiva}
+As soluções de abordagem preditiva possuem desempenho bastante variados nos
+critérios de desempenho estabelecidos no início deste capítulo, porém elas
+acabam convergindo na efetividade. No critério de eficência, as soluções se
+destacam, possuem alta eficiência, uma vez que não requerem a alocação de
+recursos de nuvem para realizar as predições. No entanto, o
+\textit{CloudProphet} é a única solução de abordagem preditiva
+com baixa eficiência, pois requer a alocações de recursos da nuvem para
+avaliar todas as demandas e configurações. Já com relação à acurácia, as
+soluções tem um desempenho moderado, com distinção para a solução apresentada
+em~\cite{fittkau2012cdosim}, que possui baixa acurácia, conforme fica
+evidenciado nos resultados apresentados na subseção~\ref{subsec:CloudProphet}.
+Finalmente, no que diz respeito à complexidade, a solução com menor
+complexidade, portanto com maior destaque, é a \textit{CloudHarmony} permite que
+testes sejam iniciados e que pesquisas de resultados anteriores sejam realizadas
+através de uma interface amigável, sem a necessidade de intervenções do usuário.
+Já as demais possuem complexidade moderada.
+ 
+Ainda com base nos critérios de avaliação, as soluções apresentadas
+em~\cite{malkowski2010cloudxplor,cloudharmony} possuem baixa completude, pois
+não permitem que sejam definidos aplicação, demanda, recurso da nuvem e SLA. Já
+o \textit{CloudAdvisor} apresentando em~\cite{jung2013cloudadvisor}, permite a
+definição da aplicação, e da carga, porém não permite a escolha do SLA e não
+faz referência a respeito do uso de nuvens públicas diferentes das apresentadas
+nos resultados. Dessa forma, com relação à completude, o \textit{CloudAdvisor}
+tem um desempenho moderado. Das abordagens preditivas, o \textit{CloudProphet}
+é a solução que se destaque no critério da completude, pois permite que o
+usuário defina aplicação, demanda, recurso da nuvem e SLA desejado.
 
 \subsection{Abordagem Empírica}
-Apesar das soluções de abordagem empírica terem destaque no critério da 
-completude, no que diz respeito à efetividade, elas possuem desempenho moderado 
-nos critérios relacionados à eficiência e à complexidade, enquanto possuem 
-alta acurácia. No que diz respeito à eficiência, essas ferramentas poderiam fazer 
-uso de resultados anteriores para evitar a execução de testes que claramente 
-poderiam ser evitados, por exemplo, em uma situação em uma demanda é submetida à 
-aplicação que está sendo executada em uma máquina virtual com o mais baixo nível 
-de recurso computacional, seria coerente afirmar que essa mesma demanda pode ser 
-atendida por máquinas com perfis computacionais mais robustos. Já no que diz 
-respeito à complexidade, cada trabalho faz uso de uma estratégia particular para 
-a definição da aplicação. Dessa forma, o usuário do ambiente precisa se adaptar 
-à sintaxe de cada solução, e eventualmente, configurar imagens contendo os 
-componentes da aplicação que será avaliada.
+Apesar das soluções de abordagem empírica terem destaque no critério da completude, no que diz respeito à efetividade, elas possuem desempenho moderado nos critérios relacionados à eficiência e à complexidade, enquanto que possuem alta acurácia. No que diz respeito à eficiência, essas ferramentas poderiam fazer uso de resultados anteriores para evitar a execução de testes que claramente poderiam ser evitados, por exemplo, em uma situação em uma demanda é submetida à aplicação que está sendo executada em uma máquina virtual com o mais baixo nível de recurso computacional, seria coerente afirmar que essa mesma demanda pode ser atendida por máquinas com perfis computacionais mais robustos. Já no que diz respeito à complexidade, cada trabalho faz uso de uma estratégia particular para a definição da aplicação. Dessa forma, o usuário do ambiente precisa se adaptar à sintaxe de cada solução, e eventualmente, configurar imagens contendo os componentes da aplicação que será avaliada.
 
 %\section{Outros Trabalhos e Considerações}
 
