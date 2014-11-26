@@ -600,8 +600,39 @@ desempenho suficiente para satisfazer o SLA.
   \end{center}
 \end{figure}
 
-Por fim, a terceira aba, com o título ``Full Trace'', traz uma tela também com
-uma tabela, esta com as colunas representando as 
+Por fim, a terceira aba, com o título ``Full Trace'', traz também uma tabela, 
+esta com as colunas representando as Cargas de Trabalho e as linhas representando
+as Configurações, como pode ser visto na Figura~\ref{fig:capacitor_web_fulltrace}. 
+As células representam as execuções de cada Configuração em cada Carga de Trabalho 
+e sua cor indica o sucesso ou fracasso em atender ao SLA.
+
+Cada célula dessa tabela traz um número que identifica a execução real que levou
+ao resultado representado pela cor da célula. As células dessa tabela podem aparecer
+pintadas em quatro cores diferentes:
+
+\begin{description}
+  \item[Verde Escuro] \hfill \\ Execução real que satisfez o SLA
+  \item[Verde Claro] \hfill \\ Predição de Configuração Candidata
+  \item[Vermelho Escuro] \hfill \\ Execução real que não satisfez o SLA
+  \item[Vermelho Claro] \hfill \\ Predição de Configuração Rejeitada
+\end{description}
+
+As células em cores claras são as Configurações para as quais não houve uma execução
+real, mas cujo desempenho foi inferido. O número constante da célula indica qual
+execução real levou o CloudCapacitor a marcar a Configuração como Candidata ou 
+Rejeitada para a Carga de Trabalho em questão.
+
+Quando são feitas essas predições de desempenho, em que o sucesso ou fracasso
+da Configuração em satisfazer o SLA é inferido com base no desempenho de outra
+Configuração, há a possibilidade de que a predição não seja feita corretamente.
+Quando essa situação acontece, o sistema faz uma marcação na célula com um pequeno
+círculo vermelho com um $\times$ branco inscrito. A imagem da 
+Figura~\ref{fig:capacitor_web_fulltrace} mostra essa marcação de erro de predição
+na coluna referente à Carga de Trabalho de valor 1000 e linhas referentes às
+Configurações ``3\_c3\_large'' e ``2\_c3\_xlarge'', onde a predição afirma erroneamente
+que o SLA não seria satisfeito, e ``4\_c3\_xlarge'', onde a predição errou ao inferir 
+que a Configuração conseguiria satisfazer o SLA. 
+ 
 ***RASCUNHO***
 Capacitor Web
 OK  Apresentação da interface de entrada
