@@ -21,13 +21,6 @@ ao Planejamento de Capacidade, foram realizadas seções de avaliação de
 capacidade de uma aplicação implantada em um provedor de nuvem de
 infraestrutura como serviço.
 
-\begin{figure}[htb]
-  \caption{\label{fig:implantacao}Implantação do WordPress na AWS EC2 para Avaliação de Capacidade}
-  \begin{center}
-    \includegraphics[scale=0.4]{img/ImplantacaoWordPress}
-  \end{center}
-\end{figure}
-
 A aplicação escolhida foi o WordPress \cite{wordpress}, um motor de construção 
 e administração de \emph{blogs}. Sua escolha foi motivada por ser uma aplicação
 bem conhecida, de utilização via web, ideal para implantação em ambiente de
@@ -35,15 +28,24 @@ nuvem, e com componentes arquiteturais escaláveis. Além disso, o fluxo de
 utilização típico apresenta características bem diversificadas quanto ao uso
 de recursos de CPU e memória, rede, sistema de arquivos e banco de dados.
 
+\begin{figure}[htb]
+  \caption{\label{fig:implantacao}Implantação do WordPress na AWS EC2 para Avaliação de Capacidade}
+  \begin{center}
+    \includegraphics[scale=0.5]{img/ImplantacaoWordPress}
+  \end{center}
+\end{figure}
+
 O Provedor escolhido foi a Amazon, com seu serviço de infraestrutura AWS EC2
 \cite{ec2}, onde o WordPress foi implantado em duas camadas: uma para o banco de 
 dados MySQL, e outra para a aplicação, executada pelo servidor Apache HTTPD. Como
 balanceador de carga, foi utilizada uma máquina executando o servidor web Nginx. A
 Figura~\ref{fig:implantacao} mostra um panorama geral dessa implantação. 
 
-%Na imagem,
-%podem ser vistos que na camada do WordPress algumas máquinas aparecem esmaecidas.
-%Isso foi feito para representar que os testes variam
+Devido a restrições de custo e tempo, os experimentos foram limitados de forma a variar 
+apenas a camada de aplicação, usando de 1 a 4 servidores Apache executando o WordPress. 
+Na imagem, essa variação está representada pela suavização de cor das máquinas dessa 
+camada, no sentido de que podem não estar presentes em certos cenários.
 
+A execução dos testes foi orquestrada pelo Cloud~Crawler~\cite{cunha2012ambiente}
 
 % ----------------------------------------------------------
