@@ -25,6 +25,25 @@ A aplicação escolhida foi o WordPress \cite{wordpress}, um motor de construç�
 e administração de \emph{blogs}. Sua escolha foi motivada por ser uma aplicação
 bem conhecida, de utilização via web, ideal para implantação em ambiente de
 nuvem, e com componentes arquiteturais escaláveis. Além disso, o fluxo de 
-utilização típico apresenta características bem diversificadas quanto à utilização
-de recursos de CPU e memória, rede, sistema de arquivos e banco de dados.  
+utilização típico apresenta características bem diversificadas quanto ao uso
+de recursos de CPU e memória, rede, sistema de arquivos e banco de dados.
+
+\begin{figure}[htb]
+  \caption{\label{fig:implantacao}Implantação do WordPress na AWS EC2 para Avaliação de Capacidade}
+  \begin{center}
+    \includegraphics[scale=0.5]{img/ImplantacaoWordPress}
+  \end{center}
+\end{figure}
+
+O Provedor escolhido foi a Amazon, com seu serviço de infraestrutura AWS EC2
+\cite{ec2}, onde o WordPress foi implantado em duas camadas: uma para o banco de 
+dados MySQL, e outra para a aplicação, executada pelo servidor Apache HTTPD. Como
+balanceador de carga, foi utilizada uma máquina executando o servidor web Nginx. A
+Figura~\ref{fig:implantacao} mostra um panorama geral dessa implantação. 
+
+%Na imagem,
+%podem ser vistos que na camada do WordPress algumas máquinas aparecem esmaecidas.
+%Isso foi feito para representar que os testes variam
+
+
 % ----------------------------------------------------------
