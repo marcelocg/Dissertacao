@@ -21,19 +21,19 @@ ao Planejamento de Capacidade, foram realizadas seções de avaliação de
 capacidade de uma aplicação implantada em um provedor de nuvem de
 infraestrutura como serviço.
 
+\begin{figure}[htb]
+  \caption{\label{fig:implantacao}Implantação do WordPress na AWS EC2 para Avaliação de Capacidade}
+  \begin{center}
+    \includegraphics[scale=0.4]{img/ImplantacaoWordPress}
+  \end{center}
+\end{figure}
+
 A aplicação escolhida foi o WordPress \cite{wordpress}, um motor de construção 
 e administração de \emph{blogs}. Sua escolha foi motivada por ser uma aplicação
 bem conhecida, de utilização via web, ideal para implantação em ambiente de
 nuvem, e com componentes arquiteturais escaláveis. Além disso, o fluxo de 
 utilização típico apresenta características bem diversificadas quanto ao uso
 de recursos de CPU e memória, rede, sistema de arquivos e banco de dados.
-
-\begin{figure}[htb]
-  \caption{\label{fig:implantacao}Implantação do WordPress na AWS EC2 para Avaliação de Capacidade}
-  \begin{center}
-    \includegraphics[scale=0.5]{img/ImplantacaoWordPress}
-  \end{center}
-\end{figure}
 
 O Provedor escolhido foi a Amazon, com seu serviço de infraestrutura AWS EC2
 \cite{ec2}, onde o WordPress foi implantado em duas camadas: uma para o banco de 
