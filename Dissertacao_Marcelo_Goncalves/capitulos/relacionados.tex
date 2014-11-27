@@ -1,6 +1,6 @@
 \chapter[Trabalhos Relacionados]{Trabalhos Relacionados}
 % ----------------------------------------------------------
-Apresentamos  neste capítulo alguns trabalhos cujos objetivos estejam alinhados 
+Apresentamos  neste capítulo alguns trabalhos cujos objetivos estão alinhados 
 com a ideia da avaliação de desempenho de aplicações executadas em ambientes de
 computação em nuvem. Esses trabalhos estão agrupados de acordo com a abordagem utilizada para a realização da avaliação de desempenho. São duas abordagens, a primeira é a abordagem preditiva, nesta, os trabalhos não executam diretamente a aplicação alvo no ambiente onde se deseja implantá-la. Já a segunda abordagem é a empírica, nesta as aplicações alvo são implantadas na nuvem e então submetidas a testes de carga. 
 
@@ -37,14 +37,14 @@ Cada abordagem será apresentada em uma subseção, bem como os diversos trabalh
 As ferramentas que serão apresentadas nesta seção têm em comum o fato de
 indicarem a configuração de implantação na nuvem sem executarem avaliações de
 desempenho diretamente na aplicação que será migrada para a nuvem. Dessa forma,
-elas prevêem a configuração de implantação da nuvem, por isso estão sendo chamadas de
+elas prevêem a configuração de implantação, por isso estão sendo chamadas de
 abordagens preditivas. Muitas das soluções de abordagem preditiva realizam as
 suas predições após a caracterização da performance dos recurso da nuvem, o que
-é realizado através da execução de \textit{benchmarks}. No entanto, esta não é a
-única forma de avaliação, pois o \textit{CloudProphet}, apresentado
-em~\cite{li2011cloudprophet}, coleta como a aplicação alvo faz uso dos recursos
-computacionais em um ambiente controlado e então repete essa utilização em uma
-nuvem candidata.
+é realizado através da execução de \textit{benchmarks}. Já o
+\textit{CloudProphet}, apresentado em~\cite{li2011cloudprophet}, coleta como a
+aplicação alvo faz uso dos recursos computacionais em um ambiente controlado e
+então repete essa utilização em uma nuvem candidata. Dessa forma, não necessita
+caracterizar a performance dos recursos da nuvem.
 
 A seguir, apresentaremos seis trabalhos que se destacam na avaliação de
 desempenho de aplicações na nuvem usando uma abordagem preditiva, são
@@ -145,18 +145,18 @@ obtidos a partir da execução dos {\em benchmarks} em cada provedor apenas refl
 % aplicação só será eficaz se a aplicação utilizar os recursos da nuvem de forma semelhante à dos {\em benchmarks} avaliados. Além disso, a ferramenta não oferece suporte à execução de novos cenários de avaliação na nuvem, estando limitada àqueles previamente definidos para os respectivos {\em bechmarks}.
 
 \subsection{CloudAdvisor}
-O trabalho apresentado em~\cite{jung2013cloudadvisor} ``introduz uma nova plataforma de recomendação de nuvem, chamada {\em CloudAdvisor}''. Essa plataforma destina-se a auxiliar o seu usuário na tarefa de capturar as implicações monetárias e financeiras das configurções de implantação das suas aplicações. Para recomendar a configuração, a platforma recebe como entrada parâmetros de configuração de alto nível como, orçamento, expectativa de performance e economia de energia, os quais estão limitados a uma escala discreta que vai de 0 até 10, onde 0 significa baixa influência e 10 significa alta influência. Uma vez informados os parâmetros de configuração, o {\em CloudAdvisor} irá caracterizar a performance da aplicação alvo em termos de uso dos recursos computacionais e em seguida executará o {\em benchmark} {\em CloudMeter},~\cite{jung2013cloudadvisor}, nas nuvens candidatas, a fim de caracterizar a performance dos recursos dessas nuvens.
+O trabalho apresentado em~\cite{jung2013cloudadvisor} ``introduz uma nova plataforma de recomendação de nuvem, chamada {\em CloudAdvisor}''. Essa plataforma destina-se a auxiliar o seu usuário na tarefa de capturar as implicações monetárias e financeiras das configurações de implantação das suas aplicações. Para recomendar a configuração, a platforma recebe como entrada parâmetros de configuração de alto nível como, orçamento, expectativa de performance e economia de energia, os quais estão limitados a uma escala discreta que vai de 0 até 10, onde 0 significa baixa influência e 10 significa alta influência. Uma vez informados os parâmetros de configuração, o {\em CloudAdvisor} irá caracterizar a performance da aplicação alvo em termos de uso dos recursos computacionais e em seguida executará o {\em benchmark} {\em CloudMeter},~\cite{jung2013cloudadvisor}, nas nuvens candidatas, a fim de caracterizar a performance dos recursos dessas nuvens.
 
-Para ilustrar o uso do {\em CloudAdvisor}, os autores implantaram a solução em servidores locais e em três provedores de nuvem pública, foram eles: Windows Azure, Rackspace, and Amazon EC2. Como resultado, foi observado que a taxa de erro da configuração para uma determinada carga foi de 10~\%. No entanto, quando o usuário do ambiente escolhe parâmetros de configuração extremos (por exemplo, configurar o máximo de orçamento, de economia de energia e de nível de performance), essa taxa de erro elevou para 18~\%.
+Para ilustrar o uso do {\em CloudAdvisor}, os autores implantaram a solução em servidores locais e em três provedores de nuvem pública, foram eles: Windows Azure~\cite{azure}, Rackspace~\cite{rackspace}, and Amazon EC2~\cite{ec2}. Como resultado, foi observado que a taxa de erro da configuração para uma determinada carga foi de 10~\%. No entanto, quando o usuário do ambiente escolhe parâmetros de configuração extremos (por exemplo, configurar o máximo de orçamento, de economia de energia e de nível de performance), essa taxa de erro elevou para 18~\%.
 
 Os autores concluem que o usuário da solução pode explorar diversas opções de configuração da sua aplicação na nuvem utilizando uma interface amigável e sem a necessidade de informar detalhes específicos de configuração. Além disso, mostraram que é possível utilizar uma técnica de caracterização de performance, para uma dada carga, baseada na execução de {\em benchmarks} em nuvens candidatas.
 
-\subsection{CDOSim}
-Uma solução para o desafio da escolha da configuração de implantação de uma aplicação na nuvem foi apresentada em~\cite{fittkau2012cdosim} com o nome de \textit{CDOSim}. Essa ferramenta auxilia o usuário no processo de escolha do que os autores chamaram de opção de implantação na nuvem, do inglês \textit{Cloud Deployment Option} (CDO). Uma vez que a análise manual das ``potenciais CDOs é intratável, custosa e consome tempo, devido à heterogeneidade dos ambientes de nuvem'',~\cite{fittkau2012cdosim}. Para a escolha das CDOs, são realizadas simulações que se baseiam no custo e nas propriedades de performance de cada CDO. O custo é informado pelo provedor de nuvem, já a caracterização da performance é realizada através da execução de um \textit{benchmark} para medir a quantidade de \textit{mega integer plus instructions per second} (MIPIPS)~\cite{fittkau2012cdosim}, o código desse \textit{benchmark} deve ser gerado para cada linguagem de programação utilizada pela aplicação alvo. Esta, por sua vez, deve passar por um processo de engenharia reversa para modelos KDM, que é descrito em~\cite{perez2011knowledge}, para que o simulator consiga escolher a opção de configuração mais adequada.
+\subsection{CDOSim}\label{subsec:CDOSim}
+Uma solução para o desafio da escolha da configuração de implantação de uma aplicação na nuvem foi apresentada em~\cite{fittkau2012cdosim} com o nome de \textit{CDOSim}. Essa solução auxilia o usuário no processo de escolha do que os autores chamaram de opção de implantação na nuvem --- do inglês \textit{Cloud Deployment Option} (CDO)---, uma vez que a análise manual das ``potenciais CDOs é intratável, custosa e consome tempo, devido à heterogeneidade dos ambientes de nuvem'',~\cite{fittkau2012cdosim}. Para a escolha das CDOs, são realizadas simulações que se baseiam no custo e nas propriedades de performance de cada CDO. O custo é informado pelo provedor de nuvem, já a caracterização da performance é realizada através da execução de um \textit{benchmark} para medir a quantidade de \textit{mega integer plus instructions per second} (MIPIPS)~\cite{fittkau2012cdosim}, por opção de configuração. O código desse \textit{benchmark} deve ser gerado para cada linguagem de programação utilizada pela aplicação alvo. Esta, por sua vez, deve passar por um processo de engenharia reversa para modelos KDM, que é descrito em~\cite{perez2011knowledge}, para que o simulator consiga escolher a opção de configuração mais adequada.
 
-Para validar o \textit{benchmark} MIPIPS, os resultados da simulação em comparação com dados reais e a predição da performance de um provedor de nuvem com base nos dados de outro provedor de nuvem, os autores conduziram uma série de experimentos em dois ambientes de nuvem, uma pública a Amazon EC2 e outra privada. Na nuvem pública foi evidenciado que os valores de MIPIPS dependem da região onde o \textit{benchmark} foi realizado e da carga sobre a máquina física que hospeda a máquina virtual. Já na comparação dos resultados da simulação com os dados reais, os autores mostraram que a taxa de error da utilização de CPU simulada com a utilização de CPU medida chegou a 30,86~\%, contudo, como a taxa de erro médio global foi abaixo de 22,75~\%, abaixo do limiar estabelecido pelos autores que era de 30~\%. Já a predição da performance de uma instância da Amazon EC2 a partir da performance de uma instância da nuvem privada gerou 15,76~\% como taxa de erro global.
+Para ilustrar o uso da solução, os autores executaram três tipos de experimentos, um para validar o uso de MIPIPS para caracterizar a performance das opções de configuração, outro para comparar os resultados da simulação com dados reais, e um último experimento para verificar a possibilidade da predição da performance de um provedor de nuvem com base nos dados de outro provedor de nuvem. Esses experimentos foram conduzidos em dois ambientes de nuvem, sendo uma pública, a Amazon EC2, e outra privada. Na nuvem pública foi evidenciado que os valores de MIPIPS dependem da região onde o \textit{benchmark} foi realizado e da carga sobre a máquina física que hospeda a máquina virtual. Já na comparação dos resultados da simulação com os dados reais, os autores mostraram que a taxa de error da utilização de CPU simulada com a utilização de CPU medida, chegou a 30,86~\%. Contudo, a taxa de erro médio global foi abaixo de 22,75~\%, portanto abaixo do limiar estabelecido pelos autores que era de 30~\%. Já a predição da performance de uma instância da Amazon EC2 a partir da performance de uma instância da nuvem privada gerou 15,76~\% como taxa de erro global.
 
-Finalmente, os autores concluem que a simulação pode auxiliar no processo de escolha da opção de implantação com maior performance e menor custo e que os resultados da simulação são razoavelmente próximos dos experimentos realizados dos valores reais.
+Finalmente, os autores concluem que a simulação pode auxiliar no processo de escolha da opção de implantação com maior performance e menor custo e que os resultados da simulação são razoavelmente próximos dos valores reais.
 
 \subsection{CloudProphet}\label{subsec:CloudProphet}
 Em \cite{li2011cloudprophet} os autores apresentam o \textit{CloudProphet}, um sistema de
@@ -247,19 +247,19 @@ Após a análise dos resultados, os autores concluem que o \textit{Cloud WorkBen
 \subsection{Abordagem Preditiva}
 As soluções de abordagem preditiva possuem desempenho bastante variados nos
 critérios de desempenho estabelecidos no início deste capítulo, porém elas
-acabam convergindo na efetividade. No critério de eficência, as soluções se
-destacam, possuem alta eficiência, uma vez que não requerem a alocação de
-recursos de nuvem para realizar as predições. No entanto, o
-\textit{CloudProphet} é a única solução de abordagem preditiva
-com baixa eficiência, pois requer a alocações de recursos da nuvem para
+acabam convergindo na efetividade, que comproente eficiência, acurácia e
+complexidade. No critério de eficência, as soluções se destacam, possuem
+alta eficiência, uma vez que não requerem a alocação de recursos de nuvem para
+realizarem as predições. No entanto, o \textit{CloudProphet} é a única solução
+de abordagem preditiva com baixa eficiência, pois requer a alocações de recursos da nuvem para
 avaliar todas as demandas e configurações. Já com relação à acurácia, as
 soluções tem um desempenho moderado, com distinção para a solução apresentada
 em~\cite{fittkau2012cdosim}, que possui baixa acurácia, conforme fica
-evidenciado nos resultados apresentados na subseção~\ref{subsec:CloudProphet}.
+evidenciado nos resultados apresentados na subseção~\ref{subsec:CDOSim}.
 Finalmente, no que diz respeito à complexidade, a solução com menor
-complexidade, portanto com maior destaque, é a \textit{CloudHarmony} permite que
-testes sejam iniciados e que pesquisas de resultados anteriores sejam realizadas
-através de uma interface amigável, sem a necessidade de intervenções do usuário.
+complexidade, portanto com maior destaque, é a \textit{CloudHarmony} a qual
+permite que os testes sejam iniciados e que as pesquisas de resultados
+anteriores sejam realizadas através de uma interface amigável, sem a necessidade de intervenções do usuário.
 Já as demais possuem complexidade moderada.
  
 Ainda com base nos critérios de avaliação, as soluções apresentadas
