@@ -105,8 +105,74 @@ A Métrica de Desempenho usada no experimento foi ``Tempo de Resposta Total'', o
 seja, o tempo total decorrido entre o envio da primeira requisição da sequência 
 acima e o momento em que o cliente recebeu a resposta para última requisição da
 sequência. Assim, para ser considerada como Candidata, uma Configuração devia 
-ser capaz de atender 90\% dos conjuntos de requisições de cada usuário em um
-tempo total abaixo do tempo informado na entrada do parâmetro SLA.
+ser capaz de atender 90\% dos conjuntos de requisições em um tempo total abaixo 
+do tempo informado na entrada do parâmetro SLA.
 
+A seguir serão discutidos os resultados obtidos com o Processo de Inferência de 
+Desempenho e suas Heurísticas na indicação das Configurações capazes de executar
+a Aplicação sob Teste sob vários níveis de demanda. Foram avaliadas a precisão do 
+Processo na predição de capacidade e a economia de tempo e custo na execução
+dos testes.
+
+\section{Avaliação dos Resultados}
+\label{sec:resultados_avaliacao}
+A partir da execução do Processo de Inferência de Desempenho implementado pela
+biblioteca CloudCapacitor, usada no desenvolvimento do Capacitor Web, foram 
+realizadas Avaliações de Capacidade em 280 cenários de implantação do WordPress 
+no serviço AWS EC2.
+
+Com base nos resultados desses testes, foram avaliados os seguintes aspectos em
+relação ao desempenho do Processo: 
+
+\begin{description}
+  \item[Precisão] \hfill \\ Relação entre acertos e erros na predição de 
+  capacidade das Configurações    
+  \item[Eficiência] \hfill \\ Grau de redução do número de execuções reais e,
+  consequentemente, do custo e do tempo total gasto nos testes de desempenho.
+\end{description}
+
+\subsection{Precisão}
+\label{subsec:resultados_precisao}
+A avaliação da Precisão, ou acurácia, das predições realizadas pelo Processo
+de Inferência visa a ratificar a expectativa de que, uma vez identificada uma
+relação de capacidade entre diferentes Configurações oferecidas por um Provedor
+de infraestrutura na nuvem, é possível inferir o desempenho de uma Aplicação
+executando em uma Configuração com base no desempenho observado em uma
+execução real da Aplicação em uma Configuração distinta.
+
+\begin{figure}[hbt]
+  \caption{\label{fig:avaliacao_precisao}Avaliação da Precisão da Inferência de Desempenho}
+  \begin{center}
+    \includegraphics[scale=0.5]{img/Precision}
+  \end{center}
+\end{figure}
+
+Assim, este trabalho submeteu o Processo à verificação de sua acurácia ao realizar
+predições para o desempenho do WordPress executando em máquinas virtuais do provedor
+Amazon Web Services. O cálculo de Precision and Recall~\cite{powers2011evaluation} 
+sobre os resultados dos experimentos realizados mostra que o Processo de Inferência 
+de Desempenho é capaz de obter índices de precisão muito próximos de 100\%, como 
+pode ser observado na Figura~\ref{fig:avaliacao_precisao}. 
+
+A imagem mostra XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+Isso significa que, com a correta representação das relações de capacidade entre
+as Configurações, o Processo de Inferência de Desempenho proposto neste trabalho
+consegue efeticamente predizer, com grande confiança, quais Configurações de um 
+Provedor são capazes de executar uma Aplicação sob os níveis de demanda analisados. 
+
+\subsection{Eficiência}
+\label{subsec:resultados_eficiencia}
+%A análise dos resultados de eficiência procura identificar as vantagens de ordem 
+%prática e operacional proporcionadas pela utilização do Processo de Inferência 
+%de Desempenho no planejamento de capacidade. 
+
+%\begin{figure}[hbt]
+%  \caption{\label{fig:eficiencia_custo}Avaliação da Eficiência de Custo das Heurísticas}
+%  \begin{center}
+%    \includegraphics[scale=0.33]{img/ExecutionCost-Capacity}
+%    \includegraphics[scale=0.33]{img/ExecutionCost-Price}
+%  \end{center}
+%\end{figure}
 
 % ----------------------------------------------------------
