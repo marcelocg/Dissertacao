@@ -163,16 +163,77 @@ Provedor são capazes de executar uma Aplicação sob os níveis de demanda anal
 
 \subsection{Eficiência}
 \label{subsec:resultados_eficiencia}
-%A análise dos resultados de eficiência procura identificar as vantagens de ordem 
-%prática e operacional proporcionadas pela utilização do Processo de Inferência 
-%de Desempenho no planejamento de capacidade. 
+Esta seção apresenta os resultados de eficiência atingidos pelas Heurísticas usadas 
+pelo Processo de Inferência de Desempenho sob dois aspectos distintos: o custo 
+total da Avaliação e a quantidade de execuções realizadas pelas Heurísticas. Esse 
+custo foi calculado somando-se o preço da hora de utilização, conforme a tabela 
+de preços do provedor na data realização dos testes, para cada uma das Configurações 
+para as quais foram realizadas execuções reais na nuvem. 
 
-%\begin{figure}[hbt]
-%  \caption{\label{fig:eficiencia_custo}Avaliação da Eficiência de Custo das Heurísticas}
-%  \begin{center}
-%    \includegraphics[scale=0.33]{img/ExecutionCost-Capacity}
-%    \includegraphics[scale=0.33]{img/ExecutionCost-Price}
-%  \end{center}
-%\end{figure}
+\begin{figure}[hbt]
+  \caption{\label{fig:eficiencia_custo}Avaliação da Eficiência de Custo das Heurísticas}
+  \centering
+    \begin{subfigure}[a]{0.7\textwidth}
+      \includegraphics[width=\textwidth]{img/ExecutionCost-Capacity}
+      \caption{Grafo por Capacidade}
+      \label{fig:eficiencia_custo_capacidade}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.7\textwidth}
+      \includegraphics[width=\textwidth]{img/ExecutionCost-Price}
+      \caption{Grafo por Preço}
+      \label{fig:eficiencia_custo_preco}
+    \end{subfigure}
+\end{figure}
 
+Para cada aspecto analisado, custo e número de execuções, foram realizadas duas 
+baterias iguais de testes, uma utilizando o Espaço de Implantação gerado com base 
+nas relações de poder computacional entre as Configurações e outra com o Espaço de 
+Implantação baseado nas relações de preço. Essa variação foi feita para que fosse
+possível estudar o efeito da regra de formação do Espaço de Implantação sobre o
+desempenho geral do Processo de Inferência de Desempenho. Embora haja alguma 
+diferença entre os resultados obtidos com ambas as representações, a percepção 
+geral da eficiência das Heurísticas não muda.   
+
+A Figura~\ref{fig:eficiencia_custo} mostra os gráficos dos resultados obtidos pelas
+9 Heurísticas em termos de custo total dos testes de Avaliação considerando SLAs 
+entre 10 e 50 segundos. O primeiro gráfico apresenta os resultados quando os testes
+foram executados com a representação do Espaço de Implantação baseado na relação de
+capacidade entre as Configurações. O segundo gráfico considera o grafo da relação
+de preço das Configurações usado para representar o Espaço de Implantação.
+
+No topo de ambos os gráficos vê-se um linha horizontal que representa a 
+\emph{baseline} de comparação, que é o custo total da Heurística de Força Bruta 
+(\emph{Brute Force - BF}). Como o custo total para execução da Aplicação em todas
+as combinações de Configurações e Cargas de Trabalho é sempre o mesmo, independente
+do SLA requerido, a linha do gráfico para essa Heurística sempre é uma linha
+horizontal.
+
+A análise das imagens dos gráficos mostra que mesmo a Heurística com o pior 
+desempenho no que se refere ao custo total da Avaliação já apresenta uma redução 
+em relação à Força Bruta. Por outro lado, as melhores Heurísticas chegam a 
+representar uma economia da ordem de 96\% em comparação com o que seria gasto
+com a execução de todas as combinações de Configurações e Cargas de Trabalho.
+
+Embora o comportamento das Heurísticas varie em função do SLA, é possível notar
+que quando a exigência do SLA é mais moderada o comportamento de todas as Heurísticas
+tende a se estabilizar, tornando possível identificar que algumas delas tendem a
+ser mais econômicas que as outras. Ainda que não seja possível afirmar uma só 
+Heurística como a melhor em todas as situações, pode-se considerar que as Heurísticas
+Pessimista~Otimista e Conservadora~Otimista se mostram mais econômicas em geral.
+ 
+\begin{figure}[hbt]
+  \caption{\label{fig:eficiencia_execucoes}Avaliação da Eficiência do Número de Execuções das Heurísticas}
+  \centering
+    \begin{subfigure}[a]{0.7\textwidth}
+      \includegraphics[width=\textwidth]{img/ExecutionCount-Capacity}
+      \caption{Grafo por Capacidade}
+      \label{fig:eficiencia_custo_capacidade}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.7\textwidth}
+      \includegraphics[width=\textwidth]{img/ExecutionCount-Price}
+      \caption{Grafo por Preço}
+      \label{fig:eficiencia_custo_preco}
+    \end{subfigure}
+\end{figure}
+  
 % ----------------------------------------------------------
