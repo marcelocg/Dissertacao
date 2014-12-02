@@ -64,7 +64,7 @@ entre si e com a Heurística de Força Bruta, que não faz qualquer inferência 
 desempenho. O resultado dessas comparações serão analisados nas seções seguintes.
 
 Para compor o Espaço de Implantação do experimento desenvolvido para este trabalho, 
-foram escolhidos 7 Tipos de Máquinas Virtuais oferecidos pelo serviço AWS EC2:
+foram escolhidos 7 Tipos de Máquinas Virtuais oferecidos pelo serviço EC2:
 
 \begin{itemize}
   \item m3\_medium 
@@ -201,6 +201,21 @@ foram executados com a representação do Espaço de Implantação baseado na re
 capacidade entre as Configurações. O segundo gráfico considera o grafo da relação
 de preço das Configurações usado para representar o Espaço de Implantação.
 
+\begin{figure}[hbt]
+  \caption{\label{fig:eficiencia_execucoes}Avaliação da Eficiência do Número de Execuções das Heurísticas}
+  \centering
+    \begin{subfigure}[a]{0.7\textwidth}
+      \includegraphics[width=\textwidth]{img/ExecutionCount-Capacity}
+      \caption{Grafo por Capacidade}
+      \label{fig:eficiencia_execucoes_capacidade}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.7\textwidth}
+      \includegraphics[width=\textwidth]{img/ExecutionCount-Price}
+      \caption{Grafo por Preço}
+      \label{fig:eficiencia_execucoes_preco}
+    \end{subfigure}
+\end{figure}
+
 No topo de ambos os gráficos vê-se um linha horizontal que representa a 
 \emph{baseline} de comparação, que é o custo total da Heurística de Força Bruta 
 (\emph{Brute Force - BF}). Como o custo total para execução da Aplicação em todas
@@ -216,24 +231,55 @@ com a execução de todas as combinações de Configurações e Cargas de Trabal
 
 Embora o comportamento das Heurísticas varie em função do SLA, é possível notar
 que quando a exigência do SLA é mais moderada o comportamento de todas as Heurísticas
-tende a se estabilizar, tornando possível identificar que algumas delas tendem a
-ser mais econômicas que as outras. Ainda que não seja possível afirmar uma só 
-Heurística como a melhor em todas as situações, pode-se considerar que as Heurísticas
-Pessimista~Otimista e Conservadora~Otimista se mostram mais econômicas em geral.
+se estabiliza, tornando possível identificar que algumas delas tendem a
+ser mais econômicas que as outras. Ainda que não seja possível afirmar que uma só 
+Heurística seja a melhor em todas as situações, pode-se considerar que a Heurística
+Pessimista~Otimista se mostra como a mais econômica em geral. A Heurística
+Conservadora~Otimista merece atenção para os SLAs mais brandos, com os menores
+custos absolutos nessas circunstâncias. 
  
-\begin{figure}[hbt]
-  \caption{\label{fig:eficiencia_execucoes}Avaliação da Eficiência do Número de Execuções das Heurísticas}
-  \centering
-    \begin{subfigure}[a]{0.7\textwidth}
-      \includegraphics[width=\textwidth]{img/ExecutionCount-Capacity}
-      \caption{Grafo por Capacidade}
-      \label{fig:eficiencia_custo_capacidade}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.7\textwidth}
-      \includegraphics[width=\textwidth]{img/ExecutionCount-Price}
-      \caption{Grafo por Preço}
-      \label{fig:eficiencia_custo_preco}
-    \end{subfigure}
-\end{figure}
-  
+A Figura~\ref{fig:eficiencia_execucoes} mostra o desempenho das Heurísticas sob 
+o aspecto da quantidade de execuções reais da Aplicação sob Teste no ambiente de
+nuvem alvo da Avaliação. Assim como a Figura~\ref{fig:eficiencia_custo}, essa 
+imagem apresenta dois gráficos, que retratam o comportamento do Processo de 
+Inferência ao usar as representações do Espaço de Implantação com grafos das 
+relações de Capacidade e Preço entre as Configurações.
+
+A análise desses gráficos faz notar um número de execuções até 88\% menor em 
+relação à Heurística Força Bruta. Isso se reflete em menor tempo gasto no 
+planejamento de capacidade e, consequentemente, menores custos, não só como já 
+visto no que diz respeito à economia de horas de máquina, mas também de outros 
+custos envolvidos em um projeto de software.
+
+Tanto no aspecto custo como no aspecto quantidade de execuções, nota-se que a
+Hedurística Pessimista~Pessimista tem um desempenho muito ruim, exigindo muitas
+execuções e, por isso, elevando muito o custo do planejamento de capacidade. As
+Heurísticas Pessimista~Conservadora e Conservadora~Pessimista ainda aparecem
+um pouco descoladas do desempenho das outras Heurísticas, embora com uma redução
+em torno de 65\% no número de execuções.
+
+Os menores números de execuçõs são atingidos pelas Heurísticas Otimista~Conservadora 
+e Conservadora~Otimista, sob os SLAs mais brandos. Porém, como não se saem tão 
+bem sob SLAs mais rígidos, como 10 segundos, a Heurística Pessimista~Otimista
+ganha destaque por ter comportamento mais estável, figurando entre as mais 
+econômicas no aspecto de quantidade de execuções sob a maioria dos SLAs avaliados.
+ 
+\section{Resumo}
+Este capítulo descreveu os experimentos realizados neste trabalho como forma de
+comprovar a hipótese de que é possível estabelecer uma relação de capacidade
+entre as diversas configurações de máquinas usadas na implantação de uma aplicação
+e, partindo dessa relação, é possível inferir o desempenho da aplicação em uma
+configuração com base no desempenho observado em outra.
+
+A execução de um sistema de avaliação desenvolvido com o uso da biblioteca 
+CloudCapacitor, que implementa o Processo de Avaliação de Capacidade
+por Inferência de Desempenho proposto no Capítulo~\ref{chap:processo}, demonstrou
+que a Inferência de Desempenho é viável como técnica de suporte ao 
+planejamento de capacidade, uma vez que a precisão de acertos das predições 
+realizadas nos testes se aproxima muito dos 100\%.
+
+Além disso, os experimentos mostram também que a aplicação do Processo de Inferência 
+de Desempenho pode trazer até 96\% de economia financeira e até 88\% de economia 
+de tempo na realização das atividades de testes de desempenho.
+
 % ----------------------------------------------------------
