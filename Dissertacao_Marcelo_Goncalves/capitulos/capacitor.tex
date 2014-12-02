@@ -1,20 +1,20 @@
 \chapter{Implementação do Processo}
 \label{chap:capacitor}
 % ----------------------------------------------------------
-A fim de confirmar as hipóteses de eficácia e eficiência do emprego do Processo
-de Avaliação de Capacidade descrito no capítulo anterior, bem como da técnica de
-Inferência de Desempenho e das Heurísticas de Seleção que dão suporte a esse Processo, 
-foi criada uma implementação concreta de sua especificação na forma de uma biblioteca
-extensível e de um sistema computacional que demonstra seu funcionamento fazendo
-a avaliação de uma aplicação real em um provedor de nuvem de infraestrutura.
+Este capítulo apresenta a implementação do
+Processo de Avaliação de Capacidade descrito no capítulo anterior, bem como da técnica de
+Inferência de Desempenho e das Heurísticas de Seleção que dão suporte a esse
+Processo. 
 
-Foi dado o nome de CloudCapacitor à biblioteca, implementada como uma \emph{gem} da
-linguagem Ruby~\cite{ruby} e desenvolvido o sistema computacional Capacitor Web 
-para ser uma interface visual para a utilização do CloudCapacitor, usando 
+A implementação está estruturada na forma de uma biblioteca
+extensível e de um sistema computacional que demonstra seu funcionamento.Foi dado o nome de 
+CloudCapacitor à biblioteca, implementada como uma \emph{gem}
+(i.e., um pacote) da linguagem Ruby~\cite{ruby} e desenvolvido o sistema
+computacional Capacitor Web para ser uma interface visual para a utilização do CloudCapacitor, usando 
 o \emph{framework} Ruby on Rails~\cite{rails}.  
 
-A seguir são descritos os detalhes da implementação de cada um e como ambos se
-relacionam para oferecer ao usuário a experiência da avaliação de capacidade
+A seguir são descritos os detalhes da implementação de cada um destes módulos e
+como ambos se relacionam para oferecer ao usuário a experiência da avaliação de capacidade
 de baixo custo e alta precisão prevista pelo Processo proposto, com uma interface
 amigável e de fácil utilização.
 
@@ -43,17 +43,17 @@ Aplicação sob Teste em cada uma das Cargas de Trabalho respeitando o SLA defin
 
 \subsection{Classes e Responsabilidades}
 \label{subsec:classes}
-CloudCapacitor é formado por um conjunto de classes que, juntas representam os
+CloudCapacitor é formado por um conjunto de classes que representam os
 componentes envolvidos na avaliação de capacidade de aplicações em ambientes de
-nuvem, de acordo com os conceitos e o Processo definidos anteriormente, nos
+nuvem de acordo com os conceitos e o Processo definidos anteriormente, nos
 Capítulos~\ref{chap:formalizacao} e~\ref{chap:processo}. A Figura~\ref{fig:classes}
 mostra as principais classes cujas responsabilidades e cooperação levam ao 
 resultado final de uma Avaliação. 
 
 Ao utilizar a biblioteca CloudCapacitor na construção de um software para avaliação
 de capacidade, o desenvolvedor tem à sua disposição uma classe principal, chamada
-\emph{Cacitor}. Essa classe fornece o fluxo principal do Processo de Avaliação, com todos
-os seus pontos de decisão e de extensão.
+\emph{Capacitor}. Essa classe fornece o fluxo principal do Processo de
+Avaliação, com todos os seus pontos de decisão e de extensão.
 
 \begin{figure}[htb]
   \caption{\label{fig:classes}Principais classes que compõem o CloudCapacitor e suas relações}
@@ -161,7 +161,7 @@ desempenho. O caminho onde esse arquivo deve ser entrado precisa ser passado
 como parâmetro na inicialização do objeto Capacitor. Caso não seja informado, o 
 CloudCapacitor procurará um arquivo pelo nome \emph{deployment\_space.yml}, na
 pasta \emph{config}, se for uma aplicação Ruby on Rails, ou na pasta raiz do
-script ou outro tipo de aplicação.
+script para outro tipo de aplicação.
  
 \begin{figure}[h]
   \caption{\label{fig:depspace}Especificação de Tipos de Máquinas para o Espaço de Implantação}
@@ -299,7 +299,7 @@ um objeto da classe \emph{Result}, que deve ser inicializado com apenas 3 atribu
 Essas informações devem ser obtidas pelo desenvolvedor através de chamadas a
 uma ferramenta de execução de testes, como \cite{cunha2012ambiente}, 
 \cite{jayasinghe2012} ou \cite{silva2013cloudbench}. A implementação dessa 
-comunicação com a ferramenta de automação de testes escolhida é efetuada está 
+comunicação com a ferramenta de automação de testes escolhida está 
 fora do escopo deste trabalho e deve ficar a cargo do desenvolvedor prover o 
 código que controle a execução dos testes e obtenha os valores de desempenho
 e consumo de CPU e memória.
@@ -354,8 +354,7 @@ de preço entre as Configurações. O desenvolvedor pode optar pelo grafo por ca
 instanciação do objeto \emph{Capacitor}. Embora esse não seja o foco desta 
 pesquisa, isso foi feito para que pudesse ser estudada a influência da formação 
 do Espaço de Implantação na precisão e eficiência de custo das Heurísticas de 
-Seleção. Esses resultados serão discutidos no Capítulo~\ref{chap:resultados} 
-adiante.
+Seleção. Esses resultados serão discutidos no Capítulo~\ref{chap:resultados}.
 
 O Espaço de Implantação é a estrutura que dá suporte à navegação das Estratégias
 sobre os diversos Níveis de Capacidade no momento em que devem ser escolhidas
@@ -559,7 +558,7 @@ Capacidade, formando a Heurística de Seleção utilizada, e o atributo usado pa
 geração do grafo que representa o Espaço de Implantação, isto é, capacidade ou
 preço. Abaixo, são exibidos o número de execuções reais realizadas no ambiente
 de nuvem alvo da Avaliação e o custo total por hora dessas execuções, com base
-no preço definido pelo Provedir para as Configurações efetivamente utilizadas no 
+no preço definido pelo Provedor para as Configurações efetivamente utilizadas no 
 teste. 
  
 As abas da parte inferior ativam a visualização das informações complementares 
@@ -646,7 +645,7 @@ Configurações são capazes de atender cada Carga de Trabalho.
 \section{Resumo}
 Este capítulo apresentou a implementação concreta do Processo de Avaliação proposto no
 Capítulo~\ref{chap:processo} sob a forma de uma biblioteca a ser usada na criação de sistemas
-mais completos destinados à avaliação de desempenho e capacidade de nuvens de infraestrutura.mais
+mais completos destinados à avaliação de desempenho e capacidade de nuvens de infraestrutura.
 Foram explicados os detalhes de programação necessários ao entendimento de como os conceitos vistos
 foram concretizados em software, ao tempo em que foram descritos os passos envolvidos na 
 customização das tarefas mais específicas ou que conferem flexibilidade ao Processo.
