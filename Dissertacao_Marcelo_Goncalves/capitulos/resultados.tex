@@ -140,25 +140,72 @@ de infraestrutura na nuvem, é possível inferir o desempenho de uma Aplicação
 executando em uma Configuração com base no desempenho observado em uma
 execução real da Aplicação em uma Configuração distinta.
 
-\begin{figure}[hbt]
-  \caption{\label{fig:avaliacao_precisao}Avaliação da Precisão da Inferência de Desempenho}
-  \begin{center}
-    \includegraphics[scale=0.5]{img/Precision}
-  \end{center}
-\end{figure}
+\begin{table}[htbp]
+  \centering
+  \caption{\label{table:acuracia_capacidade}Acurácia da Inferência de Desempenho no Grafo por Capacidade}
+    {\fontsize{2.5mm}{1em}\selectfont
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    \multirow{3}{*}{Heurísticas} & \multicolumn{15}{c|}{SLA (segundos)} \\
+    \cline{2-16}
+          & \multicolumn{3}{c|}{10} & \multicolumn{3}{c|}{20} & \multicolumn{3}{c|}{30} & \multicolumn{3}{c|}{40} & \multicolumn{3}{c|}{50} \\
+          \cline{2-16}
+          & P     & R     & F     & P     & R     & F     & P     & R     & F     & P     & R     & F     & P     & R     & F \\
+          \hline          
+    CC    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,98}  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    CO    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    CP    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,98}  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    OC    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,99}  & \textbf{\color{red}0,99}  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    OO    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    OP    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,98}  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    PC    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,98}  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    PO    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    PP    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,98}  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    \hline
+    \end{tabular}%
+    }% end fontsize
+  \label{tab:addlabel}%
+\end{table}%
+
+\begin{table}[htbp]
+  \centering
+  \caption{\label{table:acuracia_preco}Acurácia da Inferência de Desempenho no Grafo por Preço}
+  {\fontsize{2.5mm}{1em}\selectfont
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline          
+    \multirow{3}{*}{Heurísticas} & \multicolumn{15}{c|}{SLA (segundos)} \\
+    \cline{2-16}
+          & \multicolumn{3}{c|}{10} & \multicolumn{3}{c|}{20} & \multicolumn{3}{c|}{30} & \multicolumn{3}{c|}{40} & \multicolumn{3}{c|}{50} \\
+          \cline{2-16}
+          & P     & R     & F     & P     & R     & F     & P     & R     & F     & P     & R     & F     & P     & R     & F \\
+          \hline
+    CC    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,97}  & \textbf{\color{red}0,98}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    CO    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,98}  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    CP    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,97}  & \textbf{\color{red}0,98}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    OC    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,97}  & \textbf{\color{red}0,98}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    OO    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,98}  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    OP    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,97}  & \textbf{\color{red}0,98}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    PC    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,99}  & \textbf{\color{red}0,97}  & \textbf{\color{red}0,98}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    PO    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,98}  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    PP    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,99}  & \textbf{\color{red}0,97}  & \textbf{\color{red}0,98}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    \hline
+    \end{tabular}%
+    }% end fontsize
+  \label{tab:addlabel}%
+\end{table}%
 
 Assim, este trabalho submeteu o Processo à verificação de sua acurácia ao realizar
 predições para o desempenho do WordPress executando em máquinas virtuais do provedor
 Amazon Web Services. O cálculo de Precision and Recall~\cite{powers2011evaluation} 
 sobre os resultados dos experimentos realizados mostra que o Processo de Inferência 
 de Desempenho é capaz de obter índices de precisão muito próximos de 100\%, como 
-pode ser observado na Figura~\ref{fig:avaliacao_precisao}. 
+pode ser observado nas Tabelas~\ref{table:acuracia_capacidade}~e~\ref{table:acuracia_preco}. 
 
-A imagem mostra XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+As tabelas mostram XXXXXXXXX
 
 Isso significa que, com a correta representação das relações de capacidade entre
 as Configurações, o Processo de Inferência de Desempenho proposto neste trabalho
-consegue efeticamente predizer, com grande confiança, quais Configurações de um 
+consegue efetivamente predizer, com grande confiança, quais Configurações de um 
 Provedor são capazes de executar uma Aplicação sob os níveis de demanda analisados. 
 
 \subsection{Eficiência}
