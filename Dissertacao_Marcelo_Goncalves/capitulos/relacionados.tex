@@ -56,8 +56,8 @@ O projeto {\em CloudHarmony}, cujo
 objetivo é ``tornar-se a principal fonte independente, imparcial e útil de
 métricas de desempenho de provedores de nuvem''~\cite{cloudharmony}, agrega
 dados de testes de desempenho realizados desde 2009 em mais de 60 provedores de
-nuvem. Além do histórico das avaliações, o {\em CloudHarmony} disponibiliza uma ferramenta para executar novas avaliações de desempenho a qualquer momento, denominada
-\textit{Cloud Speed Test},\footnote{\url{http://cloudharmony.com/speedtest}}, a qual permite realizar quatro tipos de teste:
+nuvem. Conforme descrito em~\cite{cunha2012ambiente}, além do histórico das
+avaliações, o {\em CloudHarmony} disponibiliza uma ferramenta para executar novas avaliações de desempenho a qualquer momento, denominada \textit{Cloud Speed Test},\footnote{\url{http://cloudharmony.com/speedtest}}, a qual permite realizar quatro tipos de teste:
 
 \begin{description}
   \item[\em Download a few large files] --- objetiva determinar o melhor provedor
@@ -274,7 +274,35 @@ tem um desempenho moderado. Das abordagens preditivas, o \textit{CloudProphet}
 usuário defina aplicação, demanda, recurso da nuvem e SLA desejado.
 
 \subsection{Abordagem Empírica}
-Apesar das soluções de abordagem empírica terem destaque no critério da completude, no que diz respeito à efetividade, elas possuem desempenho moderado nos critérios relacionados à eficiência e à complexidade, enquanto que possuem alta acurácia. No que diz respeito à eficiência, essas ferramentas poderiam fazer uso de resultados anteriores para evitar a execução de testes que claramente poderiam ser evitados, por exemplo, em uma situação em uma demanda é submetida à aplicação que está sendo executada em uma máquina virtual com o mais baixo nível de recurso computacional, seria coerente afirmar que essa mesma demanda pode ser atendida por máquinas com perfis computacionais mais robustos. Já no que diz respeito à complexidade, cada trabalho faz uso de uma estratégia particular para a definição da aplicação. Dessa forma, o usuário do ambiente precisa se adaptar à sintaxe de cada solução, e eventualmente, configurar imagens contendo os componentes da aplicação que será avaliada.
+As soluções de abordagem empírica, por sua vez, possuem desempenhos muito
+parecidos tanto na completude, quanto na efetividade. Com relação à
+completude, que abrange a definição da aplicação, da demanda, dos recursos da
+nuvem e do SLA, as soluções possuem alto desempenho. Pois permitem muita
+liberdade nessas definições. Por exemplo, na solução apresentada
+em~\cite{cunhacloud}, o usuário pode definir toda a pilha de componentes
+da aplicação alvo, todos cenários utilizados na avaliação de desempenho, as
+demandas que serão submetidas a cada um dos cenários e o critério que define se
+o cenário suportou a demanda, ou seja, o SLA. Da mesma forma, as soluções
+apresentadas em ~\cite{jayasinghe2012,silva2013cloudbench,scheuner2014cloud},
+possuem os seus mecanismos para a realização dessas definições.
+
+Apesar das soluções de abordagem empírica terem destaque na completude, no que
+diz respeito à efetividade, que abrange eficiência, acurácia e complexidade,
+essas soluções possuem desempenho moderado. No critério da eficiência, essas
+ferramentas deveriam fazer uso de resultados anteriores para evitar a execução
+de testes que claramente poderiam ser evitados. Por exemplo, em uma situação na qual uma demanda é submetida à aplicação que está sendo
+executada em uma máquina virtual com baixo poder computacional, seria coerente
+afirmar que essa mesma demanda pode ser atendida por máquinas com perfis
+computacionais mais robustos. Devido à essa necessidade de executar os testes em
+cada uma das configurações, sem fazer uso de resultados anteriores, as soluções
+de abordagem empírica possuem baixa eficiência. Por outro lado, como irão
+executar de fato a aplicação e submetê-la à demanda especificada, essas soluções
+possuem alta acurácia. Já no que diz respeito à complexidade, o desempenho é
+considerado moderado. Uma vez que cada trabalho faz uso de uma estratégia
+de uso particular, e que as experiências anteriores do usuário irão ser
+determinantes na percepção da complexidade. Esse usuário precisa se adaptar à
+sintaxe de cada solução, e eventualmente, configurar imagens contendo os
+componentes da aplicação que será avaliada.
 
 %\section{Outros Trabalhos e Considerações}
 
