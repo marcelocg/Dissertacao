@@ -29,10 +29,10 @@ utilização típico apresenta características bem diversificadas quanto ao uso
 de recursos de CPU e memória, rede, sistema de arquivos e banco de dados.
 
 \begin{figure}[hbt]
-  \caption{\label{fig:implantacao}Implantação do WordPress na AWS EC2 para Avaliação de Capacidade}
   \begin{center}
     \includegraphics[scale=0.4]{img/ImplantacaoWordPress}
   \end{center}
+  \caption{\label{fig:implantacao}Implantação do WordPress na AWS EC2 para Avaliação de Capacidade}
 \end{figure}
 
 O Provedor escolhido foi a Amazon, com seu serviço de infraestrutura AWS EC2
@@ -142,7 +142,6 @@ em uma Configuração distinta.
 
 \begin{table}[htbp]
   \centering
-  \caption{\label{table:acuracia_capacidade}Acurácia da Inferência de Desempenho no Grafo por Capacidade}
     {\fontsize{2.4mm}{1em}\selectfont
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline
@@ -164,12 +163,11 @@ em uma Configuração distinta.
     \hline
     \end{tabular}%
     }% end fontsize
-  \label{tab:addlabel}%
+  \caption{\label{table:acuracia_capacidade}Acurácia da Inferência de Desempenho no Grafo por Capacidade}
 \end{table}%
 
 \begin{table}[htbp]
   \centering
-  \caption{\label{table:acuracia_preco}Acurácia da Inferência de Desempenho no Grafo por Preço}
   {\fontsize{2.4mm}{1em}\selectfont
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline          
@@ -191,7 +189,7 @@ em uma Configuração distinta.
     \hline
     \end{tabular}%
     }% end fontsize
-  \label{tab:addlabel}%
+  \caption{\label{table:acuracia_preco}Acurácia da Inferência de Desempenho no Grafo por Preço}
 \end{table}%
 
 Assim, este trabalho submeteu o Processo à verificação de sua acurácia ao realizar
@@ -255,7 +253,6 @@ de preços do provedor na data realização dos testes, para cada uma das Config
 para as quais foram realizadas execuções reais na nuvem. 
 
 \begin{figure}[hbt]
-  \caption{\label{fig:eficiencia_custo}Avaliação da Eficiência de Custo das Heurísticas}
   \centering
     \begin{subfigure}[a]{0.7\textwidth}
       \includegraphics[width=\textwidth]{img/ExecutionCost-Capacity}
@@ -267,6 +264,7 @@ para as quais foram realizadas execuções reais na nuvem.
       \caption{Grafo por Preço}
       \label{fig:eficiencia_custo_preco}
     \end{subfigure}
+  \caption{\label{fig:eficiencia_custo}Avaliação da Eficiência de Custo das Heurísticas}
 \end{figure}
 
 Para cada aspecto analisado, custo e número de execuções, foram realizadas duas 
@@ -286,7 +284,6 @@ capacidade entre as Configurações. O segundo gráfico considera o grafo da rel
 de preço das Configurações usado para representar o Espaço de Implantação.
 
 \begin{figure}[hbt]
-  \caption{\label{fig:eficiencia_execucoes}Avaliação da Eficiência do Número de Execuções das Heurísticas}
   \centering
     \begin{subfigure}[a]{0.7\textwidth}
       \includegraphics[width=\textwidth]{img/ExecutionCount-Capacity}
@@ -298,6 +295,7 @@ de preço das Configurações usado para representar o Espaço de Implantação.
       \caption{Grafo por Preço}
       \label{fig:eficiencia_execucoes_preco}
     \end{subfigure}
+  \caption{\label{fig:eficiencia_execucoes}Avaliação da Eficiência do Número de Execuções das Heurísticas}
 \end{figure}
 
 No topo de ambos os gráficos vê-se um linha horizontal que representa a 
