@@ -372,11 +372,11 @@ de tempo na realização das atividades de testes de desempenho.
     \hline
     \multirow{2}{*}{Métricas} & \multicolumn{9}{c|}{Heurísticas} \\
     \cline{2-10}
-    & CC   & CO   & CP   & OC   & OO   & OP   & PC   & PO   & PP \\
+                 & CC    & CO    & CP    & OC    & OO    & OP    & PC    & PO    & PP \\
     \hline
-    Custo    & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 \\
-    Tempo    & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 \\
-    Acurácia & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 & 1,00 \\
+    Custo (US\$) & 25,23 & 21,55 & 52,31 & 24,05 & 31,74 & 28,85 & 42,79 & \cellcolor{OliveGreen}\textbf{\color{yellow}16,54} & 117,95 \\
+    Tempo (h)    & 50,10 & 80,30 & 50,60 & 53,00 & 53,00 & 79,50 & 96,20 & \cellcolor{OliveGreen}\textbf{\color{yellow}47,50} & 169,70 \\
+    Acurácia     & 0,997 & 0,998 & 0,997 & 0,997 & 0,998 & 0,997 & 0,997 & \cellcolor{OliveGreen}\textbf{\color{yellow}0,998} & 0,997  \\
     \hline
     \end{tabular}%
   \caption{\label{table:resultado_consolidado}Resultados Consolidados da Inferência de Desempenho}
@@ -385,6 +385,24 @@ de tempo na realização das atividades de testes de desempenho.
 
 A Tabela~\ref{table:resultado_consolidado} apresenta uma consolidação geral dos
 resultados obtidos por todas as Heurísticas definidas pelo Processo de Avaliação
-de Capacidade por Inferência de Desempenho.
+de Capacidade por Inferência de Desempenho. Como pode ser observado, a Heurística 
+Pessimista-Otimista atinge os melhores resultados, predizendo com uma precisão de 
+99,8\% as melhores Configurações para executar a Aplicação sob Teste e gastando 
+menos de US\$~17,00 e menos de 48 horas na média global para completar a Avaliação 
+de Capacidade.  
+
+Destacam-se ainda outras Heurísticas como Conservadora-Conservadora e 
+Otimista-Conservadora, que, na média global, obtiveram resultados não muito acima
+do atingido pela Pessimista-Otimista. A Heurística Pessimista-Pessimista, como
+já mostrado na análise dos gráficos das 
+Figuras~\ref{fig:eficiencia_custo}~e~\ref{fig:eficiencia_execucoes}, apresentou
+resultados muito ruins quanto ao custo e ao tempo gastos para completar a Avaliação.
+
+Esses dados consolidados comprovam ainda a grande precisão com que a predição
+pela Inferência de Desempenho aponta as melhores Configurações para executar a
+Aplicação sob Teste sob as mais variadas Cargas de Trabalho.
+ 
+
+
 
 % ----------------------------------------------------------
