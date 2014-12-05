@@ -1,5 +1,10 @@
 Lista de Pendências
 
+- Capitulo 2 - conceitos de nuvem, planejamento capacidade, Amazon
+- Cap 3 - definicoes para cap 4, formalizacao some
+- Revisar o cap 4 para referencias
+- Minimizar o problema do cap 6. limitacao cujo impacto eh minimo
+- trabalhos futuros estudar impacto flutuacao
 - Captions embaixo das figuras, e nao em cima
 - Figuras em Português
 - 
