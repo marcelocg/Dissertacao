@@ -226,9 +226,13 @@ um deles o Processo deixou de obter 100\% de acurácia nas predições. Durante 
 execução dos experimentos foram observados momentos de flutuação no desempenho
 das máquinas virtuais disponibilizadas pelo Provedor. Essa flutuação afetou os
 testes para o SLA igual a 30 segundos, refletindo em erros de predição. Essa é
-na verdade uma fraqueza constatada do Processo de Avaliação de Capacidade por
-Inferência de Desempenho. De fato, oscilações no desempenho da infraestrutura
-do Provedor já foram observados por \cite{iosup2011performance} e \cite{cunhaavalia}.
+na verdade uma limitação constatada do Processo de Avaliação de Capacidade por
+Inferência de Desempenho, que está sujeito às flutuações do Provedor por fazer
+uso, ainda que pouco frequente, de execuções reais. De fato, oscilações no 
+desempenho da infraestrutura do Provedor são comuns e já foram observados por 
+\cite{iosup2011performance} e \cite{cunhaavalia}. O impacto dessas flutuações, 
+porém, é mínimo, reduzindo a acurácia do Processo de Inferência em, no máximo,
+3\%.
 
 Embora afetado pela oscilação do desempenho no Provedor, o Processo de Inferência
 de Desempenho ainda se mostra bastante preciso quando observados os demais 
