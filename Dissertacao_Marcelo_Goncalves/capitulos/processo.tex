@@ -1,22 +1,168 @@
 \chapter{Avaliação de Capacidade}
 \label{chap:processo}
 % ----------------------------------------------------------
-Dadas as definições e formalizações propostas anteriormente, faz-se necessária
-a especificação de uma lógica de manipulação das entidades e operações descritas.
-
 Este capítulo apresenta uma proposta de processo de avaliação de capacidade
 que visa a buscar as Configurações de menor preço capazes de executar uma determinada 
 Carga de Trabalho. Esse processo foi implementado como parte de um sistema 
 computacional ao qual demos o nome de \emph{Cloud Capacitor} e que descreveremos 
 no capítulo seguinte.  
 
-\begin{figure}
-  \caption{\label{fig:fig_processo_alto_nivel}Visão geral do Processo de
-  Avaliação de Capacidade}
-  \begin{center}
-    \includegraphics[scale=0.6]{img/processoAltoNivel}
-  \end{center}
-\end{figure}
+Antes de descrever o processo, é preciso que seja apresentado um 
+conjunto de definições e terminologias que baseiam o entendimento da 
+construção do trabalho e também a avaliação dos resultados, bem como a eficiência 
+e eficácia da solução proposta. Os conceitos aqui explicitados são tomados de 
+forma a permitir um estudo agnóstico quanto a aplicações, plataformas e provedores
+utilizados durante a execução das ferramentas desenvolvidas neste trabalho.
+
+\section{Definições e Terminologias}
+Apresentamos a seguir as definições que permeiam o conhecimento necessário para 
+a análise dos problemas estudados e soluções propostas. Mostramos também as 
+terminologias ou nomenclaturas que criamos para designar esses conceitos a fim 
+de facilitar a comunicação e o entendimento por parte do leitor.
+
+\subsection{Aplicação sob Teste}
+A Aplicação sob Teste é um sistema computacional, possivelmente implementado em 
+arquitetura multicamadas, para o qual se deseja observar o comportamento em um 
+ambiente de computação em nuvem e ao qual estão ligadas uma ou mais Métricas de 
+Desempenho.
+
+\subsection{Métrica de Desempenho}
+Uma característica ou comportamento mensurável de forma automatizada e 
+comparável a um Valor de Referência capaz de indicar o grau de sucesso de uma 
+execução da Aplicação. Ex. tempo de resposta, quadros por segundo, etc. Métricas 
+podem ser minimizáveis ou maximizáveis, a depender do objetivo da métrica quanto 
+ao resultado desejado. Por exemplo, “tempo de resposta” é uma métrica 
+minimizável, uma vez que geralmente se deseja que uma Aplicação responda a uma 
+requisição com o menor tempo de resposta possível nos resultados. Contrariamente, 
+uma métrica “quadros renderizados por segundo”, no domínio da computação gráfica, 
+é uma métrica maximizável, pois quanto mais quadros são renderizados por unidade 
+de tempo, maior a qualidade percebida pelo usuário.
+
+\subsection{Valor de Referência de Desempenho ou SLA}
+Um valor predefinido como minimamente aceitável como resultado apresentado por 
+uma Métrica após uma Execução da Aplicação sob Teste. Este valor, também 
+referenciado neste trabalho como SLA (Service Level Agreement), serve como base 
+de comparação para que se classifique a Aplicação como capaz de ser executada 
+em um determinado arranjo de máquinas virtuais e sob uma determinada Carga de
+Trabalho a ela imposta.
+
+\subsection{Provedor}
+Consideramos neste trabalho a figura do provedor como representando uma empresa 
+que fornece infraestrutura computacional como serviço cobrado financeiramente 
+por fração de tempo de utilização. Alguns provedores fornecem conjuntamente a 
+modalidade de plataforma como serviço. Nós, porém, não estamos considerando essa 
+modalidade neste trabalho, interessando-nos apenas os serviços de infraestrutura, 
+notadamente a disponibilização de máquinas virtuais.
+
+\subsection{Tipos de Máquinas Virtuais}
+Provedores costumam classificar as máquinas virtuais fornecidas conforme suas 
+características, de modo a manter uma linha de produtos discreta e finita. 
+Normalmente essa classificação se dá em termos de quantidade de memória RAM, 
+quantidade de espaço em disco e capacidade computacional, neste caso, quer seja 
+em termos relativos a um valor padrão tomado como base, quer seja em termos 
+absolutos, como número de CPUs virtuais.
+
+\subsection{Categorias de Máquinas Virtuais}
+Tipos de Máquinas Virtuais podem ser agrupados em Categorias, conforme suas 
+características físicas, plataforma e/ou arquitetura de hardware e a natureza do 
+uso a que se destinam. Dentro de uma mesma Categoria, os Tipos de Máquinas 
+Virtuais variam apenas na quantidade de cada um dos recursos especificados para 
+a Categoria e no preço cobrado pelo uso das máquinas virtuais.
+
+Como exemplo, podemos citar uma Categoria de máquinas destinadas a armazenamento 
+de arquivos, onde as máquinas devem privilegiar o espaço de armazenamento em 
+massa. Dentro dessa categoria, a principal diferença entre os Tipos de Máquinas 
+Virtuais se dá em função da quantidade de espaço em disco disponibilizado, 
+enquanto características como memória RAM e CPU teriam pequenas variações. 
+Outras Categorias podem enfatizar o consumo de banda de rede ou processamento 
+paralelo de alto desempenho.
+
+\subsection{Configurações}
+Chamamos de Configuração um conjunto de máquinas virtuais pertencentes ao mesmo 
+Tipo de Máquinas Virtuais e, portanto, de uma mesma Categoria. Configurações são
+usadas para implantar uma camada arquitetural da Aplicação sob Teste (apresentação, 
+negócio, persistência, etc.) e representam o estado de uma determinada camada da 
+aplicação quanto à sua escalabilidade, vertical ou horizontal.
+
+Por exemplo, suponhamos avaliação do comportamento de uma Aplicação cuja camada de
+negócios está implantada em arquitetura de cluster de servidores de aplicação. 
+Variando a quantidade de máquinas que compõem esse cluster, obtemos diferentes níveis
+de escalabilidade horizontal para os quais podemos avaliar o desempenho da Aplicação.
+Agora, suponhamos que podemos usar uma, duas, três ou quatro máquinas em paralelo como
+componentes do cluster da camada de negócios da Aplicação sob Teste. Assim, teríamos
+então quatro Configurações diferentes, a primeira com uma instância na camada de negócio,
+a segunda Configuração com duas instâncias, a terceira com três e a quarta com quatro 
+instâncias de máquinas do mesmo Tipo de Máquina Virtual. A Aplicação sob Teste seria 
+executada quatro vezes, cada uma das quais utilizando uma dessas Configurações. Os 
+resultados dessas Execuções refletem o efeito da escalabilidade horizontal no desempenho
+geral da Aplicação.
+
+Analogamente, poderiam ser usadas Configurações criadas a partir de Tipos de Máquinas
+Virtuais diferentes, umas mais potentes que as outras. A comparação dos resultados obtidos
+nesse cenário nos dão insumos para avaliar o efeito da escalabilidade vertical sobre o
+desempenho da Aplicação.
+
+Os experimentos desenvolvidos e apresentados neste trabalho comparam 
+implantações de diferentes Configurações em uma determinada camada da Aplicação 
+sob Teste estudada. Isso permite, por exemplo, que sejam feitas avaliações como 
+a viabilidade financeira da escalabilidade vertical face ao desempenho 
+possivelmente obtido com a escalabilidade horizontal.
+
+\subsection{Espaço de Implantação}
+Chamamos de Espaço de Implantação o conjunto limitado de Configurações tomadas 
+para execução da Aplicação sob Teste em uma sessão de avaliação.
+ 
+Idealmente, uma Aplicação deveria ser testada sob todos os Tipos de Máquinas 
+Virtuais fornecidos pelo Provedor (cobrindo todo o espaço de escalabilidade 
+vertical) com o maior número possível de combinações de quantidade de instâncias 
+(cobrindo o espaço de escalabilidade horizontal). Porém, se muitos Tipos de 
+Máquinas Virtuais forem necessários e se o intervalo de número de instâncias 
+solicitado for muito grande, o tempo de duração da sessão e o custo da muitas 
+execuções podem se tornar proibitivos.
+
+Assim, o processo de especificação de um Espaço de Implantação consiste em 
+selecionar uma lista de Tipos de Máquinas Virtuais entre os oferecidos pelo 
+Provedor e designar o melhor valor para o número máximo de instâncias que serão 
+usadas na criação das Configurações. Isso faz com que ambos os espaços de 
+escalabilidade vertical e horizontal sejam limitados, de forma a controlar 
+melhor os custos e permitir que sejam executados testes mais objetivos e de 
+acordo com a meta de Carga de Trabalho a ser atendida pela Aplicação.
+
+\subsection{Carga de Trabalho}
+A Carga de Trabalho, ou Workload, representa o tamanho da demanda que será 
+imposta à Aplicação sob Teste em uma execução. A unidade de medida da Carga é 
+dependente do domínio da Aplicação, como a duração do vídeo em uma aplicação
+de transcodificação de arquivos multimídia ou o tamanho do arquivos de entrada
+para uma aplicação de compactação de arquivos. Entretanto, para efeito deste 
+trabalho, essa unidade de medida da Carga é irrelevante, uma vez que a 
+responsabilidade pela execução dos testes e, por conseguinte, pela geração da 
+carga, é delegada a um módulo à parte dentro do sistema de avaliação, como um
+software de \emph{benchmarking}.
+
+\subsection{Execução}
+Dá-se o nome de Execução ao evento de utilização de uma Configuração para 
+executar a Aplicação sob Teste submetida a uma determinada Carga de Trabalho. 
+Dessa forma, a avaliação dos Resultados de uma Execução nos dará uma ideia de 
+como a Aplicação responderá às requisições de certo número de usuários (Workload) 
+após ser implantada num ambiente de nuvem com certo grau de escalabilidade 
+horizontal (número de máquinas virtuais usadas). 
+
+Tome-se como exemplo uma aplicação web muito comum, um blog. São requisições 
+comuns a um blog o acesso à página principal, uma consulta às postagens de uma
+categoria e o acesso a uma postagem específica. Agora, suponha-se uma Configuração
+composta de três instâncias de máquinas virtuais do Provedor Rackspace, do Tipo 
+"Performance 1", executando uma instalação do blog Wordpress, muito usado hoje em 
+dia. Uma Execução dessa aplicação seria a imposição da Carga de Trabalho correspondente
+a um conjunto de requisições disparadas por 100 usuários simultâneos sobre essa Configuração. 
+
+Introduzidas as definições e formalizações, torna-se possível agora a especificação 
+de uma lógica de manipulaçãoo das entidades e operações descritas. As próximas 
+seções descrevem a proposta de um Processo de Avaliação de Capacidade por 
+Inferência de Desempenho cujo objetivo é identificar as Configurações capazes
+de executar uma Aplicação respeitando um certo SLA definido.
+
+\section{Visão Geral do Processo}
+\label{sec:processo_visao_geral}
 
 O processo (Figura~\ref{fig:fig_processo_alto_nivel}) prevê um conjunto de
 dados de entrada, ao menos uma execução da Aplicação sob Teste no ambiente de nuvem de infraestrutura almejado para 
@@ -27,13 +173,21 @@ cenários. Ao final do processo, é fornecida como saída uma lista de Configura
 ordenadas por preço, capazes de executar a Aplicação sob cada uma das Cargas de 
 Trabalho fornecidas como parte dos dados de entrada.
 
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[scale=0.6]{img/processoAltoNivel}
+  \end{center}
+  \caption{\label{fig:fig_processo_alto_nivel}Visão geral do Processo de
+  Avaliação de Capacidade}
+\end{figure}
+
 Este capítulo aborda em detalhes todas as fases do processo 
 proposto, explicando quais são os dados de entrada necessários, as operações 
 executadas pelo processo e quais as decisões pelas quais o processo tem que 
 passar até determinar quais são as Configurações de menor custo capazes de 
 executar a Aplicação.
 
-\section{Dados de Entrada}
+\subsection{Dados de Entrada}
 
 O principal parâmetro esperado pelo processo de avaliação de capacidade é o Valor
 de Referência de Desempenho, ao qual também nos referimos como SLA 
@@ -58,7 +212,7 @@ passa a conhecer então o Espaço de Implantação disponível para os testes de
 desempenho, composto por uma lista de Configurações geradas a partir da lista de
 Tipos de Máquinas Virtuais disponíveis e do número máximo de instâncias.
 
-\section{Atividades Customizáveis}
+\subsection{Atividades Customizáveis}
 O processo de avaliação de capacidade proposto é um processo extensível, do qual
 fazem parte atividades customizáveis para as quais são delegadas funções de
 cunho mais específico, como a comunicação com o Provedor de nuvem e a Aplicação sob Teste
@@ -67,7 +221,7 @@ para fins de orquestração do teste de desempenho, e também funções para as 
 como a escolha das Cargas de Trabalho e Configurações que serão usadas na execução
 da Aplicação.
 
-\subsection{Execução dos Testes de Desempenho}
+\subsubsection{Execução dos Testes de Desempenho}
 Todas as atividades ligadas à rotina de execução da Aplicação, desde sua implantação,
 passando pela criação e configuração das máquinas virtuais no ambiente do Provedor 
 de nuvem, bem como pelo controle de inicialização e finalização dessas instâncias, 
@@ -89,8 +243,8 @@ pontos de extensibilidade oferecidos pelo processo e sua implementação concret
 fora do escopo deste trabalho, cujo foco não está na automação de execução de testes 
 de qualquer natureza, mas na análise dos dados resultantes dessa execução.
 
-\subsection{Estratégias e Heurísticas}
-\label{sec:heuristicas}
+\subsubsection{Estratégias e Heurísticas}
+\label{subsubsec:heuristicas}
 De modo análogo à abordagem adotada em relação às atividades de execução dos
 testes, as operações de seleção da Configuração sobre as quais a Aplicação
 sob Teste será executada, bem como a seleção das Cargas de Trabalho a que ela 
@@ -150,11 +304,11 @@ processo entre as Configurações que compõem o Espaço de Implantação a ser 
 e também entre as Cargas de Trabalho a serem impostas sobre a Aplicação, convém
 observar a Figura~\ref{fig:heuristicas}.
 
-\begin{figure}
-  \caption{\label{fig:heuristicas}Diagrama de Funcionamento das Heurísticas de Seleção}
+\begin{figure}[hbt]
   \begin{center}
     \includegraphics[scale=1]{img/heuristics}
   \end{center}
+  \caption{\label{fig:heuristicas}Diagrama de Funcionamento das Heurísticas de Seleção}
 \end{figure}
 
 A imagem ilustra dois conjuntos dispostos em forma de matriz, um conjunto 
@@ -195,10 +349,10 @@ da técnica de inferência. A eficácia e efetividade da aplicação das heurís
 é analisada no capítulo~\ref{chap:resultados}. 
 
 \begin{figure}
-  \caption{\label{fig:fig_processo_aval_capacidade}Diagrama de Funcionamento do Processo de Avaliação de Capacidade}
   \begin{center}
     \includegraphics[scale=0.45]{img/capacity-planning-diagram-v13-mono}
   \end{center}
+  \caption{\label{fig:fig_processo_aval_capacidade}Diagrama de Funcionamento do Processo de Avaliação de Capacidade}
 \end{figure}
 
 \section{Funcionamento do Processo}
@@ -281,10 +435,10 @@ entre elas apontando da menor para a maior. A ausência de seta entre duas Confi
 implica a impossibilidade de se afirmar uma relação de capacidade entre elas. 
 
 \begin{figure}
-  \caption{\label{fig_niveis_capacidade}Agrupamento de Configurações por Níveis de Capacidade}
   \begin{center}
     \includegraphics[scale=1]{img/exemplo-niveis-capacidade}
   \end{center}
+  \caption{\label{fig_niveis_capacidade}Agrupamento de Configurações por Níveis de Capacidade}
 \end{figure}
 
 Assim, observando o Espaço de Implantação organizado por Categorias e classificado
@@ -340,7 +494,16 @@ Assim, usando a representação do Espaço de Implantação conforme descrito na
 Seção~\ref{subsec:processo_niveis_capacidade}, o Processo assinala como candidatas
 todas as Configurações para as quais, direta ou indiretamente, a Configuração 
 atual aponte uma seta, ou seja, todas as Configurações ``maiores que'' a Configuração
-atual, no sentido da definição apresentada na seção~\ref{sec:formalizacao_configuracoes}.
+atual. Considera-se que uma Configuração $C_1$ é ``maior que'' uma outra Configuração
+$C_2$ se: 
+
+\begin{enumerate}[label=\bfseries \alph*)]
+\item ambas são formadas pelo mesmo Tipo de Máquina Virtual e $C_1$ possui 
+número maior de instâncias do que $C_2$; ou
+\item ambas são formadas pelo mesmo número de instâncias
+e o Tipo de Máquina de $C_1$ possui mais CPU e mais memória que o Tipo de Máquina
+de $C_2$.  
+\end{enumerate}
 
 Mas a técnica de Inferência ainda vai mais longe. Sabendo que as Configurações
 que acabaram de ser assinaladas como Candidatas são capazes de executar a Aplicação
@@ -368,11 +531,11 @@ atender a demandas maiores, ou mais severas. O Processo de Avaliação manda, en
 que a Configuração atual e todas as Configurações menores sejam também marcadas
 como Rejeitadas para todas as Cargas de Trabalho maiores que a Carga atual. 
 
-\begin{figure}
-  \caption{\label{fig:fig_processo_inferencia}Inferência de Desempenho: Marcação de Configurações Candidatas e Rejeitadas}
+\begin{figure}[h]
   \begin{center}
     \includegraphics[scale=1]{img/inference}
   \end{center}
+  \caption{\label{fig:fig_processo_inferencia}Inferência de Desempenho: Marcação de Configurações Candidatas e Rejeitadas}
 \end{figure}
 
 O efeito da aplicação da técnica de Inferência de Desempenho pode ser melhor
@@ -444,7 +607,7 @@ Processo é dado por concluído e sua finalização se efetiva pela apresentaç�
 lista que contém, para cada Carga de Trabalho, as Configurações capazes de executar
 a Aplicação sob Teste, em ordem crescente de preço.
 
-Por "capazes de executar", entenda-se como as Configurações para as quais o valor
+Por ``capazes de executar'', entenda-se como as Configurações para as quais o valor
 obtido para a Métrica de Desempenho durante a execução da Aplicação sob determinada
 Carga de Trabalho é menor ou igual ao valor definido para o SLA ou Valor de Referência
 como um dos dados de entrada no início do Processo de Avaliação de Capacidade.
@@ -462,10 +625,10 @@ em que a técnica de Inferência de Desempenho é empregada e evidenciando a inf
 a utilização de diferentes Heurísticas exerce sobre a eficiência do Processo.
 
 \begin{figure}
-  \caption{\label{fig:fig_processo_traces}Rastreamamento da Execução das Heurísticas e Inferência de Desempenho}
   \begin{center}
     \includegraphics[scale=0.6]{img/traces}
   \end{center}
+  \caption{\label{fig:fig_processo_traces}Rastreamamento da Execução das Heurísticas e Inferência de Desempenho}
 \end{figure}
 
 A Figura~\ref{fig:fig_processo_traces} mostra, nos quadros da parte inferior, 
