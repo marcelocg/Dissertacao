@@ -1,0 +1,236 @@
+\section{Fundamentação Teórica}
+% ----------------------------------------------------------
+Esta seção apresenta alguns fundamentos básicos ligados à Computação em Nuvem
+(\emph{Cloud Computing}) a fim de nivelar o conhecimento do leitor a respeito
+das tecnologias envolvidas bem como terminologias e conceitos utilizados neste
+trabalho.
+
+\subsection{Computação em Nuvem}
+Embora não haja uma conceituação padronizada, a análise da literatura disponível 
+em torno da computação em nuvem permite caracterizá-la como um modelo de computação 
+distribuída em que usuários rapidamente provisionam e liberam sob demanda recursos 
+computacionais virtualizados configuráveis de maneira escalável e elástica através 
+de um serviço provido pela rede ou Internet 
+\cite{foster2009cloud,cearley2010case,mell2011nist}. 
+
+A partir desse texto é possível destacar três ideias chave: \textbf{escalável} --- 
+relacionada à percepção de recursos ilimitados; \textbf{serviço} --- similar ao 
+fornecimento de serviços utilitários como energia elétrica ou gás, que são pagos 
+apenas quando utilizados; \textbf{rede e Internet} --- relativa ao meio através do qual o 
+consumidor terá acesso ao serviço; \textbf{rápido provisionamento e a liberação de recursos}
+ --- como forma de garantir escalabilidade, e o acesso aos recursos através da rede, não
+necessariamente a Internet.
+
+Em~\cite{vaquero2008break}, os autores discutem o paradigma da computação em
+nuvem através da identificação e estudo de 20 definições disponíveis na literatura, 
+para então extrair uma definição mais abrangente, contendo as características comuns 
+a várias das definições analisadas:
+
+\begin{citacao}
+A computação em nuvem ``consiste em um grande \emph{pool} de recursos virtualizados 
+(tais como hardware, plataformas de desenvolvimento e/ou serviços) facilmente 
+utilizáveis e acessíveis. Esses recursos podem ser dinamicamente reconfigurados 
+para se ajustarem a uma carga variável, permitindo também a sua utilização ótima. 
+Esse \emph{pool} de recursos é tipicamente explorado em um modelo de pagar-pelo-uso, 
+no qual o provedor de infraestrutura oferece garantias por meio de acordos de nível 
+de serviço (SLAs) customizados.''\end{citacao}
+
+Essa última definição menciona o termo \textbf{acordo de nível de serviço}, uma 
+característica particularmente importante para aplicações sensíveis a flutuações 
+de desempenho. Outra característica mencionada é o modelo de \textbf{pagar-pelo-uso}, 
+o que permite que uma aplicação se adapte a variações na demanda com a adição de 
+novos recursos ou a liberação de recursos existentes, restringindo seus gastos 
+com a nuvem apenas a recursos que de fato necessita e utiliza.
+
+\subsubsection{Modelos de Implantação}
+O serviço de disponibilização de recursos computacionais ao usuário, conforme
+carcaterizado na seção anterior, pode ser implantado de maneiras diferentes,
+a depender da sua localização em relação à entidade corporativa representada pelo
+usuário e ao meio pelo qual esse usuário tem acesso a esse 
+serviço~\cite{armbrust2009above,Zhang2010}.
+ 
+\begin{description}
+\item[Nuvem privada] \hfill \\ É construída para ser utilizada por uma única 
+organização e, geralmente, a alocação de seus recursos se dá por uma rede interna. 
+Esse modelo de nuvem oferece todos os benefícios normalmente atribuídos à computação 
+em nuvem, como recursos virtualizados e escalabilidade das aplicações. A exceção 
+é o seu alto custo de manutenção, já que a própria organização é responsável pelo 
+gerenciamento da infraestrutura física. Atualmente há diversas soluções que permitem 
+a criação e o gerenciamento de uma nuvem privada dentro de uma organização, com 
+destaque para soluções de código aberto como OpenStack~\cite{openstack}, 
+Eucalyptus~\cite{eucalyptus} e Open-Nebula~\cite{opennebula}.
+\item[Nuvem pública] \hfill \\ A nuvens públicas constituem o modelo de nuvem 
+mais conhecido, e disponibilizam recursos de nuvem para o público em geral. Esses 
+recursos normalmente estão disponíveis através da Internet e são gerenciados por 
+uma organização (provedor da nuvem), que pode cobrar pela sua utilização. 
+\item[Nuvem híbrida] \hfill \\ No modelo de implantação híbrido, recursos de uma 
+nuvem pública são alocados em conjunto com os de uma nuvem privada. Um exemplo de 
+aplicabilidade desse modelo é o caso dos recursos da nuvem privada terem se exaurido,
+possivelmente num momento de pico de utilização de uma aplicação. Neste caso, 
+novos recursos podem ser alocados a partir de uma nuvem pública. O modelo de 
+nuvem híbrida é implementado em algumas soluções como OpenNebula~\cite{opennebula}, 
+que permite a integração de recursos de uma nuvem privada com recursos da nuvem 
+da Amazon, e Righscale~\cite{rightscale}, que oferece um serviço de nuvem híbrida 
+comercial.
+\end{description}
+
+Este trabalho tem seu foco totalmente voltado ao planejamento de capacidade em
+nuvens públicas e, portanto, este foi o modelo de implantação adotado na execução
+dos experimentos descritos no Capítulo~\ref{chap:resultados}. 
+
+\subsubsection{Tipos de Serviço de Nuvem}
+Outra forma de classificar as soluções de computação em nuvem é quanto aos tipos 
+dos serviços oferecidos. Os três tipos de serviços de nuvem mais comumente citados 
+são: infraestrutura como serviço (IaaS), plataforma como serviço (PaaS), e 
+software como serviço (SaaS)~\cite{armbrust2010view,Zhang2010}. 
+
+\begin{description}
+\item[SaaS - Software as a Service] \hfill \\ Caracterizam-se por ter como cliente o
+próprio usuário final do serviço publicado, que normalmente consiste em uma
+aplicação hospedada na nuvem. Nas nuvens SaaS, é o provedor da nuvem quem se
+responsabiliza pelo desenvolvimento e atualização dos serviços (aplicações) 
+fornecidos aos usuários. Estão cada vez mais presentes no dia a dia dos usuários 
+de computadores. Os exemplos mais comuns são serviços de email, discos virtuais, 
+CRM e editores online, que muitas vezes são ofertados sem custo inicial para seus 
+usuários. No caso do email, um dos serviços mais conhecidos é o GMail, que oferece 
+uma determinada capacidade de armazenamento gratuitamente, com o usuário tendo a 
+opção de pagar para estender essa capacidade inicial caso necessite de mais espaço. 
+Serviços de discos virtuais, como Dropbox e GoogleDrive, também seguem uma política 
+de preços similar. Já serviços de CRM - \emph{Customer Relationship Management}, 
+como \cite{salesforce} e o \cite{zoho}, oferecem um período de teste gratuito 
+para o usuário, após o qual o serviço passa a ser pago. O \cite{github} é um 
+serviço gratuito de controle de versionamento de arquivos para repositórios 
+públicos. Entretanto, o usuário tem a opção de pagar pelo serviço para ter direito 
+a repositórios privados.
+\item[PaaS - Platform as a Service] \hfill \\ Nas nuvens PaaS o desenvolvimento 
+das aplicações fica sob responsabilidade dos clientes, cabendo ao provedor da 
+nuvem oferecer uma plataforma de execução apropriada ao cliente. Nesse tipo de 
+nuvem, o provedor é responsável por manter o ambiente operacional, garantindo a 
+disponibilidade dos serviços e realizando os ajustes necessários para que as 
+aplicações desenvolvidas pelos clientes atendam à demanda de seus usuários. 
+Dois dos provedores de nuvem PaaS mais conhecidos são Microsoft e Google, que 
+oferecem os serviços Windows Azure~\cite{azure} e Google AppEngine~\cite{appengine}, 
+respectivamente. No Windows Azure, o cliente da nuvem tem acesso às plataformas 
+.NET, Node.js, Java, PHP, Python e Ruby, além das plataformas móveis iOS, Android
+e Windows Phone. Já no Google App Engine o desenvolvedor pode escolher entre 
+as linguagens Java, Python, PHP e Go. No entanto, uma aplicação Java ou Phyton 
+já existente dificilmente poderia ser portada para um desses serviços sem sofrer 
+modificações, pois em abos há restrições ou a necessidade de configurações específicas
+em suas APIs quando comparadas às plataformas tradicionais.
+\item[IaaS - Infrastructure as a Service] \hfill \\ Nuvens to tipo IaaS oferecem 
+aos clientes recursos básicos de infraestrutura, como processamento, armazenamento 
+e rede. Nessa modalidade de serviço, o usuário tem à sua disposição um conjunto
+de recursos virtuais, geralmente agrupados por sua capacidade ou finalidade, para
+que escolha e monte a configuração que mais se adeque às necessidade de desempenho
+da sua aplicação. Entre esses recursos estão máquinas virtuais, discos,
+CPUs de voltadas a processamento gráfico e redes de alta velocidade. Comparado 
+aos outros dois tipos de serviço de nuvem, os serviços do tipo IaaS oferecem muito 
+mais flexibilidade de configuração pelos clientes, que assim podem implantar e 
+executar na nuvem as aplicações de sua escolha, inclusive os próprios sistemas 
+corporativos com pouca o nenhuma modificação. Alguns dos provedores de nuvens 
+IaaS mais conhecidos são Amazon, com seu serviço EC2 - Elastic Compute 
+Cloud~\cite{ec2}, e Rackspace~\cite{rackspace}.
+\end{description}
+
+Uma vez que o objetivo deste trabalho está voltado para o planejamento de capacidade
+de recursos de nuvens, a modalidade de serviço utilizada é a IaaS. Os estudos 
+desenvolvidos focam no teste de desempenho de uma aplicação implantada em um
+provedor de nuvem de infraestrutura, onde o objetivo é identificar quais dentre
+os recursos disponibilizados são capazes de executar a aplicação obdedecendo ao 
+acordo de nível de serviço estabelecido. Assim, apresentamos a seguir uma breve
+descrição dos recursos oferecidos em um provedor de nuvem de infraestrutura. 
+
+\subsubsection{Recursos de IaaS}
+A fim de esclarecer melhor quais recursos um usuário de nuvem IaaS tem a seu
+dispor, esta seção mostra algumas das oções disponibilizadas pelo serviço EC2
+da Amazon. A descrição está focada neste provedor por ter sido o escolhido para
+a execução dos testes de desempenho que dão suporte aos experimentos realizados
+neste trabalho.
+
+O serviço EC2 caracteriza-se principalmente pelo fornecimento de máquinas virtuais
+que o usuário pode criar, ligar e desligar livremente, pagando pelo tempo de
+utilização, ou seja, pelo tempo em que as máquinas estiverem ligadas. Essas 
+máquinas são instanciadas a partir de configurações cujo poder computacional é 
+pré determinado pelo provedor, mas especificamente, quantidade de memória, 
+quantidade de núcleos virtuais de CPU e poder de processamento total da CPU.
+
+Os tipos de máquinas virtuais do serviço EC2 são categorizados segundo sua 
+finalidade e segundo seus atributos de hardware. Há categorias para máquinas
+que priorizam mais memória em detrimento de poder computacional, outras para 
+máquinas cujo característica é o grande poder de processamento e até categorias
+específicas de máquinas voltadas ao processamento gráfico ou em \emph{clusters}.
+A Tabela~\ref{table:maquinas_ec2} mostra uma parte dos tipos de máquinas virtuais
+oferecidos pelo serviço EC2 da Amazon, com os preços cobrados por hora e suas
+características de hardware.
+
+\begin{table}
+  \centering
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+%    \multirow{2}{*}{Tipos de Máqunas} & Núcleos & ECU\footnotemark & \parbox[m]{2cm}{\center{Memória\\(GiB)}} & US\$ / hora\\
+    Tipos de Máquinas & Núcleos & ECU\footnotemark & \parbox[m]{2cm}{\center{Memória\\(GiB)}} & US\$ / hora\\
+%    \cline{2-5}
+    \hline    
+      \multicolumn{5}{|c|}{Propósito Geral} \\
+      \hline      
+      t2.micro  & 1 & Variável & 1 & 0.013 \\
+      t2.small  & 1 & Variável & 2 & 0.026 \\
+      t2.medium & 2 & Variável & 4 & 0.052 \\
+      m3.medium & 1 & 3 & 3.75 & 0.070 \\
+      m3.large  & 2 & 6.5 & 7.5 & 0.140 \\
+      m3.xlarge & 4 & 13  & 15  & 0.280 \\
+      m3.2xlarge & 8 & 26 & 30  & 0.560 \\
+      \hline      
+      \multicolumn{5}{|c|}{Otimizadas para Computação} \\
+      \hline      
+      c3.large  & 2 & 7 & 3.75 & 0.105 \\
+      c3.xlarge & 4 & 14 & 7.5 & 0.210 \\
+      c3.2xlarge & 8 & 28 & 15 & 0.420 \\
+      c3.4xlarge & 16 & 55 & 30 & 0.840 \\
+      c3.8xlarge & 32 & 108 & 60 & 1.680 \\
+      \hline      
+      \multicolumn{5}{|c|}{Otimizadas para Processamento Gráfico (GPU)} \\
+      \hline      
+      g2.2xlarge & 8 & 26 & 15 & 0.650 \\
+      \hline      
+      \multicolumn{5}{|c|}{Otimizadas para Memória} \\
+      \hline      
+      r3.large & 2 & 6.5 & 15 & 0.175 \\
+      r3.xlarge & 4 & 13 & 30.5 & 0.350 \\
+      r3.2xlarge & 8 & 26 & 61 & 0.700 \\
+      r3.4xlarge & 16 & 52 & 122 & 1.400 \\
+      r3.8xlarge & 32 & 104 & 244 & 2.800 \\
+    \hline    
+  \end{tabular}
+  \caption{\label{table:maquinas_ec2}Relação parcial de preços do EC2 na regiao US East em Dezembro de 2014}
+\end{table}
+
+\footnotetext{\emph{ECU - EC2 Compute Unit} é uma medida própria criada pela Amazon 
+para relativizar o poder de processamento de suas máquinas para permitir uma 
+comparação entre os vários tipos de máquinas oferecidos.}
+
+Cada máquina pode ser individualmente configurada com opções diferentes de armazenamento
+em massa. Há opções de armazenamento volátil, armazenamento em volumes magnéticos
+comuns ou discos de estado sólido - \emph{SSDs}. Essas opções, embora não alterem
+a categorização da máquina, alteram o preço final da hora de utilização, acarretando
+um custo adicional ao valor base da hora da configuração padrão da máquina. Além
+disso, a utilização de alguns recursos acarreta mais um custo adicional, como o
+tráfego de dados pela rede. A Amazon cobra uma tarifa por \emph{gigabyte} trafegado
+para fora da rede local do provedor. Isso significa que mesmo o tráfego de rede 
+entre centros de dados diferentes pode ser cobrado.
+
+Os preços cobrados pela Amazon para a utilização de uma máquina virtual variam 
+conforme o centro de dados escolhido pelo usuário no momento da criação da máquina.
+Essa variação ocorre tanto para o preço base das máquinas como para recursos adicionais
+e consumíveis, como tráfego de dados.
+
+A Amazon possui centros de dados em todos os continentes, oferecendo redundância
+e buscando minimizar problemas com latência de rede. Atualmente existem 3 centros de
+dados nos Estados Unidos, sendo 1 em Virginia, 1 no Oregon e 1 na Califórnia; 2 
+centros de dados na Europa, sendo 1 em Frankfurt e 1 na Irlanda; 3 centros na Ásia,
+com 1 em Cingapura, 1 em Tóquio e 1 em Sydney; e 1 centro de dados na América do
+Sul, em São Paulo. Por motivos de custo, para os testes executados nos experimentos 
+deste trabalho foi utilizado o centro de dados da região US East (Virginia), o
+mais barato entre todos, inclusive mais barato que o centro de dados no Brasil.   
+
+% ----------------------------------------------------------
