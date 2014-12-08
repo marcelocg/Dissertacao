@@ -4,6 +4,9 @@
 Este capítulo apresenta alguns conceitos básicos ligados à Computação em Nuvem, incluindo sua definição, seus modelos de implantação e seus tipos de serviços. O capítulo também aborda a questão do planejamento da capacidade de recursos na nuvem, descrevendo e analisando criticamente vários trabalhos existentes relacionados ao tema.
 
 \section{Computação em Nuvem}
+
+\subsection{Definição}
+
 Embora ainda não haja uma definição oficial, a análise da literatura disponível 
 em torno da computação em nuvem permite caracterizá-la como ``um modelo de computação 
 distribuída em que usuários podem rapidamente provisionar e liberar, sob demanda, recursos 
@@ -77,7 +80,7 @@ Este trabalho tem seu foco voltado ao planejamento de capacidade em
 nuvens públicas e, portanto, este foi o modelo de implantação adotado na execução
 dos experimentos descritos no Capítulo~\ref{chap:resultados}. 
 
-\subsection{Tipos de Serviço de Nuvem}
+\subsection{Tipos de Serviço}
 
 Outra forma de classificar as plataformas de computação em nuvem é quanto aos tipos 
 dos serviços oferecidos. Os três tipos de serviços de nuvem mais comumente citados 
@@ -233,7 +236,7 @@ mais barato entre todos, inclusive mais barato que o centro de dados no Brasil.
 
 % ----------------------------------------------------------
 
-\section{Planejamento de Capacidade na Nuvem}
+\subsection{Planejamento de Capacidade}
 
 A questão do planejamento de capacidade de recursos na nuvem pode ser vista a partir de dois ângulos distintos: do ponto de vista do provedor do serviço e do ponto de vista do usuário do serviço \cite{Menasce2009}. Do ponto de vista do provedor do serviço, planejar a capacidade dos recursos significa monitorar a utilização e, sempre que necessário, adicionar novos  recursos computacionais à infraestrutura física onde são implantados os serviços disponibilizados aos usuários da nuvem. Nesse aspecto, o planejamento de capacidade precisa ser realizado pelo provedor independentemente do modelo de implantação ou do tipo de serviço oferecido aos usuários.
 
@@ -247,31 +250,27 @@ A próxima seção apresenta e analisa criticamente alguns dos principais trabal
 
 \section{Abordagens para Apoiar o Planejamento de Capacidade em Nuvens IaaS}
 
-Apresentamos  neste capítulo alguns trabalhos cujos objetivos estão alinhados 
-com a ideia da avaliação de desempenho de aplicações executadas em ambientes de
-computação em nuvem. Esses trabalhos estão agrupados de acordo com a abordagem utilizada para a realização da avaliação de desempenho. São duas abordagens, a primeira é a abordagem preditiva, nesta, os trabalhos não executam diretamente a aplicação alvo no ambiente onde se deseja implantá-la. Já a segunda abordagem é a empírica, nesta as aplicações alvo são implantadas na nuvem e então submetidas a testes de carga. 
+Esta seção descreve alguns trabalhos cujos objetivos estão alinhados em apoiar o planejamento da capacidade de aplicações a serem executadas utilizando um serviço de nuvem na modalidade IaaS. A descrição desses trabalhos é feita de acordo com a abordagem utilizada para a realização do planejamento de capacidade. São duas as principais abordagens identificadas: a \textbf{abordagem preditiva}, cujo objetivo é conseguir prever o desempenho esperado da aplicação alvo quando executada sob determinadas configurações de recursos e determinadas cargas de trabalho, sem a necessidade de executá-la diretamente no ambiente de nuvem onde se deseja implantá-la; e a \textbf{abordagem empírica}, cujo objetivo é avaliar o real desempenho da aplicação alvo diretamente na plataforma de nuvem desejada, executando-a sob diferentes configurações de recursos e níveis de carga de trabalho. 
 
-
-Cada abordagem será apresentada em uma subseção, bem como os diversos trabalhos da área que serão resumidos separadamente. Ao final da subseção, será apresentada uma análise crítica que será baseada nos critérios descritos acima.
+Ao final da seção, será apresentada uma análise crítica dos trabalhos descritos no contexto de cada uma das duas abordagens supra-mencionadas.
 
 \subsection{Abordagem Preditiva}
 
-As ferramentas que serão apresentadas nesta seção têm em comum o fato de
+Os trabalhos categorizados nessa abordagem têm em comum o fato de
 indicarem a configuração de implantação na nuvem sem executarem avaliações de
 desempenho diretamente na aplicação que será migrada para a nuvem. Dessa forma,
-elas prevêem a configuração de implantação, por isso estão sendo chamadas de
-abordagens preditivas. Muitas das soluções de abordagem preditiva realizam as
+eles tentam prever a configuração ideal de implantação da aplicação alvo.
+
+A maioria das soluções que adotam a abordagem preditiva realiza as
 suas predições após a caracterização da performance dos recurso da nuvem, o que
-é realizado através da execução de \textit{benchmarks}. Já o
-\textit{CloudProphet}, apresentado em~\cite{li2011cloudprophet}, coleta como a
+é realizado através da execução de \textit{benchmarks}. A exceção é a solução proposta em~\cite{li2011cloudprophet}, que coleta dados sobre como a
 aplicação alvo faz uso dos recursos computacionais em um ambiente controlado e
-então repete essa utilização em uma nuvem candidata. Dessa forma, não necessita
-caracterizar a performance dos recursos da nuvem.
+então repete essa utilização em uma nuvem candidata. Dessa forma, não é necessária a caracterização prévia da performance dos recursos da nuvem.
 
 A seguir, apresentaremos seis trabalhos que se destacam na avaliação de
-desempenho de aplicações na nuvem usando uma abordagem preditiva, são
-eles:~\cite{cloudharmony},~\cite{malkowski2010cloudxplor},~\cite{li2011},~\cite{jung2013cloudadvisor},~\cite{fittkau2012cdosim}
-e~\cite{li2011cloudprophet}.
+desempenho de aplicações na nuvem usando a abordagem preditiva. São
+eles: Cloud Harmony~\cite{cloudharmony}, CloudXplor~\cite{malkowski2010cloudxplor}, CloudCmp~\cite{li2011}, CloudAdvisor~\cite{jung2013cloudadvisor}, CDOSim~\cite{fittkau2012cdosim}
+e CloudProphet~\cite{li2011cloudprophet}.
 
 \subsubsection{Cloud Harmony}
 O projeto {\em CloudHarmony}, cujo
@@ -412,9 +411,12 @@ componentes da aplicação, que podem acarretar dificuldades de configuração e
 compatibilidade no novo ambiente.
 
 \subsection{Abordagem Empírica}
-As ferramentas que serão apresentadas nesta seção têm em comum o fato de utilizarem como aplicação alvo a prória aplicação que se deseja implantar na nuvem. Portanto, é preciso inicialmente realizar uma implantação na nuvem para que seja dado início ao processo de análise de desempenho. Por isso, cada ferramenta oferece um mecanismo para que o seu usuário possa definir como a aplicação deve ser implantada e configurada. Além da definição da aplicação e dos recursos da nuvem que serão utilizados, essas ferramentas também permitem que sejam definidas a demanda que será imposta a cada aplicação e o acordo de nível de serviço. Dessa forma, é possível definir, por exemplo, o número de usuários simultâneos e o tempo de resposta esperado para uma transação.
 
-Uma vez que que as ferramentas que realizam a abordagem empírica possibilitam ao usuário muita liberdade na definição da aplicação, demanda, recurso da nuvem e SLA, essas soluções têm o mais alto grau de completude. Além disso, como faz-se uso da própria aplicação alvo para a avaliação de desempenho, a acurácia dos resultados apresentados pelas ferramentas é a mais elevada. A seguir, apresentaremos quatro trabalhos que se destacam na avaliação de desempenho de aplicações na nuvem usando a abordagem empírica, são eles:~\cite{jayasinghe2012},~\cite{silva2013cloudbench},~\cite{cunhacloud} e~\cite{scheuner2014cloud}.
+Os trabalhos que adotam a abordagem empírica têm em comum o fato de utilizarem como aplicação alvo a própria aplicação que se deseja implantar na nuvem. Portanto, é preciso inicialmente realizar uma implantação na nuvem para que seja dado início ao processo de análise de desempenho. Por isso, cada ferramenta oferece um mecanismo para que o seu usuário possa definir como a aplicação deve ser implantada e configurada. Além da definição da aplicação e dos recursos da nuvem que serão utilizados, essas ferramentas também permitem que sejam definidas a demanda que será imposta a cada aplicação e o acordo de nível de serviço. Dessa forma, é possível definir, por exemplo, o número de usuários simultâneos e o tempo de resposta esperado para uma transação.
+
+Uma vez que que as ferramentas que realizam a abordagem empírica possibilitam ao usuário muita liberdade na definição da aplicação, demanda, recurso da nuvem e SLA, essas soluções têm o mais alto grau de flexibilidade. Além disso, como faz-se uso da própria aplicação alvo para a avaliação de desempenho, a acurácia dos resultados apresentados pelas ferramentas é a mais elevada. 
+
+A seguir, apresentamos quatro trabalhos que se destacam na avaliação de desempenho de aplicações na nuvem usando a abordagem empírica. São eles: Expertus~\cite{jayasinghe2012}, CloudBench~\cite{silva2013cloudbench}, Cloud Crawler~\cite{cunhacloud} e Cloud WorkBench~\cite{scheuner2014cloud}.
 
 \subsubsection{Expertus}
 Devido à complexidade e às implicações da escolha da configuração para a implantação de uma aplicação na nuvem, em~\cite{jayasinghe2012} os autores apresentam o \textit{Expertus}, que é descrito como ``um framework flexível de geração de código para automatizar testes de performance de aplicações distribuídas em nuvem de infraestrutura''. Essa geração automática de código é realizada a partir de {\em templates} especificados na forma de documentos XML~\cite{jayasinghe2012}. Os templates utilizados nas avaliações de desempenho devem ser escritos pelo usuário e servem de entrada para o ambiente, que realiza diversas transformações nessa entrada até a forma de \textit{shell scripts}. Esses \textit{scripts}, por fim, possuem os comandos para a configuração da avaliação de desempenho na aplicação alvo.
@@ -471,17 +473,17 @@ Após a análise dos resultados, os autores concluem que o \textit{Cloud WorkBen
 Para apoiar a análise crítica de cada trabalho e suas abordagens, definimos um conjunto de critérios a partir dos quais poderemos tanto descrever, quanto comparar as soluções existentes de apoio a avaliação de desempenho do ponto de vista do usuário. Seguem os critérios:
 
 \begin{enumerate}
-  \item \textbf{Completude da solução}
+  \item \textbf{Flexibilidade da solução}
   \begin{enumerate}
-    \item \textbf{Definição da aplicação} --- flexibilidade da solução para
+    \item \textbf{Seleção da aplicação} --- flexibilidade da solução para
     definir a aplicação a ser avaliada;
-    \item \textbf{Definição da demanda} --- flexibilidade da solução para
+    \item \textbf{Seleção da demanda} --- flexibilidade da solução para
     definir os níveis de carga de trabalho sobre os quais a aplicação será
     submetida;
-	\item \textbf{Definição dos recursos da nuvem} --- flexibilidade da solução
+	\item \textbf{Seleção dos recursos da nuvem} --- flexibilidade da solução
 	para definir as configurações de recursos do provedor sobre as quais a aplicação
 	será executada;
-	\item \textbf{Definição do acordo de nível de serviço (SLA)} --- flexibilidade
+	\item \textbf{Seleção do acordo de nível de serviço (SLA)} --- flexibilidade
 	da solução para definir o SLA desejado.
   \end{enumerate}
   \item \textbf{Efetividade da solução}  
@@ -498,10 +500,9 @@ Para apoiar a análise crítica de cada trabalho e suas abordagens, definimos um
 
 \subsubsection{Abordagem Preditiva}
 As soluções de abordagem preditiva possuem desempenho bastante variados nos
-critérios de desempenho estabelecidos no início deste capítulo, porém elas
-acabam convergindo na efetividade, que comproente eficiência, acurácia e
-complexidade. No critério de eficência, as soluções se destacam, possuem
-alta eficiência, uma vez que não requerem a alocação de recursos de nuvem para
+critérios de comparação estabelecidos na subseção anterior. Porém, elas
+acabam convergindo na efetividade, que comprimem eficiência, acurácia e
+complexidade. No critério de eficência, as soluções se destacam, uma vez que não requerem a alocação de recursos de nuvem para
 realizarem as predições. No entanto, o \textit{CloudProphet} é a única solução
 de abordagem preditiva com baixa eficiência, pois requer a alocações de recursos da nuvem para
 avaliar todas as demandas e configurações. Já com relação à acurácia, as
@@ -515,20 +516,20 @@ anteriores sejam realizadas através de uma interface amigável, sem a necessida
 Já as demais possuem complexidade moderada.
  
 Ainda com base nos critérios de avaliação, as soluções apresentadas
-em~\cite{malkowski2010cloudxplor,cloudharmony} possuem baixa completude, pois
+em~\cite{malkowski2010cloudxplor,cloudharmony} possuem baixa flexibilidade, pois
 não permitem que sejam definidos aplicação, demanda, recurso da nuvem e SLA. Já
 o \textit{CloudAdvisor} apresentando em~\cite{jung2013cloudadvisor}, permite a
 definição da aplicação, e da carga, porém não permite a escolha do SLA e não
 faz referência a respeito do uso de nuvens públicas diferentes das apresentadas
-nos resultados. Dessa forma, com relação à completude, o \textit{CloudAdvisor}
-tem um desempenho moderado. Das abordagens preditivas, o \textit{CloudProphet}
-é a solução que se destaque no critério da completude, pois permite que o
+nos resultados. Dessa forma, com relação à flexibilidade, o \textit{CloudAdvisor}
+tem um desempenho moderado. Dentre as soluções da abordagem preditiva, o \textit{CloudProphet}
+é a solução que se destaque no critério da flexibilidade, pois permite que o
 usuário defina aplicação, demanda, recurso da nuvem e SLA desejado.
 
 \subsubsection{Abordagem Empírica}
 As soluções de abordagem empírica, por sua vez, possuem desempenhos muito
-parecidos tanto na completude, quanto na efetividade. Com relação à
-completude, que abrange a definição da aplicação, da demanda, dos recursos da
+parecidos tanto na flexibilidade, quanto na efetividade. Com relação à
+flexibilidade, que abrange a definição da aplicação, da demanda, dos recursos da
 nuvem e do SLA, as soluções possuem alto desempenho. Pois permitem muita
 liberdade nessas definições. Por exemplo, na solução apresentada
 em~\cite{cunhacloud}, o usuário pode definir toda a pilha de componentes
@@ -536,25 +537,26 @@ da aplicação alvo, todos cenários utilizados na avaliação de desempenho, as
 demandas que serão submetidas a cada um dos cenários e o critério que define se
 o cenário suportou a demanda, ou seja, o SLA. Da mesma forma, as soluções
 apresentadas em ~\cite{jayasinghe2012,silva2013cloudbench,scheuner2014cloud},
-possuem os seus mecanismos para a realização dessas definições.
+possuem os seus próprios mecanismos para a realização dessas definições.
 
-Apesar das soluções de abordagem empírica terem destaque na completude, no que
+Apesar das soluções de abordagem empírica terem destaque na flexibilidade, no que
 diz respeito à efetividade, que abrange eficiência, acurácia e complexidade,
-essas soluções possuem desempenho moderado. No critério da eficiência, essas
-ferramentas deveriam fazer uso de resultados anteriores para evitar a execução
-de testes que claramente poderiam ser evitados. Por exemplo, em uma situação na qual uma demanda é submetida à aplicação que está sendo
-executada em uma máquina virtual com baixo poder computacional, seria coerente
-afirmar que essa mesma demanda pode ser atendida por máquinas com perfis
-computacionais mais robustos. Devido à essa necessidade de executar os testes em
+essas soluções possuem desempenho moderado. Devido à necessidade de executar os testes em
 cada uma das configurações, sem fazer uso de resultados anteriores, as soluções
 de abordagem empírica possuem baixa eficiência. Por outro lado, como irão
 executar de fato a aplicação e submetê-la à demanda especificada, essas soluções
 possuem alta acurácia. Já no que diz respeito à complexidade, o desempenho é
 considerado moderado. Uma vez que cada trabalho faz uso de uma estratégia
 de uso particular, e que as experiências anteriores do usuário irão ser
-determinantes na percepção da complexidade. Esse usuário precisa se adaptar à
-sintaxe de cada solução, e eventualmente, configurar imagens contendo os
+determinantes na percepção da complexidade. Esse usuário precisa se adaptar aos mecanismos oferecidos por cada solução, e eventualmente, configurar imagens contendo os
 componentes da aplicação que será avaliada.
+
+\section{Resumo}
+
+Este capítulo apresentou os principais conceitos relacionados à computação em nuvem, com destaque para sua definição, seus modelos de implantação e seus tipos de serviços. Também foi abordada a questão do planejamento de capacidade em nuvens do tipo IaaS, sendo descritos e analisados criticamente diversos trabalhos propostos com o intuito de apoiar os usuários deste tipo de nuvem no planejamento dos recursos a serem alocados a suas aplicações.
+
+
+O próximo capítulo apresenta um novo processo de inferência de desempenho que visa apoiar o planejamento de capacidade em nuvens IaaS. O novo processo segue uma abordagem híbrida, combinando aspectos das abordagens preditiva e empírica, o que lhe permite obter resultados com alta efetividade e flexibilidade. 
 
 
 
