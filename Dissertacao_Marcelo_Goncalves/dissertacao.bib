@@ -28,12 +28,18 @@
   year={2011},
   organization={IEEE}
 }
-@article{li2011cloudprophet,
-  title={CloudProphet: predicting web application performance in the cloud},
-  author={Li, Ang and Zong, Xuanran and Zhang, Ming and Kandula, Srikanth and Yang, Xiaowei},
-  journal={ACM SIGCOMM Poster},
-  year={2011}
-}
+
+@inproceedings{li2011cloudprophet,
+ author = {Li, Ang and Zong, Xuanran and Kandula, Srikanth and Yang, Xiaowei and Zhang, Ming},
+ title = {CloudProphet: Towards Application Performance Prediction in Cloud},
+ booktitle = {Proc. of the ACM SIGCOMM 2011 Conference},
+ OPTseries = {SIGCOMM},
+ year = {2011},
+ pages = {426--427},
+ OPTpublisher = {ACM},
+ note={Also available as a Duke University technical report at \url{https://www.cs.duke.edu/~angl/papers/cloudprophet_tr.pdf}} 
+} 
+
 @conference{foster2009cloud,
   title={{Cloud computing and grid computing 360-degree compared}},
   author={Foster, I. and Zhao, Y. and Raicu, I. and Lu, S.},
@@ -85,31 +91,31 @@
   organization={IEEE}
 }
 @Unpublished{ github,
-    author = "github",
+    author = "GitHub",
     title = "GitHub",
     note= "\url{https://www.github.com/}",
     year = "2014"
 }
 @Unpublished{ zoho,
     author = "Zoho",
-    title = "Zoho",
+    title = "Zoho Creator",
     note= "\url{https://www.zoho.com/}",
     year = "2014"
 }
 @Unpublished{ salesforce,
     author = "Salesforce",
-    title = "Salesforce",
+    title = "Salesforce1",
     note= "\url{https://www.salesforce.com/}",
     year = "2014"
 }
 @Unpublished{ appengine,
-	author = "AppEngine",
-	title = "Google App Engine",
+	author = "Google",
+	title = "App Engine",
 	note= "\url{https://cloud.google.com/appengine/}",
 	year = "2014"
 }
 @Unpublished{azure,
-	author = "Azure",
+	author = "Microsoft",
 	title = "Windows Azure Platform",
 	note= "\url{http://azure.microsoft.com/}",
 	year = "2014"
@@ -134,7 +140,7 @@
 }
 @Unpublished{ cloudharmony,
 	author = "CloudHarmony",
-	title = {CloudHarmony Benchmarking the Cloud},
+	title = {CloudHarmony: Benchmarking the Cloud},
 	note = {\url{http://cloudharmony.com/benchmarks}},
 	year = {2014}
 }
@@ -170,20 +176,20 @@
     year = {2009}
 }
 @Unpublished{ ec2,
-	author = "EC2",
-	title = {Amazon Elastic Compute Cloud},
+	author = "Amazon",
+	title = {Amazon Elastic Compute Cloud (EC2)},
 	note = {\url{http://aws.amazon.com/ec2}},
 	year = {2014}
 }
 @Unpublished{ s3,
-	author = "S3",
-	title = {Amazon Simple Storage Service},
+	author = "Amazon",
+	title = {Amazon Simple Storage Service (S3)},
 	note = {\url{http://aws.amazon.com/s3}},
 	year = {2012}
 }
 @Unpublished{ ebs,
-	author = "EBS",
-	title = {Amazon Elastic Block Store},
+	author = "Amazon",
+	title = {Amazon Elastic Block Store (EBS)},
 	note = {\url{http://aws.amazon.com/ebs/}},
 	year = {2012}
 }
@@ -207,13 +213,15 @@
   year={2012},
   organization={IEEE Computer Society}
 }
-@conference{sobel2008cloudstone,
-  title={{Cloudstone: Multi-platform, multi-language benchmark and measurement tools for web 2.0}},
-  author={Sobel, W. and Subramanyam, S. and Sucharitakul, A. and Nguyen, J. and Wong, H. and Patil, S. and Fox, A. and Patterson, D.},
-  booktitle={Proc. of CCA},
-  year={2008},
-  organization={Citeseer}
+@inproceedings{sobel2008cloudstone,
+  title={Cloudstone: Multi-platform, multi-language benchmark and measurement tools for web 2.0},
+  author={Sobel, Will and Subramanyam, Shanti and Sucharitakul, Akara and Nguyen, Jimmy and Wong, Hubert and Klepchukov, Arthur and Patil, Sheetal and Fox, Armando and Patterson, David},
+  booktitle={Proc. of the 1st Workshop on Cloud Computing and Its Applications (CCA)},
+  OPTseries={CCA},
+  pages={1--6},
+  year={2008}
 }
+
 @article{armbrust2010view,
   title={A view of cloud computing},
   author={Armbrust, M. and Fox, A. and Griffith, R. and Joseph, A.D. and Katz, R. and Konwinski, A. and Lee, G. and Patterson, D. and Rabkin, A. and Stoica, I. and others},
@@ -256,20 +264,37 @@
   year={2012},
   organization={IEEE Computer Society}
 }
-@article{mell2011nist,
+@Unpublished{ wordpress,
+	author = {WordPress},
+	title = {WordPress: Blog Tool, Publishing Platform, and CMS},
+	note = {\url{https://wordpress.org/}},
+	year = {2014}
+}
+@Unpublished{mell2011nist,
   title={The NIST Definition of Cloud Computing},
   author={Mell, P. and Grance, T.},
-  journal={Recommendations of the National Institute of Standards and Technology},  
+  note={Available at \url{http://csrc.nist.gov/publications/nistpubs/800-145/SP800-145.pdf}},  
   year={2011},
   month={September},
-  publisher={NIST}
+  publisher={National Institute of Standards and Technology}
 }
+@InProceedings{Menasce2009,
+    author = {Daniel A. Menascé and Paul Ngo},
+    title = {Understanding Cloud Computing: Experimentation and Capacity Planning},
+    booktitle = {Proc. of the 2009 Computer Measurement Conference Group},
+    year = {2009}
+}
+
 @InProceedings{li2011,
-author = {Li, Ang and Yang, Xiaowei and Kandula, Srikanth and Zhang, Ming},
-title = {{CloudCmp: Comparing Public Cloud Providers}},
-booktitle = {Internet Measurement Conference},
-year = {2010}
+  author = {Li, Ang and Yang, Xiaowei and Kandula, Srikanth and Zhang, Ming},
+  OPTauthor = {Li, Ang and others},
+  title = {{CloudCmp: Comparing Public Cloud Providers}},
+  booktitle = {Proc. of the 10th ACM SIGCOMM Internet Measurement Conference (IMC)},
+  OPTseries={IMC},
+  pages={1--14},
+  year = {2010}
 }
+
 @article{Zhang2010,
   title={Cloud computing: state-of-the-art and research challenges},
   author={Zhang, Q. and Cheng, L. and Boutaba, R.},
