@@ -56,10 +56,10 @@ de capacidade, o desenvolvedor tem à sua disposição uma classe principal, cha
 Avaliação, com todos os seus pontos de decisão e de extensão.
 
 \begin{figure}[htb]
-  \caption{\label{fig:classes}Principais classes que compõem o CloudCapacitor e suas relações}
   \begin{center}
     \includegraphics[scale=0.75]{img/CapacitorClasses}
   \end{center}
+  \caption{\label{fig:classes}Principais classes que compõem o CloudCapacitor e suas relações}
 \end{figure}
 
 Entre os pontos de extensão, destaca-se o uso da classe \emph{Strategy}. Como 
@@ -134,7 +134,6 @@ os limites do Espaço de Implantação. São apenas dois parâmetros:
 \end{description}
 
 \begin{figure}[h]
-  \caption{\label{fig:settings}Parâmetros de Configuração para o CloudCapacitor}
  \begin{lstlisting}[linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
 deployment_space:
   #The maximum price for a whole Configuration.
@@ -146,6 +145,7 @@ deployment_space:
   #This is for horizontal scaling.
   max_num_instances: 4
   \end{lstlisting}
+  \caption{\label{fig:settings}Parâmetros de Configuração para o CloudCapacitor}
 \end{figure}
 
 No exemplo acima, serão criadas Configurações com 1, 2, 3 e 4 instâncias para cada
@@ -164,7 +164,6 @@ pasta \emph{config}, se for uma aplicação Ruby on Rails, ou na pasta raiz do
 script para outro tipo de aplicação.
  
 \begin{figure}[h]
-  \caption{\label{fig:depspace}Especificação de Tipos de Máquinas para o Espaço de Implantação}
  \begin{lstlisting}[linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
 ---
 - !ruby/object:CloudCapacitor::VMType
@@ -192,6 +191,7 @@ script para outro tipo de aplicação.
   price: 1.64
   category: m2
   \end{lstlisting}
+  \caption{\label{fig:depspace}Especificação de Tipos de Máquinas para o Espaço de Implantação}
 \end{figure}
 
 A Figura~\ref{fig:depspace} mostra a especificação de um conjunto de Tipos de
@@ -211,7 +211,6 @@ implementação e que forneça os meios necessários para administração da exe
 dos testes de desempenho da Aplicação sob Teste.
 
 \begin{figure}[h]
-  \caption{\label{fig:mincode}Código Ruby para execução do CloudCapacitor}
  \begin{lstlisting}[language=Ruby,linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
     capacitor = Capacitor.new
     capacitor.executor = Executors::DummyExecutor.new
@@ -225,6 +224,7 @@ dos testes de desempenho da Aplicação sob Teste.
     total_cost = capacitor.run_cost
     total_executions = capacitor.executions  
  \end{lstlisting}
+  \caption{\label{fig:mincode}Código Ruby para execução do CloudCapacitor}
 \end{figure}
 
 Na Figura~\ref{fig:mincode} vê-se a instanciação do Capacitor, na linha 1. Na 
@@ -331,10 +331,10 @@ Avaliação possa identificar, por meio da técnica de Inferência de Desempenho
 quais são as Configurações Candidatas e Rejeitadas. 
 
 \begin{figure}[htb]
-  \caption{\label{fig:depspace_real}Representação interna de um Espaço de Implantação no CloudCapacitor}
   \begin{center}
     \includegraphics[scale=0.35]{img/exemplo_grafo_espaco_implantacao}
   \end{center}
+  \caption{\label{fig:depspace_real}Representação interna de um Espaço de Implantação no CloudCapacitor}
 \end{figure}
 
 Como é possível ver na Figura~\ref{fig:depspace_real}, o Espaço de Implantação é 
@@ -384,7 +384,6 @@ mostram o código fonte dos métodos de seleção de Carga de Trabalho e Nível
 de Capacidade, respectivamente.
 
 \begin{figure}[h]
-  \caption{\label{fig:strategy_workload_code}Seleção de Carga de Trabalho na classe \emph{Strategy}}
   \begin{lstlisting}[language=Ruby,linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
   def select_workload( workload_list )
     case @wkl_approach
@@ -397,10 +396,10 @@ de Capacidade, respectivamente.
     end
   end
   \end{lstlisting}
+  \caption{\label{fig:strategy_workload_code}Seleção de Carga de Trabalho na classe \emph{Strategy}}
 \end{figure}
 
 \begin{figure}[h]
-  \caption{\label{fig:strategy_capacity_code}Seleção de Nível de Capacidade na classe \emph{Strategy}}
   \begin{lstlisting}[language=Ruby,linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
   def take_a_capacity_level_from( unexplored_levels )
     levels = unexplored_levels.keys
@@ -415,6 +414,7 @@ de Capacidade, respectivamente.
     end
   end
   \end{lstlisting}
+  \caption{\label{fig:strategy_capacity_code}Seleção de Nível de Capacidade na classe \emph{Strategy}}
 \end{figure}
 
 Ambas as implementações são bastante simples. Para a seleção da Carga de Trabalho,
@@ -466,7 +466,6 @@ a seção seguinte apresenta o retorno dos resultados obtidos pelo CloudCapacito
 após a execução da Avaliação.
 
 \begin{figure}[h]
-  \caption{\label{fig:resultado}Representação do retorno do resultado da execução do CloudCapacitor}
  \begin{lstlisting}[linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
 - 100
     m3.large
@@ -481,6 +480,7 @@ após a execução da Avaliação.
 - 400
     m3.2xlarge
   \end{lstlisting}
+  \caption{\label{fig:resultado}Representação do retorno do resultado da execução do CloudCapacitor}
 \end{figure}
 
 \subsubsection{Resultado da Avaliação}
@@ -513,10 +513,10 @@ de nuvem. A aplicação recebeu o nome de Capacitor Web e foi utilizada também
 para a execução dos experimentos que fazem parte deste trabalho.
 
 \begin{figure}[htb]
-  \caption{\label{fig:capacitor_web_front}Página inicial do Capacitor Web}
   \begin{center}
     \includegraphics[scale=0.5]{img/CapacitorWeb_Frontpage}
   \end{center}
+  \caption{\label{fig:capacitor_web_front}Página inicial do Capacitor Web}
 \end{figure}
 
 A Figura~\ref{fig:capacitor_web_front} mostra a tela inicial do sistema, onde
@@ -539,10 +539,10 @@ para ambos os campos. Depois de selecionados os parâmetros, o usuário ordena a
 ao pressionar o botão presente na parte inferior da tela.
 
 \begin{figure}[htb]
-  \caption{\label{fig:capacitor_web_results}Página de Resultados do Capacitor Web}
   \begin{center}
     \includegraphics[scale=0.5]{img/CapacitorWeb_Results}
   \end{center}
+  \caption{\label{fig:capacitor_web_results}Página de Resultados do Capacitor Web}
 \end{figure}
 
 Uma vez concluída a execução da Avaliação, o sistema apresenta ao usuário a tela
@@ -570,10 +570,10 @@ nomes das Configurações consideradas como Candidatas para executar com sucesso
 Aplicação sob aquela Carga.  
 
 \begin{figure}[htb]
-  \caption{\label{fig:capacitor_web_trace}Rastro de Execução do Capacitor Web}
   \begin{center}
     \includegraphics[scale=0.45]{img/CapacitorWeb_ExecutionTrace}
   \end{center}
+  \caption{\label{fig:capacitor_web_trace}Rastro de Execução do Capacitor Web}
 \end{figure}
 
 A segunda aba da parte inferior da tela de resultados apresenta o título 
@@ -593,10 +593,10 @@ as células na cor avermelhada indicam as execuções onde a Aplicação não co
 desempenho suficiente para satisfazer o SLA.
  
 \begin{figure}[htb]
-  \caption{\label{fig:capacitor_web_fulltrace}Rastro Completo da Execução do Capacitor Web}
   \begin{center}
     \includegraphics[scale=0.5]{img/CapacitorWeb_FullTrace}
   \end{center}
+  \caption{\label{fig:capacitor_web_fulltrace}Rastro Completo da Execução do Capacitor Web}
 \end{figure}
 
 Por fim, a terceira aba, com o título ``Full Trace'', traz também uma tabela, 
