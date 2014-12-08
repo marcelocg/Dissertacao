@@ -1,5 +1,51 @@
 \chapter{Conclusão}
 \label{chap:conclusao}
 % ----------------------------------------------------------
+Este capítulo encerra este trabalho, apresentando uma síntese dos resultados 
+obtidos, as contribuições e sugestões para trabalhos futuros.
+
+\section{Resultados e Contribuições}
+A oportunidade de adoção da computação em nuvem como alternativa para implantação 
+de aplicações corporativas ante a expectativa de economia gerada pela tarifação 
+sob demanda e a elasticidade de recursos traz consigo a necessidade de uma
+avaliação prévia da viabilidade financeira da migração dessas aplicações para
+o novo ambiente. Essa análise de viabilidade passa pela identificação de quais 
+combinações de recursos entre os existentes na nuvem são potencialmente capazes 
+de manter ou, preferencialmente, suplantar o desempenho original da aplicação em 
+questão. Entre esses recursos, o de máquinas virtuais geralmente representam os
+maiores custos de operação para aplicações implantadas na nuvem. Ao mesmo tempo,
+é muito difícil prever qual será o custo operacional total na nuvem, exatamente
+devido à característica de escalabilidade e elasticidade proporcionada pelo modelo
+de implantação em nuvem IaaS.
+
+Nesse contexto, este trabalho propôs uma nova abordagem para a pesquisa das 
+melhores combinações de recursos de máquinas virtuais em provedores de nuvem IaaS.
+A proposta se baseia no Processo de Inferência de Desempenho para Planejamento de
+Capacidade, como descrito no Capítulo~\ref{chap:processo}. O Processo se apoia
+na inferência de desempenho para determinadas configurações a partir da observação
+do desempenho real de uma configuração ao executar de fato a aplicação no
+ambiente de nuvem. A inferência é realizada pela interpretação do mapeamento das 
+relações de capacidade existentes entre as diversas configurações que o provedor 
+disponibiliza. A alta acurácia das inferências, acima de 99\% em média, conforme 
+verificada pelos experimentos demonstrados no Capítulo~\ref{chap:resultados}, denota 
+a confiabilidade das respostas dadas pela utilização do Processo de Inferência 
+no apoio às atividades de planejamento de capacidade para migração de aplicações 
+para o ambiente de nuvem. 
+
+Paralelamente à confiabilidade, outro diferencial do Processo de Inferência é a 
+economia financeira e operacional, em termos de tempo, na realização da fase de 
+testes do planejamento de capacidade. Dado o enorme número de combinações de 
+configurações possíveis entre recursos do Provedor, o uso de estratégias inteligentes,
+com a aplicação das Heurísticas propostas para a seleção das combinações mais 
+promissoras na busca pelas mais configurações mais baratas, confere ao Processo 
+uma eficiência notável, destacada pela economia de até 96\% em custos e até 88\% 
+em tempo de execução dos testes.  
+  
+\section{Sugestões para Trabalhos Futuros}
+- realização de novos experimentos visando investigar até que ponto os resultados obtidos durante o mestrado podem ser generalizados para outras aplicações e provedores de nuvem;
+
+- implementação e avaliação de novas heurísticas de inferência de desempenho, que levem em conta os dados de monitoramento dos recursos utilizados, incluindo memória, CPU e a distância do desempenho observado para o desempenho esperado (o "delta").
+
+-  evolução do Capacitor para oferecer um serviço completo de implantação, avaliação e planejamento de capacidade de aplicações em nuvens IaaS.
 
 % ----------------------------------------------------------
