@@ -1,8 +1,6 @@
 \chapter[Introdução]{Introdução}
 % ----------------------------------------------------------
-
 \section{Motivação}
-
 A computação em nuvem é um paradigma computacional que está
 transformando a forma de desenvolver e gerenciar aplicações e serviços de
 tecnologia da informação. Diversas organizações passaram a adotar este paradigma
@@ -13,42 +11,46 @@ desafios enfrentados pelos usuários de nuvens que oferecem
 infraestrutura-como-serviço (IaaS) é planejar adequadamente a capacidade 
 dos recursos da nuvem necessários às suas aplicações.  
 
-O processo de decisão pela migração de aplicações para o ambiente de nuvens computacionais 
-envolve uma série de análises que buscam, entre outras coisas, identificar que vantagens a 
-mudança trará de fato \cite{li2011cloudprophet, rodero2010infrastructure}, 
-além de tentar descobrir a melhor maneira de configurar a aplicação com os
-vários recursos oferecidos pelo provedor de nuvem.
+O processo de decisão pela migração de aplicações para o ambiente de nuvens 
+computacionais envolve uma série de análises que buscam, entre outras coisas, 
+identificar que vantagens a mudança trará de fato \cite{li2011cloudprophet, 
+rodero2010infrastructure}, além de tentar descobrir a melhor maneira de configurar 
+a aplicação com os vários recursos oferecidos pelo provedor de nuvem.
 
 Um dos principais recursos computacionais oferecidos por provedores de nuvem
 IaaS, que normalmente representam a parte mais significativa dos gastos dos
 clientes, é o serviço de máquina virtual. Em geral, provedores de IaaS cobram um
-valor em função do tempo de utilização deste recurso, normalmente medido em horas, e esse valor 
-unitário varia conforme o tamanho da máquina virtual (capacidade de processamento, memória e espaço de armazenamento).
-Dessa forma, a apuração do custo de operação de uma aplicação em um determinado
-período de tempo leva em conta a quantidade de máquinas virtuais utilizadas bem como seu perfil, ou seja, o tamanho e quantidade de recursos 
-usados em cada uma.
+valor em função do tempo de utilização deste recurso, normalmente medido em horas, 
+e esse valor unitário varia conforme o tamanho da máquina virtual (capacidade de 
+processamento, memória e espaço de armazenamento). Dessa forma, a apuração do 
+custo de operação de uma aplicação em um determinado período de tempo leva em 
+conta a quantidade de máquinas virtuais utilizadas bem como seu perfil, ou seja, 
+o tamanho e quantidade de recursos usados em cada uma.
  
-Para prever o custo de operação de uma aplicação na nuvem, é preciso estimar ou medir como a 
-aplicação responderá à demanda submetida em termos de indicadores de desempenho. Para se chegar a essa 
-conclusão, faz-se necessário conhecer o comportamento 
-da aplicação no ambiente de nuvem para que se identifiquem quais perfis de
-máquinas virtuais oferecidos pelo provedor são capazes de executar a aplicação com níveis satisfatórios de desempenho. 
-Somem-se a isso as variações da demanda exercidas sobre a aplicação e as
-diversas possibilidades de variação da arquitetura de implantação por meio de
-procedimentos de escalabilidade.
+Para prever o custo de operação de uma aplicação na nuvem, é preciso estimar ou 
+medir como a aplicação responderá à demanda submetida em termos de indicadores de 
+desempenho. Para se chegar a essa conclusão, faz-se necessário conhecer o 
+comportamento da aplicação no ambiente de nuvem para que se identifiquem quais 
+perfis de máquinas virtuais oferecidos pelo provedor são capazes de executar a 
+aplicação com níveis satisfatórios de desempenho. Somem-se a isso as variações 
+da demanda exercidas sobre a aplicação e as diversas possibilidades de variação 
+da arquitetura de implantação por meio de procedimentos de escalabilidade.
  
-Ao se tomarem procedimentos de escalabilidade vertical (variando-se a quantidade de recursos de 
-cada máquina) e/ou de escalabilidade horizontal (variando-se a quantidade de máquinas em uma ou 
-mais camadas da aplicação, como dados, apresentação e negócio) chega-se a níveis de desempenho e de custo muito 
-diversos. A variação da demanda exige que a aplicação também varie em tamanho da implantação, 
-vertical ou horizontalmente, conforme a carga aplicada. Quanto mais acentuadas e mais frequentes 
-as variações na demanda, mais variações de custo e desempenho serão observadas.
+Ao se tomarem procedimentos de escalabilidade vertical (variando-se a quantidade 
+de recursos de cada máquina) e/ou de escalabilidade horizontal (variando-se a 
+quantidade de máquinas em uma ou mais camadas da aplicação, como dados, apresentação 
+e negócio) chega-se a níveis de desempenho e de custo muito diversos. A variação 
+da demanda exige que a aplicação também varie em tamanho da implantação, vertical 
+ou horizontalmente, conforme a carga aplicada. Quanto mais acentuadas e mais 
+frequentes as variações na demanda, mais variações de custo e desempenho serão 
+observadas.
 
-Assim, o custo apresenta-se entre os mais difíceis de prever, uma vez que depende necessariamente 
-do tamanho da demanda exercida sobre a aplicação além do desempenho oferecido e preços cobrados 
-pelo provedor de nuvem de infraestrutura contratado \cite{cunha2012ambiente}. Estrategicamente, 
-torna-se interessante identificar, entre as possíveis composições de máquinas virtuais ofertadas 
-em um ou vários provedores, quais são as configurações de menor custo capazes de executar a 
+Assim, o custo apresenta-se entre os mais difíceis de prever, uma vez que depende 
+necessariamente do tamanho da demanda exercida sobre a aplicação além do desempenho 
+oferecido e preços cobrados pelo provedor de nuvem de infraestrutura contratado 
+\cite{cunha2012ambiente}. Estrategicamente, torna-se interessante identificar, 
+entre as possíveis composições de máquinas virtuais ofertadas em um ou vários 
+provedores, quais são as configurações de menor custo capazes de executar a 
 aplicação mantendo-se os níveis satisfatórios para os indicadores de desempenho.
 
 Para facilitar o entendimento do problema suponha o seguinte exemplo. Uma
@@ -64,46 +66,50 @@ segundos para uma determinado conjunto de operações com 100 usuários).
 Uma vez estabelecidos os valores aceitáveis, pode-se implantar a aplicação 
 sob essa configuração de recursos no ambiente da nuvem e então testar o
 desempenho da aplicação. Ao comparar a resposta da aplicação com os valores
-dados como aceitáveis para os indicadores, é possível determinar se aquela configuração de recursos 
-escolhida é capaz de executar a aplicação a 
-contento e ainda calcular o custo mensal dessa implantação.
+dados como aceitáveis para os indicadores, é possível determinar se aquela 
+configuração de recursos escolhida é capaz de executar a aplicação a contento e 
+ainda calcular o custo mensal dessa implantação.
 
-Porém, partindo-se do pressuposto de que o desempenho da aplicação foi satisfatório, o que se 
-tem até agora é o custo de uma única configuração capaz de executar a aplicação estudada sob 
-um único nível de carga de trabalho. No entanto, cargas de trabalho costumam variar em função do tempo 
-em implantações reais, fazendo-se necessário, portanto, que esse efeito seja contemplado nos 
-testes por meio da medição do desempenho da aplicação submetida a diferentes níveis de carga 
-de trabalho.
+Porém, partindo-se do pressuposto de que o desempenho da aplicação foi satisfatório, 
+o que se tem até agora é o custo de uma única configuração capaz de executar a 
+aplicação estudada sob um único nível de carga de trabalho. No entanto, cargas de 
+trabalho costumam variar em função do tempo em implantações reais, fazendo-se 
+necessário, portanto, que esse efeito seja contemplado nos testes por meio da 
+medição do desempenho da aplicação submetida a diferentes níveis de carga de 
+trabalho.
 
-Analogamente, as diversas configurações de máquinas e recursos, ainda que no mesmo provedor, 
-podem responder de maneira diferente sob o mesmo nível de carga de trabalho a depender 
-do momento em que sejam ativados \cite{cunha2011investigating, iosup2011performance, 
-jayasinghe2011variations}. Independente do motivo que leve a esse comportamento de certa 
-forma imprevisível, é preciso levar em conta nos ensaios de avaliação de desempenho essa 
-variabilidade e isso pode ser alcançado através da repetição dos cenários de teste em horários 
-e dias diferentes.
+Analogamente, as diversas configurações de máquinas e recursos, ainda que no mesmo 
+provedor, podem responder de maneira diferente sob o mesmo nível de carga de 
+trabalho a depender do momento em que sejam ativados \cite{cunha2011investigating, 
+iosup2011performance, jayasinghe2011variations}. Independente do motivo que leve 
+a esse comportamento de certa forma imprevisível, é preciso levar em conta nos 
+ensaios de avaliação de desempenho essa variabilidade e isso pode ser alcançado 
+através da repetição dos cenários de teste em horários e dias diferentes.
 
 Um grande problema começa a se desenhar ao seguir essa abordagem: a fase de
 experimentação pode atingir patamares elevados de custo, a depender das
-necessidades de variação da demanda, da arquitetura de implantação e das configurações utilizadas 
-em cada arquitetura implantada 
-\cite{silva2013cloudbench}. Ainda que certos provedores IaaS ofereçam descontos ou pacotes de 
-horas grátis para novos clientes, em geral esses incentivos são suficientes para custear apenas 
-um mês de utilização de uma única máquina virtual muito pequena, provavelmente incapaz de suportar 
-a carga de uma aplicação real em produção. Assim, executar uma aplicação real, tipicamente 
-implantada em arquitetura de várias camadas, em máquinas virtuais de tamanho considerável e por 
-longos períodos de tempo apenas para estudar o seu comportamento, pode se traduzir em um custo 
-alto que inviabilize o próprio projeto de migração dessa aplicação para a nuvem. 
+necessidades de variação da demanda, da arquitetura de implantação e das 
+configurações utilizadas em cada arquitetura implantada \cite{silva2013cloudbench}. 
+Ainda que certos provedores IaaS ofereçam descontos ou pacotes de horas grátis 
+para novos clientes, em geral esses incentivos são suficientes para custear apenas 
+um mês de utilização de uma única máquina virtual muito pequena, provavelmente 
+incapaz de suportar a carga de uma aplicação real em produção. Assim, executar 
+uma aplicação real, tipicamente implantada em arquitetura de várias camadas, em 
+máquinas virtuais de tamanho considerável e por longos períodos de tempo apenas 
+para estudar o seu comportamento, pode se traduzir em um custo alto que inviabilize 
+o próprio projeto de migração dessa aplicação para a nuvem. 
 
-Com o intuito de resolver este problema algumas abordagens (ref XXX) já
-foram desenvolvidas e se organizam em duas categorias: preditiva e empírica.
+Com o intuito de resolver este problema algumas abordagens já
+foram desenvolvidas e se organizam em duas categorias: preditiva \cite{cloudharmony,
+malkowski2010cloudxplor, fittkau2012cdosim, li2011cloudprophet} e empírica 
+\cite{jayasinghe2012, silva2013cloudbench, cunhacloud, scheuner2014cloud}.
 Normalmente baseadas em simuladores, estas abordagens apresentam uma baixa
-eficiência (Colocar referencia XXX) com relação a sua capacidade de prever as
-melhores configurações dos recursos da nuvem para variadas cargas impostas na aplicação. Isto se deve
-normalmente a fatores como: diferenças conceituais entre o modelo de simulação e
-o modelo real de comportamento da aplicação e instabilidade dos serviços de
-nuvem. Uma vantagem das abordagens preditivas é não onerar os clientes com os
-testes pois não exigem implantação real no ambiente da nuvem.
+eficiência \cite{XXXXXXXXXXXXXX} com relação a sua capacidade de prever as
+melhores configurações dos recursos da nuvem para variadas cargas impostas na 
+aplicação. Isto se deve normalmente a fatores como: diferenças conceituais entre 
+o modelo de simulação e o modelo real de comportamento da aplicação e instabilidade 
+dos serviços de nuvem. Uma vantagem das abordagens preditivas é não onerar os 
+clientes com os testes pois não exigem implantação real no ambiente da nuvem.
 
 As abordagens empíricas são baseadas na implantação das aplicações alvo na nuvem 
 e em testes de carga. As abordagens normalmente oferecem suporte aos usuários
@@ -111,22 +117,21 @@ para automatizar as taferas de instalar, configurar e testar as aplicações no
 ambiente da nuvem eliminando uma série de trabalhos manuais custosos. Por
 executarem no ambuiente de nuvem real elas conseguem ajudar a atingir resultados
 significativamente melhores no que diz respeito a seleção de recursos
-computacionais para cargas de trabalho específicas. No entanto, um problema ainda existente nessas abordagens
-é a necessidade de se testar exaustivamente uma grande quantidade de
-configurações de recursos e cargas de trabalho implicando em altos custos
-durante a fase de experimentação.
+computacionais para cargas de trabalho específicas. No entanto, um problema ainda 
+existente nessas abordagens é a necessidade de se testar exaustivamente uma grande 
+quantidade de configurações de recursos e cargas de trabalho implicando em altos 
+custos durante a fase de experimentação.
 
 Com o intuito de combinar as vantagens das duas abordagens, este trabalho
 propõe uma nova maneira de apoiar o planejamento da capacidade de aplicações
 em nuvens IaaS. A nova abordagem tem como premissa a definição de uma relação 
-de capacidade entre as diferentes configurações de recursos oferecidas por um provedor 
-de nuvem, com a qual é possível prever (ou ``inferir''), com alto grau de precisão, 
-o desempenho esperado de uma aplicação para determinadas configurações de recursos. A predição 
-é realizada com base no desempenho observado (em testes na nuvem) para outras
-configurações de recursos do mesmo provedor.
+de capacidade entre as diferentes configurações de recursos oferecidas por um 
+provedor de nuvem, com a qual é possível prever (ou ``inferir''), com alto grau 
+de precisão, o desempenho esperado de uma aplicação para determinadas configurações 
+de recursos. A predição é realizada com base no desempenho observado (em testes 
+na nuvem) para outras configurações de recursos do mesmo provedor.
 
 \section{Objetivos}
-
 Este trabalho tem como principal objetivo o de propor uma abordagem de
 planejamento de capacidade baseado nas relações de capacidade existentes em
 recursos da nuvem e também em um processo de inferência de desempenho 
@@ -145,12 +150,11 @@ específicos do trabalho são:
 \end{itemize}
  
 \section{Contribuições}
-
 Com o intuito de resolver a problemática do planejamento de capacidade na nuvem
-atendendo aos objetivos propostos algumas contribuições podem ser destacadas
+atendendo aos objetivos propostos, algumas contribuições podem ser destacadas
 deste trabalho.
 
-Primeiramente propusemos um modelo que representa as relações de capacidade de
+Primeiramente é proposto um modelo que representa as relações de capacidade de
 configurações de uma nuvem. Este modelo é chamado de Espaço de Implantação
 e consiste de uma estrutura em grafo que representa as relações entre os
 Tipos de Máquinas Virtuais oferecidos pelo Provedor de nuvem. O grafo é
@@ -158,11 +162,73 @@ construído de forma a indicar as relações de capacidade entre os tipos de
 instância indicando quais tipos são maiores, menores ou não relacionados com
 outros.
 
-Outra contribuição significativa é o processo de inferencia de desempenho ..
-falar das inovacoes, heuristicas, 
+Outra contribuição significativa é o Processo de Avaliação de Capacidade por 
+Inferencia de Desempenho. Esse processo define uma nova abordagem para o 
+planejamento de capacidade com base na inferência do comportamento de máquinas 
+virtuais. A inferência se dá sob a luz da análse da relação de capacidade 
+representada pelo Espaço de Implantação e a partir do resultado da execução de 
+testes reais de desempenho em poucas máquinas dentre o conjunto completo de 
+configurações estudadas.
 
-capacitor --> falar das inovacoes,das
+Para que o Processo saiba identificar quais configurações devem ser efetivamente
+testadas e em que ordem, foram definidas Heurísticas para a seleção dessas 
+configurações. A cada passo da iteração do Processo, a Heurística selecionada é
+acionada para que, a depender do resultado obtido no passo anterior, uma nova
+configuração de máquinas virtuais seja levada a testes.
 
+As Heurísticas conferem grande flexibilidade ao Processo, que pode se adaptar a
+diferentes comportamentos da Aplicação sob Teste. Além de já ter definido um 
+conjunto inicial, o Processo prevê a possibilidade de que novas Heurísticas possam
+ser escritas e aplicadas como pontos de extensão à implementação original.
 
+Quando um estudo de capacidade está sendo executado por um profissional, é 
+intuitivo que não sejam testadas todas as combinações possíveis de configurações
+e cargas de trabalho. Porém, no momento da realização dos testes, a decisão de
+qual será a próxima configuração a ser testada é um problema de difícil solução.
+Com custos altos envolvidos já durante a fase de execução de testes e com 
+possivelmente dezenas de configurações a serem examinadas, como saber qual a
+configuração a ser executada a fim de minimizar o custo e maximizar as chances
+de obter respostas conclusivas quanto ao planejamento de capacidade em andamento?
+
+Essa é outra contribuição consequente da aplicação da Processo de Inferência de
+Desempenho: a minimização do custo de execução de testes e a maximização das 
+respostas para o planejamento de capacidade, com altíssimo nível de confiança na
+acurácia dessas respostas.
+
+Este trabalho apresenta uma implementação concreta usada em experimentos para 
+validar o Processo. Os resultados desses experimentos comprovam sua eficiência 
+na redução de custos e sua acurácia ao apontar quais configurações conseguem 
+atender a um acordo de nível de serviço estipulado previamente. 
 
 \section{Estrutura da Dissertação}
+Além desta Introdução, esta dissertação está organizada em mais cinco capítulos, 
+descritos brevemente a seguir.
+
+\begin{description}
+  \item[Capítulo 2 - Fundamentação Teórica e Trabalhos Relacionados] \hfill \\
+  Aborda alguns conceitos fundamentais da computação em nuvem e planejamento de
+  capacidade, de modo a nivelar o conhecimento do leitor sobre o tema. Além disso, 
+  são descritos os trabalhos relacionados a esta pesquisa, agrupando-os pelo método 
+  de abordagem do problema e como este trabalho se diferencia em sua proposta de 
+  solução.
+  \item[Capítulo 3 - Avaliação de Capacidade] \hfill \\
+  Apresenta os conceitos criados especificamente no âmbito desta pesquisa, explicando 
+  as terminologias usadas no texto e que permeiam a solução proposta. Descreve em 
+  detalhes o Processo proposto para o planejamento de capacidade baseado em
+  inferência de desempenho.
+  \item[Capítulo 4 - Implementação do Processo] \hfill \\
+  Descreve os detalhes da implementação concreta do processo proposto, mostrando
+  como foi construída a biblioteca de programação que fornece a funcionalidade
+  necessária à execução de rotinas de avaliação de capacidade. Apresenta também
+  o sistema construído com a utilização da biblioteca, validando sua 
+  aplicabilidade. 
+  \item[Capítulo 5 - Experimentos e Resultados] \hfill \\
+  Onde são apresentados os experimentos criados como parte deste estudo a fim de
+  verificar a aplicabilidade do processo de inferência de desempenho. Os resultados 
+  dos experimentos são analisados e vêm comprovar a eficiência e acurácia do 
+  processo. 
+  \item[Capítulo 6 - Conclusão] \hfill \\
+  Faz o fechamento do trabalho, apontando as contribuições trazidas e sugestões
+  de trabalhos futuros. 
+\end{description}
+% ----------------------------------------------------------
