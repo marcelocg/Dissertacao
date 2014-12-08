@@ -63,6 +63,7 @@ em termos relativos a um valor padrão tomado como base, quer seja em termos
 absolutos, como número de CPUs virtuais.
 
 \subsection{Categorias de Máquinas Virtuais}
+\label{subsec:definicoes_categorias}
 Tipos de Máquinas Virtuais podem ser agrupados em Categorias, conforme suas 
 características físicas, plataforma e/ou arquitetura de hardware e a natureza do 
 uso a que se destinam. Dentro de uma mesma Categoria, os Tipos de Máquinas 
@@ -386,8 +387,8 @@ um volume de carga maior se a Heurística for Otimista ou um volume menor se a
 Heurística para Cargas de Trabalho for Pessimista. 
 
 Depois de selecionar o nível de carga, o processo segue para selecionar a
-Categoria. Conforme as definições apresentadas no
-Capítulo~\ref{chap:formalizacao}, os Tipos de Máquinas Virtuais oferecidos pelo Provedor são normalmente agrupados 
+Categoria. Conforme as definições apresentadas na Seção~\ref{subsec:definicoes_categorias}, 
+os Tipos de Máquinas Virtuais oferecidos pelo Provedor são normalmente agrupados 
 por Categorias, que reunem máquinas de propósito e atributos semelhantes. Dessa
 forma, o Espaço de Implantação sobre o qual a avaliação de capacidade se dará está 
 dividido em Categorias. O número de Categorias envolvidas na avaliação depende do 
@@ -416,11 +417,21 @@ sobre as relações de capacidade de processamento entre as diversas Configuraç
 Essa hierarquia de capacidade é válida apenas entre Configurações de uma mesma 
 Categoria de Máquinas Virtuais. 
 
-Para cada Categoria, o Nível "um" de Capacidade é composto apenas pela Configuração 
+Para cada Categoria, o Nível ``um'' de Capacidade é composto apenas pela Configuração 
 de menor preço dentro da Categoria. Um novo nível é criado com todas as Configurações 
-para as quais é verdadeira a relação "maior que", conforme a definição descrita 
-no seção~\ref{sec:formalizacao_configuracoes}. Esse, então, passa a ser o Nível 
-"dois" e a lógica se repete daí em diante, tomando-se, para cada Configuração 
+para as quais é verdadeira a relação ``maior que''. Considera-se que uma 
+Configuração $C_1$ é ``maior que'' uma outra Configuração $C_2$ se: 
+
+\begin{enumerate}[label=\bfseries \alph*)]
+\item ambas são formadas pelo mesmo Tipo de Máquina Virtual e $C_1$ possui 
+número maior de instâncias do que $C_2$; ou
+\item ambas são formadas pelo mesmo número de instâncias
+e o Tipo de Máquina de $C_1$ possui mais CPU e mais memória que o Tipo de Máquina
+de $C_2$.  
+\end{enumerate}
+
+Esse, então, passa a ser o Nível 
+``dois'' e a lógica se repete daí em diante, tomando-se, para cada Configuração 
 desse nível, as imediatamente maiores, formando um novo Nível. O procedimento 
 continua até que todas as Configurações estejam devidamente classificadas em 
 Níveis de Capacidade.
@@ -456,9 +467,8 @@ Configurações do Nível de Capacidade devem ser avaliados, ainda que por meio 
 Inferência de Desempenho, vista adiante.
  
 Executa-se, então, a Aplicação sob Teste, impondo-se a ela a Carga de Trabalho 
-selecionada, e analisa-se o Resultado (ver seção~\ref{subsec:formalizacao_resultados}) 
-dessa execução. Nesse ponto o Processo se bifurca, atingindo seu primeiro ponto 
-de decisão.
+selecionada, e analisa-se o resultado dessa execução. Nesse ponto o Processo se 
+bifurca, atingindo seu primeiro ponto de decisão.
 
 Esse é o momento em que a técnica de Inferência, conforme propomos neste trabalho,
 será aplicada. A análise do Resultado obtido, mais especificamente do valor atribuído
@@ -494,16 +504,7 @@ Assim, usando a representação do Espaço de Implantação conforme descrito na
 Seção~\ref{subsec:processo_niveis_capacidade}, o Processo assinala como candidatas
 todas as Configurações para as quais, direta ou indiretamente, a Configuração 
 atual aponte uma seta, ou seja, todas as Configurações ``maiores que'' a Configuração
-atual. Considera-se que uma Configuração $C_1$ é ``maior que'' uma outra Configuração
-$C_2$ se: 
-
-\begin{enumerate}[label=\bfseries \alph*)]
-\item ambas são formadas pelo mesmo Tipo de Máquina Virtual e $C_1$ possui 
-número maior de instâncias do que $C_2$; ou
-\item ambas são formadas pelo mesmo número de instâncias
-e o Tipo de Máquina de $C_1$ possui mais CPU e mais memória que o Tipo de Máquina
-de $C_2$.  
-\end{enumerate}
+atual. 
 
 Mas a técnica de Inferência ainda vai mais longe. Sabendo que as Configurações
 que acabaram de ser assinaladas como Candidatas são capazes de executar a Aplicação
