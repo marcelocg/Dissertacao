@@ -1,4 +1,4 @@
-\chapter{Avaliação de Capacidade}
+\chapter{Processo de Avaliação de Capacidade}
 \label{chap:processo}
 % ----------------------------------------------------------
 Este capítulo apresenta uma proposta de processo de avaliação de capacidade
@@ -7,29 +7,28 @@ Carga de Trabalho. Esse processo foi implementado como parte de um sistema
 computacional ao qual demos o nome de \emph{Cloud Capacitor} e que descreveremos 
 no capítulo seguinte.  
 
-Antes de descrever o processo, é preciso que seja apresentado um 
-conjunto de definições e terminologias que baseiam o entendimento da 
-construção do trabalho e também a avaliação dos resultados, bem como a eficiência 
-e eficácia da solução proposta. Os conceitos aqui explicitados são tomados de 
+Antes de descrever o processo, será apresentado um 
+conjunto de definições bem como a terminologia que embasam o entendimento da 
+construção do trabalho e também a avaliação de seus resultados. Os conceitos aqui explicitados são tomados de 
 forma a permitir um estudo agnóstico quanto a aplicações, plataformas e provedores
 utilizados durante a execução das ferramentas desenvolvidas neste trabalho.
 
-\section{Definições e Terminologias}
+\section{Definições e Terminologia}
 Apresentamos a seguir as definições que permeiam o conhecimento necessário para 
-a análise dos problemas estudados e soluções propostas. Mostramos também as 
-terminologias ou nomenclaturas que criamos para designar esses conceitos a fim 
+a análise dos problemas estudados e soluções propostas. Mostramos também a 
+terminologia utilizada para designar esses conceitos a fim 
 de facilitar a comunicação e o entendimento por parte do leitor.
 
 \subsection{Aplicação sob Teste}
 A Aplicação sob Teste é um sistema computacional, possivelmente implementado em 
 arquitetura multicamadas, para o qual se deseja observar o comportamento em um 
-ambiente de computação em nuvem e ao qual estão ligadas uma ou mais Métricas de 
+ambiente de computação em nuvem e ao qual estão associadas uma ou mais Métricas de 
 Desempenho.
 
 \subsection{Métrica de Desempenho}
 Uma característica ou comportamento mensurável de forma automatizada e 
 comparável a um Valor de Referência capaz de indicar o grau de sucesso de uma 
-execução da Aplicação. Ex. tempo de resposta, quadros por segundo, etc. Métricas 
+execução da Aplicação. Ex.: tempo de resposta, quadros por segundo, etc. Métricas 
 podem ser minimizáveis ou maximizáveis, a depender do objetivo da métrica quanto 
 ao resultado desejado. Por exemplo, “tempo de resposta” é uma métrica 
 minimizável, uma vez que geralmente se deseja que uma Aplicação responda a uma 
@@ -41,7 +40,7 @@ de tempo, maior a qualidade percebida pelo usuário.
 \subsection{Valor de Referência de Desempenho ou SLA}
 Um valor predefinido como minimamente aceitável como resultado apresentado por 
 uma Métrica após uma Execução da Aplicação sob Teste. Este valor, também 
-referenciado neste trabalho como SLA (Service Level Agreement), serve como base 
+referenciado neste trabalho como SLA (\emph{Service Level Agreement}), serve como base 
 de comparação para que se classifique a Aplicação como capaz de ser executada 
 em um determinado arranjo de máquinas virtuais e sob uma determinada Carga de
 Trabalho a ela imposta.
@@ -85,7 +84,7 @@ usadas para implantar uma camada arquitetural da Aplicação sob Teste (apresent
 negócio, persistência, etc.) e representam o estado de uma determinada camada da 
 aplicação quanto à sua escalabilidade, vertical ou horizontal.
 
-Por exemplo, suponhamos avaliação do comportamento de uma Aplicação cuja camada de
+Por exemplo, suponhamos a avaliação do comportamento de uma Aplicação cuja camada de
 negócios está implantada em arquitetura de cluster de servidores de aplicação. 
 Variando a quantidade de máquinas que compõem esse cluster, obtemos diferentes níveis
 de escalabilidade horizontal para os quais podemos avaliar o desempenho da Aplicação.
@@ -130,7 +129,7 @@ melhor os custos e permitir que sejam executados testes mais objetivos e de
 acordo com a meta de Carga de Trabalho a ser atendida pela Aplicação.
 
 \subsection{Carga de Trabalho}
-A Carga de Trabalho, ou Workload, representa o tamanho da demanda que será 
+A Carga de Trabalho (\emph{Workload}) representa o tamanho da demanda que será 
 imposta à Aplicação sob Teste em uma execução. A unidade de medida da Carga é 
 dependente do domínio da Aplicação, como a duração do vídeo em uma aplicação
 de transcodificação de arquivos multimídia ou o tamanho do arquivos de entrada
@@ -144,15 +143,15 @@ software de \emph{benchmarking}.
 Dá-se o nome de Execução ao evento de utilização de uma Configuração para 
 executar a Aplicação sob Teste submetida a uma determinada Carga de Trabalho. 
 Dessa forma, a avaliação dos Resultados de uma Execução nos dará uma ideia de 
-como a Aplicação responderá às requisições de certo número de usuários (Workload) 
+como a Aplicação responderá às requisições de certo número de usuários (Carga de Trabalho) 
 após ser implantada num ambiente de nuvem com certo grau de escalabilidade 
-horizontal (número de máquinas virtuais usadas). 
+horizontal (quantidade de Máquinas Virtuais usadas). 
 
 Tome-se como exemplo uma aplicação web muito comum, um blog. São requisições 
 comuns a um blog o acesso à página principal, uma consulta às postagens de uma
 categoria e o acesso a uma postagem específica. Agora, suponha-se uma Configuração
 composta de três instâncias de máquinas virtuais do Provedor Rackspace, do Tipo 
-"Performance 1", executando uma instalação do blog Wordpress, muito usado hoje em 
+``Performance 1'', executando uma instalação do blog Wordpress, muito usado hoje em 
 dia. Uma Execução dessa aplicação seria a imposição da Carga de Trabalho correspondente
 a um conjunto de requisições disparadas por 100 usuários simultâneos sobre essa Configuração. 
 
@@ -165,21 +164,21 @@ de executar uma Aplicação respeitando um certo SLA definido.
 \section{Visão Geral do Processo}
 \label{sec:processo_visao_geral}
 
-O processo (Figura~\ref{fig:fig_processo_alto_nivel}) prevê um conjunto de
+O processo proposto (Figura~\ref{fig:fig_processo_alto_nivel}) prevê um conjunto de
 dados de entrada, ao menos uma execução da Aplicação sob Teste no ambiente de nuvem de infraestrutura almejado para 
-hospedá-la e a análise do desempenho obtido pela Aplicação a partir 
+hospedá-la, e a análise do desempenho obtido pela Aplicação a partir 
 de suas execuções. Com base nos dados de desempenho, o processo passa por diversos
 pontos de decisão que podem levar a novas execuções da Aplicação em diferentes 
 cenários. Ao final do processo, é fornecida como saída uma lista de Configurações, 
 ordenadas por preço, capazes de executar a Aplicação sob cada uma das Cargas de 
 Trabalho fornecidas como parte dos dados de entrada.
 
-\begin{figure}[h]
+\begin{figure}[t]
   \begin{center}
     \includegraphics[scale=0.6]{img/processoAltoNivel}
   \end{center}
   \caption{\label{fig:fig_processo_alto_nivel}Visão geral do Processo de
-  Avaliação de Capacidade}
+  Avaliação de Capacidade.}
 \end{figure}
 
 Este capítulo aborda em detalhes todas as fases do processo 
@@ -191,8 +190,7 @@ executar a Aplicação.
 \subsection{Dados de Entrada}
 
 O principal parâmetro esperado pelo processo de avaliação de capacidade é o Valor
-de Referência de Desempenho, ao qual também nos referimos como SLA 
-(\emph{Service Level Agreement}). Esse valor será usado para determinar 
+de Referência de Desempenho, ou SLA. Esse valor será usado para determinar 
 se a Aplicação atingiu os requisitos mínimos de desempenho exigidos, conforme
 veremos na descrição do funcionamento do processo, mais adiante.
 
@@ -240,9 +238,8 @@ que será responsável pelas ações necessárias à execução da Aplicação s
 alvo. A atividade customizada deverá conhecer os detalhes inerentes à comunicação com 
 o Provedor e com a Aplicação sob Teste e, assim, ser capaz de ordenar a sua execução e 
 coletar como resposta os dados de desempenho esperados pelo processo. Esse é um dos 
-pontos de extensibilidade oferecidos pelo processo e sua implementação concreta está 
-fora do escopo deste trabalho, cujo foco não está na automação de execução de testes 
-de qualquer natureza, mas na análise dos dados resultantes dessa execução.
+pontos de extensibilidade oferecidos pelo processo, cuja implementação concreta está 
+fora do escopo deste trabalho. Vale destacar que o foco do processo proposto não está na automação de execução de testes de qualquer natureza, mas na análise dos dados resultantes dessa execução.
 
 \subsubsection{Estratégias e Heurísticas}
 \label{subsubsec:heuristicas}
@@ -269,7 +266,7 @@ Um problema relacionado à execução de testes de desempenho em ambientes de nu
 caso o Espaço de Implantação definido seja muito extenso. O mesmo se dá com 
 relação à lista de Cargas de Trabalho. A fim de minimizar esse problema, este
 trabalho propõe a técnica de inferência de desempenho explicada
-detalhadamente na seção~\ref{subsec:processo_niveis_capacidade}, e através da
+detalhadamente na seção~\ref{subsec:processo_niveis_capacidade}, através da
 qual será possível eliminar grande parte das execuções reais da Aplicação
 durante os testes, reduzindo assim o custo total da avaliação.
 
@@ -288,28 +285,30 @@ ou seja, à escolha da próxima Configuração a ser testada, e outras 3 abordag
 aplicáveis à lista de Cargas de Trabalho. A combinação dessas abordagens dá origem
 a 9 Heurísticas de Seleção, a saber:
 
+\begin{samepage}
 \begin{description}
-  \item[OO - Otimista/Otimista] \hfill \\ Visa Configurações menores e Cargas de Trabalho maiores
-  \item[OC - Otimista/Conservadora] \hfill \\ Visa Configurações menores e Cargas de Trabalho intermediárias
-  \item[OP - Otimista/Pessimista] \hfill \\ Visa Configurações e Cargas de Trabalho menores
-  \item[CO - Conservadora/Otimista] \hfill \\ Visa Configurações intermediárias e Cargas de Trabalho maiores
-  \item[CC - Conservadora/Conservadora] \hfill \\ Visa Configurações e Cargas de Trabalho intermediárias
-  \item[CP - Conservadora/Pessimista] \hfill \\ Visa Configurações intermediárias e Cargas de Trabalho menores
-  \item[PO - Pessimista/Otimista] \hfill \\ Visa Configurações e Cargas de Trabalho maiores
-  \item[PC - Pessimista/Conservadora] \hfill \\ Visa Configurações maiores e Cargas de Trabalho intermediárias
-  \item[PP - Pessimista/Pessimista] \hfill \\ Visa Configurações maiores e Cargas de Trabalho menores
+  \item[OO - Otimista/Otimista] \hfill \\ Visa selecionar Configurações menores e Cargas de Trabalho maiores
+  \item[OC - Otimista/Conservadora] \hfill \\ Visa selecionar Configurações menores e Cargas de Trabalho intermediárias
+  \item[OP - Otimista/Pessimista] \hfill \\ Visa selecionar Configurações e Cargas de Trabalho menores
+  \item[CO - Conservadora/Otimista] \hfill \\ Visa selecionar Configurações intermediárias e Cargas de Trabalho maiores
+  \item[CC - Conservadora/Conservadora] \hfill \\ Visa selecionar Configurações e Cargas de Trabalho intermediárias
+  \item[CP - Conservadora/Pessimista] \hfill \\ Visa selecionar Configurações intermediárias e Cargas de Trabalho menores
+  \item[PO - Pessimista/Otimista] \hfill \\ Visa selecionar Configurações e Cargas de Trabalho maiores
+  \item[PC - Pessimista/Conservadora] \hfill \\ Visa selecionar Configurações maiores e Cargas de Trabalho intermediárias
+  \item[PP - Pessimista/Pessimista] \hfill \\ Visa selecionar Configurações maiores e Cargas de Trabalho menores
 \end{description}
+\end{samepage}
 
 Para um melhor entendimento de como as Heurísticas influenciam a navegação do 
 processo entre as Configurações que compõem o Espaço de Implantação a ser explorado
 e também entre as Cargas de Trabalho a serem impostas sobre a Aplicação, convém
 observar a Figura~\ref{fig:heuristicas}.
 
-\begin{figure}[hbt]
+\begin{figure}[t]
   \begin{center}
-    \includegraphics[scale=1]{img/heuristics}
+    \includegraphics[scale=.8]{img/heuristics}
   \end{center}
-  \caption{\label{fig:heuristicas}Diagrama de Funcionamento das Heurísticas de Seleção}
+  \caption{\label{fig:heuristicas}Ilustração das estratégias de seleção de Configurações e Cargas de Trabalho utilizadas pelas 9 Heurísticas de Seleção.}
 \end{figure}
 
 A imagem ilustra dois conjuntos dispostos em forma de matriz, um conjunto 
@@ -323,7 +322,7 @@ refere-se à abordagem usada para a escolha da Configuração e a segunda letra 
  
 Podemos ver, então, que as Heurísticas com abordagem Otimista escolherão Configurações 
 mais próximas a $C_1$ e Cargas de Trabalho mais próximas a $W_m$. Por serem otimistas, essas 
-abordagens consideram que máquinas menores são capazes de executar sob cargas 
+abordagens consideram que máquinas menores são capazes de executar a aplicação com o nível esperado de desempenho sob cargas 
 mais severas.
 
 Ainda com base na mesma imagem, vemos que as abordagens conservadoras se concentram
@@ -341,20 +340,13 @@ deve ser feita a escolha de Configurações e Cargas, a Estratégia implementa d
 um algoritmo que reflita o comportamento esperado pela ideia da Heurística.
  
 A aplicação das Heurísticas de Seleção, através da implementação de Estratégias 
-de Avaliação, está intrinsecamente ligada aos objetivos deste trabalho de estudar 
+de Avaliação, está intrinsecamente ligada aos objetivos deste trabalho, que é estudar 
 os efeitos da inferência de desempenho na eficiência do processo de avaliação de 
-capacidade para aplicações em ambientes de nuvem de infraestrutura. A inteligência 
+capacidade para aplicações em ambientes de nuvem IaaS. A inteligência 
 das Heurísticas propostas, ou seja, sua capacidade de escolher corretamente as 
 Configurações e Cargas de Trabalho, é determinante para o sucesso do processo e 
 da técnica de inferência. A eficácia e efetividade da aplicação das heurísticas
-é analisada no capítulo~\ref{chap:resultados}. 
-
-\begin{figure}
-  \begin{center}
-    \includegraphics[scale=0.45]{img/capacity-planning-diagram-v13-mono}
-  \end{center}
-  \caption{\label{fig:fig_processo_aval_capacidade}Diagrama de Funcionamento do Processo de Avaliação de Capacidade}
-\end{figure}
+é analisada no Capítulo~\ref{chap:resultados}. 
 
 \section{Funcionamento do Processo}
 \label{sec:funcionamento_processo}
@@ -365,9 +357,16 @@ delegação de funções específicas a atividades customizadas: além da flexib
 adaptabilidade, a abstração dessas operações torna mais fácil o entendimento, 
 a descrição e a implementação concreta do processo.
 
-Na Figura~\ref{fig:fig_processo_aval_capacidade}, os blocos em destaque representam
-as operações que o processo espera que sejam executadas por uma Estratégia de 
-Avaliação que implemente as Heurísticas propostas na seção anterior. Os outros 
+\begin{figure}
+  \begin{center}
+    \includegraphics[scale=0.5]{img/capacity-planning-diagram-v13-mono}
+  \end{center}
+  \caption{\label{fig:fig_processo_aval_capacidade}Diagrama de atividades do Processo de Avaliação de Capacidade.}
+\end{figure}
+
+
+No diagrama de atividades representado na Figura~\ref{fig:fig_processo_aval_capacidade}, os blocos em destaque representam as operações que o processo espera que sejam executadas por uma Estratégia de 
+Avaliação que implemente alguma das Heurísticas propostas na seção anterior. Os outros 
 blocos referem-se a ações comuns do próprio processo, executadas de maneira 
 idêntica independentemente de qual seja a Aplicação sob Teste ou de qual seja a 
 Estratégia de Avaliação usada. A delegação de funções para a atividade de Execução
@@ -379,12 +378,12 @@ config sob nível de carga}'', situado aproximadamente no centro da figura.
 Uma vez tendo recebido os dados de entrada, o Processo tem seu início com o momento 
 de escolher por onde começar a execução dos testes.
 
-A primeira atividade desempenhada pelo Processo é a escolha da Carga de trabalho
-inicial. A Estratégia é solicitada para realizar esta escolha que deve
+A primeira atividade desempenhada pelo Processo é a escolha da Carga de Trabalho
+inicial. A Estratégia é solicitada para realizar esta escolha, que deve
 seguir a orientação dada pela lógica da Heurística selecionada para 
 a avaliação. Assim, será escolhido
-um volume de carga maior se a Heurística for Otimista ou um volume menor se a
-Heurística para Cargas de Trabalho for Pessimista. 
+um volume de carga maior se a Heurística for Otimista, um volume menor se a
+Heurística for Pessimista, ou um volume intermediário se a Heurística for Conservadora. 
 
 Depois de selecionar o nível de carga, o processo segue para selecionar a
 Categoria. Conforme as definições apresentadas na Seção~\ref{subsec:definicoes_categorias}, 
@@ -445,16 +444,16 @@ As setas que ligam as Configurações indicam a existência da relação de capa
 entre elas apontando da menor para a maior. A ausência de seta entre duas Configurações 
 implica a impossibilidade de se afirmar uma relação de capacidade entre elas. 
 
-\begin{figure}
+\begin{figure}[t]
   \begin{center}
-    \includegraphics[scale=1]{img/exemplo-niveis-capacidade}
+    \includegraphics[scale=.65]{img/exemplo-niveis-capacidade}
   \end{center}
   \caption{\label{fig_niveis_capacidade}Agrupamento de Configurações por Níveis de Capacidade}
 \end{figure}
 
 Assim, observando o Espaço de Implantação organizado por Categorias e classificado
 hierarquicamente, a Estratégia deve selecionar, com base em uma das Heurísticas 
-propostas na seção~\ref{sec:heuristicas}, um Nível de Capacidade inicial. As 
+propostas na subseção anterior, um Nível de Capacidade inicial. As 
 Configurações que fazem parte do Nível inicial escolhido são disponibilizadas 
 para que a Avaliação proceda com a execução dos testes da Aplicação.
 
@@ -472,12 +471,12 @@ bifurca, atingindo seu primeiro ponto de decisão.
 
 Esse é o momento em que a técnica de Inferência, conforme propomos neste trabalho,
 será aplicada. A análise do Resultado obtido, mais especificamente do valor atribuído
-à Métrica de Desempenho avaliada, comparado ao parâmetro do Valor de Referência, 
-ou SLA, define se a Aplicação é ou não capaz de atender à demanda imposta pela
+à Métrica de Desempenho avaliada, comparado ao parâmetro do Valor de Referência (SLA), 
+determina se a Aplicação é ou não capaz de atender à demanda imposta pela
 Carga de Trabalho. Vejamos a seguir uma explanação mais detalhada a respeito das
 inferências que sucedem essa análise.  
 
-\subsubsection{Inferência de Desempenho}
+\subsection{Inferência de Desempenho}
 O processo de Inferência de Desempenho acontece logo após a análise comparativa
 do Resultado, conseguinte a uma execução real da Aplicação sob Teste em uma 
 Configuração, que foi tomada a partir de um Nível de Capacidade previamente 
@@ -503,15 +502,14 @@ também seja capaz de executar a mesma Aplicação sob a mesma Carga de Trabalho
 Assim, usando a representação do Espaço de Implantação conforme descrito na
 Seção~\ref{subsec:processo_niveis_capacidade}, o Processo assinala como candidatas
 todas as Configurações para as quais, direta ou indiretamente, a Configuração 
-atual aponte uma seta, ou seja, todas as Configurações ``maiores que'' a Configuração
-atual. 
+atual aponte, ou seja, todas as Configurações que, de acordo com o grafo de capacidade representado no Espaço de Implantação, seriam ``maiores que'' a Configuração atual. 
 
 Mas a técnica de Inferência ainda vai mais longe. Sabendo que as Configurações
 que acabaram de ser assinaladas como Candidatas são capazes de executar a Aplicação
 sob a Carga de Trabalho atual, também é intuitivo concluir que Cargas de Trabalho 
-menores, ou mais brandas, serão naturalmente atendidas.
+menores, ou mais brandas, serão naturalmente atendidas por essas mesmas Configurações.
 
-Então, prosseguindo com a aplicação da Inferência de Desempenho, o Processo marca
+Então, com base na Inferência de Desempenho, o Processo marca
 a Configuração atual e todas as maiores que ela como Candidatas não só para a 
 Carga de Trabalho atual, mas também para todas as Cargas inferiores à atual.
 
@@ -528,28 +526,27 @@ Rejeitadas para a Carga de Trabalho atual.
 
 Ainda seguindo a Inferência de Desempenho, quando uma Configuração não consegue
 atender a demanda de uma Carga de Trabalho, presume-se que também não consiga
-atender a demandas maiores, ou mais severas. O Processo de Avaliação manda, então,
-que a Configuração atual e todas as Configurações menores sejam também marcadas
-como Rejeitadas para todas as Cargas de Trabalho maiores que a Carga atual. 
+atender a demandas maiores, ou mais severas. O Processo de Avaliação marca, então,
+a Configuração atual e todas as Configurações menores que ela como Rejeitadas para todas as Cargas de Trabalho maiores que a Carga atual. 
 
-\begin{figure}[h]
+\begin{figure}[t]
   \begin{center}
-    \includegraphics[scale=1]{img/inference}
+    \includegraphics[scale=.8]{img/inference}
   \end{center}
-  \caption{\label{fig:fig_processo_inferencia}Inferência de Desempenho: Marcação de Configurações Candidatas e Rejeitadas}
+  \caption{\label{fig:fig_processo_inferencia}Ilustração da marcação de Configurações Candidatas (à esquerda) e Rejeitadas (à direita) com a técnica de Inferência de Desempenho.}
 \end{figure}
 
-O efeito da aplicação da técnica de Inferência de Desempenho pode ser melhor
-visualizado através da Figura~\ref{fig:fig_processo_inferencia}. A figura mostra 
+O efeito da utilização da técnica de Inferência de Desempenho pode ser melhor
+visualizado através dos exemplos mostrados na Figura~\ref{fig:fig_processo_inferencia}. A figura mostra 
 duas situações: a da esquerda para o caso em que o SLA é satisfeito e a da direita 
 caso o SLA não seja satisfeito. Em ambos os casos vemos uma célula central realçada, 
 indicando que a Aplicação sob Teste foi executada na Configuração $C_3$ sob a 
-Carga de Trabalho $W_3$. As células marcadas com $\sqrt{}$ mostram as Configurações
+Carga de Trabalho $W_3$. As células assinaladas com com um ``\boldmath$\surd{}$'' mostram as Configurações
 marcadas como Candidatas para as Cargas de Trabalho correspondentes. As células
-marcadas com $\times{}$ representam as Configurações assinaladas como Rejeitadas.
+assinaladas com um ``\boldmath$\times{}$'' representam as Configurações marcadas como Rejeitadas.
 
-Essa representação serve para demonstrar a contribuição da aplicação da técnica 
-de Inferência na aplicação de testes de desempenho. Nesse exemplo, foram 
+Essa representação serve para demonstrar a contribuição da utilização da técnica 
+de Inferência na execução de testes de desempenho. Nesse exemplo, foram 
 explorados 9 cenários diferentes, dados pelas combinações de Configurações e 
 Cargas de Trabalho, mas apenas 1 execução real foi conduzida. Isso significa não
 só que o tempo total gasto na Avaliação de Capacidade é reduzido, mas também o
@@ -596,7 +593,7 @@ nessa escolha, o Processo dispara uma nova execução da Aplicação com a Confi
 corrente e sob a Carga de Trabalho que acabou de ser selecionada.
 
 Porém, se a Estratégia não conseguir fornecer uma Carga de Trabalho segundo as 
-restrições do Processo segundo a comparação do Resultado com o SLA, o Processo 
+restrições do Processo definidas a partir da comparação do Resultado com o SLA, o Processo 
 voltará ao passo inicial de seleção de Carga de Trabalho, que não tem qualquer 
 restrição quanto a essa seleção. Tentará assim a escolha de uma Carga inexplorada
 qualquer. Caso não seja encontrada nenhuma Carga de Trabalho inexplorada, significa
@@ -610,8 +607,8 @@ a Aplicação sob Teste, em ordem crescente de preço.
 
 Por ``capazes de executar'', entenda-se como as Configurações para as quais o valor
 obtido para a Métrica de Desempenho durante a execução da Aplicação sob determinada
-Carga de Trabalho é menor ou igual ao valor definido para o SLA ou Valor de Referência
-como um dos dados de entrada no início do Processo de Avaliação de Capacidade.
+Carga de Trabalho é menor ou igual ao valor definido para o SLA
+como parte dos dados de entrada do Processo.
 
 Embora essa seja a resposta final do processo, a contribuição real deste trabalho está
 na maneira como chegamos a essa resposta, com redução de custo e tempo, e na precisão 
@@ -620,16 +617,16 @@ Candidatas e Rejeitadas. Dados reais que comprovam a eficácia do
 Processo e da técnica de Inferência de Desempenho propostos são apresentados no
 Capítulo~\ref{chap:resultados}, que trata dos experimentos realizados e analisa criticamente os resultados obtidos.
 
-Para deixar mais clara essa contribuição, é explicado a seguir
-como o Processo constrói a resposta final, demonstrando o rastreamento dos vários momentos
-em que a técnica de Inferência de Desempenho é empregada e evidenciando a influência que
-a utilização de diferentes Heurísticas exerce sobre a eficiência do Processo.
+Para deixar mais clara essa contribuição, a seguir é dado um exemplo que ilustra os vários momentos
+em que a técnica de Inferência de Desempenho é empregada durante a execução do Processo, e que evidencia a influência que a utilização de diferentes Heurísticas de Seleção exerce sobre a sua eficiência em selecionar as melhores configurações de recursos para a aplicação alvo.
+
+\section{Exemplo de Utilização do Processo}
 
 \begin{figure}
   \begin{center}
-    \includegraphics[scale=0.6]{img/traces}
+    \includegraphics[scale=0.7]{img/rastros}
   \end{center}
-  \caption{\label{fig:fig_processo_traces}Rastreamamento da Execução das Heurísticas e Inferência de Desempenho}
+  \caption{\label{fig:fig_processo_traces}Ilustração da Inferência de Desempenho com Diferentes Heurísticas de Seleção.}
 \end{figure}
 
 A Figura~\ref{fig:fig_processo_traces} mostra, nos quadros da parte inferior, 
@@ -649,10 +646,10 @@ da Heurística utilizada na Avaliação, medindo a economia em número de execu�
 reais e, por conseguinte, em tempo e custo financeiro da Avaliação.
 
 As execuções reais são representadas nas figuras pelas células destacadas, mais 
-escuras. As células marcadas com um $\sqrt{}$ indicam que a Aplicação atingiu um
+escuras. Novamente, as células marcadas com um ``\boldmath$\surd{}$'' indicam que a Aplicação atingiu um
 desempenho que cumpre o SLA exigido para aquela combinação de Configuração e Carga
 de Trabalho, ou seja, a Configuração é considerada Candidata para aquela Carga. As
-células marcadas com um $\times$ mostram onde a Aplicação não conseguiu cumprir 
+células marcadas com um ``\boldmath$\times$'' mostram onde a Aplicação não conseguiu cumprir 
 o SLA, ou seja, as Configurações Rejeitadas.
 
 Dentro de cada célula nos quadros que mostram o comportamento das Heurísticas há
@@ -664,10 +661,10 @@ passo denotado pelo pequeno número no canto da célula. Note-se que para as cé
 destacadas os números não se repetem e demonstram a ordem de escolha das Configurações
 pela Heurística para execução real da Aplicação.
 
-Os exemplos apresentados na figura~\ref{fig:fig_processo_traces} mostram uma eficácia
-de 100\%, ou seja, usando a Inferência, o Processo indicou com correção todas as
+O exemplo apresentado na Figura~\ref{fig:fig_processo_traces} mostra uma eficácia
+de 100\%, ou seja, usando a Inferência de Desempenho, o Processo indicou com correção todas as
 Configurações que, caso fossem testadas de fato, com uma execução real da Aplicação,
-teriam um desempenho dentro do SLA esperado. A imagem mostra, ainda, que, para a 
+teriam um desempenho dentro do SLA esperado. A figura mostra, ainda, que, para a 
 Aplicação fictícia considerada, a Heurística Conservadora/Conservadora foi a mais
 eficiente, com apenas 9 execuções reais contra um potencial total de 25 execuções.
 Supondo que o tempo de execução dos testes de desempenho da Aplicação é o mesmo 
@@ -681,34 +678,34 @@ ambiente, com dezenas ou até centenas de variações tanto do ambiente como dos
 volumes de demanda, a escolha de uma combinação inicial dessas variáveis é um
 problema de difícil solução.
 
-O emprego das Heurísticas de Seleção ajudam não só na escolha da Configuração e 
+O emprego das Heurísticas de Seleção ajuda não só na escolha da Configuração e 
 da Carga de Trabalho iniciais, mas também de qual a próxima combinação a ser 
 testada e sempre visando ao menor custo de execução dessa avaliação.
 
 O Capítulo~\ref{chap:resultados} irá mostrar os resultados obtidos
-com o Processo de Avaliação proposto e descrito neste trabalho ao avaliar uma
-Aplicação real em um ambiente também real de nuvem de infraestrutura. Serão apresentados
+com o Processo de Avaliação proposto neste trabalho ao avaliar uma
+Aplicação real em um ambiente também real de nuvem IaaS. Serão apresentados
 resultados de eficiência e eficácia do emprego da técnica de Inferência de Desempenho
 e das Heurísticas de Seleção, comparando-as sob diversos SLAs.
 
 \section{Resumo}
 Este capítulo apresentou uma proposta de processo de avaliação de capacidade
-cuja ideia chave é a inferência de capacidade de um recurso a partir dos dados 
-reais de desempenho obtidos por um outro recurso semelhante, mas de capacidade
+cuja ideia chave é a inferência de capacidade de uma configuração de recursos a partir dos dados 
+reais de desempenho obtidos por uma outra configuração de recursos semelhante, mas de capacidade
 presumidamente menor ou maior.
 
 Essa proposta de processo se apoia na hipótese de que é possível estabelecer uma
 relação de capacidade entre os recursos disponibilizados por um provedor de nuvem
-de infraestrutura. Com base nessa hipótese, definiu-se uma sequência de passos
+IaaS. Com base nessa hipótese, definiu-se uma sequência de passos
 que visam a identificar quais recursos são capazes de executar uma determinada 
 aplicação sob determinados volumes de carga de trabalho com o menor número
 possível de execuções reais da aplicação. Como resultado, o processo busca
 a redução de custo e tempo normalmente envolvidos na atividade de avaliação de
 capacidade dos recursos disponíveis na nuvem.
 
-O Capítulo~\ref{chap:capacitor} a seguir apresentará uma visão mais concreta,
+O Capítulo~\ref{chap:capacitor}, a seguir, apresentará uma visão mais concreta,
 com a descrição do arcabouço de software desenvolvido neste trabalho como implementação de referência
-para o processo proposto. Além disso, será utilizada uma aplicação web para
+para o processo proposto. Além disso, será apresentada uma aplicação web desenvolvida para
 ilustrar o uso do processo de avaliação de capacidade
 baseado em inferência de desempenho. 
 
