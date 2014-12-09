@@ -346,12 +346,16 @@ nó, observado no topo do grafo, é o nó raiz e serve apenas para estabelecer a
 separação e permitir o trânsito entre as Categorias.
 
 As classes \emph{DeploymentSpace} e \emph{DeploymentSpaceBuilder} implementam
-a geração do Espaço de Implantação com base na relação de capacidade ou na relação
-de preço entre as Configurações. O desenvolvedor pode optar pelo grafo por capacidade ou por preço no momento da
-instanciação do objeto \emph{Capacitor}. Embora esse não seja o foco desta 
-pesquisa, isso foi feito para que pudesse ser estudada a influência da formação 
+a geração do Espaço de Implantação com base na relação de capacidade entre as 
+Configurações. Embora o foco desta pesquisa seja o estudo da Inferência de 
+Desempenho baseada nas relações de capacidade, esta implementação do Processo
+criou um Espaço de Implantação baseado nas relações de preço entre as Configurações. 
+Isso foi feito para que pudesse ser estudada a influência da formação 
 do Espaço de Implantação na precisão e eficiência de custo das Heurísticas de 
-Seleção. Esses resultados serão discutidos no Capítulo~\ref{chap:resultados}.
+Seleção. Esses resultados serão discutidos no Capítulo~\ref{chap:resultados}. 
+Desta forma, o desenvolvedor pode optar pelo grafo que representa o Espaço de 
+Implantação por relação de capacidade ou por relação de preço no momento da
+instanciação do objeto \emph{Capacitor}.
 
 O Espaço de Implantação é a estrutura que dá suporte à navegação das Estratégias
 sobre os diversos Níveis de Capacidade no momento em que devem ser escolhidas
