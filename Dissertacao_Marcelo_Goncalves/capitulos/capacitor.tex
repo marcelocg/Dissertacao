@@ -4,14 +4,13 @@
 Este capítulo apresenta a implementação do
 Processo de Avaliação de Capacidade descrito no capítulo anterior, bem como da técnica de
 Inferência de Desempenho e das Heurísticas de Seleção que dão suporte a esse
-Processo. 
+Processo. A implementação está estruturada na forma de uma biblioteca
+extensível, denominada CloudCapacitor, e de um sistema computacional que demonstra seu funcionamento, denominado Capacitor Web. 
 
-A implementação está estruturada na forma de uma biblioteca
-extensível e de um sistema computacional que demonstra seu funcionamento.Foi dado o nome de 
-CloudCapacitor à biblioteca, implementada como uma \emph{gem}
-(i.e., um pacote) da linguagem Ruby~\cite{ruby} e desenvolvido o sistema
-computacional Capacitor Web para ser uma interface visual para a utilização do CloudCapacitor, usando 
-o \emph{framework} Ruby on Rails~\cite{rails}.  
+%Foi dado o nome de CloudCapacitor à biblioteca, implementada como uma \emph{gem}
+%(i.e., um pacote) da linguagem Ruby~\cite{ruby} e desenvolvido o sistema
+%computacional Capacitor Web para ser uma interface visual para a utilização do CloudCapacitor, usando 
+%o \emph{framework} Ruby on Rails~\cite{rails}.  
 
 A seguir são descritos os detalhes da implementação de cada um destes módulos e
 como ambos se relacionam para oferecer ao usuário a experiência da avaliação de capacidade
@@ -20,13 +19,14 @@ amigável e de fácil utilização.
 
 \section{CloudCapacitor}
 CloudCapacitor é uma biblioteca para criação de sistemas de avaliação de 
-capacidade em ambientes de nuvem de infraestrutura como serviço. É a implementação
-completa da especificação do Processo de Avaliação de Capacidade do 
+capacidade em ambientes de nuvem IaaS, implementada como uma \emph{gem}
+(i.e., um pacote) da linguagem Ruby~\cite{ruby}. A biblioteca fornece uma implementação
+completa da especificação do Processo de Avaliação de Capacidade descrito no 
 Capítulo~\ref{chap:processo}, permitindo que sejam customizadas as atividades 
-definidas pelo Processo como pontos de extensão, como as Estratégias de Avaliação
-e o disparo e controle da execução da Aplicação sob Teste.
+definidas como pontos de extensão do Processo, como as Estratégias de Avaliação
+e a execução da Aplicação sob Teste.
 
-A apresentação do CloudCapacitor inicia-se pelas classes que compõem a biblioteca
+Primeiramente, serão apresentadas as classes que compõem a biblioteca
 e suas responsabilidades. Em seguida, será mostrado como CloudCapacitor auxilia 
 desenvolvedores de software na criação de sistemas de avaliação de capacidade,
 mostrando o fluxo de utilização da biblioteca através de sua interface de programação.
@@ -43,10 +43,10 @@ Aplicação sob Teste em cada uma das Cargas de Trabalho respeitando o SLA defin
 
 \subsection{Classes e Responsabilidades}
 \label{subsec:classes}
-CloudCapacitor é formado por um conjunto de classes que representam os
+A biblioteca CloudCapacitor é formada por um conjunto de classes que representam os
 componentes envolvidos na avaliação de capacidade de aplicações em ambientes de
-nuvem de acordo com os conceitos e o Processo definidos anteriormente, nos
-Capítulos~\ref{chap:formalizacao} e~\ref{chap:processo}. A Figura~\ref{fig:classes}
+nuvem de acordo com os conceitos e o Processo definidos anteriormente, no
+Capítulo~\ref{chap:processo}. A Figura~\ref{fig:classes}
 mostra as principais classes cujas responsabilidades e cooperação levam ao 
 resultado final de uma Avaliação. 
 
@@ -55,11 +55,11 @@ de capacidade, o desenvolvedor tem à sua disposição uma classe principal, cha
 \emph{Capacitor}. Essa classe fornece o fluxo principal do Processo de
 Avaliação, com todos os seus pontos de decisão e de extensão.
 
-\begin{figure}[htb]
+\begin{figure}[t]
   \begin{center}
-    \includegraphics[scale=0.75]{img/CapacitorClasses}
+    \includegraphics[scale=0.65]{img/CapacitorClasses}
   \end{center}
-  \caption{\label{fig:classes}Principais classes que compõem o CloudCapacitor e suas relações}
+  \caption{\label{fig:classes}Principais classes que compõem o CloudCapacitor e suas relações.}
 \end{figure}
 
 Entre os pontos de extensão, destaca-se o uso da classe \emph{Strategy}. Como 
@@ -86,7 +86,7 @@ precisa ter conhecimento do Espaço de Implantação disponibilizado. Essa é a
 responsabilidade da classe \emph{DeploymentSpace}, que implementa uma estrutura 
 de dados em memória para representar os diversos Níveis de Capacidade formados 
 entre as Configurações. A construção dessa estrutura é responsabilidade da classe 
-\emph{DeploymentSpaceBuilder}, que contém os algoritmos necessários à preparação 
+\emph{DeploymentSpaceBuilder}, que contém os algoritmos necessários à geração 
 do grafo usado para navegação pelos Níveis de Capacidade. 
 
 \subsection{Fluxo de Utilização da Biblioteca}
@@ -97,12 +97,11 @@ visando basicamente a reusabilidade e a simplicidade na composição dessas
 aplicações.
 
 Embora tenha sido desenvolvida objetivando sua utilização na construção de 
-aplicações web baseadas no framework Ruby on Rails, CloudCapacitor pode facilmente
+aplicações web baseadas no \emph{framework} Ruby on Rails~\cite{rails}, CloudCapacitor pode facilmente
 ser usada em todo tipo de aplicação escrita em Ruby, desde scripts puros até
-aplicações baseadas em outros frameworks.
+aplicações baseadas em outros \emph{frameworks}.
 
-Em suma, o fluxo de utilização da biblioteca é bastante simples e pode ser 
-descrito por:
+Em suma, o fluxo de utilização da biblioteca é bastante simples e contém os seguintes passos:
 
 \begin{enumerate}
   \item Configurar parâmetros de criação do Espaço de Implantação 
@@ -116,8 +115,7 @@ descrito por:
 Antes que a aplicação que está sendo desenvolvida possa de fato dar início ao uso 
 da biblioteca, é preciso que o desenvolvedor a configure previamente. 
 
-O primeiro passo é configurar os limites de tamanho do Espaço de Implantação e 
-isso deve ser feito através de um arquivo em formato YAML~\cite{yml}. A localização 
+O primeiro passo é configurar os limites de tamanho do Espaço de Implantação, o que deve ser feito através de um arquivo em formato YAML~\cite{yml}. A localização 
 e o nome do arquivo de parâmetros para a criação do Espaço de Implantação dependem 
 de como a aplicação está sendo implementada: se for uma aplicação Ruby on Rails, 
 deverá haver um arquivo chamado \emph{capacitor.yml} na pasta \emph{config}, que 
@@ -125,15 +123,7 @@ fica dentro da pasta raiz da aplicação; caso contrário, deverá haver um arqu
 chamado \emph{capacitor\_settings.yml} já na pasta raiz da aplicação ou na mesma 
 pasta em que está o script que invoca a biblioteca. 
 
-A Figura~\ref{fig:settings} mostra um exemplo de conteúdo do arquivo que configura
-os limites do Espaço de Implantação. São apenas dois parâmetros:
-
-\begin{description}
-  \item[max\_price] \hfill \\ O custo máximo que uma Configuração pode atingir
-  \item[max\_num\_instances] \hfill \\ Número máximo de instâncias usadas em uma Configuração 
-\end{description}
-
-\begin{figure}[h]
+\begin{figure}[t]
  \begin{lstlisting}[linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
 deployment_space:
   #The maximum price for a whole Configuration.
@@ -145,10 +135,18 @@ deployment_space:
   #This is for horizontal scaling.
   max_num_instances: 4
   \end{lstlisting}
-  \caption{\label{fig:settings}Parâmetros de Configuração para o CloudCapacitor}
+  \caption{\label{fig:settings}Parâmetros de Configuração para o CloudCapacitor.}
 \end{figure}
 
-No exemplo acima, serão criadas Configurações com 1, 2, 3 e 4 instâncias para cada
+A Figura~\ref{fig:settings} mostra um exemplo de conteúdo do arquivo que configura
+os limites do Espaço de Implantação. São apenas dois parâmetros:
+
+\begin{description}
+  \item[max\_price] \hfill \\ O custo máximo que uma Configuração pode atingir
+  \item[max\_num\_instances] \hfill \\ Número máximo de instâncias usadas em uma Configuração 
+\end{description}
+
+No exemplo da Figura~\ref{fig:settings}, serão criadas Configurações com 1, 2, 3 e 4 instâncias para cada
 Tipo de Máquina Virtual especificada, desde que o custo total da Configuração não
 ultrapasse o valor de 7,00 unidades monetárias.
 
@@ -163,7 +161,7 @@ CloudCapacitor procurará um arquivo pelo nome \emph{deployment\_space.yml}, na
 pasta \emph{config}, se for uma aplicação Ruby on Rails, ou na pasta raiz do
 script para outro tipo de aplicação.
  
-\begin{figure}[h]
+\begin{figure}[t]
  \begin{lstlisting}[linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
 ---
 - !ruby/object:CloudCapacitor::VMType
@@ -191,13 +189,13 @@ script para outro tipo de aplicação.
   price: 1.64
   category: m2
   \end{lstlisting}
-  \caption{\label{fig:depspace}Especificação de Tipos de Máquinas para o Espaço de Implantação}
+  \caption{\label{fig:depspace}Especificação de Tipos de Máquinas para o Espaço de Implantação.}
 \end{figure}
 
 A Figura~\ref{fig:depspace} mostra a especificação de um conjunto de Tipos de
 Máquinas Virtuais oferecidos pelo serviço EC2 do Provedor Amazon Web 
 Services~\cite{ec2}. São disponibilizadas para o CloudCapacitor máquinas 
-\emph{m2.xlarge}, \emph{c1.xlarge}, \emph{m1.xlarge} e \emph{m2.4xlarge} e, para
+dos tipos \emph{m2.xlarge}, \emph{c1.xlarge}, \emph{m1.xlarge} e \emph{m2.4xlarge} e, para
 cada uma, podem ser vistas as características de CPU, memória RAM e preço, conforme
 informados pelo Provedor. Esses são os dados que serão usados na criação do Espaço
 de Implantação, atendendo às restrições de tamanho e custo impostas no passo 
@@ -205,12 +203,12 @@ anterior, de forma que os testes sejam executados conforme o proposto
 no Processo de Avaliação de Capacidade.
 
 Feitas as configurações necessárias, o desenvolvedor pode, assim, criar um objeto 
-a partir da classe \emph{Capacitor} e, então atribuir a ele um objeto instanciado
+a partir da classe \emph{Capacitor} e, então, atribuir a ele um objeto instanciado
 a partir de uma subclasse de \emph{DefaultExecutor}, subclasse esta de sua própria
 implementação e que forneça os meios necessários para administração da execução
 dos testes de desempenho da Aplicação sob Teste.
 
-\begin{figure}[h]
+\begin{figure}[t]
  \begin{lstlisting}[language=Ruby,linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
     capacitor = Capacitor.new
     capacitor.executor = Executors::DummyExecutor.new
@@ -224,19 +222,17 @@ dos testes de desempenho da Aplicação sob Teste.
     total_cost = capacitor.run_cost
     total_executions = capacitor.executions  
  \end{lstlisting}
-  \caption{\label{fig:mincode}Código Ruby para execução do CloudCapacitor}
+  \caption{\label{fig:mincode}Código Ruby para execução do CloudCapacitor.}
 \end{figure}
 
-Na Figura~\ref{fig:mincode} vê-se a instanciação do Capacitor, na linha 1. Na 
+A Figura~\ref{fig:mincode} mostra um exemplo de código em Ruby responsável pela execução do CloudCapacitor. Na linha~1, vê-se a instanciação do \emph{Capacitor}. Na 
 linha seguinte, um objeto da classe \emph{DummyExecutor}, que é apenas didática, 
-é atribuído ao \emph{Capacitor}.
-
-A partir da linha 3, vêem-se os passos seguintes da utilização do 
+é atribuído ao \emph{Capacitor}. A partir da linha 3, vêem-se os passos seguintes da utilização do 
 CloudCapacitor, com a definição de uma Estratégia de Avaliação, configurada
 com uma Heurística de Seleção do tipo OC (v. Seção~\ref{subsubsec:heuristicas}).
 A execução da Avaliação de Capacidade acontece de fato na chamada que ocorre
 na linha 8, onde são passados valores que representam uma lista de grandezas de
-Cargas de Trabalho que serão impostas à Aplicação sob Teste rodando sobre as
+Cargas de Trabalho que serão impostas à Aplicação sob Teste quando executadas sobre as
 Configurações geradas a partir do Espaço de Implantação.
 
 Ao final da Avaliação, o Capacitor retorna a lista de Configurações Candidatas
@@ -246,7 +242,7 @@ como o número total de execuções da Aplicação sob Teste no ambiente de nuve
 custo total acarretado por essas execuções. 
 
 Agora, já com uma visão geral dos componente e da utilização do CloudCapacitor,
-segue-se uma descrição um pouco mais detalhada do que acontece durante a atividade
+segue-se com uma descrição um pouco mais detalhada do que acontece durante a atividade
 de Avaliação de Capacidade.
 
 \subsection{Funcionamento Interno}
@@ -257,7 +253,7 @@ implementação que ajudarão a esclarecer melhor como todas essas partes agem e
 conjunto para executar, da forma como proposto no Capítulo~\ref{chap:processo},
 o Processo de Avaliação de Capacidade.
 
-Nesta seção são mostradas inicialmente as linhas gerais da implementação da classe 
+Nesta subseção, são mostradas inicialmente as linhas gerais da implementação da classe 
 responsável pelo controle da execução dos testes de desempenho. Mostra-se em 
 seguida como a biblioteca representa o Espaço de Implantação de forma que os 
 Níveis de Capacidade sejam usados para navegar entre Configurações e como a 
@@ -273,13 +269,13 @@ meio de um objeto instanciado de uma classe que deve ser criada pelo
 desenvolvedor que está utilizando o CloudCapacitor na implementação de sua 
 ferramenta de Avaliação de Capacidade.
 
-Para que tudo funcione a contento, a classe criada deve ser extendida a partir
+Para que tudo funcione a contento, a classe criada deve ser estendida a partir
 da classe \emph{DefaultExecutor} fornecida pelo CloudCapacitor. A única 
 exigência feita para essa subclasse é que ela implemente um método:
 
 \begin{itemize}
-  \item Com a assinatura \emph{run(configuration, workload)}; e
-  \item Que retorne um objeto da classe \emph{Result}
+  \item com a assinatura \emph{run(configuration, workload)}; e
+  \item que retorne um objeto da classe \emph{Result}
 \end{itemize}
 
 Ou seja, a classe criada pelo desenvolvedor deve pelo menos apresentar um método
@@ -289,15 +285,15 @@ um objeto da classe \emph{Result}, que deve ser inicializado com apenas 3 atribu
 
 \begin{description}
   \item[\emph{value}] \hfill \\
-    O valor obtido pela Aplicação para a Métrica de Desempenho estudada
+    O valor obtido pela Aplicação para a Métrica de Desempenho estudada.
   \item[\emph{cpu}] \hfill \\
-    O percentual de CPU consumido pela Aplicação durante o teste
+    O percentual de CPU consumido pela Aplicação durante o teste.
   \item[\emph{mem}] \hfill \\
-    O percentual de Memória RAM utilizada pela Aplicação durante o teste
+    O percentual de Memória RAM utilizada pela Aplicação durante o teste.
 \end{description}
 
 Essas informações devem ser obtidas pelo desenvolvedor através de chamadas a
-uma ferramenta de execução de testes, como \cite{cunha2012ambiente}, 
+uma ferramenta de execução de testes, como descritas em \cite{cunha2012ambiente}, 
 \cite{jayasinghe2012} ou \cite{silva2013cloudbench}. A implementação dessa 
 comunicação com a ferramenta de automação de testes escolhida está 
 fora do escopo deste trabalho e deve ficar a cargo do desenvolvedor prover o 
@@ -330,17 +326,18 @@ possam navegar entre as Configurações e que a rotina que implementa o Processo
 Avaliação possa identificar, por meio da técnica de Inferência de Desempenho, 
 quais são as Configurações Candidatas e Rejeitadas. 
 
-\begin{figure}[htb]
+\begin{figure}[t]
   \begin{center}
-    \includegraphics[scale=0.35]{img/exemplo_grafo_espaco_implantacao}
+    %\includegraphics[scale=0.37]{img/exemplo_grafo_espaco_implantacao}
+    \includegraphics[width=\linewidth]{img/exemplo_grafo_espaco_implantacao}
   \end{center}
-  \caption{\label{fig:depspace_real}Representação interna de um Espaço de Implantação no CloudCapacitor}
+  \caption{\label{fig:depspace_real}Representação interna de um Espaço de Implantação no CloudCapacitor.}
 \end{figure}
 
 Como é possível ver na Figura~\ref{fig:depspace_real}, o Espaço de Implantação é 
 representado internamente por um grafo direcionado onde arestas ligam duas 
 Configurações para identificar as relações imediatas ``maior que'' e ``menor que'', 
-conforme as definições da Seção~\ref{sec:formalizacao_configuracoes}. 
+conforme as definições da Seção~\ref{subsec:processo_niveis_capacidade}. 
 
 CloudCapacitor separa o Espaço de Implantação em subgrafos, agrupando as
 Configurações por Categoria de Máquinas Virtuais. Cada subgrafo é destinado às
@@ -381,9 +378,9 @@ CloudCapacitor fornece uma classe chamada \emph{Strategy} como uma implementaç�
 padrão para as 9 Heurísticas descritas no Capítulo~\ref{chap:processo}. As
 Figuras~\ref{fig:strategy_workload_code}~e~\ref{fig:strategy_capacity_code}
 mostram o código fonte dos métodos de seleção de Carga de Trabalho e Nível
-de Capacidade, respectivamente.
+de Capacidade, respectivamente, da classe  \emph{Strategy}.
 
-\begin{figure}[h]
+\begin{figure}[t]
   \begin{lstlisting}[language=Ruby,linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
   def select_workload( workload_list )
     case @wkl_approach
@@ -396,10 +393,10 @@ de Capacidade, respectivamente.
     end
   end
   \end{lstlisting}
-  \caption{\label{fig:strategy_workload_code}Seleção de Carga de Trabalho na classe \emph{Strategy}}
+  \caption{\label{fig:strategy_workload_code}Seleção de Carga de Trabalho na classe \emph{Strategy}.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[t]
   \begin{lstlisting}[language=Ruby,linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
   def take_a_capacity_level_from( unexplored_levels )
     levels = unexplored_levels.keys
@@ -414,7 +411,7 @@ de Capacidade, respectivamente.
     end
   end
   \end{lstlisting}
-  \caption{\label{fig:strategy_capacity_code}Seleção de Nível de Capacidade na classe \emph{Strategy}}
+  \caption{\label{fig:strategy_capacity_code}Seleção de Nível de Capacidade na classe \emph{Strategy}.}
 \end{figure}
 
 Ambas as implementações são bastante simples. Para a seleção da Carga de Trabalho,
@@ -437,7 +434,7 @@ Capacidade do meio da lista de Níveis.
 
 A combinação das abordagens de seleção para Cargas de Trabalho e Níveis de 
 Capacidade nos métodos descritos corresponde às 9 Heurísticas apresentadas na
-Seção~\ref{sec:heuristicas}. Os experimentos realizados neste trabalho e 
+Seção~\ref{subsubsec:heuristicas}. Os experimentos realizados neste trabalho e 
 apresentados no Capítulo~\ref{chap:resultados} foram todos executados com a 
 implementação mostrada acima que, como será analisado, demonstra grande eficiência
 na predição de desempenho para a Aplicação sob Teste avaliada.
@@ -445,12 +442,12 @@ na predição de desempenho para a Aplicação sob Teste avaliada.
 Porém, caso se faça necessário atender especificidades da Aplicação sob Teste, 
 é possível substituir essa implementação padrão trazida pela classe \emph{Strategy} 
 por uma mais adequada aos objetivos do usuário. O relacionamento entre a classe 
-\emph{Capacitor} e a Estratégia de Avaliação se dá conforme o Padrão de Projeto 
-(\emph{Design Pattern}) \emph{Strategy} \cite{gamma}, o que justifica a escolha 
+\emph{Capacitor} e a Estratégia de Avaliação se dá conforme o padrão de projeto 
+\emph{Strategy} \cite{gamma}, o que justifica a escolha 
 do nome da classe e do conceito criado para a implementação das Heurísticas.
 
 Assim, para que uma nova lógica de seleção de Cargas de Trabalho seja fornecida
-ao CloudCapacitor, basta que o desenvolvedor implemente uma nova classe que extenda
+ao CloudCapacitor, basta que o desenvolvedor implemente uma nova classe que estenda
 \emph{Strategy} e sobrescreva o método \emph{select\_workload}. Analogamente,
 para uma nova lógica de seleção de Níveis de Capacidade, a nova classe deve 
 sobrescrever o método \emph{take\_a\_capacity\_level\_from}.
@@ -465,7 +462,10 @@ Dando continuidade à descrição da implementação concreta do Processo de Ava
 a seção seguinte apresenta o retorno dos resultados obtidos pelo CloudCapacitor
 após a execução da Avaliação.
 
-\begin{figure}[h]
+\subsubsection{Resultado da Avaliação}
+\label{subsubsec:funcionamento_resultado}
+
+\begin{figure}[t]
  \begin{lstlisting}[linewidth=\textwidth,xleftmargin=.04\textwidth, numbers=left]
 - 100
     m3.large
@@ -480,49 +480,44 @@ após a execução da Avaliação.
 - 400
     m3.2xlarge
   \end{lstlisting}
-  \caption{\label{fig:resultado}Representação do retorno do resultado da execução do CloudCapacitor}
+  \caption{\label{fig:resultado}Representação do retorno do resultado da execução do CloudCapacitor.}
 \end{figure}
 
-\subsubsection{Resultado da Avaliação}
-\label{subsubsec:funcionamento_resultado}
 Durante toda a execução da Avaliação, CloudCapacitor segue colecionando as
 Configurações marcadas como Candidatas, segundo a técnica de Inferência de 
 Desempenho, para cada uma das Cargas de Trabalho especificadas como parâmetro de 
-entrada.
-
-Ao final da execução, CloudCapacitor dispõe de uma lista de Cargas de Trabalho 
+entrada. Ao final da execução, CloudCapacitor dispõe de uma lista de Cargas de Trabalho 
 associadas cada qual a uma lista de Configurações Candidatas. Essa estrutura de
 lista de listas é devolvida como retorno do método \emph{run\_for} da classe 
-\emph{Capacitor} e uma representação conceitual de exemplo pode ser vista na 
-Figura~\ref{fig:resultado}. 
+\emph{Capacitor}, cuja representação textual é ilustrada na Figura~\ref{fig:resultado}. 
 
-Esses dados podem então ser usados como base para escolha, por parte do usuário,
+Os dados retornados pelo \emph{Capacitor} podem então ser usados como base para escolha, por parte do usuário,
 da Configuração mais barata que atende às diversas demandas esperadas para a 
 sua aplicação implantada na nuvem.
 
 Conclui-se assim a apresentação da implementação da biblioteca CloudCapacitor. A
 seção a seguir mostra a implementação de um sistema de avaliação de capacidade 
 que faz uso do CloudCapacitor e que foi usado neste trabalho para realizar os
-experimentos e analisar os seus resultados.
+experimentos de avaliação e analisar os seus resultados.
 
 \section{Capacitor Web}
 A fim de validar a implementação concreta do Processo através da biblioteca
-CloudCapacitor, foi construída uma aplicação web que faz uso das funcionalidades
-oferecidas para a realização de testes de Avaliação de Capacidade em ambientes
-de nuvem. A aplicação recebeu o nome de Capacitor Web e foi utilizada também
+CloudCapacitor, foi construída uma aplicação web, utilizando o \emph{framework} Ruby on Rails, que faz uso das funcionalidades oferecidas para a realização de testes de Avaliação de Capacidade em ambientes
+de nuvem. A aplicação, denominada Capacitor Web, foi utilizada também
 para a execução dos experimentos que fazem parte deste trabalho.
 
-\begin{figure}[htb]
+\begin{figure}[t]
   \begin{center}
-    \includegraphics[scale=0.5]{img/CapacitorWeb_Frontpage}
+    %\includegraphics[scale=0.5]{img/CapacitorWeb_Frontpage}
+    \includegraphics[width=\linewidth]{img/CapacitorWeb_Frontpage}
   \end{center}
-  \caption{\label{fig:capacitor_web_front}Página inicial do Capacitor Web}
+  \caption{\label{fig:capacitor_web_front}Página inicial do Capacitor Web.}
 \end{figure}
 
-A Figura~\ref{fig:capacitor_web_front} mostra a tela inicial do sistema, onde
+A Figura~\ref{fig:capacitor_web_front} mostra a tela inicial da aplicação, onde
 o usuário tem a oportunidade de parametrizar a execução da Avaliação. O primeiro
 campo permite a especificação do SLA que deve ser respeitado pela Aplicação para
-que uma execução seja considerada bem sucedida. Em seguida apresenta-se o campo
+que uma execução seja considerada bem sucedida. Em seguida, apresenta-se o campo
 para seleção da representação do Espaço de Implantação, com opções de representação
 por capacidade ou por preço.
 
@@ -538,11 +533,12 @@ opções aqui são ``\emph{Optimistic}'', ``\emph{Conservative}'' e ``\emph{Pess
 para ambos os campos. Depois de selecionados os parâmetros, o usuário ordena a execução 
 ao pressionar o botão presente na parte inferior da tela.
 
-\begin{figure}[htb]
+\begin{figure}[t]
   \begin{center}
-    \includegraphics[scale=0.5]{img/CapacitorWeb_Results}
+    %\includegraphics[scale=0.5]{img/CapacitorWeb_Results}
+    \includegraphics[width=\linewidth]{img/CapacitorWeb_Results}
   \end{center}
-  \caption{\label{fig:capacitor_web_results}Página de Resultados do Capacitor Web}
+  \caption{\label{fig:capacitor_web_results}Página de Resultados do Capacitor Web.}
 \end{figure}
 
 Uma vez concluída a execução da Avaliação, o sistema apresenta ao usuário a tela
@@ -569,11 +565,12 @@ conjunto de valores de Cargas de Trabalho e, abaixo de cada um, uma lista com os
 nomes das Configurações consideradas como Candidatas para executar com sucesso a 
 Aplicação sob aquela Carga.  
 
-\begin{figure}[htb]
+\begin{figure}[t]
   \begin{center}
-    \includegraphics[scale=0.45]{img/CapacitorWeb_ExecutionTrace}
+    %\includegraphics[scale=0.45]{img/CapacitorWeb_ExecutionTrace}
+    \includegraphics[width=\linewidth]{img/CapacitorWeb_ExecutionTrace}
   \end{center}
-  \caption{\label{fig:capacitor_web_trace}Rastro de Execução do Capacitor Web}
+  \caption{\label{fig:capacitor_web_trace}Rastro de Execução do Capacitor Web.}
 \end{figure}
 
 A segunda aba da parte inferior da tela de resultados apresenta o título 
@@ -585,18 +582,19 @@ Figura~\ref{fig:capacitor_web_trace} mostra uma imagem dessa tela.
 
 Os dados são exibidos em uma tabela cujas linhas apresentam a sequencia das 
 execuções, identificadas pelo número presente na primeira coluna. Cada coluna da
-tabela representa uma Carga de Trabalho e as células, que são a intercessão entre
+tabela representa uma Carga de Trabalho e as células, que são a interceção entre
 uma sequencia de execução e uma Carga, trazem um texto com o nome da Configuração 
 utilizada naquela execução daquela Carga de Trabalho. As células que aparecem na 
 cor esverdeada indicam as execuções onde o SLA foi satisfeito. De modo contrário, 
 as células na cor avermelhada indicam as execuções onde a Aplicação não conseguiu 
 desempenho suficiente para satisfazer o SLA.
  
-\begin{figure}[htb]
+\begin{figure}[t]
   \begin{center}
-    \includegraphics[scale=0.5]{img/CapacitorWeb_FullTrace}
+    %\includegraphics[scale=0.5]{img/CapacitorWeb_FullTrace}
+    \includegraphics[width=\linewidth]{img/CapacitorWeb_FullTrace}
   \end{center}
-  \caption{\label{fig:capacitor_web_fulltrace}Rastro Completo da Execução do Capacitor Web}
+  \caption{\label{fig:capacitor_web_fulltrace}Rastro Completo da Execução do Capacitor Web.}
 \end{figure}
 
 Por fim, a terceira aba, com o título ``Full Trace'', traz também uma tabela, 
@@ -625,7 +623,7 @@ Quando são feitas essas predições de desempenho, em que o sucesso ou fracasso
 da Configuração em satisfazer o SLA é inferido com base no desempenho de outra
 Configuração, há a possibilidade de que a predição não tenha sido feita corretamente.
 Quando essa situação acontece, o sistema faz uma marcação na célula com um pequeno
-círculo vermelho com um $\times$ branco inscrito. A imagem da 
+círculo vermelho com um ``\boldmath$\times$'' branco inscrito. A imagem da 
 Figura~\ref{fig:capacitor_web_fulltrace} mostra essa marcação de erro de predição
 na coluna referente à Carga de Trabalho de valor 1000 e linhas referentes às
 Configurações ``3\_c3\_large'' e ``2\_c3\_xlarge'', onde a predição afirma erroneamente
@@ -644,8 +642,8 @@ Configurações são capazes de atender cada Carga de Trabalho.
 
 \section{Resumo}
 Este capítulo apresentou a implementação concreta do Processo de Avaliação proposto no
-Capítulo~\ref{chap:processo} sob a forma de uma biblioteca a ser usada na criação de sistemas
-mais completos destinados à avaliação de desempenho e capacidade de nuvens de infraestrutura.
+Capítulo~\ref{chap:processo}, sob a forma de uma biblioteca a ser usada na criação de sistemas
+mais completos destinados à avaliação de desempenho e capacidade de aplicações em nuvens IaaS.
 Foram explicados os detalhes de programação necessários ao entendimento de como os conceitos vistos
 foram concretizados em software, ao tempo em que foram descritos os passos envolvidos na 
 customização das tarefas mais específicas ou que conferem flexibilidade ao Processo.
@@ -654,9 +652,8 @@ Foi mostrado ainda o sistema web criado para validação da implementação da b
 apoiar a execução dos experimentos realizados neste trabalho, com a descrição de sua interface de
 entrada de dados e apresentação de resultados.
 
-O Capítulo~\ref{chap:resultados} a seguir explica em detalhes os experimentos 
-realizados, detalhando a metodologia utilizada, a Aplicação sob Teste escolhida, como
-foi implantada e como foram realizadas as execuções para coleta de dados de desempenho. 
+O Capítulo~\ref{chap:resultados}, a seguir, reporta os experimentos 
+realizados, detalhando a metodologia utilizada, a Aplicação sob Teste e o Provedor escolhidos, as opções de implantação da aplicação avaliadas, e como foram realizadas as execuções para coleta de dados de desempenho. 
 Além disso, serão analisados os resultados obtidos pela aplicação das 9 Heurísticas, 
 comprovando e quantificando a eficiência do Processo de Avaliação de Capacidade proposto
 e sua técnica de Inferência de Desempenho.
