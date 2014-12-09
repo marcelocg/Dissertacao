@@ -1,6 +1,5 @@
 Lista de Pendências
 
-- trabalhos futuros estudar impacto flutuacao
 - 
 
 OK - Calcular dados da tabela 3 (seção resumo, capitulo 6 - Resultados)
@@ -11,3 +10,5 @@ OK - Revisar o cap 4 para referencias
 OK - Capitulo 2 - conceitos de nuvem, planejamento capacidade, Amazon
 OK - Captions embaixo das figuras, e nao em cima
 OK - Figuras em Português
+OK - trabalhos futuros estudar impacto flutuacao
+OK - escrever sobre a possibilidade de usar outras representações de dep space
