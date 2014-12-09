@@ -36,7 +36,7 @@ Esse \emph{pool} de recursos é tipicamente explorado em um modelo de pagar-pelo
 no qual o provedor de infraestrutura oferece garantias por meio de acordos de nível 
 de serviço customizados.''\end{citacao}
 
-Essa última definição menciona o termo \textbf{acordo de nível de serviço} (ou SLA, do Inglês \emph{Service-Level Agreement}), uma característica particularmente importante para aplicações sensíveis a flutuações 
+Essa última definição menciona o termo \textbf{acordo de nível de serviço} (\emph{Service-Level Agreement}, ou SLA), uma característica particularmente importante para aplicações sensíveis a flutuações 
 de desempenho. Outra característica mencionada é o modelo de \textbf{pagar-pelo-uso}, 
 o que permite que uma aplicação se adapte a variações na demanda com a adição de 
 novos recursos ou a liberação de recursos existentes, restringindo seus gastos 
@@ -77,15 +77,15 @@ comercial.
 \end{description}
 
 Este trabalho tem seu foco voltado ao planejamento de capacidade em
-nuvens públicas e, portanto, este foi o modelo de implantação adotado na execução
+nuvens públicas, tendo sido este, portanto, o modelo de implantação adotado na execução
 dos experimentos descritos no Capítulo~\ref{chap:resultados}. 
 
 \subsection{Tipos de Serviço}
 
 Outra forma de classificar as plataformas de computação em nuvem é quanto aos tipos 
 dos serviços oferecidos. Os três tipos de serviços de nuvem mais comumente citados 
-são: infraestrutura como serviço (do Inglês \emph{Infrastructure-as-a-Service}, ou IaaS), plataforma como serviço (do Inglês \emph{Platform-as-a-Service}, ou PaaS), e 
-software como serviço (do Inglês \emph{Software-as-a-Service}, ou SaaS)~\cite{armbrust2010view,Zhang2010}. 
+são: infraestrutura como serviço (\emph{Infrastructure-as-a-Service}, ou IaaS), plataforma como serviço (\emph{Platform-as-a-Service}, ou PaaS), e 
+software como serviço (\emph{Software-as-a-Service}, ou SaaS)~\cite{armbrust2010view,Zhang2010}. 
 
 \begin{description}
 \item[Nuvem IaaS] \hfill \\ Nuvens to tipo IaaS oferecem 
@@ -128,7 +128,7 @@ usuários. No caso do email, um dos serviços mais conhecidos é o GMail, que of
 uma determinada capacidade de armazenamento gratuitamente, com o usuário tendo a 
 opção de pagar para estender essa capacidade inicial caso necessite de mais espaço. 
 Serviços de discos virtuais, como Dropbox e GoogleDrive, também seguem uma política 
-de preços similar. Já serviços de CRM (do Inglês \emph{Customer Relationship Management}), 
+de preços similar. Já serviços de CRM (\emph{Customer Relationship Management}), 
 como Salesforce1 \cite{salesforce} e Zoho Creator \cite{zoho}, oferecem um período de teste gratuito 
 para o usuário, após o qual o serviço passa a ser pago. O GitHub \cite{github} é um 
 serviço gratuito de controle de versionamento de arquivos para repositórios 
@@ -141,8 +141,8 @@ a repositórios privados.
 
 Este trabalho foca na modalidade de serviço de nuvem IaaS, mais especificamente na questão do planejamento da capacidade dos recursos virtuais a serem alocados às aplicações que serão executadas na nuvem.
 
-Apresentamos a seguir uma breve descrição de alguns dos diferentes tipos de recursos oferecidos pelo serviço EC2,
-da Amazon, um dos mais conhecidos serviços de nuvem IaaS disponíveis publicamente, o qual também foi utilizado para a realização dos experimentos que fizeram parte deste trabalho. 
+Apresentamos a seguir uma breve descrição de alguns dos tipos de recursos oferecidos pelo serviço EC2,
+da Amazon, um dos mais conhecidos serviços de nuvem IaaS disponíveis publicamente.
 
 \subsection{Exemplo de Nuvem Pública IaaS: Amazon EC2}
 
@@ -240,11 +240,11 @@ mais barato entre todos, inclusive mais barato que o centro de dados no Brasil.
 
 A questão do planejamento de capacidade de recursos na nuvem pode ser vista a partir de dois ângulos distintos: do ponto de vista do provedor do serviço e do ponto de vista do usuário do serviço \cite{Menasce2009}. Do ponto de vista do provedor do serviço, planejar a capacidade dos recursos significa monitorar a utilização e, sempre que necessário, adicionar novos  recursos computacionais à infraestrutura física onde são implantados os serviços disponibilizados aos usuários da nuvem. Nesse aspecto, o planejamento de capacidade precisa ser realizado pelo provedor independentemente do modelo de implantação ou do tipo de serviço oferecido aos usuários.
 
-Já do ponto de vista do usuário do serviço, o planejamento de capacidade envolve o correto dimensionamento dos recursos virtuais a serem alocados às diferentes aplicações que serão executadas na nuvem. Nesse caso, o planejamento de capacidade é necessário apenas em nuvens da modalidade IaaS, uma vez que em nuvens das modalidades PaaS e SaaS a alocação dos recursos às aplicações é feita automaticamente, com parte dos benefícios oferecidas pelo provedor do serviço, ficando totalmente transparente ao usuário. 
+Já do ponto de vista do usuário do serviço, o planejamento de capacidade envolve o correto dimensionamento dos recursos virtuais a serem alocados às diferentes aplicações que serão executadas na nuvem. Nesse caso, o planejamento de capacidade é necessário apenas em nuvens da modalidade IaaS, uma vez que em nuvens das modalidades PaaS e SaaS a alocação dos recursos às aplicações é feita automaticamente, como parte dos benefícios oferecidos pelo provedor do serviço, ficando totalmente transparente ao usuário. 
 
-Nos dois casos, um planejamento inadequado dos recurso pode levar a situações indesejadas. No caso do provedor do serviço, um mal planejamento pode resultar tanto em uma infraestrutura subutilizada, na qual a quantidade de recursos físicos disponíveis é muito superior à demanda, quanto em uma infraestrutura saturada, com qual o provedor não consegue garantir os requisitos mínimos de qualidade prometidos aos usuários em seus acordos de nível de serviço. Ambas as situações podem acarretar em prejuízos financeiros, seja pelo desperdício de recursos, seja pela insatisfação dos usuários.
+Em qualquer dos casos, um planejamento inadequado dos recurso pode levar a situações distintas mas igualmente indesejadas. No caso do provedor do serviço, um mal planejamento pode resultar tanto em uma infraestrutura subutilizada, na qual a quantidade de recursos físicos disponíveis é muito superior à demanda, quanto em uma infraestrutura saturada, com qual o provedor não consegue garantir os requisitos mínimos de qualidade prometidos aos usuários em seus acordos de nível de serviço. Ambas as situações podem acarretar em prejuízos financeiros, seja pelo desperdício de recursos, seja pela insatisfação e eventual saída dos usuários.
 
-O problema do mal planejamento de recursos é ainda mais sutil no caso do usuário do serviço, que é o foco deste trabalho. Isso porque a provisão de recursos virtuais além do estritamente necessário costuma passar despercebida à maioria dos usuários de nuvens IaaS, que muitas vezes focam apenas no monitoramento do desempenho de suas aplicações, e não no nível de utilização do recursos que lhes foram alocados. Esse problema existe mesmo diante da utilização de serviços IaaS que oferecem escalabilidade automática de aplicações, como é o caso dos serviços Amazon CloudWatch \cite{amazon_watch} e RightScale \cite{rightscale}. A razão é que esses tipos de serviço são tipicamente restritos à escalabilidade horizontal da aplicação, na qual alguns dos componentes da aplicação são executados paralelamente em um conjunto de duas ou mais máquinas virtuais do mesmo tipo. Dependendo do nível de utilização das máquinas virtuais em uso, mais máquinas virtuais podem ser adicionadas ao grupo ou algumas das máquinas virtuais em uso podem ser desligadas. De qualquer maneira, a variação da capacidade de recursos alocados à aplicação fica limitada à variação da quantidade de máquinas virtuais presentes em grupos de máquinas homogêneos, cujos tipos também precisam ser cuidadosamente determinados pelo usuário como parte do processo de planejamento de capacidade. 
+A questão do planejamento de recursos é ainda mais sutil no caso do usuário do serviço de nuvem, que é o foco deste trabalho. Isso porque a contratação de recursos virtuais além do estritamente necessário costuma passar despercebida à maioria dos usuários de nuvens IaS, que muitas vezes focam apenas no monitoramento do desempenho de suas aplicações, e não no nível de utilização do recursos que lhes foram alocados. Esse problema existe mesmo diante da utilização de serviços IaaS que oferecem escalabilidade automática de aplicações, como é o caso dos serviços Amazon CloudWatch \cite{amazon_watch} e RightScale \cite{rightscale}. A razão é que esses tipos de serviço são tipicamente restritos à escalabilidade horizontal da aplicação, na qual alguns dos componentes da aplicação são executados paralelamente em um conjunto de duas ou mais máquinas virtuais do mesmo tipo. Dependendo do nível de utilização das máquinas virtuais em uso, mais máquinas virtuais podem ser adicionadas ao grupo ou algumas das máquinas virtuais em uso podem ser desligadas. De qualquer maneira, com esse tipo de serviço a variação da capacidade de recursos alocados à aplicação fica limitada à variação da quantidade de máquinas virtuais presentes em grupos de máquinas homogêneos, cujos tipos também precisam ser cuidadosamente determinados pelo usuário como parte do processo de planejamento de capacidade. 
 
 A próxima seção apresenta e analisa criticamente alguns dos principais trabalhos propostos para apoiar usuários de serviços de nuvem IaaS a melhor planejar a capacidade dos recursos a serem alocados a suas aplicações.
 
@@ -412,11 +412,11 @@ compatibilidade no novo ambiente.
 
 \subsection{Abordagem Empírica}
 
-Os trabalhos que adotam a abordagem empírica têm em comum o fato de utilizarem como aplicação alvo a própria aplicação que se deseja implantar na nuvem. Portanto, é preciso inicialmente realizar uma implantação na nuvem para que seja dado início ao processo de análise de desempenho. Por isso, cada ferramenta oferece um mecanismo para que o seu usuário possa definir como a aplicação deve ser implantada e configurada. Além da definição da aplicação e dos recursos da nuvem que serão utilizados, essas ferramentas também permitem que sejam definidas a demanda que será imposta a cada aplicação e o acordo de nível de serviço. Dessa forma, é possível definir, por exemplo, o número de usuários simultâneos e o tempo de resposta esperado para uma transação.
+Os trabalhos que adotam a abordagem empírica têm em comum o fato de utilizarem como aplicação alvo a própria aplicação que se deseja implantar na nuvem. Portanto, é preciso inicialmente realizar uma implantação na nuvem para que seja dado início ao processo de análise de desempenho. Por isso, cada trabalho oferece mecanismos para que o usuário possa definir como a aplicação deve ser implantada e configurada. Além da definição da aplicação e dos recursos da nuvem que serão utilizados, esses trabalhos também permitem que sejam definidas a demanda que será imposta a cada aplicação e o acordo de nível de serviço. Dessa forma, é possível definir, por exemplo, o número de usuários simultâneos e o tempo de resposta esperado para uma operação.
 
-Uma vez que que as ferramentas que realizam a abordagem empírica possibilitam ao usuário muita liberdade na definição da aplicação, demanda, recurso da nuvem e SLA, essas soluções têm o mais alto grau de flexibilidade. Além disso, como faz-se uso da própria aplicação alvo para a avaliação de desempenho, a acurácia dos resultados apresentados pelas ferramentas é a mais elevada. 
+Uma vez que que os trabalhos que seguem a abordagem empírica possibilitam ao usuário muita liberdade na definição da aplicação, demanda, recurso da nuvem e SLA, essas soluções têm o mais alto grau de flexibilidade. Além disso, como faz-se uso da própria aplicação alvo para a avaliação de desempenho, a acurácia dos resultados apresentados é bastante elevada. 
 
-A seguir, apresentamos quatro trabalhos que se destacam na avaliação de desempenho de aplicações na nuvem usando a abordagem empírica. São eles: Expertus~\cite{jayasinghe2012}, CloudBench~\cite{silva2013cloudbench}, Cloud Crawler~\cite{cunhacloud} e Cloud WorkBench~\cite{scheuner2014cloud}.
+A seguir, apresentamos quatro trabalhos que se destacam na avaliação de desempenho de aplicações na nuvem usando a abordagem empírica. São eles: Expertus~\cite{jayasinghe2012}, CloudBench~\cite{silva2013cloudbench}, Cloud Crawler~\cite{cunhacloud,cunha2013b} e Cloud WorkBench~\cite{scheuner2014cloud}.
 
 \subsubsection{Expertus}
 Devido à complexidade e às implicações da escolha da configuração para a implantação de uma aplicação na nuvem, em~\cite{jayasinghe2012} os autores apresentam o \textit{Expertus}, que é descrito como ``um framework flexível de geração de código para automatizar testes de performance de aplicações distribuídas em nuvem de infraestrutura''. Essa geração automática de código é realizada a partir de {\em templates} especificados na forma de documentos XML~\cite{jayasinghe2012}. Os templates utilizados nas avaliações de desempenho devem ser escritos pelo usuário e servem de entrada para o ambiente, que realiza diversas transformações nessa entrada até a forma de \textit{shell scripts}. Esses \textit{scripts}, por fim, possuem os comandos para a configuração da avaliação de desempenho na aplicação alvo.
@@ -453,7 +453,7 @@ uma aplicação real no ambiente testado.
 %de arquitetura de implantação. 
 
 \subsubsection{Cloud Crawler}
-Este trabalho apresenta um ambiente programável para apoiar os usuários de nuvens IaaS na realização de testes automáticos de desempenho de aplicações na nuvem. As principais contribuições do ambiente são: a linguagem declarativa {\em Crawl}, com a qual os usuários podem especificar, através de uma notação simples e de alto nível de abstração, uma grande variedade de cenários de avaliação de desempenho de uma aplicação na nuvem; e o motor de execução {\em Crawler}, que automaticamente executa e coleta os resultados dos cenários descritos em {\em Crawl} em um ou mais provedores. Essas duas ferramentas são denominadas conjuntamente de {\em Cloud Crawler}~\cite{cunhacloud}.
+Este trabalho apresenta um ambiente programável para apoiar os usuários de nuvens IaaS na realização de testes automáticos de desempenho de aplicações na nuvem. As principais contribuições do ambiente são: a linguagem declarativa {\em Crawl}, com a qual os usuários podem especificar, através de uma notação simples e de alto nível de abstração, uma grande variedade de cenários de avaliação de desempenho de uma aplicação na nuvem; e o motor de execução {\em Crawler}, que automaticamente executa e coleta os resultados dos cenários descritos em {\em Crawl} em um ou mais provedores. Essas duas ferramentas são denominadas conjuntamente de {\em Cloud Crawler}~\cite{cunhacloud,cunha2013b}.
 
 Para iniciar os testes de desempenho de uma aplicação através do ambiente {\em Cloud Crawler}, os componentes dessa aplicação precisam ser declarados em um \textit{script} da linguagem {\em Crawl}. Compõem esse \textit{script Crawl}, por exemplo, o provedor de nuvem, os tipos de máquinas virtuais e as máquinas virtuais que serão utilizadas nas avaliações, além disso, métricas de desempenho e a demanda imposta à aplicação também irão compor o cenário de avaliação que é declarado no \textit{script Crawl}. Finalizada essa etapa de declaração, o usuário do ambiente irá submeter o \textit{script crawl} para o motor de execução {\em Crawler}. Esse motor irá iniciar todas as máquinas virtuais, caso seja necessário, irá proceder com a modificação do tipo de máquina virtual, de acordo com o que estiver declarado. Após a inicialização de cada máquina virtual, o motor pode executar alguma configuração nessa máquina, por exemplo, a configuração do endereço ip de um banco de dados, ou a configuração do total de memória utilizado por uma máquina virtual java. Todas as configurações necessárias para a aplicação executar na nuvem devem estar declaradas no {\em script Crawl} que foi submetido para o motor. Quando a última máquina virtual é configurada, o motor {\em Crawler} executa um por um os cenários de avaliação, com suas respectivas demandas, e ao mesmo tempo coleta as métricas de desempenho especificadas. As métricas de desempenho podem ser tanto métricas de sistema, como percentual de CPU utilizado e de memória RAM, quanto métricas de aplicação, como o tempo de resposta de uma aplicação WEB.
 
@@ -466,36 +466,36 @@ Para ilustrar o uso do \textit{Cloud WorkBench}, foi realizado um pequeno experi
 
 Após a análise dos resultados, os autores concluem que o \textit{Cloud WorkBench} suporta a realização de experimentos em nuvens de infraestrutura, e que toda a complexidade da configuração do ambiente pode ficar codificada. O que diminui a ocorrência de erros decorrentes de eventuais intervenções manuais.
 
-\subsection{Análise Crítica}
+\subsection{Análise Compartiva}
 
 \subsubsection{Critérios de Comparação}
 
-Para apoiar a análise crítica de cada trabalho e suas abordagens, definimos um conjunto de critérios a partir dos quais poderemos tanto descrever, quanto comparar as soluções existentes de apoio a avaliação de desempenho do ponto de vista do usuário. Seguem os critérios:
+Para apoiar a análise crítica de cada trabalho e suas abordagens, definimos um conjunto de critérios a partir dos quais iremos comparar as soluções existentes de apoio ao planejamento de capacidade do ponto de vista do usuário. Seguem os critérios (e seus respectivos sub-critérios):
 
-\begin{enumerate}
+\begin{itemize}
   \item \textbf{Flexibilidade da solução}
-  \begin{enumerate}
-    \item \textbf{Seleção da aplicação} --- flexibilidade da solução para
+  \begin{itemize}
+    \item \textbf{Definição da aplicação} --- flexibilidade da solução para
     definir a aplicação a ser avaliada;
-    \item \textbf{Seleção da demanda} --- flexibilidade da solução para
+    \item \textbf{Definição da demanda} --- flexibilidade da solução para
     definir os níveis de carga de trabalho sobre os quais a aplicação será
     submetida;
-	\item \textbf{Seleção dos recursos da nuvem} --- flexibilidade da solução
+	\item \textbf{Definição dos recursos da nuvem} --- flexibilidade da solução
 	para definir as configurações de recursos do provedor sobre as quais a aplicação
 	será executada;
-	\item \textbf{Seleção do acordo de nível de serviço (SLA)} --- flexibilidade
+	\item \textbf{Definição do acordo de nível de serviço (SLA)} --- flexibilidade
 	da solução para definir o SLA desejado.
-  \end{enumerate}
+  \end{itemize}
   \item \textbf{Efetividade da solução}  
-  \begin{enumerate}
+  \begin{itemize}
     \item \textbf{Eficiência} --- tempo e custo necessários para a solução
     resolver o problema;
     \item \textbf{Acurácia} --- confiabilidade das respostas oferecidas pela
     solução;
 	\item \textbf{Complexidade} --- grau de complexidade/esforço exigido do usuário
 	da solução.
-  \end{enumerate}
-\end{enumerate}
+  \end{itemize}
+\end{itemize}
 
 
 \subsubsection{Abordagem Preditiva}
@@ -548,15 +548,15 @@ executar de fato a aplicação e submetê-la à demanda especificada, essas solu
 possuem alta acurácia. Já no que diz respeito à complexidade, o desempenho é
 considerado moderado. Uma vez que cada trabalho faz uso de uma estratégia
 de uso particular, e que as experiências anteriores do usuário irão ser
-determinantes na percepção da complexidade. Esse usuário precisa se adaptar aos mecanismos oferecidos por cada solução, e eventualmente, configurar imagens contendo os
+determinantes na percepção da complexidade, esse usuário precisa se adaptar aos mecanismos oferecidos por cada solução, e eventualmente, configurar imagens contendo os
 componentes da aplicação que será avaliada.
 
 \section{Resumo}
 
-Este capítulo apresentou os principais conceitos relacionados à computação em nuvem, com destaque para sua definição, seus modelos de implantação e seus tipos de serviços. Também foi abordada a questão do planejamento de capacidade em nuvens do tipo IaaS, sendo descritos e analisados criticamente diversos trabalhos propostos com o intuito de apoiar os usuários deste tipo de nuvem no planejamento dos recursos a serem alocados a suas aplicações.
+Este capítulo apresentou os principais conceitos relacionados à computação em nuvem, com destaque para sua definição, seus modelos de implantação e seus tipos de serviço. Também foi abordada a questão do planejamento de capacidade em nuvens do tipo IaaS, sendo descritos e analisados criticamente diversos trabalhos propostos com o intuito de apoiar os usuários deste tipo de nuvem no planejamento dos recursos a serem alocados a suas aplicações.
 
 
-O próximo capítulo apresenta um novo processo de inferência de desempenho que visa apoiar o planejamento de capacidade em nuvens IaaS. O novo processo segue uma abordagem híbrida, combinando aspectos das abordagens preditiva e empírica, o que lhe permite obter resultados com alta efetividade e flexibilidade. 
+O próximo capítulo apresenta um novo processo de inferência de desempenho que visa apoiar o planejamento de capacidade em nuvens IaaS. O novo processo segue uma abordagem híbrida, combinando aspectos positivos das abordagens preditiva e empírica, o que lhe permite obter resultados com alta efetividade e flexibilidade. 
 
 
 
