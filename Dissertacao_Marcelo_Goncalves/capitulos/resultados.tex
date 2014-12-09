@@ -1,45 +1,40 @@
 \chapter{Experimentos e Resultados}
 \label{chap:resultados}
 % ----------------------------------------------------------
-Este capítulo vem apresentar os experimentos realizados como forma de
+Este capítulo descreve os experimentos realizados como forma de
 verificação do Processo de Avaliação de Capacidade por Inferência de 
-Desempenho proposto no Capítulo~\ref{chap:processo}. Inicialmente é
-apresentada a metodologia utilizada para construção dos experimentos, 
-com a descrição da Aplicação sob Teste escolhida, como foi implantada e 
-como foram realizadas as execuções para coleta de dados de desempenho. Depois
-são apresentados os resultados obtidos por cada uma das 9 Heurísticas ao
-fazer a Avaliação de Capacidade da Aplicação. Esses resultados são usados 
-para uma comparação qualitativa das Heusrísticas entre si e para atestar
-a eficiência do Processo de Avaliação de Capacidade proposto e sua técnica 
-de Inferência de Desempenho tanto quanto à economia de tempo e custo como  
-quanto à precisão de acerto de seuas predições.
+Desempenho proposto no Capítulo~\ref{chap:processo}. Inicialmente, é
+apresentada a metodologia utilizada para a condução dos experimentos. Em seguida, 
+são apresentados os resultados obtidos por cada uma das 9 Heurísticas propostas. Esses resultados são usados 
+tanto para uma comparação qualitativa das Heurísticas entre si, quanto para atestar
+a eficiência do Processo de Avaliação de Capacidade proposto e de sua técnica 
+de Inferência de Desempenho.
 
 \section{Metodologia}
 \label{sec:resultados_metodologia}
-A fim de validar a eficiência da Inferência de Desempenho no apoio
+A fim de validar a eficiência da técnica de Inferência de Desempenho no apoio
 ao Planejamento de Capacidade, foram realizadas seções de avaliação de
-capacidade de uma aplicação implantada em um provedor de nuvem de
-infraestrutura como serviço.
+capacidade de uma aplicação real implantada em um provedor de nuvem IaaS público.
 
 A aplicação escolhida foi o WordPress \cite{wordpress}, um motor de construção 
 e administração de \emph{blogs}. Sua escolha foi motivada por ser uma aplicação
 bem conhecida, de utilização via web, ideal para implantação em ambiente de
 nuvem, e com componentes arquiteturais escaláveis. Além disso, o fluxo de 
-utilização típico apresenta características bem diversificadas quanto ao uso
+utilização típico da aplicação apresenta características bem diversificadas quanto ao uso
 de recursos de CPU e memória, rede, sistema de arquivos e banco de dados.
 
-\begin{figure}[hbt]
+\begin{figure}[t]
   \begin{center}
     \includegraphics[scale=0.4]{img/ImplantacaoWordPress}
   \end{center}
-  \caption{\label{fig:implantacao}Implantação do WordPress na AWS EC2 para Avaliação de Capacidade}
+  \caption{\label{fig:implantacao}Arquitetura de implantação do WordPress na AWS EC2 para efeito do Processo de Avaliação de Capacidade.}
 \end{figure}
 
-O Provedor escolhido foi a Amazon, com seu serviço de infraestrutura AWS EC2
+O Provedor escolhido foi o Amazon Web Services (AWS), com seu serviço de infraestrutura EC2
 \cite{ec2}, onde o WordPress foi implantado em duas camadas: uma para o banco de 
-dados MySQL, e outra para a aplicação, executada pelo servidor Apache HTTPD. Como
+dados MySQL, e outra para o servidor de aplicação, executada pelo servidor Apache HTTPD. Como
 balanceador de carga, foi utilizada uma máquina executando o servidor web Nginx. A
-Figura~\ref{fig:implantacao} mostra um panorama geral dessa implantação. 
+Figura~\ref{fig:implantacao} mostra um panorama geral dessa arquitetura de implantação. 
 
 Devido a restrições de custo e tempo, os experimentos foram limitados de forma a variar 
 apenas a camada de aplicação, usando de 1 a 4 servidores Apache executando o WordPress. 
@@ -140,7 +135,35 @@ nuvem, é possível inferir o desempenho de uma Aplicação executando em uma
 Configuração com base no desempenho observado em uma execução real da Aplicação 
 em uma Configuração distinta.
 
-\begin{table}[htbp]
+Assim, este trabalho submeteu o Processo à verificação de sua acurácia ao realizar
+predições para o desempenho do WordPress executando em máquinas virtuais do provedor
+Amazon Web Services. 
+
+
+\unboldmath
+
+Foram calculados os valores médios de \emph{Precision}, \emph{Recall} e \emph{F-Measure}~\cite{powers2011evaluation} 
+para as predições realizadas em todas as combinações de Níveis de Carga de 
+Trabalho e SLAs. Os valores dessas três métricas para cada nível \emph{$i$} de Carga de Trabalho, denotados por $P_{i}$, $R_{i}$ e $F_{i}$, respectivamente, são dados pelas seguintes fórmulas~\cite{powers2011evaluation}:
+
+%\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries F-Measure:}]
+\begin{description}[leftmargin=!]
+  \item[$P_{i}$] = $\dfrac{\emph{\# config. candidatas verdadeiras}}{\emph{\# config. candidatas verdadeiras}\,+\,\emph{\# config. candidatas falsas}}$
+  \item[$R_{i}$] = $\dfrac{\emph{\# config. candidatas verdadeiras}}{\emph{\# config. candidatas verdadeiras}\,+\,\emph{\# config. rejeitadas falsas}}$
+  \item[$F_{i}$] = $2\,\cdot\,\dfrac{\emph{$P_{i}$}\,\times\,\emph{$R_{i}$}}{\emph{$P_{i}$}\,+\,\emph{$R_{i}$}}$
+\end{description}
+
+
+Considerando $m$ Níveis de Carga de Trabalho, as fórmulas para o cálculo das médias dos valores de \emph{Precision}, \emph{Recall} e \emph{F-Measure} de cada Heurística para um determinado SLA são as seguintes: 
+
+\begin{description}
+  \item[\normalfont\emph{Precision}] = $\dfrac{\sum\limits_{i=1}^{m}\,P_{i}}{m}$
+  \item[\normalfont\emph{Recall}] = $\dfrac{\sum\limits_{i=1}^{m}\,R_{i}}{m}$
+  \item[\normalfont\emph{F-Measure}] = $\dfrac{\sum\limits_{i=1}^{m}\,F_{i}}{m}$
+\end{description}
+
+
+\begin{table}[t]
   \centering
     {\fontsize{2.4mm}{1em}\selectfont
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -163,10 +186,10 @@ em uma Configuração distinta.
     \hline
     \end{tabular}%
     }% end fontsize
-  \caption{\label{table:acuracia_capacidade}Acurácia da Inferência de Desempenho no Grafo por Capacidade}
+  \caption{\label{table:acuracia_capacidade}Acurácia da Inferência de Desempenho no Grafo por Capacidade.}
 \end{table}%
 
-\begin{table}[htbp]
+\begin{table}[t]
   \centering
   {\fontsize{2.4mm}{1em}\selectfont
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -189,37 +212,22 @@ em uma Configuração distinta.
     \hline
     \end{tabular}%
     }% end fontsize
-  \caption{\label{table:acuracia_preco}Acurácia da Inferência de Desempenho no Grafo por Preço}
+  \caption{\label{table:acuracia_preco}Acurácia da Inferência de Desempenho no Grafo por Preço.}
 \end{table}%
 
-Assim, este trabalho submeteu o Processo à verificação de sua acurácia ao realizar
-predições para o desempenho do WordPress executando em máquinas virtuais do provedor
-Amazon Web Services. O cálculo de Precision and Recall~\cite{powers2011evaluation} 
-sobre os resultados dos experimentos realizados mostra que o Processo de Inferência 
-de Desempenho é capaz de obter índices de precisão muito próximos de 100\%, como 
-pode ser observado nas Tabelas~\ref{table:acuracia_capacidade}~e~\ref{table:acuracia_preco}. 
+
+O valores médios de \emph{Precision}, \emph{Recall} e \emph{F-Measure}
+calculados sobre os resultados dos experimentos realizados mostra que o Processo de Avaliação e Capacidade com base em Inferência de Desempenho é capaz de obter índices de acertos muito próximos de 100\%, como 
+pode ser observado nas Tabelas~\ref{table:acuracia_capacidade}~e~\ref{table:acuracia_preco}. Cada célula nessas tabelas apresenta a média obtida pela Heurística nas predições para cada um dos 10 Níveis de Carga de Trabalho avaliados sob cada SLA em questão. Em ambas, as linhas exibem 
+as Heurísticas usadas na execução do Processo e as colunas, agrupadas segundo
+os SLAs aplicados nos testes, de 10 segundos até 50 segundos, os resultados 
+de acurácia calculados para \emph{Precision} (P), \emph{Recall} (R) e \emph{F-Measure} (F).
 
 A Tabela~\ref{table:acuracia_capacidade} apresenta os dados de acurácia das 
 predições realizadas usando-se o Espaço de Implantação estruturado pelas relações
 de capacidade entre as Configurações. Já a Tabela~\ref{table:acuracia_preco} mostra
 a acurácia das predições feitas utilizando-se o Espaço de Implantação organizado
-conforme a relação de preço entre as Configurações. Em ambas, as linhas exibem 
-as Heurísticas usadas na execução do Processo e as colunas, agrupadas segundo
-os SLAs aplicados nos testes, de 10 segundos até 50 segundos, os resultados 
-de acurácia calculados para \emph{Precision}, \emph{Recall} e \emph{F-Measure}.
-
-Foram medidos os valores de \emph{Precision}, \emph{Recall} e \emph{F-Measure}
-para as predições realizadas em todas as combinações de Níveis de Carga de 
-Trabalho e SLAs. Cada célula nessas tabelas apresenta a média obtida pela 
-Heurística nas predições para cada SLA em questão. Considerando os 10 Níveis
-de Carga de Trabalho utilizados no experimento, de 100 a 1000 usuários variando
-em intervalos de 100, as fórmulas para o cálculo das médias são as seguintes: 
-
-\begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries F-Measure:}]
-  \item[\emph{Precision}:] $\dfrac{\sum\limits_{i=100}^{1000}\,\dfrac{\emph{true positives}}{\emph{true positives}\,+\,\emph{false positives}}}{10}$
-  \item[\emph{Recall}:] $\dfrac{\sum\limits_{i=100}^{1000}\,\dfrac{\emph{true positives}}{\emph{true positives}\,+\,\emph{false negatives}}}{10}$
-  \item[\emph{F-Measure}:] $\dfrac{\sum\limits_{i=100}^{1000}\,2\,\cdot\,\dfrac{\emph{Precision}\,\times\,\emph{Recall}}{\emph{Precision}\,+\,\emph{Recall}}}{10}$
-\end{description}
+conforme a relação de preço entre as Configurações. 
 
 Observando as tabelas, nota-se que, dentre os 5 níveis de SLA avaliados, em apenas 
 um deles o Processo deixou de obter 100\% de acurácia nas predições. Durante a
@@ -256,7 +264,7 @@ custo foi calculado somando-se o preço da hora de utilização, conforme a tabe
 de preços do provedor na data realização dos testes, para cada uma das Configurações 
 para as quais foram realizadas execuções reais na nuvem. 
 
-\begin{figure}[hbt]
+\begin{figure}[t]
   \centering
     \begin{subfigure}[a]{0.7\textwidth}
       \includegraphics[width=\textwidth]{img/ExecutionCost-Capacity}
@@ -268,7 +276,7 @@ para as quais foram realizadas execuções reais na nuvem.
       \caption{Grafo por Preço}
       \label{fig:eficiencia_custo_preco}
     \end{subfigure}
-  \caption{\label{fig:eficiencia_custo}Avaliação da Eficiência de Custo das Heurísticas}
+  \caption{\label{fig:eficiencia_custo}Avaliação da Eficiência de Custo das Heurísticas.}
 \end{figure}
 
 Para cada aspecto analisado, custo e número de execuções, foram realizadas duas 
@@ -287,7 +295,7 @@ foram executados com a representação do Espaço de Implantação baseado na re
 capacidade entre as Configurações. O segundo gráfico considera o grafo da relação
 de preço das Configurações usado para representar o Espaço de Implantação.
 
-\begin{figure}[hbt]
+\begin{figure}[t]
   \centering
     \begin{subfigure}[a]{0.7\textwidth}
       \includegraphics[width=\textwidth]{img/ExecutionCount-Capacity}
@@ -299,7 +307,7 @@ de preço das Configurações usado para representar o Espaço de Implantação.
       \caption{Grafo por Preço}
       \label{fig:eficiencia_execucoes_preco}
     \end{subfigure}
-  \caption{\label{fig:eficiencia_execucoes}Avaliação da Eficiência do Número de Execuções das Heurísticas}
+  \caption{\label{fig:eficiencia_execucoes}Avaliação da Eficiência do Número de Execuções das Heurísticas.}
 \end{figure}
 
 No topo de ambos os gráficos vê-se um linha horizontal que representa a 
@@ -370,18 +378,18 @@ de tempo na realização das atividades de testes de desempenho.
 
 \begin{table}[htbp]
   \centering
-    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+    \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
     \hline
-    \multirow{2}{*}{Métricas} & \multicolumn{9}{c|}{Heurísticas} \\
+    \multirow{2}{*}{\textbf{Métricas}} & \multicolumn{9}{c|}{\textbf{Heurísticas}} \\
     \cline{2-10}
-                 & CC    & CO    & CP    & OC    & OO    & OP    & PC    & PO    & PP \\
+                 & \textbf{CC}    & \textbf{CO}    & \textbf{CP}    & \textbf{OC}    & \textbf{OO}    & \textbf{OP}    & \textbf{PC}    & \textbf{PO}    & \textbf{PP} \\
     \hline
     Custo (US\$) & 25,23 & 21,55 & 52,31 & 24,05 & 31,74 & 28,85 & 42,79 & \cellcolor{OliveGreen}\textbf{\color{yellow}16,54} & 117,95 \\
     Tempo (h)    & 50,10 & 80,30 & 50,60 & 53,00 & 53,00 & 79,50 & 96,20 & \cellcolor{OliveGreen}\textbf{\color{yellow}47,50} & 169,70 \\
     Acurácia     & 0,997 & 0,998 & 0,997 & 0,997 & 0,998 & 0,997 & 0,997 & \cellcolor{OliveGreen}\textbf{\color{yellow}0,998} & 0,997  \\
     \hline
     \end{tabular}%
-  \caption{\label{table:resultado_consolidado}Resultados Consolidados da Inferência de Desempenho}
+  \caption{\label{table:resultado_consolidado}Resultados Consolidados da Inferência de Desempenho.}
   \label{tab:addlabel}%
 \end{table}%
 
