@@ -6,21 +6,22 @@ obtidos, as contribuições e sugestões para trabalhos futuros.
 
 \section{Resultados e Contribuições}
 A oportunidade de adoção da computação em nuvem como alternativa para implantação 
-de aplicações corporativas ante a expectativa de economia gerada pela tarifação 
-sob demanda e a elasticidade de recursos traz consigo a necessidade de uma
+de aplicações corporativas, ante a expectativa de economia gerada pela tarifação 
+sob demanda e a elasticidade de recursos, traz consigo a necessidade de uma
 avaliação prévia da viabilidade financeira da migração dessas aplicações para
 o novo ambiente. Essa análise de viabilidade passa pela identificação de quais 
-combinações de recursos entre os existentes na nuvem são potencialmente capazes 
+combinações de recursos, entre os existentes na nuvem, são potencialmente capazes 
 de manter ou, preferencialmente, suplantar o desempenho original da aplicação em 
-questão. Entre esses recursos, o de máquinas virtuais geralmente representam os
+questão. Entre esses recursos, as máquinas virtuais geralmente representam os
 maiores custos de operação para aplicações implantadas na nuvem. Ao mesmo tempo,
-é muito difícil prever qual será o custo operacional total na nuvem, exatamente
-devido à característica de escalabilidade e elasticidade proporcionada pelo modelo
-de implantação em nuvem IaaS.
+é muito difícil prever qual será o custo operacional total da aplicação quando
+implantada na nuvem, exatamente devido à característica de escalabilidade e 
+elasticidade proporcionada pelo modelo de implantação em infraestrutura como
+serviço.
 
 Nesse contexto, este trabalho propôs uma nova abordagem para a pesquisa das 
-melhores combinações de recursos de máquinas virtuais em provedores de nuvem IaaS.
-A proposta se baseia no Processo de Inferência de Desempenho para Planejamento de
+melhores combinações de recursos de máquinas virtuais em provedores de nuvem IaaS,
+baseada no Processo de Inferência de Desempenho para Planejamento de
 Capacidade, como descrito no Capítulo~\ref{chap:processo}. O Processo se apoia
 na inferência de desempenho para determinadas configurações a partir da observação
 do desempenho real de uma configuração ao executar de fato a aplicação no
@@ -37,15 +38,59 @@ economia financeira e operacional, em termos de tempo, na realização da fase d
 testes do planejamento de capacidade. Dado o enorme número de combinações de 
 configurações possíveis entre recursos do Provedor, o uso de estratégias inteligentes,
 com a aplicação das Heurísticas propostas para a seleção das combinações mais 
-promissoras na busca pelas mais configurações mais baratas, confere ao Processo 
+promissoras na busca pelas configurações mais baratas, confere ao Processo 
 uma eficiência notável, destacada pela economia de até 96\% em custos e até 88\% 
-em tempo de execução dos testes.  
+no tempo de execução dos testes.  
   
 \section{Sugestões para Trabalhos Futuros}
-- realização de novos experimentos visando investigar até que ponto os resultados obtidos durante o mestrado podem ser generalizados para outras aplicações e provedores de nuvem;
+O Processo de Inferência de Desempenho como apoio ao planejamento de capacidade,
+proposto e estudado neste trabalho, oferece diversas oportunidades de continuidade. 
+Apresentamos algumas sugestões de trabalhos que podem ser criados como extensão 
+à pesquisa realizada:
 
-- implementação e avaliação de novas heurísticas de inferência de desempenho, que levem em conta os dados de monitoramento dos recursos utilizados, incluindo memória, CPU e a distância do desempenho observado para o desempenho esperado (o "delta").
+\begin{description}
+\item[Implementação de novas Heurísticas] \hfill \\
+O Processo de Inferência de Desempenho é extensível do ponto de vista das
+Estratégias de Avaliação, responsáveis por implementar as Heurísticas de Seleção
+de Configurações. Esta primeira implementação concreta do Processo utilizou 
+Heurísticas focadas apenas no valor da Métrica analisada nos experimentos, isto é,
+o tempo de resposta total das requisições. A implementação de Heurísticas mais
+criteriosas, que levem em consideração outros dados, podem influenciar a eficiência
+de custo do Processo. Por exemplo, Heurísticas podem confrontar o tempo de resposta
+com a carga de comprometimento de CPU e Memória das Configurações a cada execução
+e, dependendo da análise, optar por um salto maior nos Níveis de Capacidade e, 
+com isso, economizar ainda mais no número de execuções reais. 
 
--  evolução do Capacitor para oferecer um serviço completo de implantação, avaliação e planejamento de capacidade de aplicações em nuvens IaaS.
+\item[Análise do impacto da flutuação de desempenho] \hfill \\
+Observou-se através da análise da acurácia do Processo que a flutuação de 
+desempenho do Provedor, em um certo período durante a execução dos experimentos,
+causou uma leve perturbação nos resultados obtidos. Faz-se oportuno estudar o 
+impacto da flutuação de desempenho do Provedor sobre o comportamento das Heurísticas
+e do Processo como um todo, visando a melhor compreender-se até que ponto a 
+confiabilidade das respostas é imune a esses eventos.
+ 
+\item[Investigação de resultados para outras aplicações] \hfill \\
+A aplicação escolhida para os experimentos deste trabalho representa em boa
+medida o perfil comum de aplicações comerciais ou corporativas, isto é, aplicações
+em ambiente Web, multicamadas, suportadas por bancos de dados relacionais. Por
+outro lado, há novos paradigmas de aplicações em franco desenvolvimento, apoiadas
+em protocolos de comunicação assíncrona, bancos de dados não relacionais, 
+transcodificação multimídia, webservices, entre outros. É de grande interesse
+o estudo da efetividade do uso do Processo de Inferência para o planejamento de
+capacidade de aplicações com perfis diferenciados de implantação. Adicionalmente,
+outras camadas, além da camada de aplicação, podem ser estudadas com o uso do
+Processo. Há ainda a oportunidade de se estudarem outros provedores de IaaS, com
+perfis de Configurações e relações de capacidade potencialmente distintos dos já
+estudados.
+
+\item[Evolução do Cloud Capacitor] \hfill \\
+Por fim, existe a possibilidade de que o Cloud Capacitor seja evoluído para agregar
+funções de implantação e avaliação de aplicações, atividades que hoje são 
+realizadas através de chamadas a ferramentas externas especializadas nessas 
+tarefas. A agregação dessas funcionalidades ao Cloud Capacitor formaria o alicerce
+mínimo para o desenvolvimento de uma solução completa de planejamento de capacidade 
+para aplicações em nuvens IaaS.
+
+\end{description}
 
 % ----------------------------------------------------------
