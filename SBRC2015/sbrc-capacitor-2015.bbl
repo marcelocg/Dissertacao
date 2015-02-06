@@ -1,0 +1,104 @@
+\begin{thebibliography}{}
+
+\bibitem[Baeza-Yates and Ribeiro-Neto 1999]{Baeza-Yates1999}
+Baeza-Yates, R.~A. and Ribeiro-Neto, B. (1999).
+\newblock {\em Modern Information Retrieval}.
+\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA.
+
+\bibitem[Beserra et~al. 2012]{beserra2012cloudstep}
+Beserra, P.~V. et~al. (2012).
+\newblock {Cloudstep: A Step-by-Step Decision Process to Support Legacy
+  Application Migration to the Cloud}.
+\newblock In {\em IEEE MESOCA 2012}.
+
+\bibitem[CloudHarmony 2014]{cloudharmony}
+CloudHarmony (2014).
+\newblock {CloudHarmony: Benchmarking the Cloud}.
+\newblock {\footnotesize \url{http://goo.gl/IHDYxN}}.
+
+\bibitem[Cunha et~al. 2011]{cunha2011investigating}
+Cunha, M. et~al. (2011).
+\newblock {Investigating the impact of deployment configuration and user demand
+  on a social network application in the Amazon EC2 cloud}.
+\newblock In {\em IEEE CloudCom 2011}, pages 746--751.
+
+\bibitem[Cunha et~al. 2013a]{cunha2013b}
+Cunha, M. et~al. (2013a).
+\newblock {A Declarative Environment for Automatic Performance Evaluation in
+  IaaS Clouds}.
+\newblock In {\em IEEE CLOUD 2013}, pages 285--292.
+
+\bibitem[Cunha et~al. 2013b]{cunhacloud}
+Cunha, M. et~al. (2013b).
+\newblock {Cloud Crawler: Um Ambiente Program{\'a}vel para Avaliar o Desempenho
+  de Aplica{\c{c}}{\~o}es em Nuvens de Infraestrutura}.
+\newblock In {\em SBRC 2013}, pages 747--760.
+
+\bibitem[Fittkau et~al. 2012]{fittkau2012cdosim}
+Fittkau, F. et~al. (2012).
+\newblock {CDOSim: Simulating cloud deployment options for software migration
+  support}.
+\newblock In {\em IEEE MESOCA 2012}, pages 37--46.
+
+\bibitem[{Gon{\c{c}}alves Junior} et~al. 2015]{GoncalvesJunior2015}
+{Gon{\c{c}}alves Junior}, R. et~al. (2015).
+\newblock {A Multi-Criteria Approach for Assessing Cloud Deployment Options
+  Based on Non-Functional Requirements}.
+\newblock In {\em ACM SAC 2015}.
+
+\bibitem[Iosup et~al. 2011]{iosup2011performance}
+Iosup, A. et~al. (2011).
+\newblock {On the performance variability of production cloud services}.
+\newblock In {\em IEEE/ACM CCGrid 2011}, pages 104--113.
+
+\bibitem[Jayasinghe et~al. 2011]{jayasinghe2011variations}
+Jayasinghe, D. et~al. (2011).
+\newblock {Variations in performance and scalability when migrating n-tier
+  applications to different clouds}.
+\newblock In {\em IEEE CLOUD 2011}, pages 73--80.
+
+\bibitem[Jayasinghe et~al. 2012]{jayasinghe2012}
+Jayasinghe, D. et~al. (2012).
+\newblock {Expertus: A Generator Approach to Automate Performance Testing in
+  IaaS Clouds}.
+\newblock In {\em IEEE CLOUD 2012}, pages 73--80.
+
+\bibitem[Jung et~al. 2013]{jung2013cloudadvisor}
+Jung, G. et~al. (2013).
+\newblock {CloudAdvisor: A Recommendation-as-a-Service Platform for Cloud
+  Configuration and Pricing}.
+\newblock In {\em IEEE SERVICES 2013}, pages 456--463.
+
+\bibitem[Li et~al. 2010]{li2011}
+Li, A. et~al. (2010).
+\newblock {CloudCmp: Comparing Public Cloud Providers}.
+\newblock In {\em ACM SIGCOMM IMC 2010}, pages 1--14.
+
+\bibitem[Li et~al. 2011]{li2011cloudprophet}
+Li, A. et~al. (2011).
+\newblock {CloudProphet: Towards Application Performance Prediction in Cloud}.
+\newblock In {\em ACM SIGCOMM 2011}, pages 426--427.
+
+\bibitem[Malkowski et~al. 2010]{malkowski2010cloudxplor}
+Malkowski, S. et~al. (2010).
+\newblock {CloudXplor: A tool for configuration planning in clouds based on
+  empirical data}.
+\newblock In {\em ACM SAC 2010}, pages 391--398.
+
+\bibitem[Menasc{\'e} and Ngo 2009]{Menasce2009}
+Menasc{\'e}, D.~A. and Ngo, P. (2009).
+\newblock {Understanding Cloud Computing: Experimentation and Capacity
+  Planning}.
+\newblock In {\em CMG 2009}.
+
+\bibitem[Scheuner et~al. 2014]{scheuner2014cloud}
+Scheuner, J. et~al. (2014).
+\newblock {Cloud WorkBench -- Infrastructure-as-Code Based Cloud Benchmarking}.
+\newblock {\em arXiv preprint arXiv:1408.4565}.
+
+\bibitem[Silva et~al. 2013]{silva2013cloudbench}
+Silva, M. et~al. (2013).
+\newblock {CloudBench: Experiment Automation for Cloud Environments}.
+\newblock In {\em IEEE IC2E 2013}, pages 302--311.
+
+\end{thebibliography}

@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2010)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: sbrc-capacitor-2015.aux
+The style file: sbc.bst
+Database file #1: principal-capacitor.bib
+You've used 18 entries,
+            1935 wiz_defined-function locations,
+            563 strings with 6312 characters,
+and the built_in function-call counts, 7926 in all, are:
+= -- 829
+> -- 228
+< -- 30
++ -- 71
+- -- 70
+* -- 515
+:= -- 1237
+add.period$ -- 54
+call.type$ -- 18
+change.case$ -- 109
+chr.to.int$ -- 17
+cite$ -- 18
+duplicate$ -- 404
+empty$ -- 635
+format.name$ -- 107
+if$ -- 1732
+int.to.chr$ -- 2
+int.to.str$ -- 0
+missing$ -- 18
+newline$ -- 93
+num.names$ -- 54
+pop$ -- 154
+preamble$ -- 1
+purify$ -- 110
+quote$ -- 0
+skip$ -- 321
+stack$ -- 0
+substring$ -- 563
+swap$ -- 115
+text.length$ -- 12
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 106
+warning$ -- 0
+while$ -- 72
+width$ -- 0
+write$ -- 231

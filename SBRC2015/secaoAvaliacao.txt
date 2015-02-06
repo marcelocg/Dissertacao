@@ -1,0 +1,145 @@
+\subsection{Resultados}
+
+\subsubsection{Acurácia}
+
+\unboldmath
+
+Para medir acurácia, foram calculados os valores médios de \emph{Precision},
+\emph{Recall} e \emph{F-Measure}~\cite{powers2011evaluation} para as predições realizadas em todas as combinações de Níveis de Carga de 
+Trabalho e SLAs. Os valores dessas três métricas para cada nível \emph{$i$} de Carga de Trabalho, denotados por $P_{i}$, $R_{i}$ e $F_{i}$, respectivamente, são dados pelas seguintes fórmulas~\cite{powers2011evaluation}:
+
+% BUG. Nao consegui copiar e colar essa parte da formula. Da erro de compilacao.
+
+Considerando $m$ Níveis de Carga de Trabalho, as fórmulas para o cálculo das médias dos valores de \emph{Precision}, \emph{Recall} e \emph{F-Measure} de cada Heurística para um determinado SLA são as seguintes: 
+
+[\normalfont\emph{Precision}] = $\dfrac{\sum\limits_{i=1}^{m}\,P_{i}}{m}$  
+[\normalfont\emph{Recall}] = $\dfrac{\sum\limits_{i=1}^{m}\,R_{i}}{m}$
+[\normalfont\emph{F-Measure}] = $\dfrac{\sum\limits_{i=1}^{m}\,F_{i}}{m}$
+
+% \begin{description}
+%   \item[\normalfont\emph{Precision}] = $\dfrac{\sum\limits_{i=1}^{m}\,P_{i}}{m}$
+%   \item[\normalfont\emph{Recall}] = $\dfrac{\sum\limits_{i=1}^{m}\,R_{i}}{m}$
+%   \item[\normalfont\emph{F-Measure}] = $\dfrac{\sum\limits_{i=1}^{m}\,F_{i}}{m}$
+% \end{description}
+
+
+\begin{table}[t]
+  \centering
+    {\fontsize{2.4mm}{1em}\selectfont
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    \multirow{3}{*}{Heurísticas} & \multicolumn{15}{c|}{SLA (segundos)} \\
+    \cline{2-16}
+          & \multicolumn{3}{c|}{10} & \multicolumn{3}{c|}{20} & \multicolumn{3}{c|}{30} & \multicolumn{3}{c|}{40} & \multicolumn{3}{c|}{50} \\
+          \cline{2-16}
+          & P     & R     & F     & P     & R     & F     & P     & R     & F     & P     & R     & F     & P     & R     & F \\
+          \hline          
+    CC    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,98}  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    CO    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    CP    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,98}  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    OC    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,99}  & \textbf{\color{red}0,99}  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    OO    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    OP    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,98}  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    PC    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,98}  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    PO    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    PP    & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & \textbf{\color{red}0,98}  & \textbf{\color{red}0,99}  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00  & 1,00 \\
+    \hline
+    \end{tabular}%
+    }% end fontsize
+  \caption{\label{table:acuracia_capacidade}Acurácia da Inferência de Desempenho no Grafo por Capacidade.}
+\end{table}%
+
+Os valores médios de \emph{Precision}, \emph{Recall} e \emph{F-Measure}
+calculados sobre os resultados dos experimentos realizados mostram que o
+Processo de Avaliação de Capacidade com base em Inferência de Desempenho é capaz de obter 
+índices de acertos muito próximos de 100\%, como pode ser observado na 
+Tabela~\ref{table:acuracia_capacidade}. Cada célula 
+dessa tabela apresenta a média obtida pela Heurística nas predições para cada 
+um dos 10 Níveis de Carga de Trabalho avaliados sob cada SLA em questão. As
+linhas exibem as Heurísticas usadas na execução do Processo e as colunas, 
+agrupadas segundo os SLAs aplicados nos testes, de 10 segundos até 50 segundos, 
+os resultados de acurácia calculados para \emph{Precision} (P), \emph{Recall} (R) 
+e \emph{F-Measure} (F).
+
+A Tabela~\ref{table:acuracia_capacidade} apresenta os dados de acurácia das 
+predições realizadas usando-se o Espaço de Implantação estruturado pelas relações
+de capacidade entre as Configurações. Nota-se que, dentre os 5 níveis de SLA avaliados, em apenas 
+um deles o Processo deixou de obter 100\% de acurácia nas predições. Durante a
+execução dos experimentos foram observados momentos de flutuação no desempenho
+das máquinas virtuais disponibilizadas pelo Provedor. Essa flutuação afetou os
+testes para o SLA igual a 30 segundos, refletindo em erros de predição. Essa é
+na verdade uma limitação constatada do Processo de Avaliação de Capacidade por
+Inferência de Desempenho, que está sujeito às flutuações do Provedor por fazer
+uso, ainda que pouco frequente, de execuções reais. De fato, oscilações no 
+desempenho da infraestrutura do Provedor são comuns e já foram observados por 
+\cite{iosup2011performance} e \cite{cunhaavalia}. O impacto dessas flutuações, 
+porém, é mínimo, reduzindo a acurácia do Processo de Inferência em, no máximo,
+3\%.
+
+\subsubsection{Eficiência}
+Esta seção apresenta os resultados de eficiência atingidos pelas Heurísticas usadas 
+pelo Processo de Inferência de Desempenho sob dois aspectos distintos: o custo 
+total da Avaliação e a quantidade de execuções realizadas pelas Heurísticas. Esse 
+custo foi calculado somando-se o preço da hora de utilização, conforme a tabela 
+de preços do provedor na data realização dos testes, para cada uma das Configurações 
+para as quais foram realizadas execuções reais na nuvem. 
+
+A Figura~\ref{fig:eficiencia_custo} mostra o gráfico dos resultados obtidos pelas
+9 Heurísticas em termos de custo total dos testes de Avaliação considerando SLAs 
+entre 10 e 50 segundos e o Espaço de Implantação baseado na relação de
+capacidade entre as Configurações. No topo do gráfico vê-se um linha horizontal
+que representa a \emph{baseline} de comparação, que é o custo total da Heurística de Força Bruta 
+(\emph{Brute Force - BF}). Como o custo total para execução da Aplicação em todas
+as combinações de Configurações e Cargas de Trabalho é sempre o mesmo, independente
+do SLA requerido, a linha do gráfico para essa Heurística sempre é uma linha
+horizontal.
+
+\begin{figure}[t]
+  \begin{center}
+    \includegraphics[scale=0.3]{img/ExecutionCost-Capacity}
+  \end{center}
+  \caption{\label{fig:eficiencia_custo}Avaliação da Eficiência de Custo das
+  Heurísticas.}
+\end{figure}
+
+A análise das imagens do gráfico mostra que mesmo a Heurística com o pior 
+desempenho no que se refere ao custo total da Avaliação já apresenta uma redução 
+em relação à Força Bruta. Por outro lado, as melhores Heurísticas chegam a 
+representar uma economia da ordem de 96\% em comparação com o que seria gasto
+com a execução de todas as combinações de Configurações e Cargas de Trabalho.
+Embora o comportamento das Heurísticas varie em função do SLA, é possível notar
+que quando a exigência do SLA é mais moderada o comportamento de todas as Heurísticas
+se estabiliza, tornando possível identificar que algumas delas tendem a
+ser mais econômicas que as outras. Ainda que não seja possível afirmar que uma só 
+Heurística seja a melhor em todas as situações, pode-se considerar que a Heurística
+Pessimista~Otimista se mostra como a mais econômica em geral. A Heurística
+Conservadora~Otimista merece atenção para os SLAs mais brandos, com os menores
+custos absolutos nessas circunstâncias. 
+
+A Figura~\ref{fig:eficiencia_execucoes} mostra o desempenho das Heurísticas sob 
+o aspecto da quantidade de execuções reais da Aplicação sob Teste no ambiente de
+nuvem alvo da Avaliação. A análise desse gráfico faz notar um número de execuções até 88\% menor em 
+relação à Heurística Força Bruta. Isso se reflete em menor tempo gasto no 
+planejamento de capacidade e, consequentemente, menores custos, não só como já 
+visto no que diz respeito à economia de horas de máquina, mas também de outros 
+custos envolvidos em um projeto de software.
+
+\begin{figure}[t]
+  \begin{center}
+    \includegraphics[scale=0.3]{img/ExecutionCount-Capacity}
+  \end{center}
+  \caption{\label{fig:eficiencia_execucoes}Avaliação da Eficiência do Número de Execuções das Heurísticas.}
+\end{figure}
+
+Tanto no aspecto custo como no aspecto quantidade de execuções, nota-se que a
+Heurística Pessimista~Pessimista tem um desempenho muito ruim, exigindo muitas
+execuções e, por isso, elevando muito o custo do planejamento de capacidade. As
+Heurísticas Pessimista~Conservadora e Conservadora~Pessimista ainda aparecem
+um pouco descoladas do desempenho das outras Heurísticas, embora com uma redução
+em torno de 65\% no número de execuções.
+
+Os menores números de execuçõs são atingidos pelas Heurísticas Otimista~Conservadora 
+e Conservadora~Otimista, sob os SLAs mais brandos. Porém, como não se saem tão 
+bem sob SLAs mais rígidos, como 10 segundos, a Heurística Pessimista~Otimista
+ganha destaque por ter comportamento mais estável, figurando entre as mais 
+econômicas no aspecto de quantidade de execuções sob a maioria dos SLAs avaliados.
