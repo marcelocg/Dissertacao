@@ -166,3 +166,7 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+*.attr
+Leituras Recomendadas pelos Orientadores/projeto-de-pesquisa-exemplo1.pdf
+Leituras Recomendadas pelos Orientadores/projeto-de-pesquisa-exemplo2.pdf
+*.texlipse
