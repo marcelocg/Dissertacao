@@ -29,12 +29,14 @@ Desempenho.
 Uma característica ou comportamento mensurável de forma automatizada e 
 comparável a um Valor de Referência capaz de indicar o grau de sucesso de uma 
 execução da Aplicação. Ex.: tempo de resposta, quadros por segundo, etc. Métricas 
-podem ser minimizáveis ou maximizáveis, a depender do objetivo da métrica quanto 
-ao resultado desejado. Por exemplo, “tempo de resposta” é uma métrica 
-minimizável, uma vez que geralmente se deseja que uma Aplicação responda a uma 
+são classificadas como LB (``Lower is Better''), para resultados que se deseja minimizar,
+ ou HB (``Higher is Better''), para resultados que se deseja maximizar,
+\cite{jain1981}, a depender do objetivo da métrica quanto ao resultado desejado. 
+Por exemplo, “tempo de resposta” é uma métrica 
+LB, uma vez que geralmente se deseja que uma Aplicação responda a uma 
 requisição com o menor tempo de resposta possível nos resultados. Contrariamente, 
 uma métrica “quadros renderizados por segundo”, no domínio da computação gráfica, 
-é uma métrica maximizável, pois quanto mais quadros são renderizados por unidade 
+é uma métrica HB, pois quanto mais quadros são renderizados por unidade 
 de tempo, maior a qualidade percebida pelo usuário.
 
 \subsection{Valor de Referência de Desempenho ou SLA}
@@ -82,7 +84,7 @@ Chamamos de Configuração um conjunto de máquinas virtuais pertencentes ao mes
 Tipo de Máquinas Virtuais e, portanto, de uma mesma Categoria. Configurações são
 usadas para implantar uma camada arquitetural da Aplicação sob Teste (apresentação, 
 negócio, persistência, etc.) e representam o estado de uma determinada camada da 
-aplicação quanto à sua escalabilidade, vertical ou horizontal.
+aplicação quanto à sua escalabilidade, seja vertical ou horizontal.
 
 Por exemplo, suponhamos a avaliação do comportamento de uma Aplicação cuja camada de
 negócios está implantada em arquitetura de cluster de servidores de aplicação. 
@@ -235,7 +237,7 @@ encapsulada pela implementação concreta desta atividade do processo.
 
 Portanto, o processo prevê a customização da atividade de Execução dos Testes,
 que será responsável pelas ações necessárias à execução da Aplicação sob Teste no ambiente
-alvo. A atividade customizada deverá conhecer os detalhes inerentes à comunicação com 
+alvo. Essa atividade customizada deverá conhecer os detalhes inerentes à comunicação com 
 o Provedor e com a Aplicação sob Teste e, assim, ser capaz de ordenar a sua execução e 
 coletar como resposta os dados de desempenho esperados pelo processo. Esse é um dos 
 pontos de extensibilidade oferecidos pelo processo, cuja implementação concreta está 
@@ -607,8 +609,8 @@ a Aplicação sob Teste, em ordem crescente de preço.
 
 Por ``capazes de executar'', entenda-se como as Configurações para as quais o valor
 obtido para a Métrica de Desempenho durante a execução da Aplicação sob determinada
-Carga de Trabalho é menor ou igual, para Métricas minimizáveis, maior ou igual, 
-para Métricas maximizáveis, ao valor definido para o SLA como parte dos dados de 
+Carga de Trabalho é menor ou igual, para Métricas LB, maior ou igual, 
+para Métricas HB, ao valor definido para o SLA como parte dos dados de 
 entrada do Processo.
 
 Embora essa seja a resposta final do processo, a contribuição real deste trabalho está

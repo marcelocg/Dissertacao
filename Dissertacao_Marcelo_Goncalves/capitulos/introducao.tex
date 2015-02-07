@@ -3,21 +3,23 @@
 \section{Motivação}
 A computação em nuvem é um paradigma computacional que está
 transformando a forma de desenvolver e gerenciar aplicações e serviços de
-Tecnologia da Informação \cite{Murugesan2014}. Diversas organizações passaram a adotar este paradigma
-atraídas pelo seu modelo de negócios onde recursos computacionais (ex:
-computação, armazenamento e transferência de dados) podem ser consumidos, sob-demanda, 
-como um serviço e pagos de acordo com o consumo efetuado. Um dos principais
-desafios enfrentados pelos usuários de nuvens que oferecem 
+Tecnologia da Informação (TI) \cite{Murugesan2014}. Diversas organizações passaram 
+a adotar este paradigma atraídas pelo seu modelo de negócios onde recursos 
+computacionais (ex: CPU, espaço de armazenamento e volume de dados transferidos) 
+podem ser consumidos, sob-demanda, como um serviço, e pagos de acordo com o consumo 
+efetuado. Um dos principais desafios enfrentados pelos usuários de nuvens que oferecem 
 infraestrutura-como-serviço (IaaS) é planejar adequadamente a capacidade 
 dos recursos da nuvem necessários às suas aplicações \cite{Menasce2009}.  
 
 O processo de decisão pela migração de aplicações para o ambiente de nuvens 
 computacionais envolve uma série de análises que buscam, entre outras coisas, 
-identificar que vantagens a mudança trará de fato \cite{beserra2012cloudstep, 
+identificar as vantagens que esta eventual migração trará de fato \cite{beserra2012cloudstep, 
 rodero2010infrastructure}, além de tentar descobrir a melhor maneira de configurar 
 a aplicação com os vários recursos oferecidos pelo provedor de nuvem.
 
-Um dos principais recursos computacionais oferecidos por provedores de nuvem que oferecem infraestrutura como serviço (IaaS), que tipicamente representam a parte mais significativa dos gastos dos
+Um dos principais recursos computacionais oferecidos por provedores de nuvem de 
+infraestrutura como serviço (IaaS), que tipicamente representam a parte mais 
+significativa dos gastos dos
 clientes, é o serviço de máquina virtual. Em geral, provedores de IaaS cobram um
 valor em função do tempo de utilização deste recurso, normalmente medido em horas, 
 e esse valor unitário varia conforme o tamanho da máquina virtual (capacidade de 
@@ -26,10 +28,10 @@ custo de operação de uma aplicação em um determinado período de tempo leva 
 conta a quantidade de máquinas virtuais utilizadas bem como seu perfil, ou seja, 
 o tamanho e quantidade de recursos usados em cada uma.
  
-Para prever o custo de operação de uma aplicação na nuvem, é preciso estimar ou 
+A fim de prever o custo de operação de uma aplicação na nuvem, é preciso estimar ou 
 medir como a aplicação responderá à demanda submetida em termos de indicadores de 
 desempenho. Para se chegar a essa conclusão, faz-se necessário conhecer o 
-comportamento da aplicação no ambiente de nuvem para que se identifiquem quais 
+comportamento da aplicação no ambiente de nuvem de modo que se identifiquem quais 
 perfis de máquinas virtuais oferecidos pelo provedor são capazes de executar a 
 aplicação com níveis satisfatórios de desempenho. Somem-se a isso as variações 
 da demanda exercidas sobre a aplicação e as diversas possibilidades de variação 
@@ -104,13 +106,13 @@ malkowski2010cloudxplor, fittkau2012cdosim, li2011cloudprophet} e empírica
 Trabalhos que adotam a abordagem preditiva têm como objetivo tentar prever o desempenho esperado da aplicação alvo quando executada na nuvem sob determinada configuração de recursos e determinado nível de carga. As técnicas de predição variam conforme o trabalho, sendo as mais comuns o uso de simuladores de nuvem \cite{fittkau2012cdosim} e a analogia com resultados previamente obtidos através da utilização de \emph{benchmarks} \cite{cloudharmony,
 malkowski2010cloudxplor}. Uma desvantagem dos trabalhos que seguem a abordagem preditiva é a sua ainda limitada capacidade para prever as melhores configurações dos recursos da nuvem para atender variadas cargas impostas à 
 aplicação. Isto se deve principalmente a fatores como: diferenças conceituais entre o comportamento real da aplicação e  
-os modelos de simulação, a ausência de \emph{benchmarks} com funcionalidades e demandas similares aos da aplicação, além da instabilidade comuns aos serviços de nuvem. Por outro lado, trabalhos da abordagem preditiva têm a grande vantagem de não onerar os usuários, pois não exigem a implantação e execução da aplicação no ambiente de nuvem real.
+os modelos de simulação, a ausência de \emph{benchmarks} com funcionalidades e demandas similares aos da aplicação, além da instabilidade, comuns aos serviços de nuvem. Por outro lado, trabalhos da abordagem preditiva têm a grande vantagem de não onerar os usuários, pois não exigem a implantação e execução da aplicação no ambiente de nuvem real.
 
 Trabalhos que utilizam a abordagem empírica são baseados na implantação das aplicações alvo na nuvem 
 e em testes de carga. Esses trabalhos normalmente oferecem suporte aos usuários
 para automatizar as tarefas de instalar, configurar e testar as aplicações no
 ambiente da nuvem, eliminando uma série de procedimentos manuais custosos. Por
-executarem no ambiente de nuvem real, eles conseguem ajudar a atingir resultados
+executarem em um ambiente de nuvem real, eles conseguem ajudar a atingir resultados
 significativamente melhores no que diz respeito a seleção de recursos
 computacionais para cargas de trabalho específicas. No entanto, um problema ainda 
 existente nos trabalhos dessa abordagem é a necessidade de se testar exaustivamente uma grande 
@@ -216,10 +218,10 @@ descritos brevemente a seguir.
   o sistema construído com a utilização da biblioteca, validando sua 
   aplicabilidade. 
   \item[Capítulo 5 -- Experimentos e Resultados] \hfill \\
-  Onde são apresentados os experimentos criados como parte deste estudo a fim de
+  Aqui são apresentados os experimentos criados como parte deste estudo a fim de
   verificar a aplicabilidade do processo de inferência de desempenho. Os resultados 
   dos experimentos são analisados e vêm comprovar a eficiência e acurácia do 
-  processo. 
+  Processo. 
   \item[Capítulo 6 -- Conclusão] \hfill \\
   Faz o fechamento do trabalho, apontando as contribuições trazidas e sugestões
   para trabalhos futuros. 
